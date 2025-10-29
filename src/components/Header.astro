@@ -6,12 +6,17 @@ const { t: _t } = Astro.props;
 const t = typeof _t === 'function' ? _t : (k) => k;
 ---
 <header class="header">
+
+Repositorio subido 
   <div class="container" style="display:flex;align-items:center;justify-content:space-between;height:68px;">
     <a href="/" aria-label="Zcflow"><strong>Zcflow</strong></a>
     <nav aria-label="Navegación">
       <a href="#funciones">{t('Funciones')}</a>
       <a href="#indicadores">{t('Indicadores')}</a>
       <a href="#contacto">{t('Contacto')}</a>
+
+
+
     </nav>
     <div style="display:flex;gap:.5rem;align-items:center">
       <Lang />
