@@ -1,0 +1,40 @@
+{
+  "pestañas": [
+    {
+      "título": "Unifica todo",
+      "resumen": "Integrate banks, ERPs and strategic partners in one place.",
+      "características": [
+        "Multi-account bank connector",
+        "Automatic reconciliation",
+        "Flow & dependency map"
+      ]
+    },
+    {
+      "título": "Cobranzas con IA",
+      "resumen": "Smart reminders and real-time tracking.",
+      "características": [
+        "Automatic alerts",
+        "DSO KPIs",
+        "Segment-based workflows"
+      ]
+    },
+    {
+      "título": "Pagos con control",
+      "resumen": "Prioritize payments and prevent errors with approval rules.",
+      "características": [
+        "Role-based approvals",
+        "Fraud prevention",
+        "End-to-end traceability"
+      ]
+    },
+    {
+      "título": "Análisis",
+      "resumen": "Dashboards with treasury metrics and predictions.",
+      "características": [
+        "Cashflow forecasting",
+        "What-if scenarios",
+        "Secure export"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+---
+import Tabs from '@/islands/Tabs.jsx';
+const { t: _t } = Astro.props;
+const t = typeof _t === 'function' ? _t : (k) => k;
+---
+
+<section id="funciones" class="section">
+  <div class="container">
+    <h2>{t('Lo que podrás hacer con Zcflow')}</h2>
+    <p>{t('Obtiene visibilidad de la liquidez y automatiza procesos clave para tu tesorería.')}</p>
+    <Tabs client:visible />
+  </div>
+</section>

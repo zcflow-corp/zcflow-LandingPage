@@ -1,0 +1,12 @@
+---
+import LogosTicker from '@/islands/LogosTicker.jsx';
+const { t: _t } = Astro.props;
+const t = typeof _t === 'function' ? _t : (k) => k;
+---
+
+<section class="section">
+  <div class="container">
+    <h3>{t('Empresas que confían')}</h3>
+    <div class="logo-row"><LogosTicker client:visible /></div>
+  </div>
+</section>

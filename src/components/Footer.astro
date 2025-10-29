@@ -1,0 +1,17 @@
+---
+
+const { t: _t } = Astro.props;
+const t = typeof _t === 'function' ? _t : (k) => k;
+---
+
+<footer id="contacto">
+  <div class="container">
+    <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between">
+      <strong>Zcflow</strong>
+      <nav aria-label="Legal">
+        <a href="#" style="opacity:.85">Política de privacidad</a> ·
+        <a href="#" style="opacity:.85">Términos y condiciones</a>
+      </nav>
+    </div>
+  </div>
+</footer>

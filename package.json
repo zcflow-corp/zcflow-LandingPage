@@ -1,0 +1,22 @@
+{
+  "name": "zcflow-landing-i18n-es-default",
+  "version": "1.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "5.15.1",
+    "@astrojs/react": "^4.0.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "sass": "^1.79.4",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.0.0",
+    "chart.js": "^4.4.4",
+    "react-chartjs-2": "^5.2.0"
+  }
+}

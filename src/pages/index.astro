@@ -1,0 +1,29 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Hero from '@/components/Hero.astro';
+import Zcflow from '@/components/Zcflow.astro';
+import TrustedBy from '@/components/TrustedBy.astro';
+import WhatYouCanDo from '@/components/WhatYouCanDo.astro';
+import Indicators from '@/components/Indicators.astro';
+import Principles from '@/components/Principles.astro';
+import CTA from '@/components/CTA.astro';
+import Footer from '@/components/Footer.astro';
+
+const locale = Astro.currentLocale || 'es';
+const messages = await import(`../i18n/${locale}.json`).then(m => m.default);
+const t = (k) => messages[k] ?? k;
+---
+<BaseLayout>
+  <Header t={t} />
+  <main>
+    <Hero t={t} />
+    <Zcflow t={t} />
+    <TrustedBy t={t} />
+    <WhatYouCanDo t={t} />
+    <Indicators t={t} />
+    <Principles t={t} />
+    <CTA t={t} />
+  </main>
+  <Footer t={t} />
+</BaseLayout>

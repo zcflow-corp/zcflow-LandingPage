@@ -1,0 +1,8 @@
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--font-body);color:var(--c-text);background:var(--c-bg)}
+h1,h2,h3{font-family:var(--font-head);line-height:1.15;color:var(--c-text);margin:.25rem 0}
+h1{font-size:var(--h1)} h2{font-size:var(--h2)} h3{font-size:var(--h3)}
+p{color:var(--c-text);opacity:.95}
+:focus { outline: 3px solid var(--c-primary-accessible); outline-offset: 2px; }
+img{max-width:100%;height:auto}
+svg{display:block}
