@@ -1,7 +1,6 @@
 ---
-
-const { t: _t } = Astro.props;
-const t = typeof _t === 'function' ? _t : (k) => k;
+const { t: _t } = Astro.props
+const t = typeof _t === 'function' ? _t : (k) => k
 ---
 
 <section class="hero section">
@@ -12,7 +11,7 @@ const t = typeof _t === 'function' ? _t : (k) => k;
       <p>{t('Decisiones en segundos, no en semanas.')}</p>
       <div class="cta">
         <a class="btn primary" href="#demo">{t('Explorar')}</a>
-        <a class="btn ghost" href="#contacto">{t('Pide una demo de inmediato')}</a>
+        <a class="btn inverse" href="#contacto">{t('Pide una demo de inmediato')}</a>
       </div>
     </div>
     <div class="card" aria-label="Mock UI">

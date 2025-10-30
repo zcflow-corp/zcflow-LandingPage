@@ -1,0 +1,200 @@
+/* ===========================
+   Buttons (SCSS) — usa tus tokens :root
+   =========================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  min-height: 2.5rem;
+  padding: 1em 2em;
+  flex-shrink: 0;
+  border-radius: 10px;
+  transition:
+    filter 0.2s ease,
+    background 0.2s ease,
+    color 0.5s ease,
+    transform 0.06s ease;
+  color: var(--c-text);
+  background: transparent;
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  height: auto;
+
+  //añad
+  box-shadow: inset 0 0 0 1px var(--greys--dark);
+  border-radius: 4px;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.1;
+  text-decoration: none;
+  transition: box-shadow .2s, background-color .2s;
+
+
+  &:focus-visible {
+    // outline: 3px solid var(--c-primary-accessible);
+    outline-offset: 2px;
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)),
+      var(--g-cta);
+
+  }
+
+  &[disabled],
+  &[aria-disabled='true'] {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  &:active {
+    transform: translateY(2px);
+  }
+
+  /* ===== Tamaños opcionales ===== */
+  &.sm {
+    padding: 0.6rem 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  &.lg {
+    padding: 1rem 1.4rem;
+    font-size: 1.05rem;
+  }
+
+  &.block {
+    display: flex;
+    width: 100%;
+  }
+
+  /* ===== Variantes ===== */
+
+  /* CTA (primary) */
+  &.primary {
+    background: var(--g-cta);
+    color: var(--c-white);
+    border-color: transparent;
+
+
+    &:hover {
+      filter: brightness(1.25);
+    }
+  }
+
+  /* Ghost (compat con ThemeSwitch: class="btn ghost") */
+  &.ghost {
+    background: transparent;
+    border-color: transparent;
+    color: var(--c-text);
+
+    &:hover {}
+  }
+
+  /* Secondary (outline con más énfasis) */
+  &.secondary {
+    background: transparent;
+    color: var(--c-text);
+    border: 2px solid var(--c-black, #000);
+
+    color: var(--greys--dark);
+
+    &:hover {
+      background: var(--c-text);
+      color: var(--c-white);
+    }
+  }
+
+  /* Inverse (para fondos oscuros) */
+  &.inverse {
+    background: var(--c-white);
+    color: var(--c-text);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+
+    &:hover {
+      background: var(--d7);
+    }
+  }
+
+  &.tertiary {
+    background: var(--c-black);
+    border: 1px solid var(--c-black);
+    color: var(--c-white);
+
+    &:hover {
+      background: var(--c-text);
+      color: var(--c-white);
+    }
+  }
+
+
+  &.gradient-stroke {
+    background:
+      linear-gradient(var(--c-bg), var(--c-bg)) padding-box,
+      var(--g-primary) border-box; // #0563ff → #004bcc
+    border: 2px solid transparent;
+    color: var(--d1);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+
+    &:hover {
+      background:
+        linear-gradient(color-mix(in srgb, var(--c-bg) 92%, var(--d4)),
+          color-mix(in srgb, var(--c-bg) 92%, var(--d4))) padding-box,
+        var(--g-primary) border-box;
+      filter: saturate(1.05);
+    }
+
+    /* opcional: relleno gradiente en hover */
+    &.fill-on-hover:hover {
+      background: var(--g-cta);
+      color: var(--c-white);
+      border-color: transparent;
+    }
+  }
+}
+
+/* ===========================
+     Dark mode tweaks
+     =========================== */
+[data-theme='dark'] {
+  .btn {
+
+
+    &.secondary {
+      color: var(--c-white);
+      border-color: var(--c-white);
+
+      &:hover {
+        background: var(--c-white);
+        color: var(--c-black);
+      }
+    }
+
+    &.inverse {
+      background: rgba(255, 255, 255, 0.96);
+      color: #0b1220;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    &.gradient-stroke {
+      background:
+        linear-gradient(var(--c-panel), var(--c-panel)) padding-box,
+        var(--g-primary) border-box;
+      color: var(--c-white);
+    }
+
+    &.tertiary {
+      background: var(--c-white);
+      color: var(--c-black);
+      border: 1px solid var(--c-white);
+    }
+  }
+}

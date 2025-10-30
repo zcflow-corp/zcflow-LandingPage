@@ -1,9 +1,14 @@
 ---
-import '@/styles/tokens.scss';
-import '@/styles/globals.scss';
-const { title = 'Zcflow — Revolucionando la tesorería', description = 'Plataforma financiera con IA' } = Astro.props;
-const url = Astro.site?.toString() ?? 'http://localhost:4321/';
+import '@/styles/tokens.scss'
+import '@/styles/globals.scss'
+import '@/styles/buttons.scss'
+const {
+  title = 'Zcflow — Revolucionando la tesorería',
+  description = 'Plataforma financiera con IA',
+} = Astro.props
+const url = Astro.site?.toString() ?? 'http://localhost:4321/'
 ---
+
 <html lang={Astro.currentLocale || 'es'}>
   <head>
     <meta charset="utf-8" />
@@ -16,10 +21,18 @@ const url = Astro.site?.toString() ?? 'http://localhost:4321/';
     <meta property="og:url" content={url} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="canonical" href={url} />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
-    <script>try{const t=localStorage.getItem('tema_activo')||'light';document.documentElement.setAttribute('data-theme',t);}catch{}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      try {
+        const t = localStorage.getItem('tema_activo') || 'light'
+        document.documentElement.setAttribute('data-theme', t)
+      } catch {}
+    </script>
   </head>
   <body>
     <slot />

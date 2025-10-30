@@ -1,25 +1,25 @@
 ---
 // pages/[lang].astro
-import BaseLayout from '@/layouts/BaseLayout.astro';
-import Header from '@/components/Header.astro';
-import Hero from '@/components/Hero.astro';
-import Zcflow from '@/components/Zcflow.astro';
-import TrustedBy from '@/components/TrustedBy.astro';
-import WhatYouCanDo from '@/components/WhatYouCanDo.astro';
-import Indicators from '@/components/Indicators.astro';
-import Principles from '@/components/Principles.astro';
-import CTA from '@/components/CTA.astro';
-import Footer from '@/components/Footer.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Header from '@/components/Header.astro'
+import Hero from '@/components/Hero.astro'
+import Zcflow from '@/components/Zcflow.astro'
+import TrustedBy from '@/components/TrustedBy.astro'
+import WhatYouCanDo from '@/components/WhatYouCanDo.astro'
+import Indicators from '@/components/Indicators.astro'
+import Principles from '@/components/Principles.astro'
+import CTA from '@/components/CTA.astro'
+import Footer from '@/components/Footer.astro'
 
 export function getStaticPaths() {
-  return ['es','en'].map((lang) => ({ params: { lang } }));
+  return ['es', 'en'].map((lang) => ({ params: { lang } }))
 }
 
-const lang = Astro.params.lang ?? 'es';
-const locale = ['en','es'].includes(lang) ? lang : 'es';
+const lang = Astro.params.lang ?? 'es'
+const locale = ['en', 'es'].includes(lang) ? lang : 'es'
 
-const messages = await import(`../i18n/${locale}.json`).then(m => m.default);
-const t = (key) => messages[key] ?? key;
+const messages = await import(`../i18n/${locale}.json`).then((m) => m.default)
+const t = (key) => messages[key] ?? key
 ---
 
 <BaseLayout>
