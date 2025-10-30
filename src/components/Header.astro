@@ -1,27 +1,27 @@
 ---
-import ThemeSwitch from '../islands/ThemeSwitch.jsx';
-import Lang from './Lang.astro';
+import ThemeSwitch from '../islands/ThemeSwitch.jsx'
+import Lang from './Lang.astro'
 
-const { t: _t } = Astro.props;
-const t = typeof _t === 'function' ? _t : (k) => k;
+const { t: _t } = Astro.props
+const t = typeof _t === 'function' ? _t : (k) => k
 ---
-<header class="header">
 
-Repositorio subido 
-  <div class="container" style="display:flex;align-items:center;justify-content:space-between;height:68px;">
+<header class="header">
+  <div
+    class="container"
+    style="display:flex;align-items:center;justify-content:space-between;height:68px;"
+  >
     <a href="/" aria-label="Zcflow"><strong>Zcflow</strong></a>
     <nav aria-label="Navegación">
       <a href="#funciones">{t('Funciones')}</a>
       <a href="#indicadores">{t('Indicadores')}</a>
       <a href="#contacto">{t('Contacto')}</a>
-
-
-
     </nav>
     <div style="display:flex;gap:.5rem;align-items:center">
       <Lang />
       <ThemeSwitch client:idle />
-      <a class="btn primary" href="#demo">{t('Ver demo')}</a>
+      <a class="btn secondary" href="#demo">{t('Ingresar')}</a>
+      <a class="btn tertiary" href="#demo">{t('Ver demo')}</a>
     </div>
   </div>
 </header>
