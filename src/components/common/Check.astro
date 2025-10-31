@@ -1,0 +1,44 @@
+---
+import IconoSvg from '../IconoSvg.astro'
+
+interface Props {
+  items?: string[]
+  class?: string // opcional: estilos extra desde el padre
+  iconSize?: number // opcional: tamaño del ícono (px)
+}
+const { items = [], class: extra = '', iconSize = 18 } = Astro.props as Props
+---
+
+<ul class={`checks ${extra}`} role="list">
+  {
+    items.map((label) => (
+      <li class="check" key={label}>
+        <IconoSvg name="check" />
+
+        <span>{label}</span>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .checks {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .check {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.9;
+    color: var(--c-text-muted);
+  }
+  .check-icon {
+    color: var(--c-text-muted);
+  }
+</style>
