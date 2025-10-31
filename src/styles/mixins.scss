@@ -1,0 +1,46 @@
+@use "sass:math";
+
+// Breakpoints estándar
+$small: 425px;
+$medium: 768px;
+$large: 1024px;
+$extralarge: 1440px;
+
+// Mixin para medios adaptativos
+@mixin media($types...) {
+    @each $type in $types {
+
+        // 📱 Móvil (hasta antes de tablet)
+        @if $type ==mobile {
+            @media only screen and (max-width: math.div($medium - 1px, 1)) {
+                @content;
+            }
+        }
+
+        // 💻 Tablet (desde 768px)
+        @else if $type ==tablet {
+            @media only screen and (min-width: $medium) and (max-width: math.div($large - 1px, 1)) {
+                @content;
+            }
+        }
+
+        // 🖥️ Desktop (desde 1024px)
+        @else if $type ==desktop {
+            @media only screen and (min-width: $large) and (max-width: math.div($extralarge - 1px, 1)) {
+                @content;
+            }
+        }
+
+        // 🖥️💎 Extra Desktop (desde 1440px)
+        @else if $type ==extradesktop {
+            @media only screen and (min-width: $extralarge) {
+                @content;
+            }
+        }
+
+        // ⚠️ Si se pasa un tipo no válido
+        @else {
+            @warn "⚠️ El tipo de media '#{$type}' no está definido. Usa: mobile, tablet, desktop o extradesktop.";
+        }
+    }
+}

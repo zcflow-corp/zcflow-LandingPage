@@ -60,13 +60,10 @@ const t = typeof _t === "function" ? _t : (k) => k;
     </nav>
     <!--Otras Acciones -->
     <div style="display:flex;gap:.5rem;align-items:center">
-      <div class="lang-switch">
-        <Lang />
-      </div>
-      <div class="theme-switch">
-        <ThemeSwitch client:idle />
-      </div>
-      <a class="btn primary" href="#demo" itemprop="url">{t("Ver demo")}</a>
+      <Lang />
+      <ThemeSwitch client:idle />
+      <a class="btn secondary" href="#demo">{t('Ingresar')}</a>
+      <a class="btn tertiary" href="#demo">{t('Ver demo')}</a>
     </div>
   </div>
 </header>

@@ -1,12 +1,17 @@
 ---
-
-const { t: _t } = Astro.props;
-const t = typeof _t === 'function' ? _t : (k) => k;
+const { t: _t } = Astro.props
+const t = typeof _t === 'function' ? _t : (k) => k
 ---
 
 <section class="section">
   <div class="container">
     <h2>{t('ZCflow, tu IA para predecir tus finanzas')}</h2>
-    <p>{t('Plataforma financiera con IA que integra, reduce riesgos y transforma finanzas con decisiones precisas')}</p>
+    <p>
+      {
+        t(
+          'Plataforma financiera con IA que integra, reduce riesgos y transforma finanzas con decisiones precisas'
+        )
+      }
+    </p>
   </div>
 </section>

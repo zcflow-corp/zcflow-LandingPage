@@ -1,5 +1,29 @@
 ---
-const { variant = 'primary', href = null, attrs = {} } = Astro.props;
-const cls = `btn ${variant}`;
+/** Props sin aliases */
+type Variant = 'primary' | 'secondary' | 'inverse' | 'tertiary' | 'gradient-stroke'
+
+interface Props {
+  variant?: Variant
+  href?: string | null
+  attrs?: Record<string, any>
+}
+
+const { variant = 'primary', href = null, attrs = {} } = Astro.props as Props
+
+/** Merge de class externas sin duplicarlas en el spread */
+const extra = (attrs?.class ?? '').toString().trim()
+const cls = `btn ${variant} ${extra}`.trim()
+const { class: _omit, ...rest } = attrs
 ---
-{href ? (<a class={cls} href={href} {...attrs}><slot/></a>) : (<button class={cls} {...attrs}><slot/></button>)}
+
+{
+  href ? (
+    <a class={cls} href={href} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <button class={cls} {...rest}>
+      <slot />
+    </button>
+  )
+}

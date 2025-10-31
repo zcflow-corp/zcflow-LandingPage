@@ -1,20 +1,24 @@
 ---
-import { Astro } from "astro";
+import { Astro } from 'astro'
 
-const current = Astro.currentLocale;              // 'es' o 'en'
-const next = current === "es" ? "en" : "es";
+const current = Astro.currentLocale // 'es' o 'en'
+const next = current === 'es' ? 'en' : 'es'
 
 // quita prefijo /en/ si existe
-const cleanPath = Astro.url.pathname.replace(/^\/(en)\//, "/");
+const cleanPath = Astro.url.pathname.replace(/^\/(en)\//, '/')
 
 // asegura barra final para evitar 404 (match con trailingSlash: 'always')
-const ensureSlash = (p) => (p.endsWith("/") ? p : p + "/");
-const basePath = ensureSlash(cleanPath);
+const ensureSlash = (p) => (p.endsWith('/') ? p : p + '/')
+const basePath = ensureSlash(cleanPath)
 
 // destino con idioma
-const nextPath = next === "es" ? basePath : `/en${basePath}`;
+const nextPath = next === 'es' ? basePath : `/en${basePath}`
 ---
 
-<a href={nextPath} class="btn ghost" aria-label={current === 'es' ? 'Cambiar a inglés' : 'Switch to Spanish'}>
-  {current === 'es' ? '🇺🇸 English' : '🇪🇸 Español'}
+<a
+  href={nextPath}
+  class="btn ghost"
+  aria-label={current === 'es' ? 'Cambiar a inglés' : 'Switch to Spanish'}
+>
+  {current === 'es' ? '🇺🇸' : '🇪🇸'}
 </a>

@@ -1,20 +1,33 @@
 ---
-import principles from '@/data/principles.json';
-const { t: _t } = Astro.props;
-const t = typeof _t === 'function' ? _t : (k) => k;
+import principles from '@/data/principles.json'
+const { t: _t } = Astro.props
+const t = typeof _t === 'function' ? _t : (k) => k
 ---
 
 <section id="fundamentos" class="section">
   <div class="container">
     <h2>{t('Los principios que nos guían')}</h2>
-    <p>{t('Sabemos que la confianza en las finanzas nace de la innovación responsable. Por eso, en ZCflow nos regimos por cinco principios que definen cómo diseñamos, operamos y colaboramos. Estos fundamentos no son opcionales: son nuestro compromiso con las empresas y con el futuro.')}</p>
+    <p>
+      {
+        t(
+          'Sabemos que la confianza en las finanzas nace de la innovación responsable. Por eso, en ZCflow nos regimos por cinco principios que definen cómo diseñamos, operamos y colaboramos. Estos fundamentos no son opcionales: son nuestro compromiso con las empresas y con el futuro.'
+        )
+      }
+    </p>
     <div class="principles">
-      {principles.map(p => (
-        <div class="card" style="transition:transform .2s, box-shadow .2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 30px rgba(0,0,0,.15)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow)'">
-          <h3>{p.title}</h3>
-          <p>{p.desc}</p>
-        </div>
-      ))}
+      {
+        principles.map((p) => (
+          <div
+            class="card"
+            style="transition:transform .2s, box-shadow .2s"
+            onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 30px rgba(0,0,0,.15)'"
+            onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow)'"
+          >
+            <h3>{p.title}</h3>
+            <p>{p.desc}</p>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>
