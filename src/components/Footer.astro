@@ -1,17 +1,77 @@
 ---
-
 const { t: _t } = Astro.props;
-const t = typeof _t === 'function' ? _t : (k) => k;
+const t = typeof _t === "function" ? _t : (k) => k;
 ---
 
-<footer id="contacto">
-  <div class="container">
-    <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between">
-      <strong>Zcflow</strong>
-      <nav aria-label="Legal">
-        <a href="#" style="opacity:.85">Política de privacidad</a> ·
-        <a href="#" style="opacity:.85">Términos y condiciones</a>
+<footer
+  id="contacto"
+  role="contentinfo"
+  aria-label="Pie de página principal de ZCFlow"
+>
+  <div class="container footer-grid">
+    <div
+      class="footer-col"
+      itemscope
+      itemtype="https://schema.org/Organization"
+    >
+      <a href="/" aria-label="Inicio - ZCFlow">
+        <img
+          src="/public/assets/logo_header_darks.webp"
+          alt="ZCFlow logo dark"
+          class="mode-light"
+          width="120"
+          height="auto"
+          loading="lazy"
+          itemprop="logo"
+        />
+        <img
+          src="/public/assets/logo_header_light.webp"
+          alt="ZCFlow logo light"
+          class="mode-dark"
+          width="120"
+          height="auto"
+          loading="lazy"
+          itemprop="logo"
+        />
+      </a>
+      <meta itemprop="name" content="ZCFlow" />
+      <meta itemprop="url" content="https://www.zcflow.com" />
+      <p itemprop="description">Predice el futuro, minimiza riesgos.</p>
+      <small>©2025 Seidor. All rights reserved.</small>
+    </div>
+
+    <div class="footer-col">
+      <h3>Platform</h3>
+      <nav aria-label="Platform">
+        <a href="#" target="_blank" rel="noopener noreferrer">Empresas</a>
+        <a href="#" target="_blank" rel="noopener noreferrer">Soluciones</a>
+        <a href="#" target="_blank" rel="noopener noreferrer">Fundamentos</a>
+        <a href="#" target="_blank" rel="noopener noreferrer">Quiénes somos</a>
       </nav>
+    </div>
+
+    <div class="footer-col">
+      <h3>Legales</h3>
+      <nav aria-label="Legal">
+        <a href="#" target="_blank" rel="noopener noreferrer"
+          >Terms of Service</a
+        >
+        <a href="#" target="_blank" rel="noopener noreferrer"
+          >Política de privacidad</a
+        >
+      </nav>
+    </div>
+
+    <div class="footer-col">
+      <h3>Ponte en contacto</h3>
+      <address>
+        <p>Dirección: Calle Falsa 123, Ciudad, País</p>
+        <a
+          href="mailto:contacto@zcflow.com"
+          target="_blank"
+          rel="noopener noreferrer">contacto@zcflow.com</a
+        >
+      </address>
     </div>
   </div>
 </footer>

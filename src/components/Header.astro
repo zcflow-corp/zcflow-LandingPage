@@ -1,27 +1,72 @@
 ---
-import ThemeSwitch from '../islands/ThemeSwitch.jsx';
-import Lang from './Lang.astro';
+import ThemeSwitch from "../islands/ThemeSwitch.jsx";
+import Lang from "./Lang.astro";
 
 const { t: _t } = Astro.props;
-const t = typeof _t === 'function' ? _t : (k) => k;
+const t = typeof _t === "function" ? _t : (k) => k;
 ---
-<header class="header">
 
-Repositorio subido 
-  <div class="container" style="display:flex;align-items:center;justify-content:space-between;height:68px;">
-    <a href="/" aria-label="Zcflow"><strong>Zcflow</strong></a>
-    <nav aria-label="Navegación">
-      <a href="#funciones">{t('Funciones')}</a>
-      <a href="#indicadores">{t('Indicadores')}</a>
-      <a href="#contacto">{t('Contacto')}</a>
+<header
+  class="site-header"
+  itemscope
+  itemtype="https://schema.org/Organization"
+>
+  <div
+    class="container"
+  >
+    <div class="logo">
+      <a href="/" aria-label="Inicio - ZCFlow">
+        <img
+          src="/public/assets/logo_header_darks.webp"
+          alt="ZCFlow logo dark"
+          class="mode-light"
+          width="180"
+          height="auto"
+          loading="lazy"
+          itemprop="logo"
+        />
+        <img
+          src="/public/assets/logo_header_light.webp"
+          alt="ZCFlow logo light"
+          class="mode-dark"
+          width="180"
+          height="auto"
+          loading="lazy"
+          itemprop="logo"
+        />
+      </a>
+      <meta itemprop="name" content="ZCFlow" />
+      <meta itemprop="url" content="https://www.zcflow.com" />
+    </div>
+    <!--Navegación -->
+    <nav
+      aria-label="Navegación principal"
+      itemscope
+      itemtype="https://schema.org/SiteNavigationElement"
+    >
+      <ul
+        style="display: flex; gap: 1rem; list-style: none; margin: 0; padding: 0;"
+      >
+        <li><a href="#empresas" itemprop="name">{t("Empresas")}</a></li>
+        <li><a href="#socios" itemprop="name">{t("Socios")}</a></li>
+        <li><a href="#soluciones" itemprop="name">{t("Soluciones")}</a></li>
+        <li><a href="#fundamentos" itemprop="name">{t("Fundamentos")}</a></li>
+        <li><a href="#about" itemprop="name">{t("Quienes somos")}</a></li>
 
-
-
+        <!-- <li><a href="#funciones" itemprop="name">{t("Funciones")}</a></li>
+        <li><a href="#indicadores" itemprop="name">{t("Indicadores")}</a></li>
+        <li><a href="#contacto" itemprop="name">{t("Contacto")}</a></li> -->
+      </ul>
     </nav>
+    <!--Otras Acciones -->
     <div style="display:flex;gap:.5rem;align-items:center">
-      <Lang />
-      <ThemeSwitch client:idle />
-      <a class="btn primary" href="#demo">{t('Ver demo')}</a>
+      <div class="lang-switch">
+        <Lang />
+      </div>
+      <div class="theme-switch">
+        <ThemeSwitch client:idle />
+      </div>
+      <a class="btn primary" href="#demo" itemprop="url">{t("Ver demo")}</a>
     </div>
   </div>
 </header>

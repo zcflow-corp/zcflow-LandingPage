@@ -4,7 +4,7 @@ const { t: _t } = Astro.props;
 const t = typeof _t === 'function' ? _t : (k) => k;
 ---
 
-<section class="section">
+<section id="about" class="section">
   <div class="container card" style="background:var(--g-primary);color:#fff;text-align:center">
     <h2>{t('Cash flow is king')}</h2>
     <p>{t('Predice tu flujo de caja, protege tu futuro financiero.')}</p>
