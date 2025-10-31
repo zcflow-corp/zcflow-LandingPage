@@ -7,7 +7,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-      "format:check": "prettier . --check",
+    "format:check": "prettier . --check",
     "format": "prettier --write \"src/**/*.{astro,js,jsx,ts,tsx,css,scss,json,md}\""
   },
   "dependencies": {
@@ -18,11 +18,17 @@
     "framer-motion": "^11.0.0",
     "react": "19.1.0",
     "react-chartjs-2": "^5.2.0",
-    "react-dom": "19.1.0",
-    "sass": "^1.79.4"
+    "react-dom": "19.1.0"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "cssnano": "^7.1.2",
+    "postcss": "^8.5.6",
+    "postcss-custom-media": "^11.0.6",
+    "postcss-mixins": "^12.1.2",
+    "postcss-preset-env": "^10.4.0",
     "prettier": "^3.6.2",
-    "prettier-plugin-astro": "^0.14.1"
+    "prettier-plugin-astro": "^0.14.1",
+    "sass": "^1.93.3"
   }
 }

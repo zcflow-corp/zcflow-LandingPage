@@ -23,6 +23,7 @@
   --c-black: #000000;
   --c-gray: #e2e2e259;
   --c-bg: #ffffff;
+  --c-bg-new: #F6F6F9;
   --c-panel: #ffffff;
   --d1: #0563ff;
   --d2: #004bcc;
@@ -35,7 +36,10 @@
   --d9: #00b8d9;
   --d10: #ff9f40;
   --g-primary: linear-gradient(135deg, #0563ff 0%, #8b00cc 100%);
+  --g-primary-light: linear-gradient(90deg, #0563FF 19.23%, #90A9D5 43.75%, #F6F6F9 83.65%);
+  --g-primary-dark: linear-gradient(90deg, #0563FF 0%, #476AA6 47.12%, #E2E2E2 100%);
   --g-cta: linear-gradient(90deg, #00084D 0%, #1D63ED 100%);
+
   --g-hero: radial-gradient(60% 80% at 70% 30%, #90a9d5 0%, #f5f9ff 70%);
   --h1: clamp(2rem, 1.2rem + 2.4vw, 3.2rem);
   --h2: clamp(1.6rem, 1.1rem + 1.6vw, 2.4rem);
@@ -107,19 +111,6 @@ footer {
   padding: 48px 0;
 }
 
-.hero {
-  background: var(--g-hero);
-  border-bottom-left-radius: 32px;
-  border-bottom-right-radius: 32px;
-  overflow: hidden;
-}
-
-.hero .cta {
-  display: flex;
-  gap: 0.8rem;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-}
 
 .logo-row {
   display: grid;
@@ -164,13 +155,4 @@ footer {
 .counter {
   font-size: 2rem;
   font-weight: 800;
-}
-
-@media (min-width: 768px) {
-  .hero-inner {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 2rem;
-    align-items: center;
-  }
 }

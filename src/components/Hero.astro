@@ -1,17 +1,23 @@
 ---
+import Checks from './common/Check.astro'
 const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k) => k
+const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
 ---
 
 <section class="hero section">
   <div class="container hero-inner">
-    <div>
+    <div class="hero-description">
       <span class="badge">{t('Impulsado por agentes de IA')}</span>
       <h1>{t('Revolucionando la tesorería')}</h1>
       <p>{t('Decisiones en segundos, no en semanas.')}</p>
       <div class="cta">
         <a class="btn primary" href="#demo">{t('Explorar')}</a>
         <a class="btn inverse" href="#contacto">{t('Pide una demo de inmediato')}</a>
+      </div>
+
+      <div class="hero-check">
+        <Checks items={ChecksHero} />
       </div>
     </div>
     <div class="card" aria-label="Mock UI">
@@ -26,4 +32,41 @@ const t = typeof _t === 'function' ? _t : (k) => k
       </svg>
     </div>
   </div>
+
+  <div class="exapample">estes es ejemplo</div>
 </section>
+
+<style lang="scss">
+  .hero {
+    background: var(--g-hero);
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+    overflow: hidden;
+
+    //usar mediaquerys
+
+    // @include media(mobile) {
+    //   background: lightblue;
+    // }
+
+    .cta {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .hero-check {
+      display: flex;
+      justify-content: flex-start;
+      width: auto;
+      align-items: flex-start;
+    }
+
+    .exapample {
+      width: 100%;
+      height: 30px;
+      background: var(--g-primary-light);
+    }
+  }
+</style>
