@@ -86,11 +86,11 @@ html[data-theme='dark'] .mode-light {
 .container {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0;
+  padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: "68px";
+  height: auto;
   gap: 4rem;
 }
 
@@ -222,7 +222,7 @@ ol {
 footer#contacto {
   background: var(--c-panel);
   color: var(--c-text);
-  padding: 48px 1rem; 
+  padding: 48px 1rem;
   font-size: 0.9rem;
 
   .footer-grid {
@@ -243,6 +243,7 @@ footer#contacto {
     color: var(--c-text);
     text-decoration: none;
   }
+
   .footer-col nav {
     display: flex;
     flex-direction: column;

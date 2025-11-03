@@ -6,7 +6,7 @@ const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
 ---
 
 <section class="hero section">
-  <div class="container hero-inner">
+  <div class="hero-inner">
     <div class="hero-description">
       <span class="badge">{t('Impulsado por agentes de IA')}</span>
       <h1>{t('Revolucionando la tesorería')}</h1>
@@ -20,8 +20,10 @@ const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
         <Checks items={ChecksHero} />
       </div>
     </div>
-    <div class="card" aria-label="Mock UI">
-      <svg width="100%" height="260" viewBox="0 0 800 260" role="img" aria-labelledby="uiTitle">
+    <div class="hero-imagen" aria-label="Mock UI">
+      <img src="/img/hero.jpg" alt={t('Imagen hero')} width="100%" height="260" loading="eager" />
+
+      <!-- <svg width="100%" height="260" viewBox="0 0 800 260" role="img" aria-labelledby="uiTitle">
         <title id="uiTitle">Mock UI</title>
         <rect x="0" y="0" width="800" height="260" rx="16" fill="var(--c-panel)"></rect>
         <rect x="24" y="24" width="200" height="16" rx="8" fill="var(--d6)"></rect>
@@ -29,11 +31,9 @@ const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
         <rect x="24" y="96" width="420" height="16" rx="8" fill="var(--d7)"></rect>
         <rect x="24" y="132" width="260" height="16" rx="8" fill="var(--d7)"></rect>
         <rect x="24" y="168" width="360" height="16" rx="8" fill="var(--d7)"></rect>
-      </svg>
+      </svg> -->
     </div>
   </div>
-
-  <div class="exapample">estes es ejemplo</div>
 </section>
 
 <style lang="scss">
@@ -42,12 +42,28 @@ const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
     border-bottom-left-radius: 32px;
     border-bottom-right-radius: 32px;
     overflow: hidden;
+    padding: 0rem 0rem 2rem 2rem;
 
     //usar mediaquerys
 
-    // @include media(mobile) {
-    //   background: lightblue;
-    // }
+    @include media(tablet) {
+      // background: red;
+      // color: red;
+    }
+
+    &-description {
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: center;
+    }
+
+    &-inner {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
 
     .cta {
       display: flex;
@@ -63,10 +79,9 @@ const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
       align-items: flex-start;
     }
 
-    .exapample {
-      width: 100%;
-      height: 30px;
-      background: var(--g-primary-light);
+    .hero-imagen {
+      height: auto;
+      width: 50%;
     }
   }
 </style>
