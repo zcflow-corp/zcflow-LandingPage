@@ -1,6 +1,8 @@
 :root {
+
   --font-head: 'Outfit', ui-sans-serif, system-ui;
-  --font-body: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Arial, 'Noto Sans', sans-serif;
+  --font-body:
+    'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Arial, 'Noto Sans', sans-serif;
   --c-primary: #0563ff;
   --c-primary-accessible: #007bff;
   --c-primary-accessible-hover: #0056b3;
@@ -8,7 +10,7 @@
   --c-line-acc: #ced4da;
   --c-secondary: #566c91;
   --c-tertiary: #e5e5e5;
-  --c-quaternary: #90A9D5;
+  --c-quaternary: #90a9d5;
   --c-quinary: #071381;
   --c-success: #52c41a;
   --c-caution: #ff9a47;
@@ -17,11 +19,12 @@
   --c-green: #0f803e;
   --c-text: #2a2a2b;
   --c-text-muted: #7e7e80ff;
-  --c-line: #A8A8A8;
+  --c-line: #a8a8a8;
   --c-white: #ffffff;
   --c-black: #000000;
   --c-gray: #e2e2e259;
   --c-bg: #ffffff;
+  --c-bg-new: #F6F6F9;
   --c-panel: #ffffff;
   --d1: #0563ff;
   --d2: #004bcc;
@@ -33,15 +36,18 @@
   --d8: #b0b0b0;
   --d9: #00b8d9;
   --d10: #ff9f40;
-  --g-primary: linear-gradient(135deg, #0563ff 0%, #004bcc 100%);
-  --g-cta: linear-gradient(135deg, #0563ff 0%, #00b8d9 100%);
-  --g-hero: radial-gradient(60% 80% at 70% 30%, #90A9D5 0%, #f5f9ff 70%);
+  --g-primary: linear-gradient(135deg, #0563ff 0%, #8b00cc 100%);
+  --g-primary-light: linear-gradient(90deg, #0563FF 19.23%, #90A9D5 43.75%, #F6F6F9 83.65%);
+  --g-primary-dark: linear-gradient(90deg, #0563FF 0%, #476AA6 47.12%, #E2E2E2 100%);
+  --g-cta: linear-gradient(90deg, #00084D 0%, #1D63ED 100%);
+  --g-hero: radial-gradient(60% 80% at 70% 30%, #90a9d5 0%, #f5f9ff 70%);
   --h1: clamp(2rem, 1.2rem + 2.4vw, 3.2rem);
   --h2: clamp(1.6rem, 1.1rem + 1.6vw, 2.4rem);
   --h3: clamp(1.2rem, 1rem + 1vw, 1.6rem);
   --radius: 16px;
-  --shadow: 0 8px 24px rgba(0, 0, 0, .08);
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   --container: 1200px;
+
 }
 
 /* 1. Variables globales de tema */
@@ -222,7 +228,7 @@ ol {
 footer#contacto {
   background: var(--c-panel);
   color: var(--c-text);
-  padding: 48px 1rem; 
+  padding: 48px 1rem;
   font-size: 0.9rem;
 
   .footer-grid {
@@ -243,6 +249,7 @@ footer#contacto {
     color: var(--c-text);
     text-decoration: none;
   }
+
   .footer-col nav {
     display: flex;
     flex-direction: column;
