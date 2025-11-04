@@ -3,11 +3,55 @@ const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k) => k
 ---
 
-<section id="about" class="section">
-  <div class="container card" style="background:var(--g-primary);color:#fff;text-align:center">
-    <h2>{t('Cash flow is king')}</h2>
-    <p>{t('Predice tu flujo de caja, protege tu futuro financiero.')}</p>
-    <a href="#contacto" class="btn ghost" style="border-color:#fff;color:#fff">{t('Contáctanos')}</a
-    >
+<section id="about" class="section about-banner" aria-labelledby="about-title">
+  <div class="container">
+    <div class="about-text">
+      <div style="display: flex; flex-direction: column; align-items: start; gap:7px">
+        <h2 id="about-title" style="margin: 0%; height:64px">{t('Cash flow is king')}</h2>
+        <div
+          style="display: flex; flex-direction: column; align-items: flex-start; line-height: 28px;"
+        >
+          <p style="margin: 0%;">
+            {t('Predice tu flujo de caja, protege tu futuro financiero.')}
+          </p>
+          <p style="margin: 0%;">{t('Solicita tu demo con ZCflow.')}</p>
+        </div>
+      </div>
+      <a href="#contacto" class="btn emptyghost" aria-label={t('Ir a la sección de contacto')}>
+        {t('Contáctanos')}
+      </a>
+    </div>
+    <!-- Bloque de imágenes -->
+    <figure class="about-image">
+      <div class="image-left">
+        <img
+          src="/public/assets/section_banner_person.svg"
+          alt={t('Gráfico de flujo de caja')}
+          class="fade-img"
+          loading="lazy"
+          width="197"
+          height="252"
+        />
+      </div>
+
+      <div class="image-right">
+        <img
+          src="/public/assets/saldo.svg"
+          alt={t('Análisis financiero')}
+          class="fade-img"
+          loading="lazy"
+          width="146"
+          height="125"
+        />
+        <img
+          src="/public/assets/posiciones.svg"
+          alt={t('Proyección de ingresos')}
+          class="fade-img"
+          loading="lazy"
+          width="192"
+          height="184"
+        />
+      </div>
+    </figure>
   </div>
 </section>

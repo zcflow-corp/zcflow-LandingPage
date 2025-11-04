@@ -29,7 +29,7 @@ export default function CounterOnView({ end = 100, duration = 900, suffix = '' }
   }, [end, duration])
 
   return (
-    <div ref={ref}>
+    <div className='style-indicators' ref={ref}>
       {val}
       {suffix}
     </div>

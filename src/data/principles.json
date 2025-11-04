@@ -1,7 +1,27 @@
 [
-  { "title": "IA First", "desc": "Automatización inteligente como pilar de producto." },
-  { "title": "Security & Compliance", "desc": "Prácticas seguras y conformes con estándares." },
-  { "title": "User Experience", "desc": "Interacciones claras y eficientes." },
-  { "title": "Productivity", "desc": "Reducimos fricción para acelerar resultados." },
-  { "title": "Collaboration", "desc": "Trabajo en equipo y transparencia." }
+  {
+    "title": "IA First",
+    "desc": "La inteligencia artificial como núcleo que convierte datos en acciones financieras inteligentes y decisiones anticipadas.",
+    "img": "/assets/section_fundamentos_OPT.svg"
+  },
+  {
+    "title": "Security & Compliance",
+    "desc": "Seguridad avanzada y cumplimiento normativo que garantizan procesos seguros, confiables y automatizados.",
+    "img": "/assets/section_fundamentos_security.svg"
+  },
+  {
+    "title": "User Experience",
+    "desc": "Pensado para las personas: una plataforma intuitiva, clara y sencilla, que se adapta al usuario y no al revés.",
+    "img": "/assets/section_fundamentos_ux.svg"
+  },
+  {
+    "title": "Productivity",
+    "desc": "Optimización del tiempo: menos tareas repetitivas, más enfoque en lo estratégico y de valor para la empresa.",
+    "img": "/assets/section_fundamentos_productivity.svg"
+  },
+  {
+    "title": "Collaboración",
+    "desc": "Un ecosistema conectado donde tesorería, bancos, socios y equipos trabajan en sincronía y transparencia.",
+    "img": "/assets/section_fundamentos_colaboradores.svg"
+  }
 ]
