@@ -8,8 +8,22 @@ const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
 <section class="hero section">
   <div class="hero-inner">
     <div class="hero-description">
-      <span class="badge">{t('Impulsado por agentes de IA')}</span>
-      <h1>{t('Revolucionando la tesorería')}</h1>
+      <div>
+        <h1>
+          <span>
+            {t('Revolucionando')}
+          </span>
+          {t('la')}
+
+          <span class="gradient-blue-dark"> {t('tesorería')} </span>
+        </h1>
+
+        <h2>
+          {t('Impulsado por agentes de IA')}
+        </h2>
+      </div>
+      <!-- <span class="badge">{t('Impulsado por agentes de IA')}</span> -->
+
       <p>{t('Decisiones en segundos, no en semanas.')}</p>
       <div class="cta">
         <a class="btn primary" href="#demo">{t('Explorar')}</a>
@@ -42,13 +56,28 @@ const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
     border-bottom-left-radius: 32px;
     border-bottom-right-radius: 32px;
     overflow: hidden;
-    padding: 0rem 0rem 2rem 2rem;
+    padding: 0rem 0rem 0rem 2rem;
 
-    //usar mediaquerys
+    flex-wrap: wrap;
+
+    h1 {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      gap: 0.25rem;
+      width: 100%;
+      span {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+      }
+    }
+
+    h2 {
+      color: var(--c-primary);
+    }
 
     @include media(tablet) {
-      // background: red;
-      // color: red;
     }
 
     &-description {
@@ -67,9 +96,9 @@ const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
 
     .cta {
       display: flex;
-      gap: 0.8rem;
+      gap: 1rem;
       flex-wrap: wrap;
-      margin-top: 1rem;
+      margin-top: 2rem;
     }
 
     .hero-check {
@@ -77,11 +106,12 @@ const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
       justify-content: flex-start;
       width: auto;
       align-items: flex-start;
+      padding: 1rem 0rem;
     }
 
     .hero-imagen {
       height: auto;
-      width: 50%;
+      width: auto;
     }
   }
 </style>

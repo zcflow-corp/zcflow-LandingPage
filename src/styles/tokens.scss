@@ -40,7 +40,7 @@
   --g-primary-light: linear-gradient(90deg, #0563FF 19.23%, #90A9D5 43.75%, #F6F6F9 83.65%);
   --g-primary-dark: linear-gradient(90deg, #0563FF 0%, #476AA6 47.12%, #E2E2E2 100%);
   --g-cta: linear-gradient(90deg, #00084D 0%, #1D63ED 100%);
-  --g-hero: radial-gradient(60% 80% at 70% 30%, #90a9d5 0%, #f5f9ff 70%);
+  --g-hero: radial-gradient(60% 80% at 70% 30%, #ffff 0%, #fff 70%);
   --h1: clamp(2rem, 1.2rem + 2.4vw, 3.2rem);
   --h2: clamp(1.6rem, 1.1rem + 1.6vw, 2.4rem);
   --h3: clamp(1.2rem, 1rem + 1vw, 1.6rem);
@@ -271,19 +271,9 @@ footer#contacto {
   }
 }
 
-.hero {
-  background: var(--g-hero);
-  border-bottom-left-radius: 32px;
-  border-bottom-right-radius: 32px;
-  overflow: hidden
-}
 
-.hero .cta {
-  display: flex;
-  gap: .8rem;
-  flex-wrap: wrap;
-  margin-top: 1rem
-}
+
+
 
 .logo-row {
   display: grid;
