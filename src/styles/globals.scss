@@ -20,6 +20,7 @@ h3 {
   line-height: 1.15;
   color: var(--c-text);
   margin: 0.25rem 0;
+  font-weight: 500;
 }
 
 h1 {
@@ -54,6 +55,30 @@ svg {
 }
 
 
+
+
+.gradient-blue-dark {
+  background: var(--g-primary-dark);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  display: inline-block;
+
+
+
+}
+
+.gradient-blue-ligth {
+  background: var(--g-primary-light);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  display: inline-block;
+}
 
 /*animaciones ref
 https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css      */

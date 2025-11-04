@@ -6,10 +6,24 @@ const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
 ---
 
 <section class="hero section">
-  <div class="container hero-inner">
+  <div class="hero-inner">
     <div class="hero-description">
-      <span class="badge">{t('Impulsado por agentes de IA')}</span>
-      <h1>{t('Revolucionando la tesorería')}</h1>
+      <div>
+        <h1>
+          <span>
+            {t('Revolucionando')}
+          </span>
+          {t('la')}
+
+          <span class="gradient-blue-dark"> {t('tesorería')} </span>
+        </h1>
+
+        <h2>
+          {t('Impulsado por agentes de IA')}
+        </h2>
+      </div>
+      <!-- <span class="badge">{t('Impulsado por agentes de IA')}</span> -->
+
       <p>{t('Decisiones en segundos, no en semanas.')}</p>
       <div class="cta">
         <a class="btn primary" href="#demo">{t('Explorar')}</a>
@@ -20,8 +34,12 @@ const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
         <Checks items={ChecksHero} />
       </div>
     </div>
-    <div class="card" aria-label="Mock UI">
-      <svg width="100%" height="260" viewBox="0 0 800 260" role="img" aria-labelledby="uiTitle">
+
+    Resolviendo conflictos
+    <div class="hero-imagen" aria-label="Mock UI">
+      <img src="/img/hero.jpg" alt={t('Imagen hero')} width="100%" height="260" loading="eager" />
+
+      <!-- <svg width="100%" height="260" viewBox="0 0 800 260" role="img" aria-labelledby="uiTitle">
         <title id="uiTitle">Mock UI</title>
         <rect x="0" y="0" width="800" height="260" rx="16" fill="var(--c-panel)"></rect>
         <rect x="24" y="24" width="200" height="16" rx="8" fill="var(--d6)"></rect>
@@ -29,11 +47,9 @@ const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
         <rect x="24" y="96" width="420" height="16" rx="8" fill="var(--d7)"></rect>
         <rect x="24" y="132" width="260" height="16" rx="8" fill="var(--d7)"></rect>
         <rect x="24" y="168" width="360" height="16" rx="8" fill="var(--d7)"></rect>
-      </svg>
+      </svg> -->
     </div>
   </div>
-
-  <div class="exapample">estes es ejemplo</div>
 </section>
 
 <style lang="scss">
@@ -42,18 +58,49 @@ const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
     border-bottom-left-radius: 32px;
     border-bottom-right-radius: 32px;
     overflow: hidden;
+    padding: 0rem 0rem 0rem 2rem;
 
-    //usar mediaquerys
+    flex-wrap: wrap;
 
-    // @include media(mobile) {
-    //   background: lightblue;
-    // }
+    h1 {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      gap: 0.25rem;
+      width: 100%;
+      span {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+      }
+    }
+
+    h2 {
+      color: var(--c-primary);
+    }
+
+    @include media(tablet) {
+    }
+
+    &-description {
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: center;
+    }
+
+    &-inner {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
 
     .cta {
       display: flex;
-      gap: 0.8rem;
+      gap: 1rem;
       flex-wrap: wrap;
-      margin-top: 1rem;
+      margin-top: 2rem;
     }
 
     .hero-check {
@@ -61,12 +108,12 @@ const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
       justify-content: flex-start;
       width: auto;
       align-items: flex-start;
+      padding: 1rem 0rem;
     }
 
-    .exapample {
-      width: 100%;
-      height: 30px;
-      background: var(--g-primary-light);
+    .hero-imagen {
+      height: auto;
+      width: auto;
     }
   }
 </style>
