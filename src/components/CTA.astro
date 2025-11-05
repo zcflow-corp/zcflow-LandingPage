@@ -1,12 +1,12 @@
 ---
 const { t: _t } = Astro.props
-const t = typeof _t === 'function' ? _t : (k) => k
+const t = typeof _t === 'function' ? _t : (k: any) => k
 ---
 
 <section id="about" class="section about-banner" aria-labelledby="about-title">
   <div class="container">
     <div class="about-text">
-      <div style="display: flex; flex-direction: column; align-items: start; gap:7px">
+      <div class="content-text">
         <h2 id="about-title" style="margin: 0%; height:64px">{t('Cash flow is king')}</h2>
         <div
           style="display: flex; flex-direction: column; align-items: flex-start; line-height: 28px;"
@@ -55,3 +55,113 @@ const t = typeof _t === 'function' ? _t : (k) => k
     </figure>
   </div>
 </section>
+<style lang="scss">
+  .about-banner {
+    background-image: url('/public/assets/section_banner.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
+    text-align: center;
+    padding: 4rem 0;
+    position: relative;
+    height: auto;
+  }
+
+  .about-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .btn.emptyghost {
+    background: transparent;
+    border: 2px solid var(--c-white);
+    border-radius: 10px;
+    color: var(--c-white);
+    width: 100%;
+    max-width: 150px;
+    min-width: 125px;
+    height: 45px;
+    padding: 0px 20px;
+  }
+  .about-banner .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 1 400px;
+    gap: 16px;
+    padding: 16px 0px;
+    justify-content: center;
+  }
+  .about-text h2,
+  .about-text p,
+  .about-text a {
+    color: var(--c-white);
+    margin: 0;
+  }
+
+  .about-image {
+    display: flex;
+    flex: 1 1 400px;
+    align-items: center;
+    column-gap: 14px;
+    justify-content: center;
+  }
+  .image-left {
+    border-radius: 10px;
+    box-shadow: 0px 1px 2px 0px #0000004d;
+    box-shadow: 0px 1px 3px 1px #00000026;
+  }
+  .image-right {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16.5px;
+  }
+  /*animaciones para las 3 imagenes*/
+  .image-right.fade-img {
+    object-fit: cover;
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+  .content-text {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 7px;
+  }
+
+  @include media(mobile) {
+    .about-banner .container {
+      flex-direction: column;
+      text-align: center;
+    }
+    .about-image {
+      flex: auto;
+    }
+    .content-text p {
+      text-align: justify;
+      max-width: 252px;
+    }
+    .about-text {
+      flex: auto;
+    }
+  }
+
+  @include media(mobile) {
+    .principles {
+      display: block !important;
+      row-gap: 8px;
+      grid-template-columns: 1fr !important;
+      justify-items: center;
+    }
+  }
+</style>

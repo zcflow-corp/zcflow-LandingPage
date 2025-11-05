@@ -57,3 +57,110 @@ const t = typeof _t === 'function' ? _t : (k) => k
     </div>
   </div>
 </section>
+<style lang="scss">
+  .indicators {
+    // border-radius: 24px;
+    // padding: 24px;
+    flex-direction: column;
+    background: var(--c-black);
+    color: var(--c-white);
+  }
+  .indicators h4 {
+    background: linear-gradient(90deg, #0563ff 19.23%, #90a9d5 43.75%, #f6f6f9 83.65%);
+    align-self: self-start;
+    font-weight: 500;
+    font-size: 1.3rem;
+    line-height: 28px;
+    margin: 0;
+    padding: 10px 50px;
+    height: 40px;
+    font-weight: bold;
+    letter-spacing: 0.35px;
+    font-size: 1rem;
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    animation: gradient-move 15s ease infinite;
+  }
+  @keyframes gradient-move {
+    0% {
+      background-position: 0% 0;
+    }
+    50% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: 0% 0;
+    }
+  }
+  .indicators-title {
+    color: var(--c-white);
+    max-width: 250px;
+    line-height: 48px;
+    font-weight: 500;
+  }
+  .container-counter p {
+    color: var(--c-white);
+  }
+  .style-indicators {
+    border-left: 2px solid
+      linear-gradient(270deg, #52c41a 0%, #00b8d9 19.71%, #00b8d9 59.62%, #7faeff 90.38%);
+  }
+  .container-counter {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 50px;
+    width: 100%;
+  }
+  .section-grafico {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    align-items: start;
+    font-size: 2rem;
+  }
+  .section-grafico div {
+    width: 100%;
+    padding: 0px 50px;
+  }
+  .section-grafico p {
+    color: var(--c-white);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 28px;
+    text-justify: inter-word;
+  }
+
+  .gradient-border-left {
+    position: relative;
+    padding-left: 12px;
+  }
+  .gradient-border-left::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(270deg, #52c41a 0%, #00b8d9 19.71%, #00b8d9 59.62%, #7faeff 90.38%);
+  }
+
+  .counter p {
+    font-size: 0.8rem;
+    font-weight: normal;
+    padding: 0px 12.5px;
+  }
+  .counter {
+    font-size: 2rem;
+    font-weight: 800;
+  }
+  @include media(mobile){
+    .container-counter{
+      flex-direction: column;
+    }
+    .section-grafico{
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
