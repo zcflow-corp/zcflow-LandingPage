@@ -23,6 +23,7 @@
   --c-black: #000000;
   --c-gray: #e2e2e259;
   --c-bg: #ffffff;
+  --c-bg-new: #f6f6f9;
   --c-panel: #ffffff;
   --d1: #0563ff;
   --d2: #004bcc;
@@ -34,8 +35,10 @@
   --d8: #b0b0b0;
   --d9: #00b8d9;
   --d10: #ff9f40;
-  --g-primary: linear-gradient(135deg, #0563ff 0%, #004bcc 100%);
-  --g-cta: linear-gradient(135deg, #0563ff 0%, #00b8d9 100%);
+  --g-primary: linear-gradient(135deg, #0563ff 0%, #8b00cc 100%);
+  --g-primary-light: linear-gradient(90deg, #0563ff 19.23%, #90a9d5 43.75%, #f6f6f9 83.65%);
+  --g-primary-dark: linear-gradient(90deg, #0563ff 0%, #476aa6 47.12%, #e2e2e2 100%);
+  --g-cta: linear-gradient(90deg, #00084d 0%, #1d63ed 100%);
   --g-hero: radial-gradient(60% 80% at 70% 30%, #90a9d5 0%, #f5f9ff 70%);
   --h1: clamp(2rem, 1.2rem + 2.4vw, 3.2rem);
   --h2: clamp(1.6rem, 1.1rem + 1.6vw, 2.4rem);
@@ -69,7 +72,6 @@ main {
   height: '68px';
   gap: 1rem;
 }
-
 
 .actions {
   display: flex;
@@ -164,8 +166,6 @@ a {
   text-decoration: none;
   color: inherit;
 }
-
-
 
 .hero {
   background: var(--g-hero);
