@@ -9,6 +9,10 @@ body {
   background: var(--c-bg);
 }
 
+main {
+  position: relative;
+}
+
 h1,
 h2,
 h3 {
@@ -59,10 +63,7 @@ svg {
   -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
-
   display: inline-block;
-
-
 
 }
 

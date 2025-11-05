@@ -1,19 +1,13 @@
 ---
-import ThemeSwitch from "../islands/ThemeSwitch.jsx";
-import Lang from "./Lang.astro";
+import ThemeSwitch from '../islands/ThemeSwitch.jsx'
+import Lang from './Lang.astro'
 
-const { t: _t } = Astro.props;
-const t = typeof _t === "function" ? _t : (k) => k;
+const { t: _t } = Astro.props
+const t = typeof _t === 'function' ? _t : (k) => k
 ---
 
-<header
-  class="site-header"
-  itemscope
-  itemtype="https://schema.org/Organization"
->
-  <div
-    class="container"
-  >
+<header class="site-header" itemscope itemtype="https://schema.org/Organization">
+  <div class="container">
     <div class="logo">
       <a href="/" aria-label="Inicio - ZCFlow">
         <img
@@ -38,32 +32,54 @@ const t = typeof _t === "function" ? _t : (k) => k;
       <meta itemprop="name" content="ZCFlow" />
       <meta itemprop="url" content="https://www.zcflow.com" />
     </div>
+    <!-- menú hamburguesa -->
+    <div class="container-toggle">
+      <button
+        class="menu-toggle"
+        aria-label="Abrir menú de navegación"
+        aria-expanded="false"
+        aria-controls="main-navigation"
+      >
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
     <!--Navegación -->
     <nav
       aria-label="Navegación principal"
+      class="nav"
+      style="display: flex; align-items:center; column-gap: 15px;"
       itemscope
       itemtype="https://schema.org/SiteNavigationElement"
     >
-      <ul
-        style="display: flex; gap: 1rem; list-style: none; margin: 0; padding: 0;"
-      >
-        <li><a href="#empresas" itemprop="name">{t("Empresas")}</a></li>
-        <li><a href="#socios" itemprop="name">{t("Socios")}</a></li>
-        <li><a href="#soluciones" itemprop="name">{t("Soluciones")}</a></li>
-        <li><a href="#fundamentos" itemprop="name">{t("Fundamentos")}</a></li>
-        <li><a href="#about" itemprop="name">{t("Quienes somos")}</a></li>
-
-        <!-- <li><a href="#funciones" itemprop="name">{t("Funciones")}</a></li>
-        <li><a href="#indicadores" itemprop="name">{t("Indicadores")}</a></li>
-        <li><a href="#contacto" itemprop="name">{t("Contacto")}</a></li> -->
+      <ul role="listbox" aria-labelledby="label_items" class="nav-list">
+        <li><a href="#empresas" itemprop="name">{t('Empresas')}</a></li>
+        <li><a href="#socios" itemprop="name">{t('Socios')}</a></li>
+        <li><a href="#soluciones" itemprop="name">{t('Soluciones')}</a></li>
+        <li><a href="#fundamentos" itemprop="name">{t('Fundamentos')}</a></li>
+        <li><a href="#about" itemprop="name">{t('Quienes somos')}</a></li>
       </ul>
+      <!--Otras Acciones -->
+      <div class="mobile-actions">
+        <Lang />
+        <ThemeSwitch client:idle />
+        <a class="btn secondary" href="#demo">Ingresar</a>
+        <a class="btn tertiary" href="#demo">Ver demo</a>
+      </div>
     </nav>
-    <!--Otras Acciones -->
-    <div style="display:flex;gap:.5rem;align-items:center">
-      <Lang />
-      <ThemeSwitch client:idle />
-      <a class="btn secondary" href="#demo">{t('Ingresar')}</a>
-      <a class="btn tertiary" href="#demo">{t('Ver demo')}</a>
-    </div>
   </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('.menu-toggle')
+      const nav = document.querySelector('.nav')
+
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') ? 'true' : 'false'
+        toggle.setAttribute('aria-expanded', expanded)
+        nav.classList.toggle('active')
+        toggle.classList.toggle('active')
+      })
+    })
+  </script>
 </header>

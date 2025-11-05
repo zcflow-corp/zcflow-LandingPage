@@ -4,30 +4,47 @@ const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k) => k
 ---
 
-<section id="fundamentos" class="section">
-  <div class="container">
-    <h2>{t('Los principios que nos guían')}</h2>
-    <p>
-      {
-        t(
-          'Sabemos que la confianza en las finanzas nace de la innovación responsable. Por eso, en ZCflow nos regimos por cinco principios que definen cómo diseñamos, operamos y colaboramos. Estos fundamentos no son opcionales: son nuestro compromiso con las empresas y con el futuro.'
-        )
-      }
-    </p>
-    <div class="principles">
+<section id="fundamentos" class="section fundamentos" aria-labelledby="fundamentos-title">
+  <div class="container-fundamentos">
+    <!-- Encabezado de la sección -->
+    <div class="section-header">
+      <div class="fundamentos-header">
+        <h6 style="margin: 0%;">{t('Nuestros fundamentos')}</h6>
+        <h2 style="margin: 0%;">{t('Los principios que nos guían')}</h2>
+      </div>
+      <p class="fundamentos-description">
+        {
+          t(
+            'Sabemos que la confianza en las finanzas nace de la innovación responsable. Por eso, en ZCflow nos regimos por cinco principios que definen cómo diseñamos, operamos y colaboramos. Estos fundamentos no son opcionales: son nuestro compromiso con las empresas y con el futuro.'
+          )
+        }
+      </p>
+    </div>
+    <div class="descubre-mas">
+      <a href="#descubre" class="btn" aria-label={t('Descubre más')}>{t('Descubre más')}</a>
+    </div>
+    <!-- principios -->
+    <section class="principles" aria-labelledby="Lista de principios fundamentales de ZCflow">
       {
         principles.map((p) => (
-          <div
-            class="card"
-            style="transition:transform .2s, box-shadow .2s"
-            onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 30px rgba(0,0,0,.15)'"
-            onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow)'"
-          >
-            <h3>{p.title}</h3>
-            <p>{p.desc}</p>
-          </div>
+          <article class="card principle" tabindex="0">
+            <section class="principles-container">
+              <div class="section-header">
+                <h3 class="principle-title">{p.title}</h3>
+              </div>
+              <div class="section-body">
+                <p>{p.desc}</p>
+              </div>
+            </section>
+
+            {p.img && (
+              <figure>
+                <img src={p.img} alt={p.title} width="100%" height="100%" loading="lazy" />
+              </figure>
+            )}
+          </article>
         ))
       }
-    </div>
+    </section>
   </div>
 </section>
