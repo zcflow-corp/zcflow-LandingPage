@@ -1,7 +1,8 @@
 ---
 import principles from '@/data/principles.json'
+import { Image } from 'astro:assets'
 const { t: _t } = Astro.props
-const t = typeof _t === 'function' ? _t : (k) => k
+const t = typeof _t === 'function' ? _t : (k: unknown) => k
 ---
 
 <section id="fundamentos" class="section fundamentos" aria-labelledby="fundamentos-title">
@@ -10,15 +11,19 @@ const t = typeof _t === 'function' ? _t : (k) => k
     <div class="section-header">
       <div class="fundamentos-header">
         <h6 style="margin: 0%;">{t('Nuestros fundamentos')}</h6>
-        <h2 style="margin: 0%;">{t('Los principios que nos guían')}</h2>
+        <div class="reveal-wrapper">
+          <h2 class="reveal-target" style="margin: 0%;">{t('Los principios que nos guían')}</h2>
+        </div>
       </div>
-      <p class="fundamentos-description">
-        {
-          t(
-            'Sabemos que la confianza en las finanzas nace de la innovación responsable. Por eso, en ZCflow nos regimos por cinco principios que definen cómo diseñamos, operamos y colaboramos. Estos fundamentos no son opcionales: son nuestro compromiso con las empresas y con el futuro.'
-          )
-        }
-      </p>
+      <div class="reveal-wrapper description-wrapper">
+        <p class="reveal-target fundamentos-description">
+          {
+            t(
+              'Sabemos que la confianza en las finanzas nace de la innovación responsable. Por eso, en ZCflow nos regimos por cinco principios que definen cómo diseñamos, operamos y colaboramos. Estos fundamentos no son opcionales: son nuestro compromiso con las empresas y con el futuro.'
+            )
+          }
+        </p>
+      </div>
     </div>
     <div class="descubre-mas">
       <a href="#descubre" class="btn" aria-label={t('Descubre más')}>{t('Descubre más')}</a>
@@ -27,19 +32,19 @@ const t = typeof _t === 'function' ? _t : (k) => k
     <section class="principles" aria-labelledby="Lista de principios fundamentales de ZCflow">
       {
         principles.map((p) => (
-          <article class="card principle" tabindex="0">
+          <article class="card principle">
             <section class="principles-container">
               <div class="section-header">
-                <h3 class="principle-title">{p.title}</h3>
+                <h3 class="principle-title">{t(p.title)}</h3>
               </div>
               <div class="section-body">
-                <p>{p.desc}</p>
+                <p>{t(p.desc)}</p>
               </div>
             </section>
 
             {p.img && (
-              <figure>
-                <img src={p.img} alt={p.title} width="100%" height="100%" loading="lazy" />
+              <figure class="images-dinamyc">
+                <Image src={p.img} alt={t(p.title)} width={1200} height={200} loading="lazy" class='images-dinamyc'/>
               </figure>
             )}
           </article>
@@ -47,6 +52,40 @@ const t = typeof _t === 'function' ? _t : (k) => k
       }
     </section>
   </div>
+  <script>
+    const imageFigure = document.querySelector('.about-image')
+
+    const principlesSection = document.querySelector('.principles')
+
+    const fundamentosSection = document.querySelector('.fundamentos')
+
+    function setupObserver(element) {
+      if (!element || !('IntersectionObserver' in window)) return
+
+      const observer = new IntersectionObserver(
+        (entries, observerInstance) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible')
+              observerInstance.unobserve(entry.target) 
+            }
+          })
+        },
+        {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1,
+        }
+      )
+      observer.observe(element)
+    }
+
+
+    setupObserver(imageFigure)
+    setupObserver(principlesSection)
+
+    setupObserver(fundamentosSection)
+  </script>
 </section>
 <style lang="scss">
   .container-fundamentos {
@@ -57,11 +96,21 @@ const t = typeof _t === 'function' ? _t : (k) => k
     flex-direction: column;
     row-gap: 40px;
   }
+
+  .images-dinamyc{
+  width: 100%; 
+  max-width: 100%;
+  & img {
+    width: 100%; 
+    height: auto;
+  }
+  }
   .principles-container {
     display: flex;
     flex-direction: column;
     row-gap: 8px;
     align-items: center;
+    padding: 0px 0px 20px 0px;
   }
   .fundamentos-header {
     display: flex;
@@ -116,7 +165,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
     justify-items: center;
     row-gap: 1.5rem;
     column-gap: 1.5rem;
-    padding: 1rem;
+    padding: 1rem 0;
   }
   .descubre-mas {
     // height: 45px;
@@ -124,7 +173,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
     text-align: center;
   }
   .fundamentos {
-    padding: 4rem 1.5rem;
+    padding: 4rem 0rem;
   }
 
   .fundamentos header .fundamentos-header {
@@ -146,16 +195,6 @@ const t = typeof _t === 'function' ? _t : (k) => k
     margin: 0 auto 0rem;
   }
 
-  // .principles .card:nth-child(-n + 2) {
-  //   grid-column: span 2;
-  //   height: 450px;
-  // }
-
-  // .principles .card:nth-child(n + 3) {
-  //   width: 300px;
-  //   grid-row: span 1.5;
-  // }
-
   .card figure img {
     max-width: 80%;
     max-height: 80%;
@@ -164,6 +203,8 @@ const t = typeof _t === 'function' ? _t : (k) => k
   }
 
   .principles .card.principle {
+    opacity: 0;
+    transform: translateY(20px);
     background: #f6f6f9; /*no existe en la paleta*/
     border-radius: 8px;
     box-shadow: var(--shadow, 0 4px 10px rgba(0, 0, 0, 0.1));
@@ -177,6 +218,37 @@ const t = typeof _t === 'function' ? _t : (k) => k
     // align-items: center;
     // justify-content: center;
     border: none;
+  }
+
+  .principles.is-visible .card.principle {
+    animation: fadeInSlideUp 0.6s ease-out forwards;
+  }
+
+  /*Secuencia (Delay)*/
+
+  /* la tarjeta 1 ocupa 2/3 */
+  .principles.is-visible .card.principle:nth-child(1) {
+    animation-delay: 0.4s;
+  }
+
+  /* la tarjeta  2 ocupa 1/3 */
+  .principles.is-visible .card.principle:nth-child(2) {
+    animation-delay: 0.6s;
+  }
+
+  /* la tarjeta  3 Fila 2, Columna 1 */
+  .principles.is-visible .card.principle:nth-child(3) {
+    animation-delay: 0.8s;
+  }
+
+  /* la tarjeta  4 Fila 2, Columna 2 */
+  .principles.is-visible .card.principle:nth-child(4) {
+    animation-delay: 0.9s;
+  }
+
+  /* la tarjeta  5 Fila 2, Columna 3 */
+  .principles.is-visible .card.principle:nth-child(5) {
+    animation-delay: 1s;
   }
 
   .card.principle:focus-visible,
@@ -207,45 +279,126 @@ const t = typeof _t === 'function' ? _t : (k) => k
     color: var(--c-secondary);
     text-align: center;
   }
-  @include media(desktop) {
+
+  .fundamentos .reveal-wrapper .reveal-target::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--c-white, #fff);
+    transform: translateX(0);
+  }
+
+  .fundamentos.is-visible .reveal-target {
+    animation: text-reveal-in 0.8s ease-out forwards;
+  }
+  .fundamentos.is-visible .reveal-target::after {
+    animation: mask-fade-out 0.1s ease-out forwards;
+  }
+
+  /*Secuencia y Retrasos */
+  .fundamentos-header .reveal-wrapper .reveal-target {
+    animation-delay: 0.1s;
+  }
+
+  .fundamentos-header .reveal-wrapper .reveal-target::after {
+    animation-delay: 0s;
+  }
+
+  .description-wrapper .reveal-wrapper .reveal-target {
+    animation-delay: 0.6s;
+  }
+
+  .description-wrapper .reveal-wrapper .reveal-target::after {
+    animation-delay: 0.5s;
+  }
+
+  @keyframes reveal-mask {
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes mask-fade-out {
+    to {
+      opacity: 0;
+    }
+  }
+  .fundamentos .reveal-wrapper {
+    overflow: hidden;
+  }
+  .fundamentos .reveal-wrapper .reveal-target {
+    position: relative;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: none;
+  }
+
+  @keyframes text-reveal-in {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @include media(desktop, extradesktop) {
     .principles {
+      display: grid;
       grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: minmax(200px, auto);
       gap: 1.5rem;
     }
 
-    .principles .card:nth-child(1),
-    .principles .card:nth-child(2) {
-      grid-row: 1 / span 1;
-      //  display: inline-block;
+    /* --- Fila Superior 2 Tarjetas--- */
+
+    /* 1. la primera tarjeta  ocupa 2 columnas */
+    .principles > .principle:nth-child(1) {
+      grid-column: 1 / span 2;
+      grid-row: 1;
     }
 
-    .principles .card:nth-child(1) {
-      justify-self: end;
-    }
-
-    .principles .card:nth-child(2) {
-      justify-self: start;
-    }
-
-    .principles .card:nth-child(3) {
-      grid-column: 1 / 2;
-    }
-    .principles .card:nth-child(4) {
-      grid-column: 2 / 3;
-    }
-    .principles .card:nth-child(5) {
+    /* 2. la segunda tarjeta  ocupa 1 columna */
+    .principles > .principle:nth-child(2) {
       grid-column: 3 / 4;
+      grid-row: 1;
+    }
+
+    /* --- Fila Inferior 3 Tarjetas --- */
+
+    /* 3. la tercera tarjeta ocupa la primera columna de la segunda fila */
+    .principles > .principle:nth-child(3) {
+      grid-column: 1 / 2;
+      grid-row: 2;
+    }
+
+    /* 4. la cuarta tarjeta  ocupa la segunda columna de la segunda fila */
+    .principles > .principle:nth-child(4) {
+      grid-column: 2 / 3;
+      grid-row: 2;
+    }
+
+    /* 5. la quinta tarjeta  ocupa la tercera columna de la segunda fila */
+    .principles > .principle:nth-child(5) {
+      grid-column: 3 / 4;
+      grid-row: 2;
     }
   }
 
   @include media(mobile) {
     .principles {
+      display: grid;
       grid-template-columns: 1fr;
-      display: inline;
-      gap: 2rem;
+      gap: 1.5rem;
     }
-    .container-fundamentos {
-      max-width: 340px;
+    .principles > .principle:nth-child(n) {
+      grid-column: auto;
+      grid-row: auto;
     }
   }
 </style>

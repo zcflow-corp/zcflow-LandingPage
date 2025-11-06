@@ -1,6 +1,7 @@
 ---
 import LineChart from '@/islands/LineChart.jsx'
 import CounterOnView from '@/islands/CounterOnView.jsx'
+import { Image } from 'astro:assets'
 const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k) => k
 ---
@@ -8,7 +9,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
 <!-- Original id="indicadores" -->
 <section class="section" aria-labelledby="indicadores-title">
   <div class="container indicators card">
-    <h4>Indicadores</h4>
+    <h4>{('Indicadores')}</h4>
     <div class="section-grafico">
       <div>
         <!-- Original id="indicadores-title" -->
@@ -27,10 +28,11 @@ const t = typeof _t === 'function' ? _t : (k) => k
           client:visible
           aria-label="Gráfico de línea mostrando indicadores financieros clave"
         />
-        <img
+        <Image
           src="/public/assets/indicadores.svg"
           alt={t('Indicadores financieros clave de ZCflow')}
-          loading="lazy"
+          decoding="async"
+           itemprop="logo"
           width="494"
           height="240"
         />
@@ -40,19 +42,25 @@ const t = typeof _t === 'function' ? _t : (k) => k
     <div class="container-counter">
       <div class="counter" role="region" aria-label="Visibilidad y control: 70%">
         <div class="gradient-border-left"><CounterOnView client:visible end={70} suffix="%" /></div>
-        <p>Visibilidad y control</p>
+        <p>{t('Visibilidad y control')}</p>
       </div>
 
       <div class="counter" role="region" aria-label="ROI en 6–9 meses: 80%">
         <div class="gradient-border-left"><CounterOnView client:visible end={80} suffix="%" /></div>
-        <p>Eficiencia</p>
+        <p>{t('Eficiencia')}</p>
       </div>
 
-      <div class="counter" role="region" aria-label="Menos costos por cobranza: 15%">
-        <div class="gradient-border-left"><CounterOnView client:visible end={15} suffix="%" /></div>
-        <p>Gastos</p>
-        <p>✓ Ahorro potencial en comisiones bancarias</p>
-        <p>✓ Control en tiempo real</p>
+      <div class="counter" role="region" aria-label="Menos costos por cobranza: -15%">
+        <div class="gradient-border-left"><CounterOnView client:visible end={-15} suffix="%" /></div>
+        <p>{t('Gastos')}</p>
+        <p>✓ {t('Ahorro potencial en comisiones bancarias')}</p>
+        <p>✓ {t('Control en tiempo real')}</p>
+      </div>
+
+       <div class="counter" role="region" aria-label="Menos costos por riesgo: 15%">
+        <div class="gradient-border-left"><CounterOnView client:visible end={-30} suffix="%" /></div>
+        <p>{t('Riesgo')}</p>
+        <p>✓ {t('Protege el cash flow')}</p>
       </div>
     </div>
   </div>
@@ -64,6 +72,10 @@ const t = typeof _t === 'function' ? _t : (k) => k
     flex-direction: column;
     background: var(--c-black);
     color: var(--c-white);
+  }
+  .gradient-border-left p{
+    margin: 0px; 
+    padding:7px 0px;
   }
   .indicators h4 {
     background: linear-gradient(90deg, #0563ff 19.23%, #90a9d5 43.75%, #f6f6f9 83.65%);
