@@ -6,7 +6,7 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
 ---
 
 <section id="fundamentos" class="section fundamentos" aria-labelledby="fundamentos-title">
-  <div class="container-fundamentos">
+  <div class="container container-fundamentos">
     <!-- Encabezado de la sección -->
     <div class="section-header">
       <div class="fundamentos-header">
@@ -44,7 +44,14 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
 
             {p.img && (
               <figure class="images-dinamyc">
-                <Image src={p.img} alt={t(p.title)} width={1200} height={200} loading="lazy" class='images-dinamyc'/>
+                <Image
+                  src={p.img}
+                  alt={t(p.title)}
+                  width={1200}
+                  height={200}
+                  loading="lazy"
+                  class="images-dinamyc"
+                />
               </figure>
             )}
           </article>
@@ -67,7 +74,7 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               entry.target.classList.add('is-visible')
-              observerInstance.unobserve(entry.target) 
+              observerInstance.unobserve(entry.target)
             }
           })
         },
@@ -79,7 +86,6 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
       )
       observer.observe(element)
     }
-
 
     setupObserver(imageFigure)
     setupObserver(principlesSection)
@@ -97,13 +103,13 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
     row-gap: 40px;
   }
 
-  .images-dinamyc{
-  width: 100%; 
-  max-width: 100%;
-  & img {
-    width: 100%; 
-    height: auto;
-  }
+  .images-dinamyc {
+    width: 100%;
+    max-width: 100%;
+    & img {
+      width: 100%;
+      height: auto;
+    }
   }
   .principles-container {
     display: flex;

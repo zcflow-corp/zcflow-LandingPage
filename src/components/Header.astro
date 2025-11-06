@@ -95,13 +95,9 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
     z-index: 1000;
 
     .container {
-      // display: flex;
-      // align-items: center;
-      padding: 1rem;
-      margin: 0px !important;
+      padding: 1rem 0rem;
       gap: 8px !important;
       width: 100%;
-      max-width: 100%;
       justify-content: space-between;
     }
 
@@ -169,20 +165,20 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
     }
 
     /*Control de elementos visibles por tema */
-    .mode-dark {
-      display: block;
-    }
-    .mode-light {
-      display: none;
-    }
+    // .mode-dark {
+    //   display: block;
+    // }
+    // .mode-light {
+    //   display: none;
+    // }
 
-    html[data-theme='dark'] .logo .mode-dark {
-      display: none;
-    }
+    // html[data-theme='dark'] .logo .mode-dark {
+    //   display: none;
+    // }
 
-    html[data-theme='dark'] .logo .mode-light {
-      display: block;
-    }
+    // html[data-theme='dark'] .logo .mode-light {
+    //   display: block;
+    // }
     /* --- Responsive --- */
     @include media(mobile) {
       .nav-list {

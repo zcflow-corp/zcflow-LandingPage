@@ -3,41 +3,59 @@
    =========================== */
 
 .btn {
+  // display: inline-flex;
+  // align-items: center;
+  // justify-content: center;
+  // gap: 0.5rem;
+  // font-weight: 600;
+  // cursor: pointer;
+  // text-decoration: none;
+  // display: inline-flex;
+  // min-height: 2.5rem;
+  // padding: 1em 2em;
+  // flex-shrink: 0;
+  // border-radius: 10px;
+  // transition:
+  //   filter 0.2s ease,
+  //   background 0.2s ease,
+  //   color 0.5s ease,
+  //   transform 0.06s ease;
+  // color: var(--c-text);
+  // background: transparent;
+  // text-align: center;
+  // font-family: Inter;
+  // font-size: 14px;
+  // font-style: normal;
+  // font-weight: 600;
+  // height: auto;
+
+  // //añad
+  // box-shadow: inset 0 0 0 1px var(--greys--dark);
+  // border-radius: 4px;
+  // padding: 16px 24px;
+  // font-size: 16px;
+  // font-weight: 500;
+  // line-height: 1.1;
+  // text-decoration: none;
+  // transition: box-shadow .2s, background-color .2s;
+
+
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 0.5rem;
+  padding: 0.85rem 1.15rem;
+  border-radius: calc(var(--radius) - 4px);
   font-weight: 600;
-  cursor: pointer;
+  border: 1px solid transparent;
   text-decoration: none;
-  display: inline-flex;
-  min-height: 2.5rem;
-  padding: 1em 2em;
-  flex-shrink: 0;
-  border-radius: 10px;
   transition:
-    filter 0.2s ease,
-    background 0.2s ease,
-    color 0.5s ease,
-    transform 0.06s ease;
-  color: var(--c-text);
-  background: transparent;
-  text-align: center;
-  font-family: Inter;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  height: auto;
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.2s ease;
 
-  //añad
-  box-shadow: inset 0 0 0 1px var(--greys--dark);
-  border-radius: 4px;
-  padding: 16px 24px;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.1;
-  text-decoration: none;
-  transition: box-shadow .2s, background-color .2s;
+
+
+
 
 
   &:focus-visible {
@@ -56,7 +74,7 @@
   }
 
   &:active {
-    transform: translateY(2px);
+    transform: translateY(1px);
   }
 
   /* ===== Tamaños opcionales ===== */
@@ -81,20 +99,34 @@
   &.primary {
     background: var(--g-cta);
     color: var(--c-white);
-    border-color: transparent;
-
+    box-shadow: var(--shadow);
 
     &:hover {
-      filter: brightness(1.25);
+      background: var(--g-primary);
     }
+
+    &:focus-visible {
+      outline: 2px solid var(--c-primary-accessible);
+      outline-offset: 2px;
+    }
+
   }
 
   /* Ghost (compat con ThemeSwitch: class="btn ghost") */
   &.ghost {
-    background: transparent;
-    border-color: transparent;
+    background: var(--c-panel);
     color: var(--c-text);
-    padding: 0px;
+    border-color: var(--c-line-acc);
+
+    &:hover {
+      border-color: var(--c-primary-accessible-hover);
+      color: var(--c-primary-accessible-hover);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--c-primary-accessible);
+      outline-offset: 2px;
+    }
   }
 
   /* Secondary (outline con más énfasis) */

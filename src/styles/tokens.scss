@@ -23,6 +23,7 @@
   --c-black: #000000;
   --c-gray: #e2e2e259;
   --c-bg: #ffffff;
+  --c-bg-variant: #F6F6F9;
   --c-panel: #ffffff;
   --d1: #0563ff;
   --d2: #004bcc;
@@ -34,6 +35,10 @@
   --d8: #b0b0b0;
   --d9: #00b8d9;
   --d10: #ff9f40;
+  // --g-primary: linear-gradient(135deg, #3385ff 0%, #071381 100%);
+  // --g-primary-light: linear-gradient(90deg, #0563FF 19.23%, #90A9D5 43.75%, #F6F6F9 83.65%);
+  // --g-primary-dark: linear-gradient(90deg, #0563FF 0%, #476AA6 47.12%, #E2E2E2 100%);
+  // --g-cta: linear-gradient(90deg, #00084D 0%, #1D63ED 100%);
   --g-primary: linear-gradient(135deg, #0563ff 0%, #8b00cc 100%); //nuevoo
   --g-primary-light: linear-gradient(90deg, #0563ff 19.23%, #90a9d5 43.75%, #f6f6f9 83.65%);
   --g-primary-dark: linear-gradient(90deg, #0563ff 0%, #476aa6 47.12%, #e2e2e2 100%);
@@ -55,6 +60,8 @@
   --c-panel: #11172a;
   --g-hero: radial-gradient(60% 80% at 70% 30%, #071381 0%, #000 70%);
   --c-line: #1f2a44;
+
+  ;
 }
 
 .container {
@@ -68,6 +75,8 @@
   gap: 4rem;
   height: auto;
   gap: 1rem;
+  max-width: 1200px; //se agregó
+
 }
 
 .actions {
@@ -89,35 +98,16 @@
   padding: 1.2rem;
 }
 
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.85rem 1.2rem;
-  border-radius: 999px;
-  font-weight: 600;
-  border: 1px solid transparent;
-  cursor: pointer;
-  text-decoration: none;
-}
 
-.btn.primary {
-  background: var(--g-cta);
-  color: var(--c-white);
-}
 
-.btn.primary:hover {
-  filter: brightness(1.05);
-}
-
-.badge {
-  background: rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  color: var(--c-text);
-  padding: 0.3rem 0.6rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-}
+// .badge {
+//   background: rgba(0, 0, 0, 0.06);
+//   border: 1px solid rgba(0, 0, 0, 0.08);
+//   color: var(--c-text);
+//   padding: 0.3rem 0.6rem;
+//   border-radius: 999px;
+//   font-size: 0.8rem;
+// }
 
 /*2. Estilos de componentes específicos */
 [data-theme='dark'] .badge {
@@ -152,16 +142,6 @@ nav a {
   text-decoration: none;
 }
 
-// nav a::after {
-//   content: '';
-//   position: absolute;
-//   left: 0;
-//   bottom: -3px;
-//   width: 0;
-//   height: 2px;
-//   background-color: var(--c-primary);
-//   transition: width 0.3s ease;
-// }
 
 nav a:hover::after,
 nav a:focus::after {
