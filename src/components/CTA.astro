@@ -1,12 +1,14 @@
 ---
+import { Image } from 'astro:assets'
+
 const { t: _t } = Astro.props
-const t = typeof _t === 'function' ? _t : (k) => k
+const t = typeof _t === 'function' ? _t : (k: unknown) => k
 ---
 
 <section id="about" class="section about-banner" aria-labelledby="about-title">
   <div class="container">
     <div class="about-text">
-      <div style="display: flex; flex-direction: column; align-items: start; gap:7px">
+      <div class="content-text">
         <h2 id="about-title" style="margin: 0%; height:64px">{t('Cash flow is king')}</h2>
         <div
           style="display: flex; flex-direction: column; align-items: flex-start; line-height: 28px;"
@@ -24,34 +26,204 @@ const t = typeof _t === 'function' ? _t : (k) => k
     <!-- Bloque de imágenes -->
     <figure class="about-image">
       <div class="image-left">
-        <img
+        <Image
           src="/public/assets/section_banner_person.svg"
           alt={t('Gráfico de flujo de caja')}
           class="fade-img"
           loading="lazy"
+          decoding="async"
           width="197"
           height="252"
         />
       </div>
 
       <div class="image-right">
-        <img
+        <Image
           src="/public/assets/saldo.svg"
           alt={t('Análisis financiero')}
           class="fade-img"
           loading="lazy"
+          decoding="async"
           width="146"
           height="125"
         />
-        <img
+        <Image
           src="/public/assets/posiciones.svg"
           alt={t('Proyección de ingresos')}
           class="fade-img"
           loading="lazy"
+          decoding="async"
           width="192"
           height="184"
         />
       </div>
     </figure>
   </div>
+  <script>
+    const imageFigure = document.querySelector('.about-image')
+
+    if ('IntersectionObserver' in window && imageFigure) {
+      const observer = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible')
+              observer.unobserve(entry.target)
+            }
+          })
+        },
+        {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1,
+        }
+      )
+      observer.observe(imageFigure)
+    }
+  </script>
 </section>
+<style lang="scss">
+  .about-banner {
+    background-image: url('/public/assets/section_banner.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
+    text-align: center;
+    padding: 4rem 0;
+    position: relative;
+    height: auto;
+  }
+
+  .about-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .btn.emptyghost {
+    background: transparent;
+    border: 2px solid var(--c-white);
+    border-radius: 10px;
+    color: var(--c-white);
+    width: 100%;
+    max-width: 150px;
+    min-width: 125px;
+    height: 45px;
+    padding: 0px 20px;
+  }
+  .about-banner .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 1 400px;
+    gap: 16px;
+    padding: 16px 0px;
+    justify-content: center;
+  }
+  .about-text h2,
+  .about-text p,
+  .about-text a {
+    color: var(--c-white);
+    margin: 0;
+  }
+
+  .about-image {
+    display: flex;
+    flex: 1 1 400px;
+    align-items: center;
+    column-gap: 14px;
+    justify-content: center;
+  }
+  .image-left {
+    border-radius: 10px;
+    box-shadow: 0px 1px 2px 0px #0000004d;
+    box-shadow: 0px 1px 3px 1px #00000026;
+  }
+  .image-right {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16.5px;
+  }
+  /*animaciones para las 3 imagenes*/
+  .image-right.fade-img {
+    object-fit: cover;
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+  .content-text {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 7px;
+  }
+
+  @include media(mobile) {
+    .about-banner .container {
+      flex-direction: column;
+      text-align: center;
+    }
+    .about-image {
+      flex: auto;
+    }
+    .content-text p {
+      text-align: justify;
+      max-width: 252px;
+    }
+    .about-text {
+      flex: auto;
+    }
+  }
+
+  @include media(mobile) {
+    .principles {
+      display: block !important;
+      row-gap: 8px;
+      grid-template-columns: 1fr !important;
+      justify-items: center;
+    }
+  }
+  @keyframes fadeInSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /*Estado Inicial*/
+  .about-image .fade-img {
+    opacity: 0;
+    transition: none;
+  }
+
+  /*Clase de Activacion*/
+  .about-image.is-visible .fade-img {
+    animation: fadeInSlideUp 1s ease-out forwards;
+  }
+
+  /*Secuencia Delays */
+
+  .about-image.is-visible .image-left img.fade-img {
+    animation-delay: 0.2s;
+  }
+
+  .about-image.is-visible .image-right img.fade-img:nth-child(1) {
+    animation-delay: 0.5s;
+  }
+
+  .about-image.is-visible .image-right img.fade-img:nth-child(2) {
+    animation-delay: 0.8s;
+  }
+</style>

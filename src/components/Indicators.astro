@@ -1,6 +1,7 @@
 ---
 import LineChart from '@/islands/LineChart.jsx'
 import CounterOnView from '@/islands/CounterOnView.jsx'
+import { Image } from 'astro:assets'
 const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k) => k
 ---
@@ -8,7 +9,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
 <!-- Original id="indicadores" -->
 <section class="section" aria-labelledby="indicadores-title">
   <div class="container indicators card">
-    <h4>Indicadores</h4>
+    <h4>{('Indicadores')}</h4>
     <div class="section-grafico">
       <div>
         <!-- Original id="indicadores-title" -->
@@ -27,10 +28,11 @@ const t = typeof _t === 'function' ? _t : (k) => k
           client:visible
           aria-label="Gráfico de línea mostrando indicadores financieros clave"
         />
-        <img
+        <Image
           src="/public/assets/indicadores.svg"
           alt={t('Indicadores financieros clave de ZCflow')}
-          loading="lazy"
+          decoding="async"
+           itemprop="logo"
           width="494"
           height="240"
         />
@@ -40,20 +42,137 @@ const t = typeof _t === 'function' ? _t : (k) => k
     <div class="container-counter">
       <div class="counter" role="region" aria-label="Visibilidad y control: 70%">
         <div class="gradient-border-left"><CounterOnView client:visible end={70} suffix="%" /></div>
-        <p>Visibilidad y control</p>
+        <p>{t('Visibilidad y control')}</p>
       </div>
 
       <div class="counter" role="region" aria-label="ROI en 6–9 meses: 80%">
         <div class="gradient-border-left"><CounterOnView client:visible end={80} suffix="%" /></div>
-        <p>Eficiencia</p>
+        <p>{t('Eficiencia')}</p>
       </div>
 
-      <div class="counter" role="region" aria-label="Menos costos por cobranza: 15%">
-        <div class="gradient-border-left"><CounterOnView client:visible end={15} suffix="%" /></div>
-        <p>Gastos</p>
-        <p>✓ Ahorro potencial en comisiones bancarias</p>
-        <p>✓ Control en tiempo real</p>
+      <div class="counter" role="region" aria-label="Menos costos por cobranza: -15%">
+        <div class="gradient-border-left"><CounterOnView client:visible end={-15} suffix="%" /></div>
+        <p>{t('Gastos')}</p>
+        <p>✓ {t('Ahorro potencial en comisiones bancarias')}</p>
+        <p>✓ {t('Control en tiempo real')}</p>
+      </div>
+
+       <div class="counter" role="region" aria-label="Menos costos por riesgo: 15%">
+        <div class="gradient-border-left"><CounterOnView client:visible end={-30} suffix="%" /></div>
+        <p>{t('Riesgo')}</p>
+        <p>✓ {t('Protege el cash flow')}</p>
       </div>
     </div>
   </div>
 </section>
+<style lang="scss">
+  .indicators {
+    // border-radius: 24px;
+    // padding: 24px;
+    flex-direction: column;
+    background: var(--c-black);
+    color: var(--c-white);
+  }
+  .gradient-border-left p{
+    margin: 0px; 
+    padding:7px 0px;
+  }
+  .indicators h4 {
+    background: linear-gradient(90deg, #0563ff 19.23%, #90a9d5 43.75%, #f6f6f9 83.65%);
+    align-self: self-start;
+    font-weight: 500;
+    font-size: 1.3rem;
+    line-height: 28px;
+    margin: 0;
+    padding: 10px 50px;
+    height: 40px;
+    font-weight: bold;
+    letter-spacing: 0.35px;
+    font-size: 1rem;
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    animation: gradient-move 15s ease infinite;
+  }
+  @keyframes gradient-move {
+    0% {
+      background-position: 0% 0;
+    }
+    50% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: 0% 0;
+    }
+  }
+  .indicators-title {
+    color: var(--c-white);
+    max-width: 250px;
+    line-height: 48px;
+    font-weight: 500;
+  }
+  .container-counter p {
+    color: var(--c-white);
+  }
+  .style-indicators {
+    border-left: 2px solid
+      linear-gradient(270deg, #52c41a 0%, #00b8d9 19.71%, #00b8d9 59.62%, #7faeff 90.38%);
+  }
+  .container-counter {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 50px;
+    width: 100%;
+  }
+  .section-grafico {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    align-items: start;
+    font-size: 2rem;
+  }
+  .section-grafico div {
+    width: 100%;
+    padding: 0px 50px;
+  }
+  .section-grafico p {
+    color: var(--c-white);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 28px;
+    text-justify: inter-word;
+  }
+
+  .gradient-border-left {
+    position: relative;
+    padding-left: 12px;
+  }
+  .gradient-border-left::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(270deg, #52c41a 0%, #00b8d9 19.71%, #00b8d9 59.62%, #7faeff 90.38%);
+  }
+
+  .counter p {
+    font-size: 0.8rem;
+    font-weight: normal;
+    padding: 0px 12.5px;
+  }
+  .counter {
+    font-size: 2rem;
+    font-weight: 800;
+  }
+  @include media(mobile){
+    .container-counter{
+      flex-direction: column;
+    }
+    .section-grafico{
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
