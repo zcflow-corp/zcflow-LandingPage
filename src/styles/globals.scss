@@ -11,6 +11,42 @@ body {
 
 main {
   position: relative;
+  // padding-top: 68px;
+
+  margin: auto;
+}
+
+header {
+  // position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: auto;
+  // max-width: 1200px;
+  margin: auto;
+  // display: flex;
+  align-items: center;
+  background: 1px solid var(--g-primary-dark);
+  border-bottom: 1px solid var(--c-line);
+  z-index: 999;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+footer {
+  // max-width: 1200px;
+  margin: auto;
+}
+
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
 }
 
 h1,
@@ -54,9 +90,6 @@ svg {
   display: block;
 }
 
-
-
-
 .gradient-blue-dark {
   background: var(--g-primary-dark);
   background-clip: text;
@@ -64,7 +97,6 @@ svg {
   color: transparent;
   -webkit-text-fill-color: transparent;
   display: inline-block;
-
 }
 
 .gradient-blue-ligth {
@@ -76,6 +108,28 @@ svg {
 
   display: inline-block;
 }
+
+
+
+
+
+.mode-dark {
+  display: block;
+}
+
+.mode-light {
+  display: none;
+}
+
+html[data-theme='dark'] .mode-dark {
+  display: none;
+}
+
+html[data-theme='dark'] .mode-light {
+  display: block;
+}
+
+
 
 /*animaciones ref
 https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css      */
