@@ -36,14 +36,31 @@ const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
       </div>
 
       <div class="hero-imagen" aria-label="Mock UI">
-        <img src="/img/hero.jpg" alt={t('Imagen hero')} width="100%" height="260" loading="eager" />
+        <img
+          src="/img/hero-white.gif"
+          alt={t('Imagen hero')}
+          class="mode-light"
+          width="100%"
+          height="260"
+          loading="eager"
+        />
+
+        <img
+          src="/img/hero-black.gif"
+          alt={t('Imagen h')}
+          class="mode-dark"
+          width="100%"
+          height="260"
+          loading="eager"
+        />
       </div>
     </div>
   </div>
 
   <style lang="scss">
     .hero {
-      background: var(--g-hero);
+      // background: var(--g-hero);
+      background: #fbfcfc;
       border-bottom-left-radius: 32px;
       border-bottom-right-radius: 32px;
       overflow: hidden;
@@ -148,6 +165,10 @@ const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
           width: auto;
         }
       }
+    }
+
+    html[data-theme='dark'] .hero {
+      background: var(--c-black);
     }
   </style>
 </section>
