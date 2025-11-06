@@ -1,12 +1,42 @@
 ---
-import LogosTicker from '@/islands/LogosTicker.jsx'
+import LogosTicker from './LogosTicker.astro'
 const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k) => k
 ---
 
 <section class="section">
-  <div class="container">
-    <h3>{t('Empresas que confían')}</h3>
-    <div class="logo-row"><LogosTicker client:visible /></div>
+  <div class="container trustedby">
+    <h4>{t('Nuestros Partners que confian en nosotros')}</h4>
+
+    {/* O pásale tus propios logos (las claves deben existir en IconoSvg.astro) */}
+    <div class="logo-row" style="margin-top:1rem">
+      <LogosTicker
+        items={[
+          { name: 'logoaws', title: 'Amazon Web Services' },
+          { name: 'logouipath', title: 'UiPath' },
+          { name: 'logorems', title: 'Rems' },
+          { name: 'logopen', title: 'OpenAI' }, // o 'logoopen' (alias)
+        ]}
+        cols={4}
+        interval={1800}
+        grayscale={true}
+        dimOpacity={0.35}
+      />
+    </div>
   </div>
 </section>
+
+<style lang="scss">
+  .trustedby {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  html[data-theme='dark'] .trustedby {
+    background: var(--c-gray);
+  }
+</style>
