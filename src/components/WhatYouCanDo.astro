@@ -1,14 +1,86 @@
 ---
-import Tabs from '@/islands/Tabs.jsx'
+import Tabs from './common/Tabs.astro'
+import { SubTitle } from 'chart.js'
 const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k) => k
+
+const TabsJson = {
+  pestañas: [
+    {
+      título: 'Conecta',
+      SubTitle: 'Unifica todo',
+      resumen: 'Conecta con bancos, ERPS y socios estratégicos',
+      características: [
+        'Conector bancario multicuenta',
+        'Conciliación automática',
+        'Mapa de flujos y dependencias',
+      ],
+
+      slides: [
+        {
+          title: t('silder en tabas '),
+          description: t(
+            'ZCFlow conecta tu ecosistema financiero y ERPs en una plataforma 100% data driven'
+          ),
+          image: '/public/assets/section_zcflow_1.svg',
+          alt: 'Paneles de ZCflow con gráficos',
+          Icono: 'check',
+        },
+        {
+          title: t('IA predictiva'),
+          description: t(
+            'Agentes de IA que anticipan escenarios, reducen riesgos y optimizan costos'
+          ),
+          image: '/public/assets/section_zcflow_2.svg',
+          alt: 'Conectores y tablero',
+          Icono: 'check',
+        },
+        {
+          title: t('Decisiones precisas'),
+          description: t(
+            'De hojas de cálculo a decisiones confiables y asistidas desde un solo lugar'
+          ),
+          image: '/public/assets/section_zcflow_3.svg',
+          alt: 'Proyecciones con IA',
+          Icono: 'check',
+        },
+      ],
+    },
+    {
+      título: 'Gestiona',
+      resumen: 'Recordatorios inteligentes y seguimiento en tiempo real.',
+      características: ['Alertas automáticas', 'KPIs de DSO', 'Workflows por segmento'],
+    },
+    {
+      título: 'Optimiza',
+      resumen: 'Prioriza pagos y evita errores con reglas de autorización.',
+      características: [
+        'Aprobaciones por rol',
+        'Prevención de fraudes',
+        'Trazabilidad de punta a punta',
+      ],
+    },
+    {
+      título: 'Actua',
+      resumen: 'Paneles con métricas de tesorería y predicciones.',
+      características: ['Pronóstico de flujo de caja', 'Escenarios what-if', 'Exportación segura'],
+    },
+  ],
+}
 ---
 
 <section id="funciones" class="section">
   <div class="container hero-solutions">
-    <h2>{t('Lo que podrás hacer con Zcflow')}</h2>
+    <span class="gradient-blue-dark"> Data driven </span>
+    <h2>
+      {t('Lo que ')}
+      <span class="gradient-blue-dark">
+        {t('podrás hacer')}
+      </span>
+      {t('con Zcflow')}
+    </h2>
     <p>{t('Obtiene visibilidad de la liquidez y automatiza procesos clave para tu tesorería.')}</p>
-    <Tabs client:visible />
+    <Tabs TabsJson={TabsJson} client:visible />
   </div>
 </section>
 

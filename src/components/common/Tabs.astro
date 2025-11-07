@@ -1,0 +1,92 @@
+---
+// Recibe los datos como prop
+import CardSlider from 'src/islands/CardSlider.jsx'
+
+const { TabsJson } = Astro.props
+let active = 0
+---
+
+<div class="tabs-container" id="tabs-root">
+  <!-- Botones -->
+  <div role="tablist" aria-label="Qué podrás hacer" class="tabs">
+    {
+      TabsJson.pestañas.map((t, i) => (
+        <button
+          role="tab"
+          id={`tab-${i}`}
+          class={`tab-btn ${i === active ? 'active' : ''}`}
+          aria-selected={i === active}
+          aria-controls={`panel-${i}`}
+          tabindex={i === active ? '0' : '-1'}
+        >
+          {t.título}
+        </button>
+      ))
+    }
+  </div>
+
+  <!-- Paneles -->
+  <div class="tab-panels">
+    {
+      TabsJson.pestañas.map((t, i) => (
+        <div
+          id={`panel-${i}`}
+          role="tabpanel"
+          aria-labelledby={`tab-${i}`}
+          class="tab-panel"
+          style={`display: ${i === active ? 'block' : 'none'}`}
+        >
+          <h3>{t.título}</h3>
+          {t.resumen && <p>{t.resumen}</p>}
+
+          <div class="slider-functions">
+            {Array.isArray(t.slides) && t.slides.length > 0 && (
+              // <CardSlider
+              //   slides={t.slides}
+              //   interval={5000}
+              //   startIndex={0}
+              //   title={t.SubTitle}
+              //   description={t.resumen}
+              //   word={t.título}
+              // />
+
+              <CardSlider
+                slides={t.slides}
+                interval={5000}
+                startIndex={0}
+                title={t.SubTitle}
+                description={t.resumen}
+                word={t.título}
+                client:load
+              />
+            )}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  const container = document.getElementById('tabs-root')
+  const tabs = container.querySelectorAll('.tab-btn')
+  const panels = container.querySelectorAll('.tab-panel')
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach((t) => t.classList.remove('active'))
+      panels.forEach((p) => (p.style.display = 'none'))
+      tab.classList.add('active')
+      panels[i].style.display = 'block'
+    })
+  })
+</script>
+
+<style lang="scss">
+  .tabs-container {
+    width: 100%;
+  }
+  .tab-btn.active {
+    border-bottom: 2px solid var(--accent-color);
+  }
+</style>
