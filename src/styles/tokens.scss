@@ -23,7 +23,7 @@
   --c-black: #000000;
   --c-gray: #e2e2e259;
   --c-bg: #ffffff;
-  --c-bg-variant: #F6F6F9;
+  --c-bg-variant: #f6f6f9;
   --c-panel: #ffffff;
   --d1: #0563ff;
   --d2: #004bcc;
@@ -60,8 +60,6 @@
   --c-panel: #11172a;
   --g-hero: radial-gradient(60% 80% at 70% 30%, #071381 0%, #000 70%);
   --c-line: #1f2a44;
-
-  ;
 }
 
 .container {
@@ -76,7 +74,6 @@
   height: auto;
   gap: 1rem;
   max-width: 1200px; //se agregó
-
 }
 
 .actions {
@@ -97,8 +94,6 @@
   box-shadow: var(--shadow);
   padding: 1.2rem;
 }
-
-
 
 // .badge {
 //   background: rgba(0, 0, 0, 0.06);
@@ -135,13 +130,29 @@
   border-bottom: 1px solid var(--c-line);
   backdrop-filter: blur(8px);
 }
+[data-theme='dark'] #fundamentos .principles .card.principle {
+  background: #141417 !important;
+  border: 1px solid #3a3a3d;
+}
 
+[data-theme='dark'] #fundamentos .section-body p {
+  color: #eaf0ff;
+}
+[data-theme='light'] #fundamentos .section-body p {
+  color: var(--c-secondary) !important;
+}
+[data-theme='dark'] .principles .principle-title {
+  color: #eaf0ff !important;
+}
+
+[data-theme='dark'] nav {
+  background: var(--c-black) !important;
+}
 nav a {
   position: relative;
   color: var(--c-text);
   text-decoration: none;
 }
-
 
 nav a:hover::after,
 nav a:focus::after {

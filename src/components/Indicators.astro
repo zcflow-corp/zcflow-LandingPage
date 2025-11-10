@@ -8,74 +8,86 @@ const t = typeof _t === 'function' ? _t : (k) => k
 
 <!-- Original id="indicadores" -->
 <section class="section" aria-labelledby="indicadores-title">
-  <div class="container indicators card">
-    <h4>{('Indicadores')}</h4>
-    <div class="section-grafico">
-      <div>
-        <!-- Original id="indicadores-title" -->
-        <h2 class="indicators-title">{t('Los resultados que importan')}</h2>
-        <p>
-          {
-            t(
-              'Con ZCflow llevas tu tesorería al siguiente nivel, transformando datos dispersos en información precisa para tomar decisiones estratégicas.'
-            )
-          }
-        </p>
+  <div style="padding: 2rem;">
+    <div class="container indicators card">
+      <h4>{'Indicadores'}</h4>
+      <div class="section-grafico">
+        <div>
+          <!-- Original id="indicadores-title" -->
+          <h2 class="indicators-title">{t('Los resultados que importan')}</h2>
+          <p>
+            {
+              t(
+                'Con ZCflow llevas tu tesorería al siguiente nivel, transformando datos dispersos en información precisa para tomar decisiones estratégicas.'
+              )
+            }
+          </p>
+        </div>
+        <!-- Gráfico de línea con descripción -->
+        <div class="section-grafico-indicador">
+          <figure style="align-self: flex-end; margin:0%">
+            <LineChart
+              client:visible
+              aria-label="Gráfico de línea mostrando indicadores financieros clave"
+            />
+          </figure>
+          <Image
+            src="/assets/indicadores.svg"
+            alt={t('Indicadores financieros clave de ZCflow')}
+            decoding="async"
+            itemprop="logo"
+            class="imagen-indicador"
+            width="494"
+            height="240"
+          />
+        </div>
       </div>
-      <!-- Gráfico de línea con descripción -->
-      <figure style="align-self: flex-end; margin:0%">
-        <LineChart
-          client:visible
-          aria-label="Gráfico de línea mostrando indicadores financieros clave"
-        />
-        <Image
-          src="/public/assets/indicadores.svg"
-          alt={t('Indicadores financieros clave de ZCflow')}
-          decoding="async"
-           itemprop="logo"
-          width="494"
-          height="240"
-        />
-      </figure>
-    </div>
-    <!-- Contadores con roles y aria-labels -->
-    <div class="container-counter">
-      <div class="counter" role="region" aria-label="Visibilidad y control: 70%">
-        <div class="gradient-border-left"><CounterOnView client:visible end={70} suffix="%" /></div>
-        <p>{t('Visibilidad y control')}</p>
-      </div>
+      <!-- Contadores con roles y aria-labels -->
+      <div class="container-counter">
+        <div class="counter" role="region" aria-label="Visibilidad y control: 70%">
+          <div class="gradient-border-left">
+            <CounterOnView client:visible end={70} suffix="%" />
+          </div>
+          <p>{t('Visibilidad y control')}</p>
+        </div>
 
-      <div class="counter" role="region" aria-label="ROI en 6–9 meses: 80%">
-        <div class="gradient-border-left"><CounterOnView client:visible end={80} suffix="%" /></div>
-        <p>{t('Eficiencia')}</p>
-      </div>
+        <div class="counter" role="region" aria-label="ROI en 6–9 meses: 80%">
+          <div class="gradient-border-left">
+            <CounterOnView client:visible end={80} suffix="%" />
+          </div>
+          <p>{t('Eficiencia')}</p>
+        </div>
 
-      <div class="counter" role="region" aria-label="Menos costos por cobranza: -15%">
-        <div class="gradient-border-left"><CounterOnView client:visible end={-15} suffix="%" /></div>
-        <p>{t('Gastos')}</p>
-        <p>✓ {t('Ahorro potencial en comisiones bancarias')}</p>
-        <p>✓ {t('Control en tiempo real')}</p>
-      </div>
+        <div class="counter" role="region" aria-label="Menos costos por cobranza: -15%">
+          <div class="gradient-border-left">
+            <CounterOnView client:visible end={-15} suffix="%" />
+          </div>
+          <p>{t('Gastos')}</p>
+          <p>✓ {t('Ahorro potencial en comisiones bancarias')}</p>
+          <p>✓ {t('Control en tiempo real')}</p>
+        </div>
 
-       <div class="counter" role="region" aria-label="Menos costos por riesgo: 15%">
-        <div class="gradient-border-left"><CounterOnView client:visible end={-30} suffix="%" /></div>
-        <p>{t('Riesgo')}</p>
-        <p>✓ {t('Protege el cash flow')}</p>
+        <div class="counter" role="region" aria-label="Menos costos por riesgo: 15%">
+          <div class="gradient-border-left">
+            <CounterOnView client:visible end={-30} suffix="%" />
+          </div>
+          <p>{t('Riesgo')}</p>
+          <p>✓ {t('Protege el cash flow')}</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 <style lang="scss">
   .indicators {
-    // border-radius: 24px;
-    // padding: 24px;
+    background: #141417 !important;
+
+    border: 1px solid #3a3a3d;
     flex-direction: column;
-    background: var(--c-black);
-    color: var(--c-white);
   }
-  .gradient-border-left p{
-    margin: 0px; 
-    padding:7px 0px;
+  .gradient-border-left p {
+    margin: 0px;
+    padding: 7px 0px;
   }
   .indicators h4 {
     background: linear-gradient(90deg, #0563ff 19.23%, #90a9d5 43.75%, #f6f6f9 83.65%);
@@ -107,14 +119,33 @@ const t = typeof _t === 'function' ? _t : (k) => k
       background-position: 0% 0;
     }
   }
+
+  .imagen-indicador {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 1.2s ease-out,
+      transform 1.2s ease-out;
+  }
+  .imagen-indicador.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .imagen-indicador {
+      transition: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
   .indicators-title {
-    color: var(--c-white);
+    color: #eaf0ff;
     max-width: 250px;
     line-height: 48px;
     font-weight: 500;
   }
   .container-counter p {
-    color: var(--c-white);
+    color: #eaf0ff;
   }
   .style-indicators {
     border-left: 2px solid
@@ -137,7 +168,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
     padding: 0px 50px;
   }
   .section-grafico p {
-    color: var(--c-white);
+    color: #eaf0ff;
     font-size: 1rem;
     font-weight: 400;
     line-height: 28px;
@@ -167,11 +198,25 @@ const t = typeof _t === 'function' ? _t : (k) => k
     font-size: 2rem;
     font-weight: 800;
   }
-  @include media(mobile){
-    .container-counter{
+  .counter.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .counter {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .counter {
+      transition: none;
+      transform: none;
+    }
+  }
+  @include media(mobile) {
+    .container-counter {
       flex-direction: column;
     }
-    .section-grafico{
+    .section-grafico {
       grid-template-columns: 1fr;
     }
   }

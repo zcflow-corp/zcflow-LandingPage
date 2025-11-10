@@ -171,11 +171,9 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
     justify-items: center;
     row-gap: 1.5rem;
     column-gap: 1.5rem;
-    padding: 1rem 0;
+    padding: 2rem;
   }
   .descubre-mas {
-    // height: 45px;
-    // border: 2px solid var(--c-black);
     text-align: center;
   }
   .fundamentos {
@@ -219,10 +217,6 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
       transform 0.25s ease,
       box-shadow 0.25s ease;
     cursor: default;
-    // display: flex;
-    // flex-wrap: wrap;
-    // align-items: center;
-    // justify-content: center;
     border: none;
   }
 
@@ -360,7 +354,6 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
       grid-auto-rows: minmax(200px, auto);
       gap: 1.5rem;
     }
-
     /* --- Fila Superior 2 Tarjetas--- */
 
     /* 1. la primera tarjeta  ocupa 2 columnas */
@@ -405,6 +398,16 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
     .principles > .principle:nth-child(n) {
       grid-column: auto;
       grid-row: auto;
+    }
+
+    .section-header {
+      padding: 2rem;
+    }
+    .reveal-target {
+      text-align: start;
+    }
+    .fundamentos-header {
+      align-items: flex-start;
     }
   }
 </style>
