@@ -134,7 +134,8 @@
             margin-top: 0.32rem;
 
             path {
-                stroke: var(--c-text-muted);
+                fill: var(--c-text-muted);
+
                 opacity: 0.4;
             }
         }
@@ -182,7 +183,7 @@
 
         svg {
             path {
-                stroke: var(--c-primary);
+                fill: var(--c-primary);
                 opacity: 1;
             }
         }
@@ -267,4 +268,59 @@ html[data-theme='dark'] .card-slider {
     &__desc-item--active {
         background: var(--c-gray);
     }
+}
+
+
+
+.hero-solutions {
+
+    .card-slider__viewport {
+
+
+        display: flex;
+        flex-direction: row-reverse;
+
+
+
+
+    }
+
+    .card-slider__title {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+
+
+
+        span {
+
+            width: auto;
+            margin: 0.5rem 0rem;
+            display: flex;
+            padding: 4px 69px 4px 12px;
+            align-items: center;
+            border-radius: 100px;
+            color: var(--c-white);
+            width: max-content;
+            background: var(--dg-blue-sf, linear-gradient(90deg, var(--color-Base-primary, #0563FF) 19.23%, var(--color-Base-quaternary, #90A9D5) 43.75%, var(--bg-variant, #F6F6F9) 83.65%))
+        }
+
+
+    }
+
+
+    .card-slider__img-wrap,
+    .card-slider__img {
+        background-color: transparent;
+        border-style: none;
+        border: none
+    }
+
+    .card-slider__img {
+        background-color: transparent;
+        background: var(--c-bg-variant);
+        border-style: none;
+        border: none;
+    }
+
 }
