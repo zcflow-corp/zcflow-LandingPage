@@ -52,7 +52,7 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
     <nav
       aria-label="Navegación principal"
       class="nav"
-      style="display: flex; align-items:center; column-gap: 15px; width: 100%; justify-content:space-between;"
+      style="display: flex; align-items:center; column-gap: 15px; width: 100%; justify-content:space-between; padding: 0rem 2rem;"
       itemscope
       itemtype="https://schema.org/SiteNavigationElement"
     >
@@ -90,12 +90,12 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
 <style lang="scss">
   .site-header {
     position: sticky;
-    padding: 0px 9px;
+    padding: 0px 0px;
     top: 0;
     z-index: 1000;
 
     .container {
-      padding: 1rem 0rem;
+      padding: 1rem 2rem;
       gap: 8px !important;
       width: 100%;
       justify-content: space-between;
@@ -157,30 +157,18 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
     .logo .mode-dark,
     .mode-light {
       width: auto;
-      height: 35px;
+      height: 30px;
+      object-fit: contain;
     }
     .mobile-actions {
       column-gap: 18px;
       display: flex;
     }
-
-    /*Control de elementos visibles por tema */
-    // .mode-dark {
-    //   display: block;
-    // }
-    // .mode-light {
-    //   display: none;
-    // }
-
-    // html[data-theme='dark'] .logo .mode-dark {
-    //   display: none;
-    // }
-
-    // html[data-theme='dark'] .logo .mode-light {
-    //   display: block;
-    // }
     /* --- Responsive --- */
     @include media(mobile) {
+      nav {
+        padding: 2rem 0rem;
+      }
       .nav-list {
         color: var(--c-dark);
         a:hover {
@@ -266,17 +254,6 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
         width: 98%;
       }
     }
-    /**validar si se usa */
-    // @keyframes fadeIn {
-    //   from {
-    //     opacity: 0;
-    //     transform: translateY(-10px);
-    //   }
-    //   to {
-    //     opacity: 1;
-    //     transform: translateY(0);
-    //   }
-    // }
   }
   .logo-row {
     display: grid;
