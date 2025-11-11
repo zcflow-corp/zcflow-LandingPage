@@ -157,6 +157,10 @@ const t = typeof _t === 'function' ? _t : (k) => k
     justify-content: space-between;
     padding: 0px 50px;
     width: 100%;
+
+    @include media(mobile) {
+      padding: 0px 1rem;
+    }
   }
   .section-grafico {
     display: grid;
@@ -167,6 +171,9 @@ const t = typeof _t === 'function' ? _t : (k) => k
   .section-grafico div {
     width: 100%;
     padding: 0px 50px;
+    @include media(mobile) {
+      padding: 0px 1rem;
+    }
   }
   .section-grafico p {
     color: #eaf0ff;

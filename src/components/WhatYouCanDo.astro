@@ -1,14 +1,318 @@
 ---
-import Tabs from '@/islands/Tabs.jsx'
+import Tabs from './common/Tabs.astro'
+import { SubTitle } from 'chart.js'
 const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k) => k
+
+// const TabsJson = {
+//   pestañas: [
+//     {
+//       título: 'Conecta',
+//       icono: 'check',
+//       SubTitle: 'Unifica todo',
+//       resumen: 'Conecta con bancos, ERPS y socios estratégicos',
+
+//       slides: [
+//         {
+//           title: t('Conexión con Bancos'),
+//           description: t(
+//             'Agentes de IA que anticipan escenarios, reducen riesgos y optimizan costos'
+//           ),
+//           image: '/public/assets/section_zcflow_1.svg', //cambiar
+//           alt: 'Conexión con Bancos',
+//           Icono: 'bank',
+//         },
+//         {
+//           title: t('Calidad de datos'),
+//           description: t(
+//             'De hojas de cálculo a decisiones confiables y asistidas desde un solo lugar'
+//           ),
+//           image: '/public/assets/section_zcflow_2.svg',
+//           alt: 'Datos',
+//           Icono: 'data',
+//         },
+//         {
+//           title: t('Conexión con socios'),
+//           description: t(
+//             ' Integración con entidades financieras, fintechs e inversionistas para una solución financiera competitiva'
+//           ),
+//           image: '/public/assets/section_zcflow_3.svg',
+//           alt: 'Conexión con socios',
+//           Icono: 'conexion',
+//         },
+//       ],
+//     },
+//     {
+//       título: 'Gestiona',
+//       icono: 'check',
+//       resumen: 'Recordatorios inteligentes y seguimiento en tiempo real.',
+//       características: ['Alertas automáticas', 'KPIs de DSO', 'Workflows por segmento'],
+//       slides: [
+//         {
+//           title: t('Conexión con Bancos'),
+//           description: t(
+//             'Agentes de IA que anticipan escenarios, reducen riesgos y optimizan costos'
+//           ),
+//           image: '/public/assets/section_zcflow_1.svg', //cambiar
+//           alt: 'Conexión con Bancos',
+//           Icono: 'bank',
+//         },
+//         {
+//           title: t('Calidad de datos'),
+
+//           description: t(
+//             'De hojas de cálculo a decisiones confiables y asistidas desde un solo lugar'
+//           ),
+//           image: '/public/assets/section_zcflow_2.svg',
+//           alt: 'Datos',
+//           Icono: 'data',
+//         },
+//         {
+//           title: t('Conexión con socios'),
+//           description: t(
+//             ' Integración con entidades financieras, fintechs e inversionistas para una solución financiera competitiva'
+//           ),
+//           image: '/public/assets/section_zcflow_3.svg',
+//           alt: 'Conexión con socios',
+//           Icono: 'conexion',
+//         },
+//       ],
+//     },
+//     {
+//       título: 'Optimiza',
+//       icono: 'check',
+//       resumen: 'Prioriza pagos y evita errores con reglas de autorización.',
+//       características: [
+//         'Aprobaciones por rol',
+//         'Prevención de fraudes',
+//         'Trazabilidad de punta a punta',
+//       ],
+//     },
+//     {
+//       título: 'Actua',
+//       icono: 'check',
+//       resumen: 'Paneles con métricas de tesorería y predicciones.',
+//       características: ['Pronóstico de flujo de caja', 'Escenarios what-if', 'Exportación segura'],
+//     },
+//   ],
+// }
+
+const TabsJson = {
+  pestañas: [
+    // 1) CONECTA
+    {
+      título: 'Conecta',
+      icono: 'conecta',
+      SubTitle: 'Unifique todo.',
+      resumen:
+        'Conecta bancos, ERPs y socios en un ecosistema seguro y confiable. Consolida información crítica con APIs seguras y decisiones ágiles desde una sola fuente.',
+      características: [
+        'Integración bancaria y ERP',
+        'Normalización de datos',
+        'Fuente única de verdad',
+        'Automatización con IA',
+      ],
+      slides: [
+        {
+          title: t('Conexión con Bancos, ERPs y otras fuentes'),
+          description: t(
+            'Agentes de IA descargan movimientos, saldos y operaciones del ERP de forma automática cada día.'
+          ),
+          image: '/public/assets/section_zcflow_1.svg',
+          alt: 'Conexión con bancos, ERPs y otras fuentes',
+          Icono: 'Bank',
+          status: true,
+        },
+        {
+          title: t('Enriquecimiento y calidad de datos'),
+          description: t(
+            'Automatiza la validación y enriquecimiento de datos con fuentes externas para decisiones confiables.'
+          ),
+          image: '/public/assets/section_zcflow_2.svg',
+          alt: 'Enriquecimiento y calidad de datos',
+          Icono: 'data',
+          status: true,
+        },
+        {
+          title: t('Conexión con socios de negocios'),
+          description: t(
+            'Integra fintechs e inversionistas para crear soluciones financieras más competitivas.'
+          ),
+          image: '/public/assets/section_zcflow_3.svg',
+          alt: 'Conexión con socios de negocios',
+          Icono: 'conexion',
+          status: 'beta',
+        },
+      ],
+    },
+
+    // 2) GESTIONA
+    {
+      título: 'Gestiona',
+      icono: 'gestiona',
+      SubTitle: 'Liquidez confiable.',
+      resumen:
+        'Visualiza la liquidez en tiempo real y clasifica movimientos con IA. Controla flujos, riesgos y reportes automáticos con dashboards interactivos.',
+      características: [
+        'Clasificación inteligente',
+        'Flujo de caja en tiempo real',
+        'Dashboards avanzados',
+        'Reportes automáticos',
+      ],
+      slides: [
+        {
+          title: t('Clasificación inteligente de movimientos'),
+          description: t(
+            'La IA detecta patrones y coincidencias para automatizar conciliaciones y liberar al equipo financiero.'
+          ),
+          image: '/public/assets/gestion_clasificacion.svg',
+          alt: 'Clasificación inteligente',
+          Icono: 'movement',
+          status: true,
+        },
+        {
+          title: t('Flujo de caja real'),
+          description: t(
+            'Consolida saldos y movimientos bancarios en un visor único, sin depender de hojas de cálculo.'
+          ),
+          image: '/public/assets/gestion_flujo_caja.svg',
+          alt: 'Flujo de caja real',
+          Icono: 'caja',
+          status: true,
+        },
+        {
+          title: t('Dashboards interactivos y widgets'),
+          description: t(
+            'Visualiza métricas clave de liquidez, riesgos y operaciones desde paneles personalizables.'
+          ),
+          image: '/public/assets/gestion_dashboards.svg',
+          alt: 'Dashboards y widgets',
+          Icono: 'dashboards',
+          status: true,
+        },
+        {
+          title: t('Reporting automático'),
+          description: t(
+            'Genera informes claros y consistentes con un clic, siempre actualizados y listos para auditores.'
+          ),
+          image: '/public/assets/gestion_reporting.svg',
+          alt: 'Reporting financiero',
+          Icono: 'reporte',
+          status: true,
+        },
+      ],
+    },
+
+    // 3) OPTIMIZA
+    {
+      título: 'Optimiza',
+      icono: 'optimiza',
+      SubTitle: 'Decide con confianza.',
+      resumen:
+        'Evalúa tasas, plazos y monedas con IA. Construye estrategias financieras eficientes que reducen costos y riesgos.',
+      características: [
+        'Proyecciones dinámicas',
+        'Escenarios financieros',
+        'Optimización costo/riesgo',
+        'Motor algorítmico',
+      ],
+      slides: [
+        {
+          title: t('Proyecciones de liquidez'),
+          description: t(
+            'Genera proyecciones ajustadas a escenarios de negocio para tomar decisiones anticipadas.'
+          ),
+          image: '/public/assets/optimiza_proyecciones.svg',
+          alt: 'Proyecciones de liquidez',
+          Icono: 'liquidez',
+          status: true,
+        },
+        {
+          title: t('Escenarios'),
+          description: t(
+            'Crea escenarios optimista, pesimista y realista, comparando impactos en la liquidez en tiempo real.'
+          ),
+          image: '/public/assets/optimiza_escenarios.svg',
+          alt: 'Escenarios financieros',
+          Icono: 'escenarios',
+          status: true,
+        },
+        {
+          title: t('Recomendaciones de costo/riesgo'),
+          description: t(
+            'La IA sugiere el mejor uso de productos financieros para optimizar costos y minimizar riesgos.'
+          ),
+          image: '/public/assets/optimiza_recomendaciones.svg',
+          alt: 'Recomendaciones costo/riesgo',
+          Icono: 'costo',
+          status: true,
+        },
+      ],
+    },
+
+    // 4) ACTÚA
+    {
+      título: 'Actúa',
+      icono: 'actua',
+      SubTitle: 'Ejecución ágil.',
+      resumen:
+        'Automatiza workflows y aprobaciones. Controla órdenes, documentos y auditorías con trazabilidad completa.',
+      características: [
+        'Workflows configurables',
+        'Aprobaciones por jerarquía',
+        'Automatización de órdenes',
+        'Gestión documental',
+        'Auditoría completa',
+      ],
+      slides: [
+        {
+          title: t('Workflow y aprobaciones'),
+          description: t(
+            'Configura jerarquías, valida operaciones y aprueba transacciones trazables y seguras.'
+          ),
+          image: '/public/assets/actua_workflow.svg',
+          alt: 'Workflow y aprobaciones',
+          Icono: 'aprobaciones',
+          status: 'beta',
+        },
+        {
+          title: t('Automatización de órdenes'),
+          description: t(
+            'Envía instrucciones financieras automáticas para préstamos, coberturas o inversiones.'
+          ),
+          image: '/public/assets/actua_ordenes.svg',
+          alt: 'Automatización de órdenes',
+          Icono: 'automatizaciones',
+          status: 'beta',
+        },
+        {
+          title: t('Gestión documental y auditoría'),
+          description: t(
+            'Centraliza documentos clave y compártelos al instante para auditorías más ágiles.'
+          ),
+          image: '/public/assets/actua_auditoria.svg',
+          alt: 'Gestión documental y auditoría',
+          Icono: 'documentaria',
+          status: true,
+        },
+      ],
+    },
+  ],
+}
 ---
 
 <section id="funciones" class="section">
   <div class="container hero-solutions">
-    <h2>{t('Lo que podrás hacer con Zcflow')}</h2>
+    <span class="gradient-blue-dark"> Data driven </span>
+    <h2>
+      {t('Lo que ')}
+      <span class="gradient-blue-dark">
+        {t('podrás hacer')}
+      </span>
+      {t('con Zcflow')}
+    </h2>
     <p>{t('Obtiene visibilidad de la liquidez y automatiza procesos clave para tu tesorería.')}</p>
-    <Tabs client:visible />
+    <Tabs TabsJson={TabsJson} client:visible />
   </div>
 </section>
 

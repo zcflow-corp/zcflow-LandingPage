@@ -1,7 +1,7 @@
 {
   "pestañas": [
     {
-      "título": "Unifica todo",
+      "título": "Conecta",
       "resumen": "Integra bancos, ERPs y socios estratégicos en un mismo lugar.",
       "características": [
         "Conector bancario multicuenta",
@@ -10,16 +10,12 @@
       ]
     },
     {
-      "título": "Cobranzas con IA",
+      "título": "Gestiona",
       "resumen": "Recordatorios inteligentes y seguimiento en tiempo real.",
-      "características": [
-        "Alertas automáticas",
-        "KPIs de DSO",
-        "Workflows por segmento"
-      ]
+      "características": ["Alertas automáticas", "KPIs de DSO", "Workflows por segmento"]
     },
     {
-      "título": "Pagos con control",
+      "título": "Optimiza",
       "resumen": "Prioriza pagos y evita errores con reglas de autorización.",
       "características": [
         "Aprobaciones por rol",
@@ -28,13 +24,9 @@
       ]
     },
     {
-      "título": "Análisis",
+      "título": "Actua",
       "resumen": "Paneles con métricas de tesorería y predicciones.",
-      "características": [
-        "Pronóstico de flujo de caja",
-        "Escenarios what-if",
-        "Exportación segura"
-      ]
+      "características": ["Pronóstico de flujo de caja", "Escenarios what-if", "Exportación segura"]
     }
   ]
 }
