@@ -324,3 +324,20 @@ html[data-theme='dark'] .card-slider {
     }
 
 }
+
+.tab-btn {
+
+    span {
+        path {
+            fill: var(--c-line);
+        }
+    }
+}
+
+.activeTab {
+    span {
+        path {
+            fill: var(--c-primary) !important;
+        }
+    }
+}

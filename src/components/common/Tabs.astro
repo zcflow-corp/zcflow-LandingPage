@@ -16,7 +16,7 @@ let active = 0
           role="tab"
           id={`tab-${i}`}
           class={`tab-btn ${i === active ? 'active' : ''}`}
-          aria-selected={i === active}
+          aria-selected={i === active ? 'active' : ''}
           aria-controls={`panel-${i}`}
           tabindex={i === active ? '0' : '-1'}
         >
@@ -68,9 +68,9 @@ let active = 0
 
   tabs.forEach((tab, i) => {
     tab.addEventListener('click', () => {
-      tabs.forEach((t) => t.classList.remove('active'))
+      tabs.forEach((t) => t.classList.remove('activeTab'))
       panels.forEach((p) => (p.style.display = 'none'))
-      tab.classList.add('active')
+      tab.classList.add('activeTab')
       panels[i].style.display = 'block'
     })
   })
@@ -112,12 +112,6 @@ let active = 0
         border: 1px solid #e6e8eb;
         background: #f9fafb;
 
-        svg {
-          path {
-            fill: red;
-          }
-        }
-
         &:focus {
           outline: none;
           box-shadow: var(--shadow);
@@ -134,21 +128,10 @@ let active = 0
         align-items: center;
         gap: 0.5rem;
         align-self: stretch;
-        // border-radius: var(--radius);
         border: 1px solid var(--color-Base-primary, #0563ff);
         background: var(--color-grays-neutrals-background-all, #f5f9ff);
       }
     }
-  }
-  .tab-btn.active {
-    // border-bottom: 2px solid var(--accent-color);
-
-    // svg {
-    //   background: #0563ff;
-    //   path {
-    //     fill: red;
-    //   }
-    // }
   }
 
   html[data-theme='dark'] .tabs-container {
@@ -156,5 +139,12 @@ let active = 0
       background-color: transparent !important;
       border: 1px solid var(--text) !important;
     }
+  }
+
+  .activeTab {
+    // border-bottom: 2px solid var(--accent-color);
+    border: 1px solid #0563ff !important;
+    background: #f5f9ff !important;
+    color: var(--c-primary) !important;
   }
 </style>
