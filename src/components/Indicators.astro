@@ -1,6 +1,7 @@
 ---
 import LineChart from '@/islands/LineChart.jsx'
 import CounterOnView from '@/islands/CounterOnView.jsx'
+import ChartIndicator from './grafic/ChartIndicator.astro'
 import { Image } from 'astro:assets'
 const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k) => k
@@ -31,15 +32,10 @@ const t = typeof _t === 'function' ? _t : (k) => k
               aria-label="Gráfico de línea mostrando indicadores financieros clave"
             />
           </figure>
-          <Image
-            src="/assets/indicadores.svg"
-            alt={t('Indicadores financieros clave de ZCflow')}
-            decoding="async"
-            itemprop="logo"
-            class="imagen-indicador"
-            width="494"
-            height="240"
-          />
+
+          <div>
+            <ChartIndicator year={2025} />
+          </div>
         </div>
       </div>
       <!-- Contadores con roles y aria-labels -->
@@ -155,12 +151,16 @@ const t = typeof _t === 'function' ? _t : (k) => k
   .container-counter {
     display: flex;
     justify-content: space-between;
-    padding: 0px 50px;
     width: 100%;
+    padding: 0px 50px;
 
     @include media(mobile) {
       padding: 0px 1rem;
     }
+
+    // @include media(tablet) {
+    //
+    // }
   }
   .section-grafico {
     display: grid;
@@ -170,9 +170,13 @@ const t = typeof _t === 'function' ? _t : (k) => k
   }
   .section-grafico div {
     width: 100%;
-    padding: 0px 50px;
+    // padding: 0px 50px;
     @include media(mobile) {
       padding: 0px 1rem;
+    }
+
+    @include media(desktop) {
+      padding: 0px 50px;
     }
   }
   .section-grafico p {

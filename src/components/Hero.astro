@@ -1,8 +1,14 @@
 ---
 import Checks from './common/Check.astro'
+import HeroFlow from './grafic/HeroFlow.astro'
 const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k) => k
 const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
+
+const textos = [
+  '¿Cuál es el saldo de mi cuenta global en USD?',
+  '¿Cuáles son los clientes que me pagan con retraso?',
+]
 ---
 
 <section class="hero">
@@ -35,23 +41,26 @@ const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
     </div>
 
     <div class="hero-imagen" aria-label="Mock UI">
-      <img
+      <HeroFlow texts={textos} />
+      <!-- <LottieAnimation client:only="astro/jsx" /> -->
+
+      <!-- <img
         src="/img/hero-white.gif"
         alt={t('Imagen hero')}
         class="mode-dark"
         width="100%"
         height="260"
         loading="eager"
-      />
+      /> -->
 
-      <img
+      <!-- <img
         src="/img/hero-md.gif"
         alt={t('Imagen modo dark')}
         class="mode-light"
         width="100%"
         height="260"
         loading="eager"
-      />
+      /> -->
     </div>
 
     <style lang="scss">

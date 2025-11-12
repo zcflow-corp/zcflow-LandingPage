@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.0.0",
+    "@lottiefiles/lottie-player": "^2.0.12",
     "astro": "5.15.1",
     "chart.js": "^4.4.4",
     "clsx": "^2.1.1",
