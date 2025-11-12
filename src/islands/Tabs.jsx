@@ -41,7 +41,7 @@ export default function Tabs() {
   if (status === 'loading') return <div className="card">Cargando…</div>
   if (status === 'error') return <div className="card">No se pudieron cargar las pestañas.</div>
   return (
-    <div>
+    <div style={{height:'242px'}}>
       <div role="tablist" aria-label="Qué podrás hacer" className="tabs" onKeyDown={onKeyDown}>
         {data.pestañas.map((t, i) => (
           <button
