@@ -3,26 +3,15 @@
  * HeroFlow.astro
  * Props:
  * - texts: string[]
- *   Ej: [
- *    "¿Cuál es el saldo de mi cuenta global en USD?",
- *    "¿Cuáles son los clientes que me pagan con retraso?"
- *   ]
+ * - t?: (k: string) => string
  */
 
-const { texts = [] } = Astro.props
-const { t: _t } = Astro.props
-const t = typeof _t === 'function' ? _t : (k) => k
+const { t: _t, texts = [] } = Astro.props
+const t = typeof _t === 'function' ? _t : (k: string) => k
 ---
 
 <section id="hero-flow" class="hero hero--flow" data-phrases={JSON.stringify(texts)}>
   <canvas class="hero__canvas"></canvas>
-
-  <!-- Sparkles decorativos -->
-  <!-- <div class="hero__sparkles">
-    <span class="hero__sparkle hero__sparkle--big"></span>
-    <span class="hero__sparkle hero__sparkle--medium"></span>
-    <span class="hero__sparkle hero__sparkle--small"></span>
-  </div> -->
 
   <!-- Nodos -->
   <div class="hero__node hero__node--conecta" data-node="conecta">{t('Conecta')}</div>
@@ -33,10 +22,8 @@ const t = typeof _t === 'function' ? _t : (k) => k
   <!-- Buscador -->
   <div class="hero__search hero__search--hidden">
     <input class="hero__search-input" type="text" disabled />
-    <button class="hero__search-button"> BOTO </button>
+    <button class="hero__search-button">BOTO</button>
   </div>
-
-  <!-- <img class="card-slider__img" src="./img/section_hero_flow" alt="hero flow" loading="eager" /> -->
 </section>
 
 <script>
@@ -48,7 +35,6 @@ const t = typeof _t === 'function' ? _t : (k) => k
     if (!canvas) return
     const ctx = canvas.getContext('2d')
 
-    // --------- Resize ----------
     let w, h
     function resize() {
       w = canvas.width = root.clientWidth
@@ -57,7 +43,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
     resize()
     window.addEventListener('resize', resize)
 
-    // --------- Secuencia de nodos ----------
+    // Nodos
     const nodeKeys = ['conecta', 'gestiona', 'optimiza', 'actua']
     const nodes = nodeKeys.map((key) => root.querySelector(`[data-node="${key}"]`))
 
@@ -91,7 +77,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
       }, 900)
     }
 
-    // --------- Máquina de escribir ----------
+    // Máquina de escribir
     const rawPhrases = root.dataset.phrases || '[]'
     let phrases
     try {
@@ -145,7 +131,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
   .hero {
     &--flow {
       position: relative;
-      width: 100%;
+      width: 92%;
       height: 85vh;
       min-height: 50px;
       overflow: hidden;
@@ -156,14 +142,6 @@ const t = typeof _t === 'function' ? _t : (k) => k
       background-position: top left;
     }
 
-    // &__canvas {
-    //   position: absolute;
-    //   inset: 0;
-    //   pointer-events: none;
-    //   background: transparent;
-    // }
-
-    // Sparkles (izquierda, como en la referencia)
     &__sparkles {
       position: absolute;
       left: 12%;
@@ -217,12 +195,6 @@ const t = typeof _t === 'function' ? _t : (k) => k
       border: 2px solid #005cff;
       background: #ffffff;
       color: #0050c8;
-      font-family:
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        'Segoe UI',
-        sans-serif;
       font-weight: 600;
       font-size: 0.75rem;
       letter-spacing: 0.06em;
@@ -249,14 +221,19 @@ const t = typeof _t === 'function' ? _t : (k) => k
 
         /* Hexágono */
         clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-        // box-shadow: 0 0 18px rgba(5, 69, 200, 0.7);
-        filter: drop-shadow(0 0 8px rgba(5, 69, 200, 0.8));
-        filter: drop-shadow(0 0 12px rgba(5, 69, 200, 1));
+        /* Sin glow inicial, lo manejamos con animación */
+        box-shadow: 0 0 0 0 rgba(5, 69, 200, 0);
       }
 
       &--conecta {
         top: 45%;
-        left: 44%;
+        left: 26%;
+
+        &::before {
+          right: -50%;
+          bottom: 10%;
+          margin-right: 10px;
+        }
       }
 
       &--gestiona {
@@ -278,7 +255,11 @@ const t = typeof _t === 'function' ? _t : (k) => k
         opacity: 1;
         filter: blur(0);
         transform: translate(5%, -50%) scale(0.9);
-        // box-shadow: 0 0 16px rgba(0, 92, 255, 0.55);
+
+        /* Glow resplandeciente de 3 segundos en el hexágono */
+        &::before {
+          animation: hero-hex-glow 3s ease-out forwards;
+        }
       }
     }
 
@@ -299,7 +280,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
         opacity 0.6s ease,
         transform 0.6s ease;
       opacity: 1;
-      width: 65%;
+      width: 68%;
       font-size: smaller;
 
       &--hidden {
@@ -338,8 +319,22 @@ const t = typeof _t === 'function' ? _t : (k) => k
       font-size: 0.75rem;
       color: #ffffff;
       background: linear-gradient(135deg, #005cff, #8a2dfc);
-      // box-shadow: 0 10px 18px rgba(0, 92, 255, 0.45);
       cursor: default;
+    }
+  }
+
+  html[data-theme='dark'] .hero {
+    .hero__search {
+      background: var(--c-quinary);
+
+      &-input {
+        color: var(--c-tertiary);
+      }
+    }
+
+    .hero__node {
+      background: transparent;
+      color: var(--c-tertiary);
     }
   }
 
@@ -352,6 +347,26 @@ const t = typeof _t === 'function' ? _t : (k) => k
     50% {
       transform: rotate(45deg) scale(1.25);
       opacity: 1;
+    }
+  }
+
+  /* Glow MUY visible del hexágono durante 3 segundos */
+  @keyframes hero-hex-glow {
+    0% {
+      box-shadow: 0 0 0 0 rgba(5, 69, 200, 0);
+    }
+    20% {
+      box-shadow:
+        0 0 16px 6px rgba(5, 69, 200, 0.95),
+        0 0 28px 10px rgba(5, 69, 200, 0.85);
+    }
+    60% {
+      box-shadow:
+        0 0 10px 4px rgba(5, 69, 200, 0.7),
+        0 0 20px 8px rgba(5, 69, 200, 0.5);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(5, 69, 200, 0);
     }
   }
 
