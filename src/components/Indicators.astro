@@ -79,8 +79,20 @@ const t = typeof _t === 'function' ? _t : (k) => k
     background: #141417 !important;
 
     border: 1px solid #3a3a3d;
+    background: #141417 !important;
+
+    border: 1px solid #3a3a3d;
     flex-direction: column;
     color: var(--c-bg);
+    padding: 2rem 4rem;
+
+    @include media(mobile) {
+      padding: 2rem;
+    }
+  }
+  .gradient-border-left p {
+    margin: 0px;
+    padding: 7px 0px;
   }
   .gradient-border-left p {
     margin: 0px;
@@ -93,7 +105,6 @@ const t = typeof _t === 'function' ? _t : (k) => k
     font-size: 1.3rem;
     line-height: 28px;
     margin: 0;
-    padding: 10px 50px;
     height: 40px;
     font-weight: bold;
     letter-spacing: 0.35px;
@@ -135,13 +146,34 @@ const t = typeof _t === 'function' ? _t : (k) => k
       transform: none;
     }
   }
+
+  .imagen-indicador {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 1.2s ease-out,
+      transform 1.2s ease-out;
+  }
+  .imagen-indicador.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .imagen-indicador {
+      transition: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
   .indicators-title {
+    color: #eaf0ff;
     color: #eaf0ff;
     max-width: 250px;
     line-height: 48px;
     font-weight: 500;
   }
   .container-counter p {
+    color: #eaf0ff;
     color: #eaf0ff;
   }
   .style-indicators {
@@ -152,8 +184,6 @@ const t = typeof _t === 'function' ? _t : (k) => k
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 0px 50px;
-
     @include media(mobile) {
       padding: 0px 1rem;
     }
@@ -162,24 +192,19 @@ const t = typeof _t === 'function' ? _t : (k) => k
     //
     // }
   }
+
   .section-grafico {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     align-items: start;
     font-size: 2rem;
+    gap: 2rem;
   }
   .section-grafico div {
     width: 100%;
-    // padding: 0px 50px;
-    @include media(mobile) {
-      padding: 0px 1rem;
-    }
-
-    @include media(desktop) {
-      padding: 0px 50px;
-    }
   }
   .section-grafico p {
+    color: #eaf0ff;
     color: #eaf0ff;
     font-size: 1rem;
     font-weight: 400;
@@ -226,10 +251,30 @@ const t = typeof _t === 'function' ? _t : (k) => k
   }
   @include media(mobile) {
     .container-counter {
+      .counter.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .counter {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .counter {
+      transition: none;
+      transform: none;
+    }
+  }
+  @include media(mobile) {
+    .container-counter {
       flex-direction: column;
     }
     .section-grafico {
-      grid-template-columns: 1fr;
+      .section-grafico {
+        grid-template-columns: 1fr;
+      }
     }
   }
 

@@ -116,7 +116,7 @@
   &.ghost {
     background: var(--c-panel);
     color: var(--c-text);
-    border-color: var(--c-line-acc);
+    // border-color: var(--c-line-acc);
 
     &:hover {
       border-color: var(--c-primary-accessible-hover);
