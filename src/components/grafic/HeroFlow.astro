@@ -10,29 +10,33 @@
  */
 
 const { texts = [] } = Astro.props
+const { t: _t } = Astro.props
+const t = typeof _t === 'function' ? _t : (k) => k
 ---
 
 <section id="hero-flow" class="hero hero--flow" data-phrases={JSON.stringify(texts)}>
   <canvas class="hero__canvas"></canvas>
 
   <!-- Sparkles decorativos -->
-  <div class="hero__sparkles">
+  <!-- <div class="hero__sparkles">
     <span class="hero__sparkle hero__sparkle--big"></span>
     <span class="hero__sparkle hero__sparkle--medium"></span>
     <span class="hero__sparkle hero__sparkle--small"></span>
-  </div>
+  </div> -->
 
   <!-- Nodos -->
-  <div class="hero__node hero__node--conecta" data-node="conecta">CONECTA</div>
-  <div class="hero__node hero__node--gestiona" data-node="gestiona">GESTIONA</div>
-  <div class="hero__node hero__node--optimiza" data-node="optimiza">OPTIMIZA</div>
-  <div class="hero__node hero__node--actua" data-node="actua">ACTÚA</div>
+  <div class="hero__node hero__node--conecta" data-node="conecta">{t('Conecta')}</div>
+  <div class="hero__node hero__node--gestiona" data-node="gestiona">{t('Gestiona')}</div>
+  <div class="hero__node hero__node--optimiza" data-node="optimiza">{t('Optimiza')}</div>
+  <div class="hero__node hero__node--actua" data-node="actua">{t('Actúa')}</div>
 
   <!-- Buscador -->
   <div class="hero__search hero__search--hidden">
     <input class="hero__search-input" type="text" disabled />
     <button class="hero__search-button"> BOTO </button>
   </div>
+
+  <!-- <img class="card-slider__img" src="./img/section_hero_flow" alt="hero flow" loading="eager" /> -->
 </section>
 
 <script>
@@ -52,41 +56,6 @@ const { texts = [] } = Astro.props
     }
     resize()
     window.addEventListener('resize', resize)
-
-    // --------- Líneas curvas animadas (fondo transparente) ----------
-    let t = 0
-    function drawFlow() {
-      ctx.clearRect(0, 0, w, h)
-
-      const lines = 20
-      for (let i = 0; i < lines; i++) {
-        ctx.beginPath()
-        const hue = 215 + i * 2
-        const light = 40 + i * 0.6
-        ctx.strokeStyle = `hsl(${hue}, 90%, ${light}%)`
-        ctx.lineWidth = 1.1
-
-        for (let x = 0; x <= w; x += 4) {
-          const progress = x / w
-          const amplitude = 160 + i * 3
-          const phase = t * 0.03 + i * 0.25
-
-          const baseY = h * (0.2 + 0.6 * progress)
-          const offsetY = Math.sin(progress * 6 + phase) * amplitude
-
-          const y = baseY + offsetY
-
-          if (x === 0) ctx.moveTo(x, y)
-          else ctx.lineTo(x, y)
-        }
-
-        ctx.stroke()
-      }
-
-      t += 1
-      requestAnimationFrame(drawFlow)
-    }
-    drawFlow()
 
     // --------- Secuencia de nodos ----------
     const nodeKeys = ['conecta', 'gestiona', 'optimiza', 'actua']
@@ -177,18 +146,22 @@ const { texts = [] } = Astro.props
     &--flow {
       position: relative;
       width: 100%;
-      height: 100vh;
-      min-height: 520px;
+      height: 85vh;
+      min-height: 50px;
       overflow: hidden;
-      background: transparent; // fondo de la sección transparente
+      background: transparent;
+      background-image: url('/assets/section_hero_flow.svg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: top left;
     }
 
-    &__canvas {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: transparent; // canvas también transparente
-    }
+    // &__canvas {
+    //   position: absolute;
+    //   inset: 0;
+    //   pointer-events: none;
+    //   background: transparent;
+    // }
 
     // Sparkles (izquierda, como en la referencia)
     &__sparkles {
@@ -209,7 +182,7 @@ const { texts = [] } = Astro.props
         width: 32px;
         height: 32px;
         border-radius: 4px;
-        border: 2px solid #005cff;
+        border: 1px solid #005cff;
         transform: rotate(45deg);
         animation: hero-sparkle 2.4s ease-in-out infinite;
       }
@@ -239,7 +212,7 @@ const { texts = [] } = Astro.props
 
     &__node {
       position: absolute;
-      padding: 6px 22px;
+      padding: 6px 16px;
       border-radius: 999px;
       border: 2px solid #005cff;
       background: #ffffff;
@@ -251,12 +224,12 @@ const { texts = [] } = Astro.props
         'Segoe UI',
         sans-serif;
       font-weight: 600;
-      font-size: 0.82rem;
+      font-size: 0.75rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       opacity: 0.2;
       filter: blur(1.5px);
-      transform: translate(-50%, -50%);
+      transform: translate(-5%, -40%);
       transition:
         opacity 0.5s ease,
         filter 0.5s ease,
@@ -268,51 +241,57 @@ const { texts = [] } = Astro.props
         position: absolute;
         right: 100%;
         margin-right: 10px;
-        width: 18px;
-        height: 18px;
-        border-radius: 6px;
-        background: linear-gradient(145deg, #005cff, #2e65ff);
-        box-shadow: 0 0 10px rgba(0, 92, 255, 0.65);
+        width: 25px;
+        height: 25px;
+        background: linear-gradient(145deg, #00329f, #0d6bff);
+        transform: rotate(90deg);
+        border-radius: 4px;
+
+        /* Hexágono */
+        clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+        // box-shadow: 0 0 18px rgba(5, 69, 200, 0.7);
+        filter: drop-shadow(0 0 8px rgba(5, 69, 200, 0.8));
+        filter: drop-shadow(0 0 12px rgba(5, 69, 200, 1));
       }
 
       &--conecta {
-        top: 56%;
-        left: 31%;
+        top: 45%;
+        left: 44%;
       }
 
       &--gestiona {
-        top: 27%;
-        left: 63%;
+        top: 19%;
+        left: 55%;
       }
 
       &--optimiza {
-        top: 47%;
-        left: 77%;
+        top: 38%;
+        left: 68%;
       }
 
       &--actua {
-        top: 74%;
-        left: 77%;
+        top: 71%;
+        left: 84%;
       }
 
       &--active {
         opacity: 1;
         filter: blur(0);
-        transform: translate(-50%, -50%) scale(1.06);
-        box-shadow: 0 0 16px rgba(0, 92, 255, 0.55);
+        transform: translate(5%, -50%) scale(0.9);
+        // box-shadow: 0 0 16px rgba(0, 92, 255, 0.55);
       }
     }
 
     &__search {
       position: absolute;
-      left: 50%;
-      bottom: 12%;
+      left: 43%;
+      bottom: 20%;
       transform: translate(-50%, 0);
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 14px 16px;
-      border-radius: 999px;
+      gap: 0.5rem;
+      padding: 0.75em 1em;
+      border-radius: var(--radius);
       background: rgba(255, 255, 255, 0.92);
       box-shadow: 0 20px 35px rgba(0, 40, 120, 0.22);
       backdrop-filter: blur(18px);
@@ -320,6 +299,8 @@ const { texts = [] } = Astro.props
         opacity 0.6s ease,
         transform 0.6s ease;
       opacity: 1;
+      width: 65%;
+      font-size: smaller;
 
       &--hidden {
         opacity: 0;
@@ -329,13 +310,14 @@ const { texts = [] } = Astro.props
     }
 
     &__search-input {
-      width: clamp(260px, 40vw, 560px);
-      height: 46px;
-      padding: 0 18px;
+      width: clamp(250px, 35vw, 500px);
+      height: 40px;
+      padding: 0 16px;
       border-radius: 999px;
       border: none;
-      font-size: 0.96rem;
-      color: #102040;
+      font-size: 0.75rem;
+      width: 100%;
+      color: var(--c-quinary);
       outline: none;
       box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.02);
 
@@ -345,18 +327,18 @@ const { texts = [] } = Astro.props
     }
 
     &__search-button {
-      min-width: 90px;
-      height: 46px;
-      border-radius: 999px;
+      min-width: 80px;
+      height: 40px;
+      border-radius: 10px;
       border: none;
-      padding: 0 22px;
+      padding: 0 1em;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: #ffffff;
       background: linear-gradient(135deg, #005cff, #8a2dfc);
-      box-shadow: 0 10px 18px rgba(0, 92, 255, 0.45);
+      // box-shadow: 0 10px 18px rgba(0, 92, 255, 0.45);
       cursor: default;
     }
   }
@@ -384,7 +366,7 @@ const { texts = [] } = Astro.props
         padding-inline: 16px;
 
         &--conecta {
-          top: 60%;
+          top: 80%;
           left: 40%;
         }
         &--gestiona {
@@ -392,8 +374,8 @@ const { texts = [] } = Astro.props
           left: 65%;
         }
         &--optimiza {
-          top: 42%;
-          left: 78%;
+          top: 20%;
+          left: 70%;
         }
         &--actua {
           top: 75%;

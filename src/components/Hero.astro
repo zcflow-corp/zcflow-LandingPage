@@ -6,8 +6,8 @@ const t = typeof _t === 'function' ? _t : (k) => k
 const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
 
 const textos = [
-  '¿Cuál es el saldo de mi cuenta global en USD?',
-  '¿Cuáles son los clientes que me pagan con retraso?',
+  t('¿Cuál es el saldo de mi cuenta global en USD?'),
+  t('¿Cuáles son los clientes que me pagan con retraso?'),
 ]
 ---
 
@@ -42,147 +42,134 @@ const textos = [
 
     <div class="hero-imagen" aria-label="Mock UI">
       <HeroFlow texts={textos} />
-      <!-- <LottieAnimation client:only="astro/jsx" /> -->
-
-      <!-- <img
-        src="/img/hero-white.gif"
-        alt={t('Imagen hero')}
-        class="mode-dark"
-        width="100%"
-        height="260"
-        loading="eager"
-      /> -->
-
-      <!-- <img
-        src="/img/hero-md.gif"
-        alt={t('Imagen modo dark')}
-        class="mode-light"
-        width="100%"
-        height="260"
-        loading="eager"
-      /> -->
     </div>
-
-    <style lang="scss">
-      .hero {
-        // background: var(--g-hero);
-        background: #fbfcfc;
-        border-bottom-left-radius: 32px;
-        // border-bottom-right-radius: 32px;
-        overflow: hidden;
-        flex-wrap: wrap;
-
-        section {
-          padding-top: 0rem !important;
-          padding-right: 0rem !important;
-        }
-
-        .container {
-          padding-top: 0rem;
-          padding-bottom: 0rem;
-
-          @include media(tablet) {
-            padding-bottom: 0rem;
-            padding-right: 0rem !important;
-          }
-        }
-
-        &-inner {
-          display: flex;
-          justify-content: space-between;
-          flex-wrap: wrap;
-          flex-direction: column;
-          gap: 1rem;
-          width: 100%;
-
-          flex-direction: row !important;
-
-          @include media(tablet) {
-          }
-        }
-
-        &-description {
-          padding-top: 2rem;
-          padding-bottom: 2rem;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          align-self: center;
-          width: 100%;
-          flex: 1;
-
-          &-title {
-            width: 100%;
-          }
-
-          h1 {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            gap: 0.25rem;
-            width: 100%;
-            span {
-              display: flex;
-              flex-direction: row;
-              flex-wrap: nowrap;
-            }
-          }
-
-          h2 {
-            color: var(--c-primary);
-
-            @include media(mobile) {
-              // text-wrap: wrap;
-              text-align: left;
-            }
-          }
-
-          p {
-            text-wrap: wrap;
-            text-align: left;
-          }
-        }
-
-        &-imagen {
-          flex: 1;
-          max-width: 100%;
-          display: flex;
-
-          img {
-            width: max-content;
-            @include media(mobile) {
-              max-width: 20rem;
-              height: auto;
-            }
-
-            @include media(tablet) {
-              max-width: 120%;
-            }
-          }
-        }
-
-        .cta {
-          display: flex;
-          gap: 1rem;
-          gap: 1rem;
-          flex-wrap: wrap;
-          margin-top: 2rem;
-          margin-top: 2rem;
-        }
-
-        .hero-check {
-          display: flex;
-          justify-content: flex-start;
-          width: auto;
-          align-items: flex-start;
-          padding: 1rem 0rem;
-          padding: 1rem 0rem;
-        }
-      }
-
-      html[data-theme='dark'] .hero {
-        background: var(--c-black);
-      }
-    </style>
   </div>
 </section>
+
+<style lang="scss">
+  .hero {
+    background: #fbfcfc;
+    border-bottom-left-radius: 32px;
+    overflow: hidden;
+    flex-wrap: wrap;
+
+    section {
+      padding-top: 0rem !important;
+      padding-right: 0rem !important;
+    }
+
+    .container {
+      padding-top: 0rem;
+      padding-bottom: 0rem;
+      padding-right: -4rem;
+      margin-right: 6rem;
+
+      @include media(tablet) {
+        padding-bottom: 0rem;
+        padding-right: 0rem !important;
+      }
+    }
+
+    &-inner {
+      display: flex;
+      justify-content: space-between;
+      // flex-wrap: wrap;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+      // background: blueviolet;
+      grid-template-columns: 30% 60%;
+      width: 100%;
+      align-items: center;
+
+      flex-direction: row !important;
+
+      @include media(tablet) {
+      }
+    }
+
+    &-description {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: center;
+      // width: 100%;
+      flex: 0 0 40%; // no crece, no se encoge, ancho fijo del 40%
+
+      &-title {
+        // width: 100%;
+      }
+
+      h1 {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        font-size: 3rem;
+        gap: 0.25rem;
+        width: 100%;
+
+        span {
+          display: flex;
+          flex-direction: row;
+          // flex-wrap: nowrap;
+        }
+      }
+
+      h2 {
+        color: var(--c-primary);
+
+        @include media(mobile) {
+          // text-wrap: wrap;
+          text-align: left;
+        }
+      }
+
+      p {
+        text-wrap: wrap;
+        text-align: left;
+      }
+    }
+
+    &-imagen {
+      flex: 0 0 60%;
+      // max-width: 100%;
+      display: flex;
+
+      img {
+        width: 100%;
+        @include media(mobile) {
+          max-width: 20rem;
+          height: auto;
+        }
+
+        @include media(tablet) {
+          max-width: 120%;
+        }
+      }
+    }
+
+    .cta {
+      display: flex;
+      gap: 1rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+      margin-top: 2rem;
+    }
+
+    .hero-check {
+      display: flex;
+      justify-content: flex-start;
+      width: auto;
+      align-items: flex-start;
+      padding: 1rem 0rem;
+      padding: 1rem 0rem;
+    }
+  }
+
+  html[data-theme='dark'] .hero {
+    background: var(--c-black);
+  }
+</style>
