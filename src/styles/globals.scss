@@ -96,6 +96,7 @@ svg {
   color: transparent;
   -webkit-text-fill-color: transparent;
   display: inline-block;
+  animation: gradient-move 15s ease infinite;
 }
 
 .gradient-blue-ligth {
@@ -104,9 +105,28 @@ svg {
   -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
-
   display: inline-block;
+  animation: gradient-move 15s ease infinite;
 }
+
+
+html[data-theme='dark'] .gradient-blue-dark {
+  background: linear-gradient(90deg, #0563ff 0%, #476aa6 47.12%, #e2e2e2 100%);
+  // font-weight: bold;
+  // text-transform: uppercase;
+  letter-spacing: 0.35px;
+  // font-size: 1rem;
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-move 15s ease infinite;
+}
+
+
+
+
 
 .mode-dark {
   display: block;
@@ -239,5 +259,25 @@ ol {
   align-items: center;
 }
 
+
+
+
+
+
+
 /*animaciones ref
 https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css      */
+
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 0;
+  }
+
+  50% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: 0% 0;
+  }
+}

@@ -10,7 +10,7 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
     <!-- Encabezado de la sección -->
     <div class="section-header">
       <div class="fundamentos-header">
-        <h6 style="margin: 0%;">{t('Nuestros fundamentos')}</h6>
+        <h6 class="gradient-blue-dark" style="margin: 0%;">{t('Nuestros fundamentos')}</h6>
         <div class="reveal-wrapper">
           <h2 class="reveal-target" style="margin: 0%;">{t('Los principios que nos guían')}</h2>
         </div>
@@ -125,28 +125,17 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
     row-gap: 8px;
   }
 
-  @keyframes gradient-move {
-    0% {
-      background-position: 0% 0;
-    }
-    50% {
-      background-position: 100% 0;
-    }
-    100% {
-      background-position: 0% 0;
-    }
-  }
   .fundamentos-header h6 {
-    background: linear-gradient(90deg, #0563ff 0%, #476aa6 47.12%, #e2e2e2 100%);
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.35px;
+    // background: linear-gradient(90deg, #0563ff 0%, #476aa6 47.12%, #e2e2e2 100%);
+    // font-weight: bold;
+    // text-transform: uppercase;
+    // letter-spacing: 0.35px;
     font-size: 1rem;
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
+    // background-size: 200% 100%;
+    // -webkit-background-clip: text;
+    // -webkit-text-fill-color: transparent;
+    // background-clip: text;
+    // color: transparent;
     animation: gradient-move 15s ease infinite;
   }
 
