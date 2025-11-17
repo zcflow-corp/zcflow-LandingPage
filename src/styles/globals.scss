@@ -6,7 +6,6 @@ body {
   margin: 0;
   font-family: var(--font-body);
   color: var(--c-text);
-  background: var(--c-bg);
 }
 
 main {
@@ -109,10 +108,6 @@ svg {
   display: inline-block;
 }
 
-
-
-
-
 .mode-dark {
   display: block;
 }
@@ -127,6 +122,10 @@ html[data-theme='dark'] .mode-dark {
 
 html[data-theme='dark'] .mode-light {
   display: block;
+}
+
+html[data-theme='dark'] body {
+  background: var(--c-black);
 }
 
 .container {
@@ -161,8 +160,6 @@ html[data-theme='dark'] .mode-light {
   box-shadow: var(--shadow);
   padding: 1.2rem;
 }
-
-
 
 /*2. Estilos de componentes específicos */
 [data-theme='dark'] .badge {
@@ -241,7 +238,6 @@ ol {
   gap: 0.5rem;
   align-items: center;
 }
-
 
 /*animaciones ref
 https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css      */

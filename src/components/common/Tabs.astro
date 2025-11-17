@@ -16,7 +16,7 @@ let active = 0
           role="tab"
           id={`tab-${i}`}
           class={`tab-btn ${i === active ? 'active' : ''}`}
-          aria-selected={i === active ? 'active' : ''}
+          aria-selected={i === active}
           aria-controls={`panel-${i}`}
           tabindex={i === active ? '0' : '-1'}
         >
@@ -35,6 +35,7 @@ let active = 0
         <div
           id={`panel-${i}`}
           role="tabpanel"
+          hidden={i !== active}
           aria-labelledby={`tab-${i}`}
           class="tab-panel"
           style={`display: ${i === active ? 'block' : 'none'}`}
@@ -62,21 +63,29 @@ let active = 0
 </div>
 
 <script>
-  const container = document.getElementById('tabs-root')
-  const tabs = container.querySelectorAll('.tab-btn')
-  const panels = container.querySelectorAll('.tab-panel')
+  const container = document.getElementById('tabs-root')!
+  const tabs = container.querySelectorAll<HTMLButtonElement>('.tab-btn')
+  const panels = container.querySelectorAll<HTMLElement>('.tab-panel')
+  tabs[0].classList.add('activeTab')
 
   tabs.forEach((tab, i) => {
     tab.addEventListener('click', () => {
-      tabs.forEach((t) => t.classList.remove('activeTab'))
+      tabs.forEach((t) => {
+        t.classList.remove('activeTab')
+        t.setAttribute('aria-selected', 'false')
+        t.tabIndex = -1
+      })
       panels.forEach((p) => (p.style.display = 'none'))
       tab.classList.add('activeTab')
+      tab.setAttribute('aria-selected', 'true')
+      tab.tabIndex = 0
       panels[i].style.display = 'block'
     })
   })
 </script>
 
 <style lang="scss">
+  
   .tabs-container {
     width: 100%;
     .tabs {
