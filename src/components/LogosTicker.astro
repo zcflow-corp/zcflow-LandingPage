@@ -1,4 +1,5 @@
 ---
+// LogosTicker.astro
 import IconoSvg from 'src/islands/IconoSVG.jsx'
 
 interface Item {
@@ -7,11 +8,11 @@ interface Item {
   alt?: string
 }
 interface Props {
-  items?: Item[] // pásalo desde el padre
+  items?: Item[]
   cols?: number
   interval?: number // ms
   grayscale?: boolean
-  dimOpacity?: number // 0..1
+  dimOpacity?: number // 0..1 (si quieres dejar un leve “ghost” puedes subirlo)
 }
 
 const {
@@ -19,7 +20,7 @@ const {
   cols = 4,
   interval = 1800,
   grayscale = true,
-  dimOpacity = 0.35,
+  dimOpacity = 0, // 0 = desaparece del todo. Si quieres que se vea tenue, pon 0.2, 0.3, etc.
 } = Astro.props as Props
 
 const count = items.length
@@ -34,7 +35,7 @@ const count = items.length
 >
   {
     items.map((l, i) => (
-      <div class="logo" data-index={i} aria-hidden={i === 0 ? 'false' : 'true'}>
+      <div class="logo-partners" data-index={i} aria-hidden={i === 0 ? 'false' : 'true'}>
         <IconoSvg name={l.name} />
       </div>
     ))
@@ -42,66 +43,74 @@ const count = items.length
 </div>
 
 <script>
-  // Rotación con animación de salida (is-leaving) + entrada (is-visible)
-  ;(() => {
-    const root = document.currentScript?.previousElementSibling
-    if (!root) return
-    const count = Number(root.dataset.count || '0')
-    const interval = Number(root.dataset.interval || '1800')
-    if (!count) return
+  // Rotación de logos: aparecen / desaparecen uno por uno en loop
+  if (typeof window !== 'undefined') {
+    const initTicker = (root) => {
+      if (!root) return
 
-    let visible = 0
-    let prev = -1
-    const nodes = Array.from(root.querySelectorAll('.logo'))
+      const logos = Array.from(root.querySelectorAll('.logo-partners'))
+      if (!logos.length) return
 
-    // estado inicial
-    nodes.forEach((n, i) => n.classList.toggle('is-visible', i === 0))
+      const interval = Number(root.dataset.interval || '1800')
+      const count = logos.length
 
-    const apply = () => {
-      // sale el anterior
-      if (prev >= 0 && prev !== visible) {
-        const out = nodes[prev]
-        out.classList.remove('is-visible')
-        out.classList.add('is-leaving')
-        // limpiar clase de salida después del tiempo de transición
-        window.setTimeout(() => out.classList.remove('is-leaving'), 600)
-      }
-      // entra el nuevo
-      nodes.forEach((n, i) => {
-        n.classList.toggle('is-visible', i === visible)
-        n.setAttribute('aria-hidden', i === visible ? 'false' : 'true')
+      let current = 0
+
+      // Estado inicial
+      logos.forEach((el, i) => {
+        if (i === 0) {
+          el.classList.add('is-visible')
+          el.setAttribute('aria-hidden', 'false')
+        } else {
+          el.classList.remove('is-visible', 'is-leaving')
+          el.setAttribute('aria-hidden', 'true')
+        }
       })
-      prev = visible
+
+      const animLeaveMs = 550 // que coincida aprox. con $anim-leave
+
+      setInterval(() => {
+        const currentEl = logos[current]
+        const nextIndex = (current + 1) % count
+        const nextEl = logos[nextIndex]
+
+        if (!currentEl || !nextEl) return
+
+        // El actual se va (fade-out)
+        currentEl.classList.remove('is-visible')
+        currentEl.classList.add('is-leaving')
+        currentEl.setAttribute('aria-hidden', 'true')
+
+        // Limpia la clase de leaving al final de la animación
+        window.setTimeout(() => {
+          currentEl.classList.remove('is-leaving')
+        }, animLeaveMs)
+
+        // El siguiente entra (fade-in)
+        nextEl.classList.add('is-visible')
+        nextEl.setAttribute('aria-hidden', 'false')
+
+        current = nextIndex
+      }, interval)
     }
 
-    const id = window.setInterval(() => {
-      visible = (visible + 1) % count
-      apply()
-    }, interval)
-
-    // Limpieza si el nodo se desmonta
-    const obs = new MutationObserver(() => {
-      if (!document.body.contains(root)) {
-        window.clearInterval(id)
-        obs.disconnect()
-      }
-    })
-    obs.observe(document.body, { childList: true, subtree: true })
-  })()
+    // Soporte para múltiples carousels de logos en la misma página
+    const tickers = document.querySelectorAll('.logos-ticker[data-count]')
+    tickers.forEach((t) => initTicker(t))
+  }
 </script>
 
 <style lang="scss">
   // ====== Vars de animación ======
-  $logos-gap: 1rem;
   $anim-dur: 0.5s;
-  $anim-leave: 0.6s; // debe coincidir con setTimeout en <script>
+  $anim-leave: 0.6s;
   $scale-off: 0.98;
   $scale-leave: 0.985;
 
   .logos-ticker {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: $logos-gap;
+    grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr));
+    gap: 1rem;
     width: 100%;
     align-items: center;
 
@@ -110,23 +119,24 @@ const count = items.length
       font-family: var(--font-body);
     }
 
-    // Gris si grayscale=true
-    &[data-grayscale='1'] {
-      .logo {
-        filter: grayscale(100%);
-
-        &.is-visible {
-          filter: grayscale(100%);
-        }
-        &.is-leaving {
-          filter: grayscale(100%) blur(1px);
-        }
-      }
-    }
+    // Si quieres modo escala de grises descomenta:
+    // &[data-grayscale='1'] {
+    //   .logo-partners {
+    //     filter: grayscale(100%);
+    //
+    //     &.is-visible {
+    //       filter: grayscale(0%);
+    //     }
+    //     &.is-leaving {
+    //       filter: grayscale(100%) blur(1px);
+    //     }
+    //   }
+    // }
   }
 
-  .logo {
-    opacity: var(--dim, 0.35);
+  .logo-partners {
+    // Por defecto “apagado”
+    opacity: 0.2;
     transform: scale($scale-off);
     color: var(--c-text);
     transition:
@@ -135,13 +145,6 @@ const count = items.length
       filter $anim-dur ease;
     will-change: opacity, transform, filter;
 
-    :where(svg) {
-      width: 100%;
-      max-width: 160px;
-      height: auto;
-      display: block;
-    }
-
     &.is-visible {
       opacity: 1;
       transform: scale(1);
@@ -149,7 +152,7 @@ const count = items.length
     }
 
     &.is-leaving {
-      opacity: var(--dim, 0.35);
+      opacity: var(--dim, 0); // usa --dim si quieres que quede un ghost tenue
       transform: scale($scale-leave);
       filter: blur(1px);
       transition-duration: $anim-leave;
@@ -163,8 +166,19 @@ const count = items.length
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .logo {
+    .logo-partners {
       transition: none !important;
     }
+  }
+</style>
+
+<!-- BLOQUE GLOBAL SOLO PARA LOS SVG -->
+<style is:global lang="scss">
+  .logo-partners span svg path {
+    fill: var(--c-text);
+  }
+
+  html[data-theme='dark'] .logo-partners span svg path {
+    fill: var(--c-white);
   }
 </style>
