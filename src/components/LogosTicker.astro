@@ -1,5 +1,5 @@
 ---
-import IconoSvg from './IconoSvg.astro'
+import IconoSvg from 'src/islands/IconoSVG.jsx'
 
 interface Item {
   name: string
@@ -129,6 +129,11 @@ const count = items.length
     opacity: var(--dim, 0.35);
     transform: scale($scale-off);
     color: var(--c-text);
+    background: var(--c-icon-banner);
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
     transition:
       opacity $anim-dur ease,
       transform $anim-dur ease,

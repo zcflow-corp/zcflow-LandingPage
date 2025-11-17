@@ -52,7 +52,7 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
     <nav
       aria-label="Navegación principal"
       class="nav"
-      style="display: flex; align-items:center; column-gap: 15px; width: 100%; justify-content:space-between;"
+      style="display: flex; align-items:center; column-gap: 15px; width: 100%; justify-content:space-between; padding: 0rem 2rem;"
       itemscope
       itemtype="https://schema.org/SiteNavigationElement"
     >
@@ -149,6 +149,9 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
 
         &:hover {
           color: var(--c-primary-accessible);
+          outline: none;
+          outline-offset: 2px;
+
           text-decoration: none;
         }
       }

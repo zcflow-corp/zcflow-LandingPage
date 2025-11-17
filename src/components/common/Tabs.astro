@@ -1,0 +1,164 @@
+---
+// Recibe los datos como prop
+import CardSlider from 'src/islands/CardSlider.jsx'
+import IconoSvg from '@/islands/IconoSVG'
+
+const { TabsJson } = Astro.props
+let active = 0
+---
+
+<div class="tabs-container" id="tabs-root">
+  <!-- Botones -->
+  <div role="tablist" aria-label="Qué podrás hacer" class="tabs">
+    {
+      TabsJson.pestañas.map((t, i) => (
+        <button
+          role="tab"
+          id={`tab-${i}`}
+          class={`tab-btn ${i === active ? 'active' : ''}`}
+          aria-selected={i === active}
+          aria-controls={`panel-${i}`}
+          tabindex={i === active ? '0' : '-1'}
+        >
+          <IconoSvg name={t.icono} />
+
+          {t.título}
+        </button>
+      ))
+    }
+  </div>
+
+  <!-- Paneles -->
+  <div class="tab-panels">
+    {
+      TabsJson.pestañas.map((t, i) => (
+        <div
+          id={`panel-${i}`}
+          role="tabpanel"
+          hidden={i !== active}
+          aria-labelledby={`tab-${i}`}
+          class="tab-panel"
+          style={`display: ${i === active ? 'block' : 'none'}`}
+        >
+          {/* <h3>{t.título}</h3>
+          {t.resumen && <p>{t.resumen}</p>} */}
+
+          <div class="slider-functions">
+            {Array.isArray(t.slides) && t.slides.length > 0 && (
+              <CardSlider
+                slides={t.slides}
+                interval={5000}
+                startIndex={0}
+                title={t.SubTitle}
+                description={t.resumen}
+                word={t.título}
+                client:load
+              />
+            )}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  const container = document.getElementById('tabs-root')!
+  const tabs = container.querySelectorAll<HTMLButtonElement>('.tab-btn')
+  const panels = container.querySelectorAll<HTMLElement>('.tab-panel')
+  tabs[0].classList.add('activeTab')
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach((t) => {
+        t.classList.remove('activeTab')
+        t.setAttribute('aria-selected', 'false')
+        t.tabIndex = -1
+      })
+      panels.forEach((p) => (p.style.display = 'none'))
+      tab.classList.add('activeTab')
+      tab.setAttribute('aria-selected', 'true')
+      tab.tabIndex = 0
+      panels[i].style.display = 'block'
+    })
+  })
+</script>
+
+<style lang="scss">
+  
+  .tabs-container {
+    width: 100%;
+    .tabs {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+
+      .tabs {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+      }
+
+      .tab-btn {
+        display: flex;
+        max-width: 10em;
+        padding: 1em 1.5em;
+        align-items: center;
+        gap: 0.5rem;
+        align-self: stretch;
+        border-radius: 0.5rem;
+        color: var(--c-line);
+        color: var(--color-Grayscale-gray, #e2e2e2);
+        font-family: Inter;
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: -0.32px;
+        border: 1px solid #e6e8eb;
+        background: #f9fafb;
+
+        @include media(mobile) {
+          width: 9em;
+        }
+
+        &:focus {
+          outline: none;
+          box-shadow: var(--shadow);
+          background-color: var(--c-white);
+        }
+      }
+
+      .tab-btn[aria-selected='true'] {
+        color: var(--c-primary);
+        border-color: transparent;
+        display: flex;
+        max-width: 9rem;
+        padding: 1rem;
+        align-items: center;
+        gap: 0.5rem;
+        align-self: stretch;
+        border: 1px solid var(--color-Base-primary, #0563ff);
+        background: var(--color-grays-neutrals-background-all, #f5f9ff);
+      }
+    }
+  }
+
+  html[data-theme='dark'] .tabs-container {
+    .tab-btn {
+      background-color: transparent !important;
+      border: 1px solid var(--text) !important;
+    }
+  }
+
+  .activeTab {
+    // border-bottom: 2px solid var(--accent-color);
+    border: 1px solid #0563ff !important;
+    background: #f5f9ff !important;
+    color: var(--c-primary) !important;
+  }
+</style>

@@ -1,5 +1,7 @@
 ---
-import CardSlider from '@/components/common/SliderCard.astro'
+// import CardSlider from '@/components/common/SliderCard.astro'
+
+import CardSlider from 'src/islands/CardSlider.jsx'
 import TrustedBy from './TrustedBy.astro'
 const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k) => k
@@ -12,21 +14,21 @@ const slides = [
     ),
     image: '/public/assets/section_zcflow_1.svg',
     alt: 'Paneles de ZCflow con gráficos',
-    Icono: 'check',
+    Icono: 'conexion',
   },
   {
     title: t('IA predictiva'),
     description: t('Agentes de IA que anticipan escenarios, reducen riesgos y optimizan costos'),
     image: '/public/assets/section_zcflow_2.svg',
     alt: 'Conectores y tablero',
-    Icono: 'check',
+    Icono: 'automatizaciones',
   },
   {
     title: t('Decisiones precisas'),
     description: t('De hojas de cálculo a decisiones confiables y asistidas desde un solo lugar'),
     image: '/public/assets/section_zcflow_3.svg',
     alt: 'Proyecciones con IA',
-    Icono: 'check',
+    Icono: 'reporte',
   },
 ]
 ---
@@ -44,6 +46,17 @@ const slides = [
             'Plataforma financiera con IA que integra, reduce riesgos y transforma finanzas con decisiones precisas'
           )}
           word="Zcflow"
+          client:load
+        />
+        <!-- <CardSlider
+          slides={slides}
+          interval={5000}
+          startIndex={0}
+          title={t('ZCflow, tu IA para predecir tus finanzas')}
+          description={t(
+            'Plataforma financiera con IA que integra, reduce riesgos y transforma finanzas con decisiones precisas'
+          )}
+          word="Zcflow"
           t={(k) => k}
           *
           o
@@ -51,7 +64,7 @@ const slides = [
           función
           i18n
           *
-        />
+        /> -->
       </div>
 
       <TrustedBy />

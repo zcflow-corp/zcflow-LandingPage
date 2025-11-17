@@ -1,0 +1,217 @@
+---
+/**
+ * ChartCard.astro
+ * Props:
+ * - data: number[] (0..100)
+ * - year?: string
+ * - pointDuration?: number
+ * - colors?: { line?: string; dot?: string; grid?: string }
+ * - style?: string (estilo inline del contenedor externo)
+ */
+ const {
+  data = [24, 48, 42, 70, 73],
+  year = '2021',
+  pointDuration = 1200,
+  colors = {},
+  style = ''
+} = Astro.props;
+
+const lineColor = colors.line ?? '#1a1446';
+const dotColor  = colors.dot  ?? '#1a1446';
+const gridColor = colors.grid ?? '#EDEEF0';
+
+// id único por instancia
+const cid = `kpi_${Math.random().toString(36).slice(2)}`;
+---
+
+<div class="chart-stage" style={style} id={cid}>
+  <div class="chart-card">
+    <canvas class="kpi-canvas"></canvas>
+    <span class="year-label">{year}</span>
+  </div>
+
+  <!-- Config embebida segura -->
+  <script type="application/json" id={`${cid}-config`}>
+    {JSON.stringify({ data, pointDuration, colors: { line: lineColor, dot: dotColor, grid: gridColor } })}
+  </script>
+</div>
+
+<style>
+  .chart-stage{
+    min-height: 320px;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(60rem 40rem at 20% 20%, #0d2a33 0%, #0b0f15 40%, #0b0f15 100%);
+    padding: 32px;
+    border-radius: 24px;
+  }
+  .chart-card{
+    position: relative;
+    width: clamp(280px, 60vw, 560px);
+    aspect-ratio: 16/9;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow:
+      0 22px 40px rgba(0,0,0,.35),
+      -10px 10px 0 rgba(255,255,255,.45) inset;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .chart-card::before{
+    content: "";
+    position: absolute;
+    inset: 14px -14px -18px -14px;
+    z-index: -1;
+    border-radius: 24px;
+    background: linear-gradient(180deg, rgba(0,0,0,.1), rgba(0,0,0,0));
+    filter: blur(6px);
+  }
+  .chart-card .kpi-canvas{ width:100%; height:100%; display:block }
+  .year-label{
+    position: absolute;
+    left: 14px;
+    bottom: 12px;
+    font-weight: 800;
+    color: #1d1654;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Helvetica Neue', Arial, 'Noto Sans';
+    letter-spacing: .2px;
+  }
+</style>
+
+<script type="module">
+  // Cada instancia se inicializa por su id único (cid renderizado por SSR)
+  const root = document.getElementById("{cid}");
+  if (root) {
+    const cfgEl = document.getElementById("{cid}-config");
+    const cfg = cfgEl ? JSON.parse(cfgEl.textContent || "{}") : {};
+    const data = Array.isArray(cfg.data) ? cfg.data : [24,48,42,70,73];
+    const pointDuration = Number(cfg.pointDuration) || 1200;
+    const lineColor = cfg.colors?.line || '#1a1446';
+    const dotColor  = cfg.colors?.dot  || '#1a1446';
+    const gridColor = cfg.colors?.grid || '#EDEEF0';
+
+    const canvas = root.querySelector('.kpi-canvas');
+    const ctx = canvas.getContext('2d');
+
+    const padding = { top: 22, right: 22, bottom: 34, left: 34 };
+    const gridLines = 4;
+
+    function resize(){
+      const dpr = Math.max(1, window.devicePixelRatio || 1);
+      const { width, height } = canvas.getBoundingClientRect();
+      canvas.width  = Math.round(width  * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    new ResizeObserver(resize).observe(canvas);
+    resize();
+
+    function xFor(i, n){
+      const w = canvas.clientWidth - padding.left - padding.right;
+      const step = n > 1 ? w / (n - 1) : 0;
+      return padding.left + i * step;
+    }
+    function yFor(v){
+      const h = canvas.clientHeight - padding.top - padding.bottom;
+      return padding.top + (1 - v/100) * h;
+    }
+    function drawGrid(){
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = gridColor;
+      ctx.beginPath();
+      const h = canvas.clientHeight - padding.top - padding.bottom;
+      for (let i=0; i<=gridLines; i++){
+        const y = padding.top + (h/gridLines)*i + .5;
+        ctx.moveTo(padding.left, y);
+        ctx.lineTo(canvas.clientWidth - padding.right, y);
+      }
+      ctx.stroke();
+    }
+    function totalLineLength(){
+      let len = 0;
+      for (let i=1; i<data.length; i++){
+        const x1 = xFor(i-1, data.length);
+        const y1 = yFor(data[i-1]);
+        const x2 = xFor(i, data.length);
+        const y2 = yFor(data[i]);
+        len += Math.hypot(x2 - x1, y2 - y1);
+      }
+      return len;
+    }
+    function strokePathProgressive(targetLen){
+      ctx.beginPath();
+      let acc = 0;
+      for (let i=0; i<data.length; i++){
+        const x = xFor(i, data.length);
+        const y = yFor(data[i]);
+        if (i === 0) { ctx.moveTo(x, y); continue; }
+        const xPrev = xFor(i-1, data.length);
+        const yPrev = yFor(data[i-1]);
+        const seg = Math.hypot(x - xPrev, y - yPrev);
+
+        if (acc + seg <= targetLen){
+          ctx.lineTo(x, y);
+          acc += seg;
+        } else {
+          const rest = targetLen - acc;
+          const t = Math.max(0, Math.min(1, rest / seg));
+          const xp = xPrev + (x - xPrev) * t;
+          const yp = yPrev + (y - yPrev) * t;
+          ctx.lineTo(xp, yp);
+          acc = targetLen;
+          break;
+        }
+      }
+      ctx.strokeStyle = lineColor;
+      ctx.lineWidth = 2;
+      ctx.lineCap = 'round';
+      ctx.stroke();
+    }
+    function drawDot(x, y, r){
+      ctx.fillStyle = dotColor;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI*2);
+      ctx.fill();
+    }
+    function drawLine(progress=1){
+      const totalLen = totalLineLength();
+      const target = progress * totalLen;
+      strokePathProgressive(target);
+      for (let i=0; i<data.length; i++){
+        drawDot(xFor(i, data.length), yFor(data[i]), 3.25);
+      }
+    }
+    function pulse(x, y, t){
+      const s = 0.9 + 0.35 * (0.5 + 0.5*Math.sin(t * 0.012));
+      ctx.beginPath();
+      ctx.arc(x, y, 12*s, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(26, 20, 70, .10)';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(x, y, 7*s, 0, Math.PI*2);
+      ctx.strokeStyle = 'rgba(26, 20, 70, .25)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      drawDot(x, y, 3.6 + 0.6*Math.sin(t * 0.02));
+    }
+
+    let startTime = performance.now();
+    function render(now){
+      const elapsed = now - startTime;
+      const cycle = data.length * pointDuration;
+      const progress = Math.min(1, (elapsed % cycle) / cycle);
+      const activeIndex = Math.floor(elapsed / pointDuration) % data.length;
+
+      ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+      drawGrid();
+      drawLine(progress);
+
+      const ax = xFor(activeIndex, data.length);
+      const ay = yFor(data[activeIndex]);
+      pulse(ax, ay, elapsed);
+
+      requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
+  }
+</script>

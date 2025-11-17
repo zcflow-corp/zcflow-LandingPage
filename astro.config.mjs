@@ -4,6 +4,9 @@ import react from '@astrojs/react'
 
 export default defineConfig({
   site: 'http://localhost:4321',
+  server: {
+    allowedHosts: ['porky-nonpossessively-kimberlie.ngrok-free.dev', 'localhost'],
+  },
   trailingSlash: 'always', // importante para que /en funcione como /en/
   integrations: [react()],
   i18n: {

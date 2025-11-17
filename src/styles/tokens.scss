@@ -22,7 +22,10 @@
   --c-white: #ffffff;
   --c-black: #000000;
   --c-gray: #e2e2e259;
+  --c-banner: #ffffff2e;
+  --c-icon-banner: #ffffff59;
   --c-bg: #ffffff;
+  --c-bg-variant: #f6f6f9;
   --c-bg-variant: #f6f6f9;
   --c-panel: #ffffff;
   --d1: #0563ff;
@@ -35,11 +38,7 @@
   --d8: #b0b0b0;
   --d9: #00b8d9;
   --d10: #ff9f40;
-  // --g-primary: linear-gradient(135deg, #3385ff 0%, #071381 100%);
-  // --g-primary-light: linear-gradient(90deg, #0563FF 19.23%, #90A9D5 43.75%, #F6F6F9 83.65%);
-  // --g-primary-dark: linear-gradient(90deg, #0563FF 0%, #476AA6 47.12%, #E2E2E2 100%);
-  // --g-cta: linear-gradient(90deg, #00084D 0%, #1D63ED 100%);
-  --g-primary: linear-gradient(135deg, #0563ff 0%, #8b00cc 100%); //nuevoo
+  --g-primary: linear-gradient(135deg, #0563ff 0%, #071381 100%); //nuevoo
   --g-primary-light: linear-gradient(90deg, #0563ff 19.23%, #90a9d5 43.75%, #f6f6f9 83.65%);
   --g-primary-dark: linear-gradient(90deg, #0563ff 0%, #476aa6 47.12%, #e2e2e2 100%);
   --g-cta: linear-gradient(90deg, #00084d 0%, #1d63ed 100%);
@@ -49,7 +48,13 @@
   --h3: clamp(1.2rem, 1rem + 1vw, 1.6rem);
   --radius: 16px;
   --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadowXL: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
+    0 18px 36px -18px rgba(0, 0, 0, 0.3);
+  --shadowInset: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
+    0 18px 36px -18px rgba(0, 0, 0, 0.3);
+  --shadowL: 0 50px 100px -20px rgba(50, 50, 93, 0.25), 0 30px 60px -30px rgba(0, 0, 0, 0.3);
   --container: 1200px;
+
 }
 
 /* 1. Variables globales de tema */

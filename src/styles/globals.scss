@@ -6,7 +6,6 @@ body {
   margin: 0;
   font-family: var(--font-body);
   color: var(--c-text);
-  background: var(--c-bg);
 }
 
 main {
@@ -109,10 +108,6 @@ svg {
   display: inline-block;
 }
 
-
-
-
-
 .mode-dark {
   display: block;
 }
@@ -129,7 +124,120 @@ html[data-theme='dark'] .mode-light {
   display: block;
 }
 
+html[data-theme='dark'] body {
+  background: var(--c-black);
+}
 
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: auto;
+  gap: 4rem;
+  height: auto;
+  gap: 1rem;
+  max-width: 1200px; //se agregó
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.section {
+  padding: 72px 0;
+  scroll-margin-top: 80px;
+}
+
+.card {
+  background: var(--c-panel);
+  border: 1px solid var(--c-line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 1.2rem;
+}
+
+/*2. Estilos de componentes específicos */
+[data-theme='dark'] .badge {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  background: var(--c-bg);
+  border-bottom: 1px solid var(--c-line);
+  z-index: 50;
+}
+
+[data-theme='light'] header {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--c-line);
+}
+
+[data-theme='dark'] header {
+  background: rgb(0, 0, 0, 0.8);
+  border-bottom: 1px solid var(--c-line);
+  backdrop-filter: blur(8px);
+}
+
+[data-theme='dark'] #fundamentos .principles .card.principle {
+  background: #141417 !important;
+  border: 1px solid #3a3a3d;
+}
+
+[data-theme='dark'] #fundamentos .section-body p {
+  color: #eaf0ff;
+}
+
+[data-theme='light'] #fundamentos .section-body p {
+  color: var(--c-secondary) !important;
+}
+
+[data-theme='dark'] .principles .principle-title {
+  color: #eaf0ff !important;
+}
+
+[data-theme='dark'] nav {
+  background: var(--c-black) !important;
+}
+
+nav a {
+  position: relative;
+  color: var(--c-text);
+  text-decoration: none;
+}
+
+nav a:hover::after,
+nav a:focus::after {
+  width: 100%;
+}
+
+a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
 
 /*animaciones ref
 https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css      */

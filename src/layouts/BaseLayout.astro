@@ -2,33 +2,59 @@
 import '@/styles/tokens.scss'
 import '@/styles/globals.scss'
 import '@/styles/buttons.scss'
+import '@/styles/components.scss'
 // import '@/styles/mixins.scss'  .. estos se importa en astro.config.msj porque tienen mixins
+
+interface BaseLayoutProps {
+  title?: string
+  description?: string
+}
 
 const {
   title = 'Zcflow — Revolucionando la tesorería',
   description = 'Plataforma financiera con IA',
-} = Astro.props
+} = Astro.props as BaseLayoutProps
 const url = Astro.site?.toString() ?? 'http://localhost:4321/'
 ---
 
+<!--
+  Meta tags y estructura optimizada siguiendo guías oficiales de SEO y accesibilidad:
+  - Google SEO: https://developers.google.com/search/docs
+  - WCAG: https://www.w3.org/WAI/WCAG21/quickref/
+-->
 <html lang={Astro.currentLocale || 'es'}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+
+    <!-- SEO básico -->
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#141417" />
+    <link rel="canonical" href={url} />
+
+    <!-- Redes sociales -->
     <meta property="og:title" content={title} />
+    <title>{title}</title>
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={url} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="canonical" href={url} />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" />
+
+    <!-- Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap"
+      as="style"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
+    <!-- Tema dark/light sin flash o parpadeo visual -->
     <script>
       try {
         const t = localStorage.getItem('tema_activo') || 'light'

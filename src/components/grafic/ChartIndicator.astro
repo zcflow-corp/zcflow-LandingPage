@@ -1,0 +1,370 @@
+---
+// src/components/ChartIndicator.astro
+const { year = new Date().getFullYear() } = Astro.props
+---
+
+<style>
+  .card-indicator {
+    position: relative;
+    border-radius: 16px;
+    margin-bottom: 0rem;
+    padding: 1rem 1rem 0.8rem;
+    overflow: hidden;
+    background: radial-gradient(120% 140% at 0% 0%, #1a1e27 0%, #10141c 55%, #0c0f15 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(145, 141, 141, 0.04),
+      0 12px 28px rgba(0, 0, 0, 0.35);
+    color: var(--c--line);
+    width: 91%;
+    /* width: 677.028px;
+    height: 321.651px; */
+    background: rgba(255, 255, 255, 0.15);
+
+    /* 0 0 0 2px #4d90fe,
+    inset 0 0 0 2px hsla(0, 0%, 100%, 0.9);
+      */
+  }
+  .indicator-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .indicator-title {
+    font-size: 0.65rem;
+    opacity: 0.9;
+  }
+  .indicator-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(41, 73, 173, 0.27), rgba(41, 73, 173, 0.08));
+    border: 1px solid rgba(84, 120, 255, 0.25);
+    color: #c9d4ff;
+    font-size: 0.65rem;
+  }
+  .indicator-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #536dff;
+    box-shadow: 0 0 12px 3px rgba(86, 121, 255, 0.55);
+  }
+  .indicator-amount {
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.4px;
+    margin: 12px 0 8px;
+  }
+  .indicator-wrap {
+    position: relative;
+    width: 100%;
+    height: 108px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .indicator-grid {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .indicator-grid hr {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    border: 0;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0));
+    transform: translateY(-0.5px);
+  }
+  canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .indicator-tip {
+    position: absolute;
+    pointer-events: none;
+    transform: translate(-50%, -140%);
+    display: none;
+    background: rgba(15, 18, 27, 0.92);
+    color: #e7eaf3;
+    font-size: 0.8rem;
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    white-space: nowrap;
+    backdrop-filter: blur(6px);
+  }
+</style>
+
+<section class="card-indicator" aria-label="Posición de caja">
+  <div class="indicator-row">
+    <div class="indicator-title">Posición de caja</div>
+    <div class="indicator-chip"><span class="indicator-dot"></span>Mes Enero {year}</div>
+  </div>
+
+  <div id="amount" class="indicator-amount">S/ 0</div>
+
+  <div class="indicator-wrap">
+    <div class="indicator-grid"><hr style="top:30%" /><hr style="top:60%" /></div>
+    <canvas id="cv" data-year={String(year)} aria-label="Indicador de caja"></canvas>
+    <div id="tip" class="indicator-tip"></div>
+  </div>
+</section>
+
+<script is:client>
+  const $ = (s, r = document) => r.querySelector(s)
+  const canvas = $('#cv'),
+    tip = $('#tip'),
+    amount = $('#amount')
+  const YEAR = Number(canvas.dataset.year) || new Date().getFullYear()
+
+  const DPR = Math.max(1, devicePixelRatio || 1)
+  const PAD = { l: 20, r: 14, t: 10, b: 16 }
+  let W = 0,
+    H = 0
+
+  // Datos deterministas (enero) en función del año
+  function dataFor(y) {
+    const n = 31,
+      base = 7200 + (y % 11) * 120
+    const r = (i) => (Math.sin(i * 0.73 + y * 1.11) + Math.cos(i * 0.31 + y * 0.57)) * 90
+    return Array.from({ length: n }, (_, i) => {
+      const trend = (i / n) ** 2 * 1100 // subida al final (como la referencia)
+      const wave = Math.sin(i / 3.2) * 240 + Math.cos(i / 5.4) * 160
+      return Math.max(900, base + wave + r(i) + trend)
+    })
+  }
+  const data = dataFor(YEAR)
+  amount.textContent = `S/ ${Math.round(data.at(-1)).toLocaleString('es-PE')}`
+
+  // Tamaño canvas
+  function resize() {
+    const rect = canvas.getBoundingClientRect()
+    W = Math.floor(rect.width)
+    H = Math.floor(rect.height)
+    canvas.width = Math.floor(W * DPR)
+    canvas.height = Math.floor(H * DPR)
+  }
+  resize()
+  addEventListener('resize', () => {
+    resize()
+    compute()
+  })
+
+  const ctx = canvas.getContext('2d')
+
+  // Catmull-Rom muestreado densamente (curva suave)
+  let pts = [],
+    smp = [],
+    cum = [],
+    totalLen = 0,
+    minV = 0,
+    maxV = 0
+  function compute() {
+    minV = Math.min(...data)
+    maxV = Math.max(...data)
+    const innerW = W - PAD.l - PAD.r,
+      innerH = H - PAD.t - PAD.b
+    pts = data.map((v, i) => {
+      const x = PAD.l + (i / (data.length - 1)) * innerW
+      const y = PAD.t + (1 - (v - minV) / (maxV - minV)) * innerH
+      return { x, y }
+    })
+
+    smp = []
+    const segSamples = 28
+    for (let i = 0; i < pts.length - 1; i++) {
+      const p0 = pts[Math.max(0, i - 1)],
+        p1 = pts[i],
+        p2 = pts[i + 1],
+        p3 = pts[Math.min(pts.length - 1, i + 2)]
+      for (let j = 0; j < segSamples; j++) {
+        const t = j / segSamples,
+          t2 = t * t,
+          t3 = t2 * t
+        const x =
+          0.5 *
+          (2 * p1.x +
+            (-p0.x + p2.x) * t +
+            (2 * p0.x - 5 * p1.x + 4 * p2.x - p3.x) * t2 +
+            (-p0.x + 3 * p1.x - 3 * p2.x + p3.x) * t3)
+        const y =
+          0.5 *
+          (2 * p1.y +
+            (-p0.y + p2.y) * t +
+            (2 * p0.y - 5 * p1.y + 4 * p2.y - p3.y) * t2 +
+            (-p0.y + 3 * p1.y - 3 * p2.y + p3.y) * t3)
+        smp.push({ x, y })
+      }
+    }
+    smp.push(pts.at(-1))
+
+    cum = [0]
+    totalLen = 0
+    for (let i = 1; i < smp.length; i++) {
+      totalLen += Math.hypot(smp[i].x - smp[i - 1].x, smp[i].y - smp[i - 1].y)
+      cum.push(totalLen)
+    }
+  }
+  compute()
+
+  // Utilidades
+  function pointAt(s) {
+    if (s <= 0) return smp[0]
+    if (s >= totalLen) return smp.at(-1)
+    let lo = 0,
+      hi = cum.length - 1
+    while (hi - lo > 1) {
+      const m = (lo + hi) >> 1
+      cum[m] < s ? (lo = m) : (hi = m)
+    }
+    const t = (s - cum[lo]) / (cum[hi] - cum[lo]),
+      a = smp[lo],
+      b = smp[hi]
+    return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t }
+  }
+
+  // Trazo degradado Azul→Gris
+  function drawGradientLine() {
+    ctx.save()
+    ctx.scale(DPR, DPR)
+    ctx.lineCap = ctx.lineJoin = 'round'
+
+    ctx.lineWidth = 3.2
+    ctx.strokeStyle = 'rgba(200,205,220,.12)'
+    ctx.beginPath()
+    ctx.moveTo(smp[0].x, smp[0].y)
+    for (let i = 1; i < smp.length; i++) ctx.lineTo(smp[i].x, smp[i].y)
+    ctx.stroke()
+
+    const grad = ctx.createLinearGradient(PAD.l, 0, W - PAD.r, 0)
+    grad.addColorStop(0.0, '#2f5dff')
+    grad.addColorStop(0.4, '#6f8dff')
+    grad.addColorStop(0.7, '#aab4c6')
+    grad.addColorStop(1.0, '#d8dde6')
+    ctx.strokeStyle = grad
+    ctx.shadowColor = 'rgba(98,130,255,.35)'
+    ctx.shadowBlur = 12
+    ctx.lineWidth = 3
+    ctx.beginPath()
+    ctx.moveTo(smp[0].x, smp[0].y)
+    for (let i = 1; i < smp.length; i++) ctx.lineTo(smp[i].x, smp[i].y)
+    ctx.stroke()
+    ctx.restore()
+  }
+
+  // Flujo animado (barrido + pulsos)
+  let sHead = 0,
+    prev = performance.now()
+  const SPEED = 180,
+    WINDOW = 180,
+    PULSE_PERIOD = 1050
+  let lastPulse = 0
+  const pulses = [] // {s,born}
+
+  function drawHighlight(s0, s1) {
+    const a = pointAt(s0),
+      b = pointAt(s1)
+    ctx.save()
+    ctx.scale(DPR, DPR)
+    ctx.lineCap = ctx.lineJoin = 'round'
+    ctx.lineWidth = 4
+    const g = ctx.createLinearGradient(a.x, a.y, b.x, b.y)
+    g.addColorStop(0, 'rgba(160,196,255,0)')
+    g.addColorStop(0.25, 'rgba(160,196,255,.5)')
+    g.addColorStop(0.5, 'rgba(220,234,255,.95)')
+    g.addColorStop(0.75, 'rgba(160,196,255,.5)')
+    g.addColorStop(1, 'rgba(160,196,255,0)')
+    ctx.strokeStyle = g
+    ctx.shadowColor = 'rgba(160,196,255,.6)'
+    ctx.shadowBlur = 18
+
+    ctx.beginPath()
+    let started = false
+    for (let i = 0; i < cum.length; i++) {
+      const s = cum[i]
+      if (s < s0 || s > s1) continue
+      const p = smp[i]
+      if (!started) {
+        ctx.moveTo(p.x, p.y)
+        started = true
+      } else ctx.lineTo(p.x, p.y)
+    }
+    if (started) ctx.stroke()
+    ctx.restore()
+  }
+
+  function drawPulse(s, age) {
+    const p = pointAt(s)
+    const r = 4 + Math.min(12, age / 70)
+    const o = Math.max(0, 1 - age / 900)
+    ctx.save()
+    ctx.scale(DPR, DPR)
+    const halo = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r + 12)
+    halo.addColorStop(0, `rgba(190,210,255,${0.28 * o})`)
+    halo.addColorStop(1, `rgba(190,210,255,0)`)
+    ctx.fillStyle = halo
+    ctx.beginPath()
+    ctx.arc(p.x, p.y, r + 12, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.beginPath()
+    ctx.fillStyle = `rgba(245,248,255,${0.9 * o})`
+    ctx.arc(p.x, p.y, 2.6, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.restore()
+  }
+
+  // Tooltip por día
+  const mouse = { inside: false, x: 0 }
+  canvas.addEventListener('mouseenter', () => (mouse.inside = true))
+  canvas.addEventListener('mouseleave', () => {
+    mouse.inside = false
+    tip.style.display = 'none'
+  })
+  canvas.addEventListener('mousemove', (e) => {
+    const r = canvas.getBoundingClientRect()
+    mouse.x = e.clientX - r.left
+    const step = (W - PAD.l - PAD.r) / (data.length - 1)
+    const idx = Math.min(Math.max(0, Math.round((mouse.x - PAD.l) / step)), data.length - 1)
+    const p = pts[idx]
+    tip.style.left = `${p.x}px`
+    tip.style.top = `${p.y}px`
+    tip.textContent = `S/ ${Math.round(data[idx]).toLocaleString('es-PE')} — día ${idx + 1}`
+    tip.style.display = 'block'
+  })
+
+  // Loop
+  function frame(now) {
+    const dt = (now - prev) / 1000
+    prev = now
+    sHead = (sHead + SPEED * dt) % totalLen
+
+    if (now - lastPulse > PULSE_PERIOD) {
+      pulses.push({ s: sHead, born: now })
+      lastPulse = now
+    }
+    for (let i = pulses.length - 1; i >= 0; i--)
+      if (now - pulses[i].born > 1100) pulses.splice(i, 1)
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    drawGradientLine()
+
+    const s0 = sHead,
+      s1 = sHead + WINDOW
+    if (s1 <= totalLen) drawHighlight(s0, s1)
+    else {
+      drawHighlight(s0, totalLen)
+      drawHighlight(0, s1 - totalLen)
+    }
+
+    for (const p of pulses) drawPulse(p.s, now - p.born)
+    requestAnimationFrame(frame)
+  }
+  requestAnimationFrame(frame)
+</script>
