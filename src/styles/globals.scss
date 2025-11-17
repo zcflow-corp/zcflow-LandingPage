@@ -148,6 +148,10 @@ html[data-theme='dark'] body {
   background: var(--c-black);
 }
 
+html[data-theme='dark'] body {
+  background: var(--c-black);
+}
+
 .container {
   max-width: var(--container);
   margin: 0 auto;
