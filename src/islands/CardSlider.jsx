@@ -115,11 +115,19 @@ export default function CardSlider({
                 }}
               >
                 <IconoSvg name={t(s.Icono)} class="icon" ariaLabel="Activo" />
+
                 <div className="content-slider">
                   <article className="card-slider__desc">
                     <span className="card-slider__desc-title">{t(s.title)}</span>,{' '}
                     {t(s.description)}
                   </article>
+                  {t(s.status) == 'beta' ? (
+                    <div className="beta-card">
+                      <span className="beta gradient-blue-dark"> beta </span>
+                    </div>
+                  ) : (
+                    ''
+                  )}
                 </div>
               </li>
             ))}

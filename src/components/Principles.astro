@@ -25,8 +25,8 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
         </p>
       </div>
     </div>
-    <div class="descubre-mas">
-      <a href="#descubre" class="btn" aria-label={t('Descubre más')}>{t('Descubre más')}</a>
+    <div class="btn ghost descubre-mas">
+      <a href="#descubre" class="btn" aria-label={t('Descubre más')}> + {t('Descubre más')}</a>
     </div>
     <!-- principios -->
     <section class="principles" aria-labelledby="Lista de principios fundamentales de ZCflow">
@@ -164,9 +164,10 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
   }
   .descubre-mas {
     text-align: center;
+    padding: 0rem;
   }
   .fundamentos {
-    padding: 4rem 0rem;
+    padding: 2rem 0rem;
   }
 
   .fundamentos header .fundamentos-header {

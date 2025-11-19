@@ -118,20 +118,6 @@ const count = items.length
       color: var(--c-text-muted);
       font-family: var(--font-body);
     }
-
-    // Si quieres modo escala de grises descomenta:
-    // &[data-grayscale='1'] {
-    //   .logo-partners {
-    //     filter: grayscale(100%);
-    //
-    //     &.is-visible {
-    //       filter: grayscale(0%);
-    //     }
-    //     &.is-leaving {
-    //       filter: grayscale(100%) blur(1px);
-    //     }
-    //   }
-    // }
   }
 
   .logo-partners {
@@ -139,6 +125,10 @@ const count = items.length
     opacity: 0.2;
     transform: scale($scale-off);
     color: var(--c-text);
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
     transition:
       opacity $anim-dur ease,
       transform $anim-dur ease,

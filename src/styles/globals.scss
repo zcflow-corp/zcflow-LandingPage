@@ -6,7 +6,6 @@ body {
   margin: 0;
   font-family: var(--font-body);
   color: var(--c-text);
-  background: var(--c-bg);
 }
 
 main {
@@ -145,6 +144,14 @@ html[data-theme='dark'] .mode-light {
   display: block;
 }
 
+html[data-theme='dark'] body {
+  background: var(--c-black);
+}
+
+html[data-theme='dark'] body {
+  background: var(--c-black);
+}
+
 .container {
   max-width: var(--container);
   margin: 0 auto;
@@ -177,8 +184,6 @@ html[data-theme='dark'] .mode-light {
   box-shadow: var(--shadow);
   padding: 1.2rem;
 }
-
-
 
 /*2. Estilos de componentes específicos */
 [data-theme='dark'] .badge {
