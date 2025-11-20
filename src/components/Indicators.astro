@@ -171,6 +171,9 @@ const t = typeof _t === 'function' ? _t : (k) => k
     max-width: 250px;
     line-height: 48px;
     font-weight: 500;
+    @include media(mobile) {
+      width: 73%
+    }
   }
   .container-counter p {
     color: #eaf0ff;
@@ -202,6 +205,12 @@ const t = typeof _t === 'function' ? _t : (k) => k
     gap: 2rem;
     width: 100%;
   }
+
+  @include media(mobile) {
+    .section-grafico div {
+      width: 70%;
+    }
+  }
   .section-grafico div {
     width: 100%;
   }
@@ -212,6 +221,11 @@ const t = typeof _t === 'function' ? _t : (k) => k
     font-weight: 400;
     line-height: 28px;
     text-justify: inter-word;
+    @include media(mobile) {
+      
+    width: 73%;
+
+  }
   }
 
   .gradient-border-left {
@@ -276,6 +290,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
     .section-grafico {
       .section-grafico {
         grid-template-columns: 1fr;
+        width: 86%;
       }
     }
   }

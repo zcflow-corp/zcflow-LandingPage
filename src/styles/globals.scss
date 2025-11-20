@@ -285,3 +285,9 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
     background-position: 0% 0;
   }
 }
+
+ @include media(mobile) {
+      .hero-imagen {
+        display: none;
+      }
+    }
