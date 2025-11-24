@@ -2,6 +2,8 @@
 import { useEffect, useState, useRef } from 'react'
 import IconoSvg from './IconoSvg.jsx'
 import FlowConexion from './FlowConexion.jsx'
+import FlowBox from './FlowBox.jsx'
+import FlowDecision from '@/islands/FlowDecision'
 
 /**
  * @param {Object} props
@@ -71,12 +73,11 @@ export default function CardSlider({
         )
 
       case 2:
-        // id 2 → otro componente cualquiera
-        return 'otro'
+        return <FlowDecision height={260} />
 
       // puedes seguir añadiendo casos:
-      // case 3:
-      //   return <OtroMas />
+      case 3:
+        return <FlowBox client:load />
 
       default:
         return null
