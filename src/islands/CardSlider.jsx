@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState, useRef } from 'react'
 import IconoSvg from './IconoSvg.jsx'
+import FlowConexion from './FlowConexion.jsx'
 
 /**
  * @param {Object} props
@@ -54,6 +55,34 @@ export default function CardSlider({
     return () => window.removeEventListener('keydown', handleKey)
   }, [])
 
+  // 🔹 Función que devuelve el componente según el id del slide
+  function renderExtraComponent(slide) {
+    if (!slide) return null
+
+    switch (slide.id) {
+      case 1:
+        // id 1 → FlowConexion
+        return (
+          <FlowConexion
+            client:load
+            labels={['Open Banking', 'RPA-ERPs', 'Fintechs, inversionistas y otros']}
+            rotationMs={9000}
+          />
+        )
+
+      case 2:
+        // id 2 → otro componente cualquiera
+        return 'otro'
+
+      // puedes seguir añadiendo casos:
+      // case 3:
+      //   return <OtroMas />
+
+      default:
+        return null
+    }
+  }
+
   return (
     <section className="card-slider" aria-label="Card Slider">
       <div
@@ -75,12 +104,16 @@ export default function CardSlider({
             >
               <div className="card-slider__bg" />
               <div className="card-slider__img-wrap">
-                <img
-                  className="card-slider__img"
-                  src={s.image}
-                  alt={s.alt ?? s.title}
-                  loading={i === index ? 'eager' : 'lazy'}
-                />
+                {s.hasFlow == true ? (
+                  renderExtraComponent(s)
+                ) : (
+                  <img
+                    className="card-slider__img"
+                    src={s.image}
+                    alt={s.alt ?? s.title}
+                    loading={i === index ? 'eager' : 'lazy'}
+                  />
+                )}
               </div>
             </figure>
           ))}

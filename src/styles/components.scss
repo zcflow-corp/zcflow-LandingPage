@@ -20,6 +20,11 @@
     gap: 2rem;
   }
 
+  &__component {
+    background: red;
+    width: 100%
+  }
+
   /* === Media: MISMO MARCO para todas las slides === */
   &__media {
     position: relative;
@@ -71,7 +76,7 @@
     width: 100%;
     height: 100%;
     border-radius: var(--radius);
-    box-shadow: var(--shadow);
+    // box-shadow: var(--shadow);
     overflow: hidden;
     padding: 0;
     /* marco limpio y consistente */
@@ -371,5 +376,90 @@ html[data-theme='dark'] .card-slider {
     path {
       fill: var(--c-primary) !important;
     }
+  }
+}
+
+//flowconexion
+.flow-conexion {
+  width: 100%;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  content: none;
+  background-color: transparent !important;
+  color: var(--c-text, #2a2a2b);
+  justify-content: flex-start;
+
+  &__inner {
+    position: relative;
+    width: 100%;
+    // margin-left: -10rem;
+    // aspect-ratio: 3 / 1;
+    // padding: 18px 28px;
+    box-sizing: border-box;
+    background: transparent;
+  }
+
+  &__canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin-left: -4rem;
+  }
+
+  &__label {
+    position: absolute;
+    left: 60%;
+    bottom: 30%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    font-family: var(--font-head, 'Outfit', system-ui);
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--c-line);
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  &__label-text {
+    // text-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
+  }
+}
+
+.flow-logo {
+  position: absolute;
+  width: 70px;
+  right: 12.5%;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+
+  &__img {
+    width: 80px;
+    height: auto;
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .flow-conexion__inner {
+    // padding: 14px 16px;
+    max-width: 100%;
+  }
+
+  .flow-logo {
+    right: 0%;
+    top: 50%;
+
+    &__img {
+      width: 32px;
+    }
+  }
+
+  .flow-conexion__label {
+    font-size: 0.5rem;
+    left: 80%;
+    bottom: 20%;
+
   }
 }
