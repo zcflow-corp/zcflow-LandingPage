@@ -1,0 +1,28 @@
+{
+  "pestañas": [
+    {
+      "título": "Conecta",
+      "resumen": "Integrate banks, ERPs and strategic partners in one place.",
+      "características": [
+        "Multi-account bank connector",
+        "Automatic reconciliation",
+        "Flow & dependency map"
+      ]
+    },
+    {
+      "título": "Optimiza",
+      "resumen": "Smart reminders and real-time tracking.",
+      "características": ["Automatic alerts", "DSO KPIs", "Segment-based workflows"]
+    },
+    {
+      "título": "Gestiona",
+      "resumen": "Prioritize payments and prevent errors with approval rules.",
+      "características": ["Role-based approvals", "Fraud prevention", "End-to-end traceability"]
+    },
+    {
+      "título": "Actua",
+      "resumen": "Dashboards with treasury metrics and predictions.",
+      "características": ["Cashflow forecasting", "What-if scenarios", "Secure export"]
+    }
+  ]
+}

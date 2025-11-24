@@ -1,0 +1,32 @@
+{
+  "pestañas": [
+    {
+      "título": "Conecta",
+      "resumen": "Integra bancos, ERPs y socios estratégicos en un mismo lugar.",
+      "características": [
+        "Conector bancario multicuenta",
+        "Conciliación automática",
+        "Mapa de flujos y dependencias"
+      ]
+    },
+    {
+      "título": "Gestiona",
+      "resumen": "Recordatorios inteligentes y seguimiento en tiempo real.",
+      "características": ["Alertas automáticas", "KPIs de DSO", "Workflows por segmento"]
+    },
+    {
+      "título": "Optimiza",
+      "resumen": "Prioriza pagos y evita errores con reglas de autorización.",
+      "características": [
+        "Aprobaciones por rol",
+        "Prevención de fraudes",
+        "Trazabilidad de punta a punta"
+      ]
+    },
+    {
+      "título": "Actua",
+      "resumen": "Paneles con métricas de tesorería y predicciones.",
+      "características": ["Pronóstico de flujo de caja", "Escenarios what-if", "Exportación segura"]
+    }
+  ]
+}
