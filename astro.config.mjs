@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config'
 import { fileURLToPath } from 'node:url'
+import vercel from "@astrojs/vercel/serverless";
 import react from '@astrojs/react'
 
 export default defineConfig({
@@ -7,6 +8,7 @@ export default defineConfig({
   server: {
     allowedHosts: ['porky-nonpossessively-kimberlie.ngrok-free.dev', 'localhost'],
   },
+  adapter: vercel(),
   trailingSlash: 'always', // importante para que /en funcione como /en/
   integrations: [react()],
   i18n: {
