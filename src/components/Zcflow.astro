@@ -1,8 +1,7 @@
 ---
-// import CardSlider from '@/components/common/SliderCard.astro'
-
 import CardSlider from 'src/islands/CardSlider.jsx'
-import FlowConexion from '@/islands/FlowConexion'
+import FlowBox from '@/islands/FlowBox'
+import FlowDecision from '@/islands/FlowDecision'
 import TrustedBy from './TrustedBy.astro'
 const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k) => k
@@ -61,6 +60,7 @@ const slides = [
       <TrustedBy />
     </div>
   </div>
+  <FlowDecision height={260} />
 </section>
 
 <style lang="scss">
