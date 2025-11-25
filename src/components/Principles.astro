@@ -3,6 +3,7 @@ import principles from '@/data/principles.json'
 import { Image } from 'astro:assets'
 const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k: unknown) => k
+const base = import.meta.env.BASE_URL;
 ---
 
 <section id="fundamentos" class="section fundamentos" aria-labelledby="fundamentos-title">
@@ -45,7 +46,7 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
             {p.img && (
               <figure class="images-dinamyc">
                 <Image
-                  src={p.img}
+                  src={`${base}${p.img}`}
                   alt={t(p.title)}
                   width={1200}
                   height={200}

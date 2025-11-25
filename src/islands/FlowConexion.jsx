@@ -1,6 +1,6 @@
 // FlowConexion.jsx
 import React, { useEffect, useRef } from 'react'
-
+const base = import.meta.env.BASE_URL;
 const BANK_SVG_BASE = `
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
   <path fill="#292D32" d="M13.05 16.25h-1.88c-1.33 0-2.42-1.12-2.42-2.5 0-.41.34-.75.75-.75s.75.34.75.75c0 .55.41 1 .92 1h1.88c.39 0 .7-.35.7-.78 0-.54-.15-.62-.49-.74l-3.01-1.05c-.64-.23-1.5-.69-1.5-2.16 0-1.25.99-2.28 2.2-2.28h1.88c1.33 0 2.42 1.12 2.42 2.5 0 .41-.34.75-.75.75s-.75-.34-.75-.75c0-.55-.41-1-.92-1h-1.88c-.39 0-.7.35-.7.78 0 .54.15.62.49.74l3.01 1.05c.64.23 1.5.69 1.5 2.16 0 1.26-.99 2.28-2.2 2.28Z"/>
@@ -108,6 +108,7 @@ const FlowConexion = ({
     const cPrimary = rootStyle.getPropertyValue('--c-primary')?.trim() || '#0563ff'
     const cPrimaryAcc = rootStyle.getPropertyValue('--c-primary-accessible')?.trim() || cPrimary
     const cLineAcc = rootStyle.getPropertyValue('--c-line-acc')?.trim() || '#ced4da'
+    
 
     const drawZGlow = (x, y, size) => {
       ctx.save()
@@ -328,7 +329,7 @@ const FlowConexion = ({
         {/* Logo Zcflow (posición fija, el canvas dibuja glow + línea hasta aquí) */}
         <div className="flow-logo">
           <img
-            src="/zcflow-LandingPage/assets/logo_header_light.webp"
+            src={`${base}assets/logo_header_light.webp`} 
             alt="ZCFlow"
             className="flow-logo__img"
             loading="lazy"

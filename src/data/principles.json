@@ -2,26 +2,26 @@
   {
     "title": "IA predictiva",
     "desc": "La inteligencia artificial como núcleo que convierte datos en acciones financieras inteligentes y decisiones anticipadas.",
-    "img": "/zcflow-LandingPage/assets/section_fundamentos_OPT.svg"
+    "img": "assets/section_fundamentos_OPT.svg"
   },
   {
     "title": "Los principios que nos guían",
     "desc": "Seguridad avanzada y cumplimiento normativo que garantizan procesos seguros, confiables y automatizados.",
-    "img": "/zcflow-LandingPage/assets/section_fundamentos_security.svg"
+    "img": "assets/section_fundamentos_security.svg"
   },
   {
     "title": "Experiencia de Usuario",
     "desc": "Pensado para las personas: una plataforma intuitiva, clara y sencilla, que se adapta al usuario y no al revés.",
-    "img": "/zcflow-LandingPage/assets/section_fundamentos_ux.svg"
+    "img": "assets/section_fundamentos_ux.svg"
   },
   {
     "title": "Productividad",
     "desc": "Optimización del tiempo: menos tareas repetitivas, más enfoque en lo estratégico y de valor para la empresa.",
-    "img": "/zcflow-LandingPage/assets/section_fundamentos_productivity.svg"
+    "img": "assets/section_fundamentos_productivity.svg"
   },
   {
     "title": "Colaboración",
     "desc": "Un ecosistema conectado donde tesorería, bancos, socios y equipos trabajan en sincronía y transparencia.",
-    "img": "/zcflow-LandingPage/assets/section_fundamentos_colaboradores.svg"
+    "img": "assets/section_fundamentos_colaboradores.svg"
   }
 ]

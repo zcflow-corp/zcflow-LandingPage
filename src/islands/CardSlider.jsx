@@ -13,6 +13,7 @@ import FlowConexion from './FlowConexion.jsx'
  * @param {string} [props.description]
  * @param {string} [props.word]
  */
+
 export default function CardSlider({
   t: _t,
   slides = [],
@@ -94,6 +95,7 @@ export default function CardSlider({
       >
         {/* === MEDIA === */}
         <div className="card-slider__media card-slider__container">
+          
           {slides.map((s, i) => (
             <figure
               key={i}
