@@ -26,7 +26,7 @@ const TabsJson = {
           description: t(
             'Agentes de IA descargan movimientos, saldos y operaciones del ERP de forma automática cada día.'
           ),
-          image: '/assets/driven/conexion_banco.webp',
+          image: '/zcflow-LandingPage/assets/driven/conexion_banco.webp',
           alt: 'Conexión con bancos, ERPs y otras fuentes',
           Icono: 'Bank',
           status: true,
@@ -36,7 +36,7 @@ const TabsJson = {
           description: t(
             'Automatiza la validación y enriquecimiento de datos con fuentes externas para decisiones confiables.'
           ),
-          image: '/assets/driven/conexion_datos.webp',
+          image: '/zcflow-LandingPage/assets/driven/conexion_datos.webp',
           alt: 'Enriquecimiento y calidad de datos',
           Icono: 'data',
           status: true,
@@ -46,7 +46,7 @@ const TabsJson = {
           description: t(
             'Integra fintechs e inversionistas para crear soluciones financieras más competitivas.'
           ),
-          image: '/assets/driven/conexion_socios.gif',
+          image: '/zcflow-LandingPage/assets/driven/conexion_socios.gif',
           alt: 'Conexión con socios de negocios',
           Icono: 'conexion',
           status: 'beta',
@@ -74,7 +74,7 @@ const TabsJson = {
           description: t(
             'La IA detecta patrones y coincidencias para automatizar conciliaciones y liberar al equipo financiero.'
           ),
-          image: '/assets/driven/gestiona_movimientos.webp',
+          image: '/zcflow-LandingPage/assets/driven/gestiona_movimientos.webp',
           alt: 'Clasificación inteligente',
           Icono: 'movement',
           status: true,
@@ -84,7 +84,7 @@ const TabsJson = {
           description: t(
             'Consolida saldos y movimientos bancarios en un visor único, sin depender de hojas de cálculo.'
           ),
-          image: '/assets/driven/gestiona_flujo_caja.webp',
+          image: '/zcflow-LandingPage/assets/driven/gestiona_flujo_caja.webp',
           alt: 'Flujo de caja real',
           Icono: 'caja',
           status: true,
@@ -94,7 +94,7 @@ const TabsJson = {
           description: t(
             'Visualiza métricas clave de liquidez, riesgos y operaciones desde paneles personalizables.'
           ),
-          image: '/assets/driven/gestiona_dashboards.webp',
+          image: '/zcflow-LandingPage/assets/driven/gestiona_dashboards.webp',
           alt: 'Dashboards y widgets',
           Icono: 'dashboards',
           status: true,
@@ -104,7 +104,7 @@ const TabsJson = {
           description: t(
             'Genera informes claros y consistentes con un clic, siempre actualizados y listos para auditores.'
           ),
-          image: '/assets/driven/gestiona_reporting.webp',
+          image: '/zcflow-LandingPage/assets/driven/gestiona_reporting.webp',
           alt: 'Reporting financiero',
           Icono: 'reporte',
           status: true,
@@ -132,7 +132,7 @@ const TabsJson = {
           description: t(
             'Genera proyecciones ajustadas a escenarios de negocio para tomar decisiones anticipadas.'
           ),
-          image: '/assets/driven/optimiza_liquidez.webp',
+          image: '/zcflow-LandingPage/assets/driven/optimiza_liquidez.webp',
           alt: 'Proyecciones de liquidez',
           Icono: 'liquidez',
           status: true,
@@ -142,7 +142,7 @@ const TabsJson = {
           description: t(
             'Crea escenarios optimista, pesimista y realista, comparando impactos en la liquidez en tiempo real.'
           ),
-          image: '/assets/driven/optimiza_escenarios.webp',
+          image: '/zcflow-LandingPage/assets/driven/optimiza_escenarios.webp',
           alt: 'Escenarios financieros',
           Icono: 'escenarios',
           status: true,
@@ -152,7 +152,7 @@ const TabsJson = {
           description: t(
             'La IA sugiere el mejor uso de productos financieros para optimizar costos y minimizar riesgos.'
           ),
-          image: '/assets/driven/optimiza_recomendaciones.webp',
+          image: '/zcflow-LandingPage/assets/driven/optimiza_recomendaciones.webp',
           alt: 'Recomendaciones costo/riesgo',
           Icono: 'costo',
           status: true,
@@ -181,7 +181,7 @@ const TabsJson = {
           description: t(
             'Configura jerarquías, valida operaciones y aprueba transacciones trazables y seguras.'
           ),
-          image: '/assets/driven/actua_aprobaciones.webp',
+          image: '/zcflow-LandingPage/assets/driven/actua_aprobaciones.webp',
           alt: 'Workflow y aprobaciones',
           Icono: 'aprobaciones',
           status: 'beta',
@@ -191,7 +191,7 @@ const TabsJson = {
           description: t(
             'Envía instrucciones financieras automáticas para préstamos, coberturas o inversiones.'
           ),
-          image: '/assets/driven/actua_ordenes.webp',
+          image: '/zcflow-LandingPage/assets/driven/actua_ordenes.webp',
           alt: 'Automatización de órdenes',
           Icono: 'automatizaciones',
           status: 'beta',
@@ -201,7 +201,7 @@ const TabsJson = {
           description: t(
             'Centraliza documentos clave y compártelos al instante para auditorías más ágiles.'
           ),
-          image: '/assets/driven/actua_documentaria.webp',
+          image: '/zcflow-LandingPage/assets/driven/actua_documentaria.webp',
           alt: 'Gestión documental y auditoría',
           Icono: 'documentaria',
           status: true,
@@ -223,7 +223,8 @@ const TabsJson = {
       {t('con Zcflow')}
     </h2>
     <p>{t('Obtiene visibilidad de la liquidez y automatiza procesos clave para tu tesorería.')}</p>
-    <Tabs TabsJson={TabsJson} client:visible />
+    {/*client:visible */}
+    <Tabs TabsJson={TabsJson} />
   </div>
 </section>
 
