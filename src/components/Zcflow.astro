@@ -1,7 +1,5 @@
 ---
 import CardSlider from 'src/islands/CardSlider.jsx'
-import FlowBox from '@/islands/FlowBox'
-import FlowDecision from '@/islands/FlowDecision'
 import TrustedBy from './TrustedBy.astro'
 const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k) => k
@@ -46,7 +44,7 @@ const slides = [
       <div>
         <CardSlider
           slides={slides}
-          interval={5000}
+          interval={10000}
           startIndex={0}
           title={t('ZCflow, tu IA para predecir tus finanzas')}
           description={t(
@@ -60,7 +58,6 @@ const slides = [
       <TrustedBy />
     </div>
   </div>
-  <FlowDecision height={260} />
 </section>
 
 <style lang="scss">

@@ -73,7 +73,7 @@ export default function CardSlider({
         )
 
       case 2:
-        return <FlowDecision height={260} />
+        return <FlowDecision client:load height={260} />
 
       // puedes seguir añadiendo casos:
       case 3:
