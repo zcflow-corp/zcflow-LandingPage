@@ -11,10 +11,12 @@ interface BaseLayoutProps {
 }
 
 const {
-  title = 'Zcflow — Revolucionando la tesorería',
-  description = 'Plataforma financiera con IA',
+  title = 'Automatización de tesorería para CFOs | Zcflow',
+  description = 'Plataforma fintech que automatiza la tesorería, mejora la liquidez y ofrece previsión financiera en tiempo real con IA.',
 } = Astro.props as BaseLayoutProps
 const url = Astro.site?.toString() ?? 'http://localhost:4321/'
+const locale = Astro.currentLocale || 'es_ES'
+const ogImage = `${url}/og-image.png`
 ---
 
 <!--
@@ -22,22 +24,24 @@ const url = Astro.site?.toString() ?? 'http://localhost:4321/'
   - Google SEO: https://developers.google.com/search/docs
   - WCAG: https://www.w3.org/WAI/WCAG21/quickref/
 -->
-<html lang={Astro.currentLocale || 'es'}>
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
     <!-- SEO básico -->
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#141417" />
     <link rel="canonical" href={url} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
 
     <!-- Redes sociales -->
     <meta property="og:title" content={title} />
-    <title>{title}</title>
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={url} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={locale} />
 
     <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" />
@@ -61,6 +65,21 @@ const url = Astro.site?.toString() ?? 'http://localhost:4321/'
         document.documentElement.setAttribute('data-theme', t)
       } catch {}
     </script>
+    {
+      /*sameAs: agregar cuando tenga redes sociales verificables 
+    por ejemplo sameAs: ['https://www.linkedin.com/company/zcflow'] 
+    */
+    }
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'Zcflow',
+        url: url,
+        logo: `${url}/logo.png`,
+      })}
+    />
   </head>
   <body>
     <slot />

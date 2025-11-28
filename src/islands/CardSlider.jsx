@@ -15,6 +15,7 @@ import FlowDecision from '@/islands/FlowDecision'
  * @param {string} [props.description]
  * @param {string} [props.word]
  */
+
 export default function CardSlider({
   t: _t,
   slides = [],
@@ -73,7 +74,7 @@ export default function CardSlider({
         )
 
       case 2:
-        return <FlowDecision height={260} />
+        return <FlowDecision client:load height={260} />
 
       // puedes seguir añadiendo casos:
       case 3:
@@ -95,6 +96,7 @@ export default function CardSlider({
       >
         {/* === MEDIA === */}
         <div className="card-slider__media card-slider__container">
+          
           {slides.map((s, i) => (
             <figure
               key={i}

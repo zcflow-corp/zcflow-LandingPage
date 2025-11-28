@@ -3,6 +3,7 @@ import { Image } from 'astro:assets'
 
 const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k: unknown) => k
+const base = import.meta.env.BASE_URL
 ---
 
 <footer id="contacto" role="contentinfo" aria-label="Pie de página principal de ZCFlow">
@@ -10,7 +11,7 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
     <div class="footer-col" itemscope itemtype="https://schema.org/Organization">
       <a href="/inicio" aria-label="Inicio - ZCFlow">
         <Image
-          src="/public/assets/logo_header_light.webp"
+          src=`${base}assets/logo_header_light.webp`
           alt="ZCFlow logo light"
           width={120}
           height={120}
@@ -103,7 +104,7 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
     }
 
     .bg-imagen {
-      background-image: url('/public/assets/section_footer_contacto.svg');
+      background-image: url('/assets/section_footer_contacto.svg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;

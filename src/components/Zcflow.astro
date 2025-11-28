@@ -1,10 +1,9 @@
 ---
 import CardSlider from 'src/islands/CardSlider.jsx'
-import FlowBox from '@/islands/FlowBox'
-import FlowDecision from '@/islands/FlowDecision'
 import TrustedBy from './TrustedBy.astro'
 const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k) => k
+const base = import.meta.env.BASE_URL
 
 const slides = [
   {
@@ -12,7 +11,7 @@ const slides = [
     description: t(
       'ZCFlow conecta tu ecosistema financiero y ERPs en una plataforma 100% data driven'
     ),
-    image: '/public/assets/section_zcflow_1.svg',
+    image: `${base}assets/section_zcflow_1.svg`,
     alt: 'Paneles de ZCflow con gráficos',
     Icono: 'conexion',
     hasFlow: true,
@@ -22,7 +21,7 @@ const slides = [
   {
     title: t('Decisiones precisas'),
     description: t('De hojas de cálculo a decisiones confiables y asistidas desde un solo lugar'),
-    image: '/public/assets/section_zcflow_3.svg',
+    image: `${base}assets/section_zcflow_3.svg`,
     alt: 'Proyecciones con IA',
     Icono: 'reporte',
     hasFlow: true,
@@ -31,7 +30,7 @@ const slides = [
   {
     title: t('IA predictiva'),
     description: t('Agentes de IA que anticipan escenarios, reducen riesgos y optimizan costos'),
-    image: '/public/assets/section_zcflow_2.svg',
+    image: `${base}assets/section_zcflow_2.svg`,
     alt: 'Conectores y tablero',
     Icono: 'automatizaciones',
     hasFlow: true,
@@ -46,7 +45,7 @@ const slides = [
       <div>
         <CardSlider
           slides={slides}
-          interval={5000}
+          interval={10000}
           startIndex={0}
           title={t('ZCflow, tu IA para predecir tus finanzas')}
           description={t(
@@ -60,7 +59,6 @@ const slides = [
       <TrustedBy />
     </div>
   </div>
-  <FlowDecision height={260} />
 </section>
 
 <style lang="scss">

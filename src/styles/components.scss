@@ -393,9 +393,6 @@ html[data-theme='dark'] .card-slider {
   &__inner {
     position: relative;
     width: 100%;
-    // margin-left: -10rem;
-    // aspect-ratio: 3 / 1;
-    // padding: 18px 28px;
     box-sizing: border-box;
     background: transparent;
   }
@@ -413,10 +410,9 @@ html[data-theme='dark'] .card-slider {
     bottom: 30%;
     transform: translateX(-50%);
     pointer-events: none;
-    font-family: var(--font-head, 'Outfit', system-ui);
-    font-size: 0.75rem;
+    font-size: 1rem;
     font-weight: 400;
-    color: var(--c-line);
+    color: var(--c-white);
     text-align: left;
     white-space: nowrap;
   }
@@ -629,16 +625,264 @@ html[data-theme='dark'] .card-slider {
 }
 
 
-.flow-decision {
-  position: relative;
+/* FlowDecision.scss */
+
+.flow-decision-box {
   width: 100%;
-  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  padding: 2.5rem 0;
+
+
+
+
+  color: #e5edff;
+
+  &__card {
+    width: min(980px, 100%);
+    border-radius: 18px;
+    position: relative;
+    overflow: hidden;
+
+    /* contenedor translúcido, sin fondo blanco */
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.12),
+        rgba(7, 18, 70, 0.35));
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+
+    padding: 0;
+    min-height: 330px;
+    backdrop-filter: blur(10px);
+  }
+
+  /* paneles apilados */
+  &__panel {
+    position: absolute;
+    inset: 0;
+    padding: 0.85rem 1rem 1.1rem;
+    transition: opacity 0.55s ease, transform 0.55s ease;
+    opacity: 0;
+    transform: translateY(16px);
+    pointer-events: none;
+  }
+
+  &__panel.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  &__panel.is-hidden {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  /* tabs */
+  &__tabs {
+    display: flex;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  &__tab {
+    position: relative;
+    padding: 0.55rem 1.4rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(230, 239, 255, 0.6);
+    border: 0;
+    background: transparent;
+    cursor: default;
+
+    &--active {
+      color: #ffffff;
+    }
+
+    &--active::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 3px;
+      border-radius: 999px 999px 0 0;
+      background: linear-gradient(90deg, #ffffff, #a6d4ff);
+      box-shadow: 0 0 8px rgba(190, 220, 255, 0.9);
+    }
+  }
+
+  /* filtros */
+  &__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.6rem 0 0.5rem;
+    font-size: 0.72rem;
+    color: rgba(232, 241, 255, 0.85);
+  }
+
+  &__filter {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  &__select {
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.18),
+        rgba(9, 26, 96, 0.6));
+    font-size: 0.72rem;
+    color: #ffffff;
+    cursor: default;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  }
+
+  /* tabla */
+  &__table-wrapper {
+    width: 100%;
+    overflow: auto;
+    margin-top: 0.35rem;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.72rem;
+    min-width: 520px;
+    color: #f5f7ff;
+
+    thead {
+      background: linear-gradient(90deg,
+          #0b3bb8 0%,
+          #0d4bd8 50%,
+          #1665ff 100%);
+      color: #ffffff;
+    }
+
+    th,
+    td {
+      padding: 0.35rem 0.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    th:first-child,
+    td:first-child {
+      text-align: left;
+    }
+
+    th {
+      font-weight: 600;
+      font-size: 0.72rem;
+    }
+
+    tbody tr:nth-child(even):not(.is-total-periodo):not(.is-total-acumulado) {
+      background: rgba(0, 0, 0, 0.16);
+    }
+
+    tbody tr:nth-child(odd):not(.is-total-periodo):not(.is-total-acumulado) {
+      background: rgba(0, 0, 0, 0.08);
+    }
+
+    .is-total-periodo {
+      background: rgba(18, 163, 91, 0.18);
+
+      td {
+        font-weight: 600;
+        color: #4ee9a1;
+
+        &:not(:first-child) {
+
+          /* negativos en rojo, positivos en verde */
+          &::before {
+            /* nada, solo dejamos el color del número que tú uses */
+          }
+        }
+      }
+    }
+
+    .is-total-acumulado {
+      background: rgba(29, 142, 214, 0.2);
+
+      td {
+        font-weight: 600;
+        color: #8ad4ff;
+      }
+    }
+
+    .is-sticky {
+      position: sticky;
+      left: 0;
+      background: linear-gradient(90deg,
+          rgba(8, 21, 80, 0.96),
+          rgba(15, 36, 109, 0.96));
+      z-index: 1;
+      font-weight: 600;
+    }
+  }
+
+  /* gráfica */
+  &__chart-header {
+    h3 {
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin: 0 0 0.1rem;
+      color: #ffffff;
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.78rem;
+      color: rgba(223, 234, 255, 0.85);
+    }
+  }
+
+  &__chart-body {
+    margin-top: 0.6rem;
+  }
+
+  &__chart-svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  &__chart-xlabels {
+    margin-top: 0.45rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    color: rgba(228, 238, 255, 0.9);
+  }
+
+  /* líneas guía del gráfico */
+  .flow-decision-box__chart-svg line {
+    stroke: rgba(255, 255, 255, 0.15);
+  }
+
+  /* línea con animación de trazo */
+  &__chart-line {
+    stroke: #e4f0ff;
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.3));
+  }
+
+  &__chart-line--animate {
+    animation: flow-decision-line-draw 1.4s ease-out forwards;
+  }
 }
 
-.flow-decision__canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: transparent; // fondo transparente real
-
+/* anima el trazo desde 1000 -> 0 */
+@keyframes flow-decision-line-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
 }
