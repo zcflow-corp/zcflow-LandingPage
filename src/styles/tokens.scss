@@ -64,6 +64,7 @@
   --c-panel: #11172a;
   --g-hero: radial-gradient(60% 80% at 70% 30%, #071381 0%, #000 70%);
   --c-line: #1f2a44;
+
 }
 
 .container {
@@ -175,34 +176,4 @@ ol {
   flex-wrap: wrap;
   gap: 0.5rem;
   align-items: center;
-}
-
-// .eyebrow {
-//   text-transform: uppercase;
-//   letter-spacing: 1px;
-//   font-weight: 600;
-//   color: var(--g-accent);
-//   margin-bottom: 0.5rem;
-// }
-
-.tabs {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin-bottom: 1rem;
-}
-
-.tab-btn {
-  padding: 0.6rem 0.9rem;
-  border-radius: 999px;
-  border: 1px solid var(--c-line);
-  background: var(--c-panel);
-  color: var(--c-text);
-  cursor: pointer;
-}
-
-.tab-btn[aria-selected='true'] {
-  background: var(--c-primary);
-  color: #fff;
-  border-color: transparent;
 }

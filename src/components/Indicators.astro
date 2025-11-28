@@ -162,16 +162,14 @@ const t = typeof _t === 'function' ? _t : (k) => k
     }
   }
   .indicators-title {
-    color: #eaf0ff;
-    line-height: 48px;
-    font-weight: 500;
+    color: var(--c-white);
 
     @include media(tablet) {
       max-width: 250px;
     }
   }
   .container-counter p {
-    color: #eaf0ff;
+    color: var(--c-bg);
     width: 100%;
     text-wrap: wrap;
     @include media(mobile) {
@@ -180,8 +178,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
     }
   }
   .style-indicators {
-    border-left: 2px solid
-      linear-gradient(270deg, #52c41a 0%, #00b8d9 19.71%, #00b8d9 59.62%, #7faeff 90.38%);
+    border-left: 2px solid var(--g-primary-dark);
   }
   .container-counter {
     display: flex;
@@ -200,8 +197,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
     display: grid;
 
     align-items: start;
-    font-size: 2rem;
-    padding: 1.5rem 0;
+    padding: 1rem 0;
     gap: 2rem;
     width: 100%;
     text-wrap: wrap;
@@ -214,12 +210,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
     width: 100%;
   }
   .section-grafico p {
-    color: #eaf0ff;
-    color: #eaf0ff;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 28px;
-    text-justify: inter-word;
+    color: #c4c4c4;
   }
 
   .gradient-border-left {
@@ -233,7 +224,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
     left: 0;
     width: 1px;
     height: 100%;
-    background: linear-gradient(270deg, #52c41a 0%, #00b8d9 19.71%, #00b8d9 59.62%, #7faeff 90.38%);
+    background: var(--g-primary-dark);
   }
 
   .counter p {

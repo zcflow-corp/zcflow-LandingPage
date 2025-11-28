@@ -6,7 +6,7 @@
   width: 100%;
 
   &__title {
-    padding-bottom: 1rem;
+    padding-bottom: 0rem;
   }
 
   &__container {
@@ -21,7 +21,6 @@
   }
 
   &__component {
-    background: red;
     width: 100%
   }
 
@@ -32,7 +31,7 @@
     background: var(--g-primary);
     border-radius: var(--radius);
     overflow: hidden;
-    min-height: 20rem;
+    min-height: 22rem;
     width: 100%;
     padding: 1rem;
   }
@@ -103,13 +102,30 @@
     display: grid;
     gap: 1rem;
     width: 100%;
-    padding: 30px 0px;
   }
 
   &__title {
-    font-family: var(--font-head);
+
     line-height: 1.2;
     margin: 0 0 0.25rem 0;
+
+    span {
+      width: auto;
+      display: flex;
+      color: var(--c-black);
+      font-style: italic;
+      font-weight: 300;
+      // padding: 4px 69px 4px 12px;
+      align-items: center;
+
+      // color: var(--c-white);
+      // width: max-content;
+      // background: var(--dg-blue-sf,
+      //     linear-gradient(90deg,
+      //       var(--color-Base-primary, #0563ff) 19.23%,
+      //       var(--color-Base-quaternary, #90a9d5) 43.75%,
+      //       var(--bg-variant, #f6f6f9) 83.65%));
+    }
   }
 
   &__desc-list {
@@ -329,21 +345,18 @@ html[data-theme='dark'] .card-slider {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
+    align-items: flex-start;
+
 
     span {
       width: auto;
-      margin: 0.5rem 0rem;
       display: flex;
-      padding: 4px 69px 4px 12px;
+      color: var(--c-black);
+      font-style: italic;
+      font-weight: 300;
+
       align-items: center;
-      border-radius: 100px;
-      color: var(--c-white);
-      width: max-content;
-      background: var(--dg-blue-sf,
-          linear-gradient(90deg,
-            var(--color-Base-primary, #0563ff) 19.23%,
-            var(--color-Base-quaternary, #90a9d5) 43.75%,
-            var(--bg-variant, #f6f6f9) 83.65%));
+
     }
 
 
@@ -367,6 +380,7 @@ html[data-theme='dark'] .card-slider {
   span {
     path {
       fill: var(--c-line);
+      opacity: 0.7;
     }
   }
 }
@@ -374,7 +388,21 @@ html[data-theme='dark'] .card-slider {
 .activeTab {
   span {
     path {
-      fill: var(--c-primary) !important;
+      fill: var(--c-black);
+      opacity: 0.9;
+    }
+  }
+}
+
+html[data-theme='dark'] .activeTab {
+  &:focus {
+    outline: none;
+  }
+
+  span {
+    path {
+      fill: var(--c-white);
+      opacity: 0.9;
     }
   }
 }
@@ -386,7 +414,7 @@ html[data-theme='dark'] .card-slider {
   height: 100%;
   justify-content: center;
   content: none;
-  background-color: transparent !important;
+  background-color: transparent;
   color: var(--c-text, #2a2a2b);
   justify-content: flex-start;
 
@@ -425,10 +453,11 @@ html[data-theme='dark'] .card-slider {
 .flow-logo {
   position: absolute;
   width: 70px;
-  right: 12.5%;
-  top: 50%;
+  right: 10%;
+  top: 51%;
   transform: translateY(-50%);
   pointer-events: none;
+
 
   &__img {
     width: 80px;
@@ -461,43 +490,55 @@ html[data-theme='dark'] .card-slider {
 }
 
 .flowbox {
+  /* === card tipo FlowDecision, con bordes de vidrio === */
+  width: min(980px, 100%);
   position: relative;
-  width: 100%;
-  max-width: 630px;
-  border-radius: 12px;
-  background: #ffffff;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
-  padding: 16px 18px 14px;
   overflow: hidden;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+  border-radius: 18px;
+  padding: 0.85rem 1rem 1.1rem;
+  min-height: 330px;
 
+  /* contenedor translúcido, sin fondo blanco sólido */
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.12),
+      rgba(7, 18, 70, 0.35));
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+
+  color: #e5edff;
+  font-family: var(--font-body);
+
+  /* HEADER */
   &__header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     margin-bottom: 6px;
+    background: transparent;
   }
 
   &__title {
     margin: 0;
-    font-size: 15px;
+    font-size: 0.98rem;
     font-weight: 600;
-    color: #111827;
+    color: #ffffff;
   }
 
   &__subtitle {
     margin: 2px 0 0;
-    font-size: 11px;
+    font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: #9ca3af;
+    color: rgba(223, 234, 255, 0.8);
   }
 
   /* Área del gráfico */
   &__canvas-wrapper {
     position: relative;
     width: 100%;
-    height: 230px; // altura fija para que el canvas siempre tenga espacio
+    height: 230px;
+    margin-top: 0.35rem;
   }
 
   &__canvas {
@@ -513,9 +554,9 @@ html[data-theme='dark'] .card-slider {
     transform: translateX(-50%);
     padding: 3px 12px;
     border-radius: 999px;
-    background: #ffffff;
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.18);
-    font-size: 12px;
+    background: rgba(3, 10, 48, 0.96);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    font-size: 0.75rem;
     font-weight: 500;
     display: inline-flex;
     align-items: center;
@@ -524,23 +565,21 @@ html[data-theme='dark'] .card-slider {
     transition: top 0.3s ease, color 0.3s ease;
   }
 
-  /* Nube roja (flujo negativo) */
   &__tooltip--negative {
     top: 62%;
-    color: #dc2626;
+    color: var(--c-error);
   }
 
-  /* Nube gris (flujo solucionado) */
   &__tooltip--positive {
     top: 16%;
-    color: #111827;
+    color: #e4f0ff;
   }
 
   &__tooltip-text {
     padding-top: 2px;
   }
 
-  /* Leyenda de flujo (eje Y a la derecha) */
+  /* Leyenda Y */
   &__ylabels {
     position: absolute;
     top: 34px;
@@ -549,8 +588,8 @@ html[data-theme='dark'] .card-slider {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    font-size: 10px;
-    color: #9ca3af;
+    font-size: 0.72rem;
+    color: rgba(228, 238, 255, 0.85);
     text-align: right;
     pointer-events: none;
   }
@@ -579,42 +618,46 @@ html[data-theme='dark'] .card-slider {
     gap: 6px;
     padding: 6px 12px;
     border-radius: 999px;
-    font-size: 12px;
+    font-size: 0.72rem;
     font-weight: 500;
     white-space: nowrap;
   }
 
   &__chip--zcflow {
-    background: #ffffff;
-    color: #111827;
-    box-shadow: 0 8px 26px rgba(79, 70, 229, 0.25);
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.18),
+        rgba(9, 26, 96, 0.6));
+    color: #ffffff;
+    box-shadow: 0 8px 26px rgba(5, 99, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.4);
   }
 
   &__chip--optimizer {
-    background: rgba(129, 140, 248, 0.16);
-    color: #4338ca;
+    background: rgba(127, 174, 255, 0.16);
+    color: #c3ddff;
+    border: 1px solid rgba(184, 211, 255, 0.7);
   }
 
   &__chip-spinner {
     width: 10px;
     height: 10px;
     border-radius: 999px;
-    border: 2px solid rgba(79, 70, 229, 0.2);
-    border-top-color: #4f46e5;
+    border: 2px solid rgba(5, 99, 255, 0.2);
+    border-top-color: var(--c-primary);
     animation: flowbox-spin 0.9s linear infinite;
   }
 
-  /* Eje X (fechas) */
+  /* eje X (fechas) */
   &__footer {
-    margin-top: 4px;
-    padding: 0 12px 2px;
+    margin-top: 0.45rem;
+    padding: 0 0.25rem 0.2rem;
     display: flex;
     justify-content: space-between;
   }
 
   &__tick {
-    font-size: 10px;
-    color: #9ca3af;
+    font-size: 0.72rem;
+    color: rgba(228, 238, 255, 0.9);
   }
 }
 
@@ -625,6 +668,7 @@ html[data-theme='dark'] .card-slider {
 }
 
 
+
 /* FlowDecision.scss */
 
 .flow-decision-box {
@@ -632,11 +676,14 @@ html[data-theme='dark'] .card-slider {
   display: flex;
   justify-content: center;
   padding: 2.5rem 0;
-
-
-
-
   color: #e5edff;
+
+  @include media(mobile) {
+    padding: 1rem;
+    margin-top: 0rem;
+    height: 100%;
+
+  }
 
   &__card {
     width: min(980px, 100%);

@@ -3,7 +3,7 @@ import principles from '@/data/principles.json'
 import { Image } from 'astro:assets'
 const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k: unknown) => k
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL
 ---
 
 <section id="fundamentos" class="section fundamentos" aria-labelledby="fundamentos-title">
@@ -26,8 +26,8 @@ const base = import.meta.env.BASE_URL;
         </p>
       </div>
     </div>
-    <div class="btn ghost descubre-mas">
-      <a href="#descubre" class="btn" aria-label={t('Descubre más')}> + {t('Descubre más')}</a>
+    <div class="btn icon descubre-mas">
+      <a href="#descubre" class="btn" aria-label={t('Descubre más')}> {t('Descubre más')}</a>
     </div>
     <!-- principios -->
     <section class="principles" aria-labelledby="Lista de principios fundamentales de ZCflow">
@@ -141,8 +141,8 @@ const base = import.meta.env.BASE_URL;
   }
 
   .fundamentos-header h2 {
-    font-weight: 500;
-    font-size: 3rem;
+    // font-weight: 500;
+    // font-size: 3rem;
   }
 
   .fundamentos-description {
@@ -173,8 +173,8 @@ const base = import.meta.env.BASE_URL;
 
   .fundamentos header .fundamentos-header {
     text-align: center;
-    max-width: 700px;
-    margin: 0 auto 3rem;
+
+    margin: 0 auto 2rem;
   }
 
   .principles figure img {
@@ -342,9 +342,9 @@ const base = import.meta.env.BASE_URL;
     @include shared-mobile-tablet-principales;
   }
 
-  @include media(extradesktop) {
-    @include shared-mobile-tablet-principales;
-  }
+  // @include media(extradesktop) {
+  //   @include shared-mobile-tablet-principales;
+  // }
 
   @include media(mobile) {
     .principles {
@@ -358,7 +358,7 @@ const base = import.meta.env.BASE_URL;
     }
 
     .section-header {
-      padding: 2rem;
+      padding: 1rem;
     }
     .reveal-target {
       text-align: start;

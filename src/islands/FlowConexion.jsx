@@ -268,7 +268,7 @@ const FlowConexion = ({
       drawLightFlow(dashedStartX, dashedEndX, joinY, elapsed)
 
       const logoSize = Math.min(w, h) * 0.22
-      drawZGlow(logoCenter.x, logoCenter.y, logoSize)
+      // drawZGlow(logoCenter.x, logoCenter.y, logoSize)
 
       const cycleT = (elapsed % rotationMs) / rotationMs
 

@@ -96,7 +96,6 @@ export default function CardSlider({
       >
         {/* === MEDIA === */}
         <div className="card-slider__media card-slider__container">
-          
           {slides.map((s, i) => (
             <figure
               key={i}
