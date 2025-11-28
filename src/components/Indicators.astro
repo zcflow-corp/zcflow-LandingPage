@@ -168,10 +168,12 @@ const t = typeof _t === 'function' ? _t : (k) => k
       max-width: 250px;
     }
   }
+
   .container-counter p {
     color: var(--c-bg);
     width: 100%;
     text-wrap: wrap;
+
     @include media(mobile) {
       padding: 1rem;
       width: 100%;
@@ -184,6 +186,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
     display: flex;
     justify-content: space-between;
     width: 100%;
+    margin-top: 3rem;
     @include media(mobile) {
       padding: 0px 1rem;
     }
