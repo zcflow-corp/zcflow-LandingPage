@@ -167,13 +167,7 @@ html[data-theme='dark'] body {
   scroll-margin-top: 80px;
 }
 
-.card {
-  background: var(--c-panel);
-  border: 1px solid var(--c-line);
-  border-radius: 16px;
-  box-shadow: var(--shadow);
-  padding: 1.2rem;
-}
+
 
 /*2. Estilos de componentes específicos */
 [data-theme='dark'] .badge {

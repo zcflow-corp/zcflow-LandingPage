@@ -31,8 +31,8 @@ const textos = [
 
       <p>{t('Decisiones en segundos, no en semanas.')}</p>
       <div class="cta">
-        <a class="btn primary" href="#demo">{t('Explorar')}</a>
-        <a href="#" class="btn icon">{t('Pide una demo de inmediato')}</a>
+        <a class="btn primary" href="#zcflow">{t('Explorar')}</a>
+        <a href="/contacto" class="btn icon">{t('Pide una demo de inmediato')}</a>
       </div>
 
       <div class="hero-check">
@@ -75,8 +75,8 @@ const textos = [
       width: 100%;
       align-items: center;
 
-      @include media(tablet) {
-        flex-direction: row !important;
+      @include media(desktop) {
+        flex-direction: row;
       }
     }
 
@@ -137,16 +137,7 @@ const textos = [
 
     &-imagen {
       display: flex;
-      flex: 1;
-
-      @include media(mobile) {
-        transform: scale(0.95);
-      }
-
-      @include media(tabet) {
-        flex: 0 0 60%;
-      }
-
+      width: 100%;
       img {
         width: 100%;
         @include media(mobile) {
@@ -155,8 +146,12 @@ const textos = [
         }
 
         @include media(tablet) {
-          max-width: 120%;
+          max-width: 100%;
         }
+      }
+
+      @include media(extradesktop) {
+        height: 50vh;
       }
     }
 

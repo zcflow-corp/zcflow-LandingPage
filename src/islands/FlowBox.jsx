@@ -5,7 +5,6 @@ const PHASES = {
   ACTING: 'ACTING',
   SOLVED: 'SOLVED',
 }
-
 const labelsX = ['24-Nov', '25-Nov', '26-Nov', '27-Nov', '28-Nov', '29-Nov']
 
 // Serie base (parecida a tus imágenes)
@@ -15,7 +14,8 @@ const solvedSeries = [15000, 20500, 20800, 21000, 19500, 16000]
 // helper: serie interpolada según t (0 = negativa, 1 = resuelta)
 const getInterpolatedSeries = (t) => negativeSeries.map((v, i) => v + (solvedSeries[i] - v) * t)
 
-const FlowBox = () => {
+const FlowBox = ({ t: _t }) => {
+  const text = typeof _t === 'function' ? _t : (k) => k
   const canvasRef = useRef(null)
   const wrapperRef = useRef(null)
 
@@ -221,7 +221,8 @@ const FlowBox = () => {
     maximumFractionDigits: 0,
   })
 
-  const title = phase === PHASES.SOLVED ? 'Flujo de caja solucionado' : 'Flujo de caja proyectado'
+  const title =
+    phase === PHASES.SOLVED ? text('Flujo de caja solucionado') : text('Flujo de caja proyectado')
 
   return (
     <section className="flowbox">
@@ -263,9 +264,9 @@ const FlowBox = () => {
         >
           <div className="flowbox__chip flowbox__chip--zcflow">
             <span className="flowbox__chip-spinner" />
-            <span>Soluciones Zcflow</span>
+            <span>{text('Soluciones Zcflow')}</span>
           </div>
-          <div className="flowbox__chip flowbox__chip--optimizer">Optimizador</div>
+          <div className="flowbox__chip flowbox__chip--optimizer">{text('Optimizador')}</div>
         </div>
       </div>
 

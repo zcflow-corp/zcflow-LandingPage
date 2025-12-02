@@ -1,7 +1,7 @@
 ---
 import LogosTicker from './LogosTicker.astro'
-const { t: _t } = Astro.props
-const t = typeof _t === 'function' ? _t : (k) => k
+const { t: _t, texts = [] } = Astro.props
+const t = typeof _t === 'function' ? _t : (k: string) => k
 ---
 
 <section class="">
@@ -14,7 +14,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
           { name: 'logoaws', title: 'Amazon Web Services' },
           { name: 'logouipath', title: 'UiPath' },
           { name: 'logorems', title: 'Rems' },
-          { name: 'logopen', title: 'OpenAI' }, // o 'logoopen' (alias)
+          { name: 'logopen', title: 'OpenAI' },
         ]}
         cols={4}
         interval={1800}
