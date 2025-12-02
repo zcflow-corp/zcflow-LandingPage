@@ -336,6 +336,10 @@ html[data-theme='dark'] .card-slider {
       background: transparent;
     }
 
+    .card-slider__description {
+      display: none;
+    }
+
     .card-slider__img-wrap {
       box-shadow: none;
     }

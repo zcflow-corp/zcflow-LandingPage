@@ -4,10 +4,12 @@ import IconoSvg from './IconoSvg.jsx'
 import FlowConexion from './FlowConexion.jsx'
 import FlowBox from './FlowBox.jsx'
 import FlowDecision from '@/islands/FlowDecision'
+import es from '../i18n/es.json'
+import en from '../i18n/en.json'
 
 /**
  * @param {Object} props
- * @param {Function} [props.t]
+ * @param {Function} props.t
  * @param {{ title: string; description: string; image: string; alt?: string; Icono?: string }[]} props.slides
  * @param {number} [props.interval]
  * @param {number} [props.startIndex]
@@ -17,20 +19,28 @@ import FlowDecision from '@/islands/FlowDecision'
  */
 
 export default function CardSlider({
-  t: _t,
   slides = [],
   interval = 5000,
   startIndex = 0,
   title = '',
   description = '',
   word = '',
+  locale,
 }) {
-  const t = typeof _t === 'function' ? _t : (k) => k
+  // ⬇️ SELECCIONA MENSAJES SEGÚN LOCALE
+  const messages = locale === 'en' ? en : es
+
+  // ⬇️ FUNCIÓN t INTERNA
+  const t = (key) => {
+    return key.split('.').reduce((obj, k) => obj?.[k], messages) ?? key
+  }
+
+  console.log('t("Explorar") =>', t('Explorar'))
+
   const [index, setIndex] = useState(startIndex)
   const timerRef = useRef(null)
   const total = slides.length
 
-  // Cambia al siguiente slide
   const next = () => setIndex((prev) => (prev + 1) % total)
   const prev = () => setIndex((prev) => (prev - 1 + total) % total)
 
@@ -46,9 +56,8 @@ export default function CardSlider({
   useEffect(() => {
     play()
     return stop
-  }, []) // 👈 solo al montar
+  }, [])
 
-  // Permitir navegación con teclado
   useEffect(() => {
     const handleKey = (e) => {
       if (e.key === 'ArrowRight') next()
@@ -58,27 +67,19 @@ export default function CardSlider({
     return () => window.removeEventListener('keydown', handleKey)
   }, [])
 
-  // 🔹 Función que devuelve el componente según el id del slide
+  // Render extra components for flow items
   function renderExtraComponent(slide) {
     if (!slide) return null
 
     switch (slide.id) {
       case 1:
-        // id 1 → FlowConexion
-        return (
-          <FlowConexion
-            client:load
-            labels={['Open Banking', 'RPA-ERPs', 'Fintechs, inversionistas y otros']}
-            rotationMs={9000}
-          />
-        )
+        return <FlowConexion rotationMs={9000} t={t} />
 
       case 2:
-        return <FlowDecision client:load height={260} />
+        return <FlowDecision height={260} t={t} />
 
-      // puedes seguir añadiendo casos:
       case 3:
-        return <FlowBox client:load />
+        return <FlowBox t={t} />
 
       default:
         return null
@@ -106,7 +107,7 @@ export default function CardSlider({
             >
               <div className="card-slider__bg" />
               <div className="card-slider__img-wrap">
-                {s.hasFlow == true ? (
+                {s.hasFlow ? (
                   renderExtraComponent(s)
                 ) : (
                   <img
@@ -126,7 +127,7 @@ export default function CardSlider({
           <div className="card-slider__title">
             <span>{word}</span>
             <h2 className="gradient-blue-dark">{title}</h2>
-            <p>{description}</p>
+            <p className="card-slider__description">{description}</p>
           </div>
 
           <ul
@@ -137,7 +138,9 @@ export default function CardSlider({
             {slides.map((s, i) => (
               <li
                 key={i}
-                className={`card-slider__desc-item${i === index ? ' card-slider__desc-item--active' : ''}`}
+                className={`card-slider__desc-item${
+                  i === index ? ' card-slider__desc-item--active' : ''
+                }`}
                 role="tab"
                 aria-selected={i === index}
                 tabIndex={0}
@@ -149,19 +152,17 @@ export default function CardSlider({
                   }
                 }}
               >
-                <IconoSvg name={t(s.Icono)} class="icon" ariaLabel="Activo" />
+                <IconoSvg name={s.Icono} class="icon" ariaLabel="Activo" />
 
                 <div className="content-slider">
                   <article className="card-slider__desc">
-                    <span className="card-slider__desc-title">{t(s.title)}</span>,{' '}
-                    {t(s.description)}
+                    <span className="card-slider__desc-title">{s.title}</span>, {s.description}
                   </article>
-                  {t(s.status) == 'beta' ? (
+
+                  {s.status === 'beta' && (
                     <div className="beta-card">
-                      <span className="beta gradient-blue-dark"> beta </span>
+                      <span className="beta gradient-blue-dark">beta</span>
                     </div>
-                  ) : (
-                    ''
                   )}
                 </div>
               </li>

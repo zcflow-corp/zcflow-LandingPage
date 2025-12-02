@@ -1,11 +1,4 @@
 ---
-/**
- * HeroFlow.astro
- * Props:
- * - texts: string[]
- * - t?: (k: string) => string
- */
-
 const { t: _t, texts = [] } = Astro.props
 const t = typeof _t === 'function' ? _t : (k: string) => k
 ---
