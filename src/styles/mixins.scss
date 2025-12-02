@@ -12,7 +12,7 @@ $Extralarge: 1440px;
 
     //only mobile or mobile down
     @if $type ==mobile {
-      @media only screen and (max-width: $medium - 1) {
+      @media only screen and (max-width: ($medium - 1)) {
         @content;
       }
     }
