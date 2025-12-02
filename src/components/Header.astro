@@ -46,7 +46,6 @@ const base = import.meta.env.BASE_URL
       >
         <span class="bar"></span>
         <span class="bar"></span>
-        <span class="bar"></span>
       </button>
     </div>
     <!--Navegación -->
@@ -107,8 +106,8 @@ const base = import.meta.env.BASE_URL
       display: none;
       flex-direction: column;
       justify-content: space-between;
-      width: 28px;
-      height: 20px;
+      width: 35px;
+      height: 13px;
       background: none;
       border: none;
       cursor: pointer;
@@ -118,24 +117,24 @@ const base = import.meta.env.BASE_URL
     }
 
     .menu-toggle .bar {
-      height: 3px;
+      height: 2px;
       width: 100%;
-      background: var(--c-white);
-      border-radius: 2px;
+      background: var(--c-black);
+      // border-radius: 2px;
       transition: all 0.3s ease;
       transform-origin: center;
     }
     .menu-toggle.active .bar:nth-child(1) {
-      transform: translateY(8px) rotate(45deg);
+      transform: translateY(3px) rotate(45deg);
     }
 
     .menu-toggle.active .bar:nth-child(2) {
-      opacity: 0;
-    }
-
-    .menu-toggle.active .bar:nth-child(3) {
       transform: translateY(-8px) rotate(-45deg);
     }
+
+    // .menu-toggle.active .bar:nth-child(3) {
+    //   transform: translateY(-8px) rotate(-45deg);
+    // }
     .nav-list {
       display: flex;
       gap: 1.5rem;
