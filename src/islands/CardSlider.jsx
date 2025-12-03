@@ -6,6 +6,7 @@ import FlowBox from './FlowBox.jsx'
 import FlowDecision from '@/islands/FlowDecision'
 import es from '../i18n/es.json'
 import en from '../i18n/en.json'
+import { LanguageProvider } from '@/context/LanguageContext.jsx'
 
 /**
  * @param {Object} props
@@ -18,6 +19,11 @@ import en from '../i18n/en.json'
  * @param {string} [props.word]
  */
 
+function getLocaleFromDoc() {
+  if (typeof document === 'undefined') return 'es'
+  return document.documentElement.lang === 'en' ? 'en' : 'es'
+}
+
 export default function CardSlider({
   slides = [],
   interval = 5000,
@@ -25,19 +31,11 @@ export default function CardSlider({
   title = '',
   description = '',
   word = '',
-  locale,
 }) {
   // ⬇️ SELECCIONA MENSAJES SEGÚN LOCALE
-  const messages = locale === 'en' ? en : es
-
-  // ⬇️ FUNCIÓN t INTERNA
-  const t = (key) => {
-    return key.split('.').reduce((obj, k) => obj?.[k], messages) ?? key
-  }
-
-  console.log('t("Explorar") =>', t('Explorar'))
 
   const [index, setIndex] = useState(startIndex)
+  const [t, setT] = useState(startIndex)
   const timerRef = useRef(null)
   const total = slides.length
 
@@ -67,19 +65,38 @@ export default function CardSlider({
     return () => window.removeEventListener('keydown', handleKey)
   }, [])
 
+  const locale = getLocaleFromDoc()
+
+  useEffect(() => {
+    const messages = locale === 'en' ? en : es
+    setT(messages)
+  }, locale)
+
   // Render extra components for flow items
   function renderExtraComponent(slide) {
     if (!slide) return null
 
     switch (slide.id) {
       case 1:
-        return <FlowConexion rotationMs={9000} t={t} />
+        return (
+          <LanguageProvider>
+            <FlowConexion rotationMs={9000} client:only />
+          </LanguageProvider>
+        )
 
       case 2:
-        return <FlowDecision height={260} t={t} />
+        return (
+          <LanguageProvider>
+            <FlowDecision height={260} />
+          </LanguageProvider>
+        )
 
       case 3:
-        return <FlowBox t={t} />
+        return (
+          <LanguageProvider>
+            <FlowBox />
+          </LanguageProvider>
+        )
 
       default:
         return null

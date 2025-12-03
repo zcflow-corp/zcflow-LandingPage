@@ -1,26 +1,28 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useLanguage } from '@/context/LanguageContext' // Accede al contexto
 
 const PHASES = {
   NEGATIVE: 'NEGATIVE',
   ACTING: 'ACTING',
   SOLVED: 'SOLVED',
 }
+
 const labelsX = ['24-Nov', '25-Nov', '26-Nov', '27-Nov', '28-Nov', '29-Nov']
 
-// Serie base (parecida a tus imágenes)
+// Serie base (como tus imágenes)
 const negativeSeries = [12000, 16000, 17000, -12000, 19500, 14000]
 const solvedSeries = [15000, 20500, 20800, 21000, 19500, 16000]
 
 // helper: serie interpolada según t (0 = negativa, 1 = resuelta)
 const getInterpolatedSeries = (t) => negativeSeries.map((v, i) => v + (solvedSeries[i] - v) * t)
 
-const FlowBox = ({ t: _t }) => {
-  const text = typeof _t === 'function' ? _t : (k) => k
+const FlowBox = () => {
+  const { t } = useLanguage() // Accedemos a la función `t` del contexto
   const canvasRef = useRef(null)
   const wrapperRef = useRef(null)
 
   const [phase, setPhase] = useState(PHASES.NEGATIVE)
-  const [t, setT] = useState(0) // 0 = serie negativa, 1 = serie positiva
+  const [tValue, setT] = useState(0) // 0 = serie negativa, 1 = serie positiva
 
   // -------------- CONTROL DEL CICLO (NEGATIVE → ACTING (animación) → SOLVED) -------------
   useEffect(() => {
@@ -101,7 +103,7 @@ const FlowBox = ({ t: _t }) => {
     const h = height - margin.top - margin.bottom
 
     // serie interpolada según t
-    const serie = getInterpolatedSeries(t)
+    const serie = getInterpolatedSeries(tValue)
 
     // índice del punto de foco: SIEMPRE el mínimo de la serie interpolada
     let minIndex = 0
@@ -204,12 +206,9 @@ const FlowBox = ({ t: _t }) => {
         ctx.fill()
       }
     }
-  }, [t, phase])
+  }, [tValue, phase]) // Usamos `tValue` en lugar de `t`
 
-  // -------------- UI: título, tooltip, leyendas, chips -----------------
-
-  // mismos datos que el canvas para tooltip/leyenda
-  const serie = getInterpolatedSeries(t)
+  const serie = getInterpolatedSeries(tValue)
   let minIndex = 0
   for (let i = 1; i < serie.length; i++) {
     if (serie[i] < serie[minIndex]) minIndex = i
@@ -222,7 +221,7 @@ const FlowBox = ({ t: _t }) => {
   })
 
   const title =
-    phase === PHASES.SOLVED ? text('Flujo de caja solucionado') : text('Flujo de caja proyectado')
+    phase === PHASES.SOLVED ? t('Flujo de caja solucionado') : t('Flujo de caja proyectado')
 
   return (
     <section className="flowbox">
@@ -264,9 +263,9 @@ const FlowBox = ({ t: _t }) => {
         >
           <div className="flowbox__chip flowbox__chip--zcflow">
             <span className="flowbox__chip-spinner" />
-            <span>{text('Soluciones Zcflow')}</span>
+            <span>{t('Soluciones Zcflow')}</span>
           </div>
-          <div className="flowbox__chip flowbox__chip--optimizer">{text('Optimizador')}</div>
+          <div className="flowbox__chip flowbox__chip--optimizer">{t('Optimizador')}</div>
         </div>
       </div>
 

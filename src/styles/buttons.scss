@@ -3,7 +3,6 @@
    =========================== */
 
 .btn {
-
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -17,14 +16,10 @@
     box-shadow 0.18s ease,
     background 0.2s ease;
 
-
   &:focus-visible {
     outline: none;
     box-shadow: none;
     box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
-
-
-
   }
 
   &[disabled],
@@ -65,9 +60,6 @@
     &:hover {
       background: var(--g-primary);
     }
-
-
-
   }
 
   /* Ghost (compat con ThemeSwitch: class="btn ghost") */
@@ -144,7 +136,9 @@
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
-      transition: opacity 0.2s ease, transform 0.2s ease;
+      transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
     }
 
     // icono por defecto (antes de hover)
@@ -171,7 +165,6 @@
       outline-offset: none;
       box-shadow: none;
 
-
       &::before {
         opacity: 0;
 
@@ -182,12 +175,8 @@
         opacity: 1;
         transform: translateX(0);
       }
-
     }
   }
-
-
-
 }
 
 /* ===========================
@@ -195,8 +184,6 @@
      =========================== */
 [data-theme='dark'] {
   .btn {
-
-
     &.secondary {
       color: var(--c-white);
       border-color: var(--c-white);
@@ -211,7 +198,7 @@
       &:hover {
         background: transparent;
         color: var(--c-white);
-        border: 1px solid var(--c-white)
+        border: 1px solid var(--c-white);
       }
     }
 
@@ -219,10 +206,7 @@
       background: rgba(255, 255, 255, 0.96);
       color: #0b1220;
       border-color: rgba(255, 255, 255, 0.2);
-
     }
-
-
 
     &.tertiary {
       background: var(--c-white);

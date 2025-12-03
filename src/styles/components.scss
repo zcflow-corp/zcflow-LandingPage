@@ -188,10 +188,6 @@
       font-size: medium;
     }
 
-    &:hover {
-      // border-color: var(--c-primary-accessible);
-    }
-
     &:focus-visible {
       // box-shadow: 0 0 0 2px var(--c-text);
       color: var(--c-text);
@@ -449,9 +445,6 @@ html[data-theme='dark'] .activeTab {
     white-space: nowrap;
   }
 
-  &__label-text {
-    // text-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
-  }
 }
 
 .flow-logo {
@@ -845,14 +838,6 @@ html[data-theme='dark'] .activeTab {
       td {
         font-weight: 600;
         color: #4ee9a1;
-
-        &:not(:first-child) {
-
-          /* negativos en rojo, positivos en verde */
-          &::before {
-            /* nada, solo dejamos el color del número que tú uses */
-          }
-        }
       }
     }
 

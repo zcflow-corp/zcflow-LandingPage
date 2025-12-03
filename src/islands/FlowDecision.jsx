@@ -1,78 +1,76 @@
 import React, { useEffect, useState } from 'react'
-
-const TABLE_DATES = ['01/11/25', '02/11/25', '03/11/25', '04/11/25', '05/11/25', '06/11/25']
-const t = typeof _t === 'function' ? _t : (k) => k
-const TABLE_ROWS = [
-  {
-    label: '[-] ' + t('Saldo'),
-    values: ['460,000.00', '460,000.00', '460,000.00', '460,000.00', '460,000.00', '460,000.00'],
-  },
-  {
-    label: '[+] ' + t('Bancos'),
-    values: ['460,000.00', '460,000.00', '460,000.00', '460,000.00', '460,000.00', '460,000.00'],
-  },
-  {
-    label: '[+] ' + t('Ingreso'),
-    values: ['30,000.00', '60,000.00', '40,000.00', '90,000.00', '100,000.00', '80,000.00'],
-  },
-  {
-    label: '[+] ' + t('Clientes terceros'),
-    values: ['30,000.00', '30,000.00', '30,000.00', '30,000.00', '30,000.00', '30,000.00'],
-  },
-  {
-    label: '[+] ' + t('Clientes relacionados'),
-    values: ['—', '60,000.00', '90,000.00', '—', '80,000.00', '40,000.00'],
-  },
-  {
-    label: '[+] ' + t('Inversión'),
-    values: ['—', '—', '—', '—', '—', '—'],
-  },
-  {
-    label: '[-] ' + t('Egreso'),
-    values: ['40,000.00', '140,000.00', '20,000.00', '30,000.00', '120,000.00', '150,000.00'],
-  },
-  {
-    label: '[+] ' + t('Proveedores'),
-    values: ['40,000.00', '140,000.00', '20,000.00', '30,000.00', '110,000.00', '80,000.00'],
-  },
-  {
-    label: '[+] ' + t('Personal'),
-    values: ['—', '—', '—', '—', '—', '—'],
-  },
-]
-
-const TOTAL_PERIODO = [
-  '450,000.00',
-  '-80,000.00',
-  '90,000.00',
-  '70,000.00',
-  '-30,000.00',
-  '20,000.00',
-]
-const TOTAL_ACUMULADO = [
-  '450,000.00',
-  '370,000.00',
-  '460,000.00',
-  '530,000.00',
-  '500,000.00',
-  '490,000.00',
-]
-
-const CHART_POINTS = [
-  { label: '18-Nov', value: 12000 },
-  { label: '19-Nov', value: 16000 },
-  { label: '20-Nov', value: 17000 },
-  { label: '21-Nov', value: 15500 },
-  { label: '22-Nov', value: 23000 },
-  { label: '23-Nov', value: 14000 },
-]
+import { useLanguage } from '@/context/LanguageContext'
 
 const FlowDecision = ({ t: _t }) => {
-  const t = typeof _t === 'function' ? _t : (k) => k
+  const { t } = useLanguage()
   // 'table' -> se ve tabla, 'chart' -> se ve gráfica
   const [stage, setStage] = useState('table')
   const [animateLine, setAnimateLine] = useState(false)
+  const TABLE_DATES = ['01/11/25', '02/11/25', '03/11/25', '04/11/25', '05/11/25', '06/11/25']
 
+  const TOTAL_PERIODO = [
+    '450,000.00',
+    '-80,000.00',
+    '90,000.00',
+    '70,000.00',
+    '-30,000.00',
+    '20,000.00',
+  ]
+  const TOTAL_ACUMULADO = [
+    '450,000.00',
+    '370,000.00',
+    '460,000.00',
+    '530,000.00',
+    '500,000.00',
+    '490,000.00',
+  ]
+
+  const CHART_POINTS = [
+    { label: '18-Nov', value: 12000 },
+    { label: '19-Nov', value: 16000 },
+    { label: '20-Nov', value: 17000 },
+    { label: '21-Nov', value: 15500 },
+    { label: '22-Nov', value: 23000 },
+    { label: '23-Nov', value: 14000 },
+  ]
+  const TABLE_ROWS = [
+    {
+      label: '[-] ' + t('Saldo'),
+      values: ['460,000.00', '460,000.00', '460,000.00', '460,000.00', '460,000.00', '460,000.00'],
+    },
+    {
+      label: '[+] ' + t('Bancos'),
+      values: ['460,000.00', '460,000.00', '460,000.00', '460,000.00', '460,000.00', '460,000.00'],
+    },
+    {
+      label: '[+] ' + t('Ingreso'),
+      values: ['30,000.00', '60,000.00', '40,000.00', '90,000.00', '100,000.00', '80,000.00'],
+    },
+    {
+      label: '[+] ' + t('Clientes terceros'),
+      values: ['30,000.00', '30,000.00', '30,000.00', '30,000.00', '30,000.00', '30,000.00'],
+    },
+    {
+      label: '[+] ' + t('Clientes relacionados'),
+      values: ['—', '60,000.00', '90,000.00', '—', '80,000.00', '40,000.00'],
+    },
+    {
+      label: '[+] ' + t('Inversión'),
+      values: ['—', '—', '—', '—', '—', '—'],
+    },
+    {
+      label: '[-] ' + t('Egreso'),
+      values: ['40,000.00', '140,000.00', '20,000.00', '30,000.00', '120,000.00', '150,000.00'],
+    },
+    {
+      label: '[+] ' + t('Proveedores'),
+      values: ['40,000.00', '140,000.00', '20,000.00', '30,000.00', '110,000.00', '80,000.00'],
+    },
+    {
+      label: '[+] ' + t('Personal'),
+      values: ['—', '—', '—', '—', '—', '—'],
+    },
+  ]
   // cambio automático tabla -> gráfica
   useEffect(() => {
     const timer = setTimeout(() => {
