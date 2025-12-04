@@ -77,17 +77,13 @@ const t = typeof _t === 'function' ? _t : (k) => k
 <style lang="scss">
   .indicators {
     background: #141417 !important;
-
-    border: 1px solid #3a3a3d;
-    background: #141417 !important;
-
     border: 1px solid #3a3a3d;
     flex-direction: column;
     color: var(--c-bg);
     padding: 2rem 4rem;
 
     @include media(mobile) {
-      padding: 2rem;
+      padding: 1rem;
     }
   }
   .gradient-border-left p {
@@ -166,27 +162,31 @@ const t = typeof _t === 'function' ? _t : (k) => k
     }
   }
   .indicators-title {
-    color: #eaf0ff;
-    color: #eaf0ff;
-    max-width: 250px;
-    line-height: 48px;
-    font-weight: 500;
-    @include media(mobile) {
-      width: 73%
+    color: var(--c-white);
+
+    @include media(tablet) {
+      max-width: 250px;
     }
   }
+
   .container-counter p {
-    color: #eaf0ff;
-    color: #eaf0ff;
+    color: var(--c-bg);
+    width: 100%;
+    text-wrap: wrap;
+
+    @include media(mobile) {
+      padding: 1rem;
+      width: 100%;
+    }
   }
   .style-indicators {
-    border-left: 2px solid
-      linear-gradient(270deg, #52c41a 0%, #00b8d9 19.71%, #00b8d9 59.62%, #7faeff 90.38%);
+    border-left: 2px solid var(--g-primary-dark);
   }
   .container-counter {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    margin-top: 3rem;
     @include media(mobile) {
       padding: 0px 1rem;
     }
@@ -198,12 +198,16 @@ const t = typeof _t === 'function' ? _t : (k) => k
 
   .section-grafico {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+
     align-items: start;
-    font-size: 2rem;
-    padding: 1.5rem 0;
+    padding: 1rem 0;
     gap: 2rem;
     width: 100%;
+    text-wrap: wrap;
+
+    @include media(tablet) {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
   }
 
   @include media(mobile) {
@@ -215,17 +219,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
     width: 100%;
   }
   .section-grafico p {
-    color: #eaf0ff;
-    color: #eaf0ff;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 28px;
-    text-justify: inter-word;
-    @include media(mobile) {
-      
-    width: 73%;
-
-  }
+    color: #c4c4c4;
   }
 
   .gradient-border-left {
@@ -239,7 +233,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
     left: 0;
     width: 1px;
     height: 100%;
-    background: linear-gradient(270deg, #52c41a 0%, #00b8d9 19.71%, #00b8d9 59.62%, #7faeff 90.38%);
+    background: var(--g-primary-dark);
   }
 
   .counter p {

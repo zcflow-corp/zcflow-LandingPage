@@ -15,23 +15,6 @@ main {
   margin: auto;
 }
 
-header {
-  // position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: auto;
-  // max-width: 1200px;
-  margin: auto;
-  // display: flex;
-  align-items: center;
-  background: 1px solid var(--g-primary-dark);
-  border-bottom: 1px solid var(--c-line);
-  z-index: 999;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
 footer {
   // max-width: 1200px;
   margin: auto;
@@ -53,7 +36,7 @@ h2,
 h3 {
   font-family: var(--font-head);
   line-height: 1.15;
-  color: var(--c-text);
+  // color: var(--c-black);
   margin: 0.25rem 0;
   font-weight: 500;
 }
@@ -71,13 +54,17 @@ h3 {
 }
 
 p {
-  color: var(--c-text);
-  opacity: 0.95;
+  // color: var(--c-text);
+  // opacity: 0.95;
+  font-size: 18px;
+  line-height: 148%;
+  font-weight: 400;
+  letter-spacing: 0.36px;
+  color: #787878;
 }
 
-:focus {
-  outline: 3px solid var(--c-primary-accessible);
-  outline-offset: 2px;
+html[data-theme='dark'] p {
+  color: #c4c4c4;
 }
 
 img {
@@ -87,6 +74,14 @@ img {
 
 svg {
   display: block;
+}
+
+a {
+  outline: none;
+  outline: none;
+  outline-offset: none;
+  box-shadow: none;
+  border-style: none;
 }
 
 .gradient-blue-dark {
@@ -109,7 +104,6 @@ svg {
   animation: gradient-move 15s ease infinite;
 }
 
-
 html[data-theme='dark'] .gradient-blue-dark {
   background: linear-gradient(90deg, #0563ff 0%, #476aa6 47.12%, #e2e2e2 100%);
   // font-weight: bold;
@@ -123,10 +117,6 @@ html[data-theme='dark'] .gradient-blue-dark {
   color: transparent;
   animation: gradient-move 15s ease infinite;
 }
-
-
-
-
 
 .mode-dark {
   display: block;
@@ -177,13 +167,7 @@ html[data-theme='dark'] body {
   scroll-margin-top: 80px;
 }
 
-.card {
-  background: var(--c-panel);
-  border: 1px solid var(--c-line);
-  border-radius: 16px;
-  box-shadow: var(--shadow);
-  padding: 1.2rem;
-}
+
 
 /*2. Estilos de componentes específicos */
 [data-theme='dark'] .badge {
@@ -196,19 +180,19 @@ html[data-theme='dark'] body {
   position: sticky;
   top: 0;
   background: var(--c-bg);
-  border-bottom: 1px solid var(--c-line);
+  // border-bottom: 1px solid var(--c-line);
   z-index: 50;
 }
 
 [data-theme='light'] header {
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--c-line);
+  // border-bottom: 1px solid var(--c-line);
 }
 
 [data-theme='dark'] header {
   background: rgb(0, 0, 0, 0.8);
-  border-bottom: 1px solid var(--c-line);
+  // border-bottom: 1px solid var(--c-line);
   backdrop-filter: blur(8px);
 }
 
@@ -263,12 +247,6 @@ ol {
   align-items: center;
 }
 
-
-
-
-
-
-
 /*animaciones ref
 https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css      */
 
@@ -285,9 +263,3 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
     background-position: 0% 0;
   }
 }
-
- @include media(mobile) {
-      .hero-imagen {
-        display: none;
-      }
-    }

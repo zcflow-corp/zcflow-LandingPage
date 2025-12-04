@@ -1,42 +1,42 @@
 import React, { useEffect, useState } from 'react'
 
 const TABLE_DATES = ['01/11/25', '02/11/25', '03/11/25', '04/11/25', '05/11/25', '06/11/25']
-
+const t = typeof _t === 'function' ? _t : (k) => k
 const TABLE_ROWS = [
   {
-    label: '[-] Saldo',
+    label: '[-] ' + t('Saldo'),
     values: ['460,000.00', '460,000.00', '460,000.00', '460,000.00', '460,000.00', '460,000.00'],
   },
   {
-    label: '[+] Bancos',
+    label: '[+] ' + t('Bancos'),
     values: ['460,000.00', '460,000.00', '460,000.00', '460,000.00', '460,000.00', '460,000.00'],
   },
   {
-    label: '[+] Ingreso',
+    label: '[+] ' + t('Ingreso'),
     values: ['30,000.00', '60,000.00', '40,000.00', '90,000.00', '100,000.00', '80,000.00'],
   },
   {
-    label: '[+] Clientes terceros',
+    label: '[+] ' + t('Clientes terceros'),
     values: ['30,000.00', '30,000.00', '30,000.00', '30,000.00', '30,000.00', '30,000.00'],
   },
   {
-    label: '[+] Clientes relacionados',
+    label: '[+] ' + t('Clientes relacionados'),
     values: ['—', '60,000.00', '90,000.00', '—', '80,000.00', '40,000.00'],
   },
   {
-    label: '[+] Inversión',
+    label: '[+] ' + t('Inversión'),
     values: ['—', '—', '—', '—', '—', '—'],
   },
   {
-    label: '[-] Egreso',
+    label: '[-] ' + t('Egreso'),
     values: ['40,000.00', '140,000.00', '20,000.00', '30,000.00', '120,000.00', '150,000.00'],
   },
   {
-    label: '[+] Proveedores',
+    label: '[+] ' + t('Proveedores'),
     values: ['40,000.00', '140,000.00', '20,000.00', '30,000.00', '110,000.00', '80,000.00'],
   },
   {
-    label: '[+] Personal',
+    label: '[+] ' + t('Personal'),
     values: ['—', '—', '—', '—', '—', '—'],
   },
 ]
@@ -67,7 +67,8 @@ const CHART_POINTS = [
   { label: '23-Nov', value: 14000 },
 ]
 
-const FlowDecision = () => {
+const FlowDecision = ({ t: _t }) => {
+  const t = typeof _t === 'function' ? _t : (k) => k
   // 'table' -> se ve tabla, 'chart' -> se ve gráfica
   const [stage, setStage] = useState('table')
   const [animateLine, setAnimateLine] = useState(false)
@@ -112,23 +113,23 @@ const FlowDecision = () => {
         >
           <div className="flow-decision-box__tabs">
             <button className="flow-decision-box__tab flow-decision-box__tab--active">
-              Flujo Inicial
+              {t('Flujo Inicial')}
             </button>
-            <button className="flow-decision-box__tab">Flujo Solucionado</button>
+            <button className="flow-decision-box__tab">{t('Flujo Solucionado')}</button>
           </div>
 
           <div className="flow-decision-box__filters">
             <div className="flow-decision-box__filter">
-              <span>Periodicidad:</span>
-              <button className="flow-decision-box__select">DIARIO ▾</button>
+              <span>{t('Periodicidad:')}</span>
+              <button className="flow-decision-box__select">{t('DIARIO')} ▾</button>
             </div>
             <div className="flow-decision-box__filter">
-              <span>Moneda:</span>
-              <button className="flow-decision-box__select">PEN ▾</button>
+              <span>{t('Moneda:')}</span>
+              <button className="flow-decision-box__select"> PEN ▾</button>
             </div>
             <div className="flow-decision-box__filter">
-              <span>Sociedad:</span>
-              <button className="flow-decision-box__select">Seleccionados: Todos ▾</button>
+              <span>{t('Sociedad:')}</span>
+              <button className="flow-decision-box__select">{t('Seleccionados: Todos')} ▾</button>
             </div>
           </div>
 
@@ -136,7 +137,7 @@ const FlowDecision = () => {
             <table className="flow-decision-box__table">
               <thead>
                 <tr>
-                  <th className="is-sticky">Posición \ Periodo</th>
+                  <th className="is-sticky">{t('Posición - Periodo')}</th>
                   {TABLE_DATES.map((date) => (
                     <th key={date}>{date}</th>
                   ))}
@@ -153,14 +154,14 @@ const FlowDecision = () => {
                 ))}
 
                 <tr className="is-total-periodo">
-                  <td className="is-sticky">Total Periodo</td>
+                  <td className="is-sticky">{t('Total Periodo')}</td>
                   {TOTAL_PERIODO.map((val, idx) => (
                     <td key={idx}>{val}</td>
                   ))}
                 </tr>
 
                 <tr className="is-total-acumulado">
-                  <td className="is-sticky">Total Acumulado</td>
+                  <td className="is-sticky">{t('Total Acumulado')}</td>
                   {TOTAL_ACUMULADO.map((val, idx) => (
                     <td key={idx}>{val}</td>
                   ))}
@@ -178,8 +179,8 @@ const FlowDecision = () => {
           }
         >
           <div className="flow-decision-box__chart-header">
-            <h3>¿Cómo va mi liquidez?</h3>
-            <p>Flujo de caja Real - PEN</p>
+            <h3> {t('¿Cómo va mi liquidez?')}</h3>
+            <p> {t('Flujo de caja Real - PEN')}</p>
           </div>
 
           <div className="flow-decision-box__chart-body">

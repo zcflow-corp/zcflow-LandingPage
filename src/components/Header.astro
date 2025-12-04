@@ -46,30 +46,28 @@ const base = import.meta.env.BASE_URL
       >
         <span class="bar"></span>
         <span class="bar"></span>
-        <span class="bar"></span>
       </button>
     </div>
     <!--Navegación -->
     <nav
       aria-label="Navegación principal"
       class="nav"
-      style="display: flex; align-items:center; column-gap: 15px; width: 100%; justify-content:space-between; padding: 0rem 2rem;"
+      style="display: flex; align-items:center; column-gap: 15px; width: 100%; justify-content:space-between; padding: 1rem 2rem;"
       itemscope
       itemtype="https://schema.org/SiteNavigationElement"
     >
       <ul role="listbox" aria-labelledby="label_items" class="nav-list">
-        <li><a href="#empresas" itemprop="name">{t('Empresas')}</a></li>
-        <li><a href="#socios" itemprop="name">{t('Socios')}</a></li>
+        <li><a href="#soluciones" itemprop="name">{t('Empresas')}</a></li>
+        <li><a href="#soluciones" itemprop="name">{t('Socios')}</a></li>
         <li><a href="#soluciones" itemprop="name">{t('Soluciones')}</a></li>
         <li><a href="#fundamentos" itemprop="name">{t('Fundamentos')}</a></li>
-        <li><a href="#about" itemprop="name">{t('Quiénes somos')}</a></li>
       </ul>
       <!--Otras Acciones -->
       <div class="mobile-actions">
         <Lang />
         <ThemeSwitch client:idle />
-        <a class="btn secondary" href="#demo">{t('Ingresar')}</a>
-        <a class="btn tertiary" href="#demo">{t('Ver demo')}</a>
+        <a class="btn icon" href="#">{t('Ingresar')}</a>
+        <a class="btn tertiary" href="/contacto">{t('Ver demo')}</a>
       </div>
     </nav>
   </div>
@@ -94,9 +92,11 @@ const base = import.meta.env.BASE_URL
     padding: 0px 0px;
     top: 0;
     z-index: 1000;
+    border-bottom: none;
+    font-weight: 500;
 
     .container {
-      padding: 1rem 2rem;
+      padding: 0rem 2rem;
       gap: 8px !important;
       width: 100%;
       justify-content: space-between;
@@ -106,8 +106,8 @@ const base = import.meta.env.BASE_URL
       display: none;
       flex-direction: column;
       justify-content: space-between;
-      width: 28px;
-      height: 20px;
+      width: 35px;
+      height: 13px;
       background: none;
       border: none;
       cursor: pointer;
@@ -117,24 +117,24 @@ const base = import.meta.env.BASE_URL
     }
 
     .menu-toggle .bar {
-      height: 3px;
+      height: 2px;
       width: 100%;
-      background: var(--c-white);
-      border-radius: 2px;
+      background: var(--c-black);
+      // border-radius: 2px;
       transition: all 0.3s ease;
       transform-origin: center;
     }
     .menu-toggle.active .bar:nth-child(1) {
-      transform: translateY(8px) rotate(45deg);
+      transform: translateY(3px) rotate(45deg);
     }
 
     .menu-toggle.active .bar:nth-child(2) {
-      opacity: 0;
-    }
-
-    .menu-toggle.active .bar:nth-child(3) {
       transform: translateY(-8px) rotate(-45deg);
     }
+
+    // .menu-toggle.active .bar:nth-child(3) {
+    //   transform: translateY(-8px) rotate(-45deg);
+    // }
     .nav-list {
       display: flex;
       gap: 1.5rem;
@@ -169,12 +169,12 @@ const base = import.meta.env.BASE_URL
       display: flex;
     }
 
-    /* --- Responsive --- */
     @include media(mobile) {
       @include shared-mobile-table;
     }
+
     @include media(tablet) {
-      @include shared-mobile-table;
+      @include shared-mobile-tablet-principales;
     }
     .logo-row {
       display: grid;

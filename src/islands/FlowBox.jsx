@@ -1,4 +1,3 @@
-// src/islands/FlowBox.jsx
 import React, { useEffect, useRef, useState } from 'react'
 
 const PHASES = {
@@ -6,15 +5,17 @@ const PHASES = {
   ACTING: 'ACTING',
   SOLVED: 'SOLVED',
 }
-
 const labelsX = ['24-Nov', '25-Nov', '26-Nov', '27-Nov', '28-Nov', '29-Nov']
 
 // Serie base (parecida a tus imágenes)
-const negativeSeries = [12000, 16000, 17000, -8000, 19500, 14000]
+const negativeSeries = [12000, 16000, 17000, -12000, 19500, 14000]
 const solvedSeries = [15000, 20500, 20800, 21000, 19500, 16000]
-const activeIndex = 2 // 26-Nov
 
-const FlowBox = () => {
+// helper: serie interpolada según t (0 = negativa, 1 = resuelta)
+const getInterpolatedSeries = (t) => negativeSeries.map((v, i) => v + (solvedSeries[i] - v) * t)
+
+const FlowBox = ({ t: _t }) => {
+  const text = typeof _t === 'function' ? _t : (k) => k
   const canvasRef = useRef(null)
   const wrapperRef = useRef(null)
 
@@ -29,8 +30,8 @@ const FlowBox = () => {
     const loop = (now) => {
       const elapsed = now - cycleStart
 
-      let newPhase = phase
-      let newT = t
+      let newPhase
+      let newT
 
       // 0–2000ms: flujo negativo estático
       if (elapsed < 2000) {
@@ -85,6 +86,12 @@ const FlowBox = () => {
     if (!ctx) return
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 
+    // colores desde tokens
+    const styles = getComputedStyle(document.documentElement)
+    const cPrimary = (styles.getPropertyValue('--c-white') || '#0563ff').trim()
+    const cError = (styles.getPropertyValue('--c-error') || '#f5222d').trim()
+    const cLine = (styles.getPropertyValue('--c-line') || '#a8a8a8').trim()
+
     const minY = -20000
     const maxY = 40000
 
@@ -94,26 +101,32 @@ const FlowBox = () => {
     const h = height - margin.top - margin.bottom
 
     // serie interpolada según t
-    const serie = negativeSeries.map((v, i) => {
-      const to = solvedSeries[i]
-      return v + (to - v) * t
-    })
+    const serie = getInterpolatedSeries(t)
+
+    // índice del punto de foco: SIEMPRE el mínimo de la serie interpolada
+    let minIndex = 0
+    for (let i = 1; i < serie.length; i++) {
+      if (serie[i] < serie[minIndex]) minIndex = i
+    }
+    const minValue = serie[minIndex]
+    const showFocus = minValue < 0 // si el mínimo ya es ≥ 0, desaparece el foco
 
     const xFor = (i) => margin.left + (i / (serie.length - 1 || 1)) * w
-
     const yFor = (val) => {
       const norm = (val - minY) / (maxY - minY)
       return margin.top + (1 - norm) * h
     }
 
-    // limpiar fondo
+    // limpiar fondo pero mantener TRANSPARENCIA
     ctx.clearRect(0, 0, width, height)
-    ctx.fillStyle = '#ffffff'
-    ctx.fillRect(0, 0, width, height)
 
-    // grid horizontal
+    // grid horizontal (con color de línea del tema)
     ctx.lineWidth = 1
-    ctx.strokeStyle = 'rgba(15,23,42,0.06)'
+    ctx.strokeStyle = 'rgba(168,168,168,0.22)'
+    if (cLine.startsWith('#')) {
+      // si quieres algo más preciso podrías convertir el hex a rgba aquí
+      ctx.strokeStyle = 'rgba(168,168,168,0.22)'
+    }
     const gridCount = 5
     for (let i = 0; i <= gridCount; i++) {
       const y = margin.top + (h / gridCount) * i
@@ -123,7 +136,7 @@ const FlowBox = () => {
       ctx.stroke()
     }
 
-    // linea principal azul (serie interpolada)
+    // línea principal (usa color primario de tokens)
     ctx.beginPath()
     serie.forEach((v, i) => {
       const x = xFor(i)
@@ -132,96 +145,98 @@ const FlowBox = () => {
       else ctx.lineTo(x, y)
     })
     ctx.lineWidth = 2
-    ctx.strokeStyle = '#4F46E5'
+    ctx.strokeStyle = cPrimary
     ctx.lineJoin = 'round'
     ctx.lineCap = 'round'
     ctx.stroke()
 
-    // valor actual en el punto 26-Nov
-    const activeValue =
-      negativeSeries[activeIndex] + (solvedSeries[activeIndex] - negativeSeries[activeIndex]) * t
-    const isNegativeNow = activeValue < 0
+    if (showFocus) {
+      // coordenadas del punto mínimo (punto de foco)
+      const focusX = xFor(minIndex)
+      const focusY = yFor(serie[minIndex])
 
-    // si SIGUE negativo (fase NEGATIVE o inicio de ACTING) pintamos
-    // el segmentito al punto en rojo, para remarcar el problema
-    if (isNegativeNow) {
-      const prevX = xFor(activeIndex - 1)
-      const prevY = yFor(serie[activeIndex - 1])
-      const actX = xFor(activeIndex)
-      const actY = yFor(serie[activeIndex])
+      // si el mínimo es negativo, segmento previo en rojo
+      if (minValue < 0 && minIndex > 0) {
+        const prevX = xFor(minIndex - 1)
+        const prevY = yFor(serie[minIndex - 1])
 
+        ctx.beginPath()
+        ctx.moveTo(prevX, prevY)
+        ctx.lineTo(focusX, focusY)
+        ctx.lineWidth = 2
+        ctx.strokeStyle = cError
+        ctx.stroke()
+      }
+
+      // línea vertical punteada
+      ctx.save()
+      ctx.setLineDash([4, 4])
+      ctx.strokeStyle = 'rgba(148,163,184,0.8)'
       ctx.beginPath()
-      ctx.moveTo(prevX, prevY)
-      ctx.lineTo(actX, actY)
-      ctx.lineWidth = 2
-      ctx.strokeStyle = '#DC2626'
+      ctx.moveTo(focusX, margin.top)
+      ctx.lineTo(focusX, height - margin.bottom)
       ctx.stroke()
-    }
+      ctx.restore()
 
-    // coordenadas del punto activo
-    const activeX = xFor(activeIndex)
-    const activeY = yFor(serie[activeIndex])
+      // círculo externo (rojo si valor negativo, azul si positivo)
+      const isNegativeNow = minValue < 0
 
-    // línea vertical punteada
-    ctx.save()
-    ctx.setLineDash([4, 4])
-    ctx.strokeStyle = 'rgba(148,163,184,0.8)'
-    ctx.beginPath()
-    ctx.moveTo(activeX, margin.top)
-    ctx.lineTo(activeX, height - margin.bottom)
-    ctx.stroke()
-    ctx.restore()
-
-    // círculo externo (rojo si valor negativo, azul si positivo)
-    ctx.beginPath()
-    ctx.arc(activeX, activeY, 9, 0, Math.PI * 2)
-    ctx.lineWidth = 2
-    ctx.strokeStyle = isNegativeNow ? 'rgba(220,38,38,0.9)' : 'rgba(129,140,248,0.9)'
-    ctx.stroke()
-
-    // círculo interno
-    ctx.beginPath()
-    ctx.arc(activeX, activeY, 4, 0, Math.PI * 2)
-    ctx.fillStyle = isNegativeNow ? '#DC2626' : '#4F46E5'
-    ctx.fill()
-
-    // glow cuando Zcflow está actuando
-    if (phase === PHASES.ACTING) {
       ctx.beginPath()
-      ctx.arc(activeX, activeY, 18, 0, Math.PI * 2)
-      const g = ctx.createRadialGradient(activeX, activeY, 0, activeX, activeY, 18)
-      g.addColorStop(0, 'rgba(79,70,229,0.25)')
-      g.addColorStop(1, 'rgba(79,70,229,0)')
-      ctx.fillStyle = g
+      ctx.arc(focusX, focusY, 9, 0, Math.PI * 2)
+      ctx.lineWidth = 2
+      ctx.strokeStyle = isNegativeNow ? cError : cPrimary
+      ctx.stroke()
+
+      // círculo interno
+      ctx.beginPath()
+      ctx.arc(focusX, focusY, 4, 0, Math.PI * 2)
+      ctx.fillStyle = isNegativeNow ? cError : cPrimary
       ctx.fill()
+
+      // glow cuando Zcflow está actuando
+      if (phase === PHASES.ACTING) {
+        ctx.beginPath()
+        ctx.arc(focusX, focusY, 18, 0, Math.PI * 2)
+        const g = ctx.createRadialGradient(focusX, focusY, 0, focusX, focusY, 18)
+        g.addColorStop(0, 'rgba(5,99,255,0.25)')
+        g.addColorStop(1, 'rgba(5,99,255,0)')
+        ctx.fillStyle = g
+        ctx.fill()
+      }
     }
   }, [t, phase])
 
   // -------------- UI: título, tooltip, leyendas, chips -----------------
 
-  const activeValue =
-    negativeSeries[activeIndex] + (solvedSeries[activeIndex] - negativeSeries[activeIndex]) * t
-  const isNegative = activeValue < 0
+  // mismos datos que el canvas para tooltip/leyenda
+  const serie = getInterpolatedSeries(t)
+  let minIndex = 0
+  for (let i = 1; i < serie.length; i++) {
+    if (serie[i] < serie[minIndex]) minIndex = i
+  }
+  const focusValue = serie[minIndex]
+  const isNegative = focusValue < 0
 
-  const formatted = Math.abs(activeValue).toLocaleString('es-PE', {
+  const formatted = Math.abs(focusValue).toLocaleString('es-PE', {
     maximumFractionDigits: 0,
   })
 
-  const title = phase === PHASES.SOLVED ? 'Flujo de caja solucionado' : 'Flujo de caja proyectado'
+  const title =
+    phase === PHASES.SOLVED ? text('Flujo de caja solucionado') : text('Flujo de caja proyectado')
 
   return (
     <section className="flowbox">
-      <header className="flowbox__header">
+      <div className="flowbox__header">
         <div>
           <h3 className="flowbox__title">{title}</h3>
           <p className="flowbox__subtitle">PEN</p>
         </div>
-      </header>
+      </div>
 
       <div className="flowbox__canvas-wrapper" ref={wrapperRef}>
         <canvas ref={canvasRef} className="flowbox__canvas" />
 
-        {/* Tooltip: rojo cuando es negativo, gris oscuro cuando es positivo */}
+        {/* Tooltip: rojo cuando el mínimo es negativo, normal cuando es positivo */}
         <div
           className={
             'flowbox__tooltip ' +
@@ -249,9 +264,9 @@ const FlowBox = () => {
         >
           <div className="flowbox__chip flowbox__chip--zcflow">
             <span className="flowbox__chip-spinner" />
-            <span>Soluciones Zcflow</span>
+            <span>{text('Soluciones Zcflow')}</span>
           </div>
-          <div className="flowbox__chip flowbox__chip--optimizer">Optimizador</div>
+          <div className="flowbox__chip flowbox__chip--optimizer">{text('Optimizador')}</div>
         </div>
       </div>
 

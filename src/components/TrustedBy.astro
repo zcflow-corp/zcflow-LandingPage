@@ -1,11 +1,11 @@
 ---
 import LogosTicker from './LogosTicker.astro'
-const { t: _t } = Astro.props
-const t = typeof _t === 'function' ? _t : (k) => k
+const { t: _t, texts = [] } = Astro.props
+const t = typeof _t === 'function' ? _t : (k: string) => k
 ---
 
 <section class="">
-  <div class="container trustedby">
+  <div class="trustedby">
     <h4>{t('Nuestros Partners que confian en nosotros')}</h4>
 
     <div class="logo-row" style="margin-top:1rem">
@@ -14,7 +14,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
           { name: 'logoaws', title: 'Amazon Web Services' },
           { name: 'logouipath', title: 'UiPath' },
           { name: 'logorems', title: 'Rems' },
-          { name: 'logopen', title: 'OpenAI' }, // o 'logoopen' (alias)
+          { name: 'logopen', title: 'OpenAI' },
         ]}
         cols={4}
         interval={1800}
@@ -31,6 +31,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
+    margin-top: 1rem;
   }
 
   html[data-theme='dark'] .trustedby {

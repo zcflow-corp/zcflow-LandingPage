@@ -87,12 +87,13 @@ let active = 0
 <style lang="scss">
   .tabs-container {
     width: 100%;
+    margin-top: 1rem;
     .tabs {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 1rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
       flex-wrap: wrap;
 
       .tabs {
@@ -111,15 +112,15 @@ let active = 0
         align-self: stretch;
         border-radius: 0.5rem;
         color: var(--c-line);
-        color: var(--color-Grayscale-gray, #e2e2e2);
         font-family: Inter;
         font-size: 1rem;
         font-style: normal;
         font-weight: 500;
         line-height: 24px;
         letter-spacing: -0.32px;
-        border: 1px solid #e6e8eb;
-        background: #f9fafb;
+        background: transparent;
+        border-style: none;
+        opacity: 0.6;
 
         @include media(mobile) {
           width: 9em;
@@ -128,36 +129,35 @@ let active = 0
         &:focus {
           outline: none;
           box-shadow: var(--shadow);
-          background-color: var(--c-white);
         }
       }
 
       .tab-btn[aria-selected='true'] {
-        color: var(--c-primary);
+        color: var(--c-black);
         border-color: transparent;
         display: flex;
         max-width: 9rem;
         padding: 1rem;
         align-items: center;
         gap: 0.5rem;
-        align-self: stretch;
-        border: 1px solid var(--color-Base-primary, #0563ff);
-        background: var(--color-grays-neutrals-background-all, #f5f9ff);
       }
     }
   }
 
-  html[data-theme='dark'] .tabs-container {
-    .tab-btn {
-      background-color: transparent !important;
-      border: 1px solid var(--text) !important;
-    }
+  .activeTab {
+    color: var(--c-black);
+    background: transparent;
+    autoline: none;
+    opacity: 1;
   }
 
-  .activeTab {
-    // border-bottom: 2px solid var(--accent-color);
-    border: 1px solid #0563ff !important;
-    background: #f5f9ff !important;
-    color: var(--c-primary) !important;
+  html[data-theme='dark'] .activeTab {
+    color: var(--c-white) !important;
+  }
+
+  html[data-theme='dark'] .tabs-container {
+    .tab-btn {
+      background-color: transparent;
+    }
   }
 </style>

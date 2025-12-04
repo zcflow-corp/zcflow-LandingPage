@@ -1,6 +1,7 @@
 // FlowConexion.jsx
 import React, { useEffect, useRef } from 'react'
 const base = import.meta.env.BASE_URL
+const t = typeof _t === 'function' ? _t : (k) => k
 const BANK_SVG_BASE = `
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
   <path fill="#292D32" d="M13.05 16.25h-1.88c-1.33 0-2.42-1.12-2.42-2.5 0-.41.34-.75.75-.75s.75.34.75.75c0 .55.41 1 .92 1h1.88c.39 0 .7-.35.7-.78 0-.54-.15-.62-.49-.74l-3.01-1.05c-.64-.23-1.5-.69-1.5-2.16 0-1.25.99-2.28 2.2-2.28h1.88c1.33 0 2.42 1.12 2.42 2.5 0 .41-.34.75-.75.75s-.75-.34-.75-.75c0-.55-.41-1-.92-1h-1.88c-.39 0-.7.35-.7.78 0 .54.15.62.49.74l3.01 1.05c.64.23 1.5.69 1.5 2.16 0 1.26-.99 2.28-2.2 2.28Z"/>
@@ -29,9 +30,9 @@ const ICON_SVGS_BASE = {
 }
 
 const DEFAULT_LABELS = {
-  bank: 'Open Banking',
-  data: 'RPA-ERPs',
-  movement: 'Fintechs, inversionistas y otros',
+  bank: t('Open Banking'),
+  data: t('RPA-ERPs'),
+  movement: t('Fintechs, inversores y otros'),
 }
 
 // Crea imágenes para un color dado (gris/azul)
@@ -47,7 +48,8 @@ const createIconImages = (color) => {
 }
 
 const FlowConexion = ({
-  labels = ['Open Banking', 'RPA-ERPs', 'Fintechs, inversionistas y otros'],
+  t: _t,
+  labels = [t('Open Banking'), t('RPA-ERPs'), t('Fintechs, inversores y otros')],
   rotationMs = 9000,
 }) => {
   const containerRef = useRef(null)
@@ -268,7 +270,7 @@ const FlowConexion = ({
       drawLightFlow(dashedStartX, dashedEndX, joinY, elapsed)
 
       const logoSize = Math.min(w, h) * 0.22
-      drawZGlow(logoCenter.x, logoCenter.y, logoSize)
+      // drawZGlow(logoCenter.x, logoCenter.y, logoSize)
 
       const cycleT = (elapsed % rotationMs) / rotationMs
 
