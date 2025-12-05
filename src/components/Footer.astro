@@ -38,7 +38,7 @@ const base = import.meta.env.BASE_URL
 
     <div class="footer-col">
       <h3>{t('Legal')}</h3>
-      <nav aria-label="Legal">
+      <nav style="line-height: 2;" aria-label="Legal">
         <a href="#terminos" target="_blank" rel="noopener noreferrer"
           >{t('Términos y Condiciones')}</a
         >
@@ -48,7 +48,7 @@ const base = import.meta.env.BASE_URL
       </nav>
     </div>
 
-    <div class="footer-col bg-imagen">
+    <div class="footer-col">
       <h3>{t('Ponte en contacto')}</h3>
       <address>
         <p>Dirección: Vittore Carpaccio 250, San Borja 15036</p>
@@ -101,20 +101,6 @@ const base = import.meta.env.BASE_URL
 
     .footer-col address a {
       display: inline-block;
-    }
-
-    .bg-imagen {
-      background-image: url('/assets/section_footer_contacto.svg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      text-align: center;
-      position: relative;
-      padding: 30px 16px;
-      font-size: 0.8rem;
-      border-radius: 8px;
-      text-align: start;
-      height: auto;
     }
 
     @media (max-width: 768px) {

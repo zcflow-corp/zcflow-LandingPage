@@ -9,89 +9,81 @@ const base = import.meta.env.BASE_URL
 <section id="about" class="section about-banner" aria-labelledby="about-title">
   <div class="container">
     <div class="about-text">
-      <div class="content-text">
-        <h2 id="about-title" style="margin: 0%; height:64px">{t('El flujo de caja es el rey')}</h2>
-        <div
-          style="display: flex; flex-direction: column; align-items: flex-start; line-height: 28px;"
-        >
-          <p style="margin: 0%;">
-            {t('Anticipa tu flujo de caja y toma decisiones con mayor seguridad.')}
-          </p>
-          <p style="margin: 0%;">{t('Solicita tu demo con ZCflow.')}</p>
-        </div>
-      </div>
-      <a href="#contacto" class="btn emptyghost" aria-label={t('Ir a la sección de contacto')}>
-        {t('Contáctanos')}
+      <h2 id="about-title" class="about-title-contacto">{t('El flujo de caja es el rey')}</h2>
+      <p style="text-align: start;">
+        {t('Anticipa tu flujo de caja y toma decisiones con mayor seguridad.')}
+      </p>
+      <a
+        href="#contacto"
+        class="btn emptyghost"
+        style="border: 4px solid #ffff;min-width: 186px;height:48px"
+        aria-label={t('Ir a la sección de contacto')}
+      >
+        {t('Solicita una demo')}
       </a>
     </div>
     <!-- Bloque de imágenes -->
     <figure class="about-image">
-      <div class="image-left">
-        <Image
-          src=`${base}assets/section_banner_person.svg`
-          alt={t('Gráfico de flujo de caja')}
-          class="fade-img"
-          loading="lazy"
-          decoding="async"
-          width="197"
-          height="252"
-        />
-      </div>
+      <Image
+        src=`${base}assets/baseDashboard.webp`
+        alt={t('dashboard 3D')}
+        class="dashboard"
+        loading="lazy"
+        decoding="async"
+        width="500"
+        height="600"
+      />
 
-      <div class="image-right">
-        <Image
-          src=`${base}assets/saldo.svg`
-          alt={t('Análisis financiero')}
-          class="fade-img"
-          loading="lazy"
-          decoding="async"
-          width="146"
-          height="125"
-        />
-        <Image
-          src=`${base}assets/posiciones.svg`
-          alt={t('Proyección de ingresos')}
-          class="fade-img"
-          loading="lazy"
-          decoding="async"
-          width="192"
-          height="184"
-        />
-      </div>
+      <Image
+        src=`${base}assets/CFOS.svg`
+        alt={t('CFOS')}
+        class="fade-img"
+        loading="lazy"
+        decoding="async"
+        width="180"
+        height="174"
+      />
     </figure>
   </div>
-  <script>
-    const imageFigure = document.querySelector('.about-image')
-
-    if ('IntersectionObserver' in window && imageFigure) {
-      const observer = new IntersectionObserver(
-        (entries, observer) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible')
-              observer.unobserve(entry.target)
-            }
-          })
-        },
-        {
-          root: null,
-          rootMargin: '0px',
-          threshold: 0.1,
-        }
-      )
-      observer.observe(imageFigure)
-    }
-  </script>
 </section>
+<script>
+  const imageFigure = document.querySelector('.about-image')
+
+  if ('IntersectionObserver' in window && imageFigure) {
+    const observer = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1,
+      }
+    )
+    observer.observe(imageFigure)
+  }
+</script>
+
 <style lang="scss">
+  .about-title-contacto {
+    margin: 0%;
+    font-size: 59px;
+    letter-spacing: 0.4px;
+    font-weight: 500;
+    line-height: 106%;
+    text-align: start;
+    width: 104%;
+  }
   .about-banner {
-    background-image: url('/assets/section_banner.webp');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-color: #0563fe;
     color: #fff;
     text-align: center;
-    padding: 4rem 0;
+    // padding: 4rem 0;
     position: relative;
     height: auto;
   }
@@ -123,8 +115,9 @@ const base = import.meta.env.BASE_URL
     flex-direction: column;
     align-items: flex-start;
     flex: 1 1 400px;
-    gap: 16px;
-    padding: 16px 0px;
+    gap: 25px;
+    // padding: 16px 0px;
+    width: 112%;
     justify-content: center;
   }
   .about-text h2,
@@ -135,11 +128,12 @@ const base = import.meta.env.BASE_URL
   }
 
   .about-image {
-    display: flex;
-    flex: 1 1 400px;
-    align-items: center;
-    column-gap: 14px;
-    justify-content: center;
+    // display: flex;
+    // flex: 1 1 400px;
+    // align-items: center;
+    // column-gap: 14px;
+    // justify-content: center;
+    margin: 0px;
   }
   .image-left {
     border-radius: 10px;
@@ -151,6 +145,18 @@ const base = import.meta.env.BASE_URL
     flex-direction: column;
     row-gap: 16.5px;
   }
+  .dashboard {
+    transform: rotateY(33deg) rotateX(7deg) translateZ(229px);
+    transform-style: preserve-3d;
+    transition: transform 0.7s ease;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+  }
+
+  .dashboard-wrapper {
+    perspective: 1600px;
+  }
+
   /*animaciones para las 3 imagenes*/
   .image-right.fade-img {
     object-fit: cover;
@@ -159,12 +165,6 @@ const base = import.meta.env.BASE_URL
     transition:
       opacity 0.6s ease,
       transform 0.6s ease;
-  }
-  .content-text {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 7px;
   }
 
   @include media(mobile) {
@@ -175,10 +175,7 @@ const base = import.meta.env.BASE_URL
     .about-image {
       flex: auto;
     }
-    .content-text p {
-      text-align: justify;
-      max-width: 252px;
-    }
+
     .about-text {
       flex: auto;
     }

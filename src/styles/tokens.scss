@@ -47,13 +47,10 @@
   --h3: clamp(1.2rem, 1rem + 1vw, 1.6rem);
   --radius: 16px;
   --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  --shadowXL: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
-    0 18px 36px -18px rgba(0, 0, 0, 0.3);
-  --shadowInset: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
-    0 18px 36px -18px rgba(0, 0, 0, 0.3);
+  --shadowXL: 0 30px 60px -12px rgba(50, 50, 93, 0.25), 0 18px 36px -18px rgba(0, 0, 0, 0.3);
+  --shadowInset: 0 30px 60px -12px rgba(50, 50, 93, 0.25), 0 18px 36px -18px rgba(0, 0, 0, 0.3);
   --shadowL: 0 50px 100px -20px rgba(50, 50, 93, 0.25), 0 30px 60px -30px rgba(0, 0, 0, 0.3);
   --container: 1200px;
-
 }
 
 /* 1. Variables globales de tema */
