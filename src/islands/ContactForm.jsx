@@ -114,7 +114,9 @@ const ContactForm = () => {
                   <Option value="general">Otro Motivo / Consulta General</Option>
                 </Select>
               </Form.Item>
+            </div>
 
+            <div className="form-group">
               <Form.Item label="Detalles sobre tu Interés (Opcional)" name="details">
                 <textarea className="form-textarea" placeholder="Escribe tus detalles aquí..." />
               </Form.Item>

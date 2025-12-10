@@ -287,7 +287,7 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
 
 
   .contact-form {
-    background-color: red;
+    background-color: red !important;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -346,7 +346,7 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
 .form-input,
 .form-textarea,
 .form-select {
-  width: 100% !important;
+  width: auto;
   padding: 0.8rem;
   border-radius: var(--radius);
   border: 1px solid var(--c-line-acc);
@@ -356,7 +356,10 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
   color: var(--c-text);
 
   &:focus {
+    outline-offset: none;
+    outline: 0.5px #fff;
     border-style: none;
+    border-color: none;
     border-color: var(--c-primary);
     box-shadow: 0 0 5px var(--c-primary);
   }
@@ -372,7 +375,7 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
 
 // Estilos específicos para el TextArea (detalles del interés)
 .form-textarea {
-  min-height: 100px;
+  min-height: 200px;
   padding: 1rem;
   resize: vertical; // Permitir el redimensionamiento vertical del textarea
 }
@@ -381,7 +384,7 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
 .form-select {
   padding: 0.8rem;
   border-radius: var(--radius);
-  border: 1px solid var(--c-line-acc);
+  // border: 1px solid var(--c-line-acc);
   font-family: var(--font-body);
   font-size: 1rem;
   color: var(--c-text);
@@ -446,23 +449,28 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
   }
 }
 
-// Estilos para los campos con errores (cuando no pasan la validación)
-.ant-form-item-has-error .ant-input,
-.ant-form-item-has-error .ant-select,
-.ant-form-item-has-error .ant-input-number {
-  border-color: var(--c-error);
+.ant-form-item {
+  width: 100%;
 }
 
-.ant-form-item-has-error .ant-input:focus,
-.ant-form-item-has-error .ant-select:focus,
-.ant-form-item-has-error .ant-input-number:focus {
-  border-color: var(--c-error);
-}
+// // Estilos para los campos con errores (cuando no pasan la validación)
+// .ant-form-item-has-error .ant-input,
+// .ant-form-item-has-error .ant-select,
+// .ant-form-item-has-error .ant-input-number {
+//   border-color: var(--c-error);
 
-.ant-form-item-explain-error {
-  color: var(--c-error);
-  font-size: 0.9rem;
-  margin-top: 0.25rem;
-}
+// }
+
+// .ant-form-item-has-error .ant-input:focus,
+// .ant-form-item-has-error .ant-select:focus,
+// .ant-form-item-has-error .ant-input-number:focus {
+//   border-color: var(--c-error);
+// }
+
+// .ant-form-item-explain-error {
+//   color: var(--c-error);
+//   font-size: 0.9rem;
+//   margin-top: 0.25rem;
+// }
 
 // Layout y espaciado general del formulario
