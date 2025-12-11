@@ -17,20 +17,20 @@ $Extralarge: 2560px;
 
     //tablet up
     @if $type ==tablet {
-      @media only screen and (min-width: $medium - 1) {
+      @media only screen and (min-width: ($medium - 1)) {
         @content;
       }
     }
 
     //desktop up
     @if $type ==desktop {
-      @media only screen and (min-width: $large - 1) {
+      @media only screen and (min-width: ($large - 1)) {
         @content;
       }
     }
 
     @if $type ==extradesktop {
-      @media only screen and (min-width: $Extralarge - 1) {
+      @media only screen and (min-width: ($Extralarge - 1)) {
         @content;
       }
     }
@@ -44,6 +44,7 @@ $Extralarge: 2560px;
     grid-auto-rows: minmax(200px, auto);
     gap: 1.5rem;
   }
+
 
   /* --- Fila Superior 2 Tarjetas--- */
 
@@ -103,7 +104,18 @@ $Extralarge: 2560px;
     flex-direction: column;
     color: var(--c-black);
   }
+  .mode-responsive{
+    display: block;
+        max-width: 73px;
+  }
 
+  html[data-theme='dark'] .mode-responsive{
+   display: none;
+}
+
+  .mode-dark{
+    display: none;
+  }
   .logo img {
     height: 31px;
     object-fit: contain;
@@ -176,7 +188,7 @@ $Extralarge: 2560px;
   .container {
     width: 100%;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 1rem 2rem;
   }
 
   .btn.secondary {
