@@ -20,6 +20,10 @@ footer {
   margin: auto;
 }
 
+.responsive-mode-dark{
+  max-width: 120px;
+}
+
 ul,
 ol {
   list-style: none;
@@ -68,7 +72,7 @@ html[data-theme='dark'] p {
 }
 
 img {
-  max-width: 100%;
+  width: 100%;
   height: auto;
 }
 
@@ -132,6 +136,10 @@ html[data-theme='dark'] .mode-dark {
 
 html[data-theme='dark'] .mode-light {
   display: block;
+}
+
+html[data-theme='dark'] .mode-responsive{
+   display: none;
 }
 
 html[data-theme='dark'] body {

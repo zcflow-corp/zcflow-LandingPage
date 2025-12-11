@@ -209,6 +209,12 @@ const t = typeof _t === 'function' ? _t : (k) => k
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     }
   }
+
+  @include media(mobile) {
+    .section-grafico div {
+      width: 70%;
+    }
+  }
   .section-grafico div {
     width: 100%;
   }
@@ -278,6 +284,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
     .section-grafico {
       .section-grafico {
         grid-template-columns: 1fr;
+        width: 86%;
       }
     }
   }
