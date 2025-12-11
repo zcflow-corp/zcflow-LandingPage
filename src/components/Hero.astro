@@ -2,6 +2,7 @@
 import Checks from './common/Check.astro'
 import HeroFlow from './grafic/HeroFlow.astro'
 const { t: _t } = Astro.props
+import HeroLine from './grafic/HeroLine.astro'
 const t = typeof _t === 'function' ? _t : (k) => k
 const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
 
@@ -33,9 +34,9 @@ const textos = [
         <a href="/contacto" class="btn icon">{t('Pide una demo de inmediato')}</a>
       </div>
 
-      <div class="hero-check">
+      <!-- <div class="hero-check">
         <Checks items={ChecksHero} />
-      </div>
+      </div> -->
     </div>
 
     <div class="hero-imagen" aria-label="Mock UI">
@@ -45,40 +46,32 @@ const textos = [
 </section>
 
 <style lang="scss">
-
-  .hero-description-title{
-    width: 126%;
-  }
   .hero {
     overflow: hidden;
     flex-wrap: wrap;
-
-    section {
-      padding-top: 0rem !important;
-      padding-right: 0rem !important;
-    }
 
     .container {
       padding-top: 0rem;
       padding-bottom: 0rem;
 
-      @include media(tablet) {
-        padding-bottom: 0rem;
-        padding-right: 0rem !important;
-      }
+      // @include media(tablet) {
+      //   padding-bottom: 0rem;
+      //   padding-right: 0rem !important;
+      // }
     }
 
     &-inner {
       display: flex;
-      justify-content: space-between;
+
       flex-direction: column;
+      justify-content: flex-start;
       gap: 1rem;
-      grid-template-columns: 30% 60%;
+      // grid-template-columns: 30% 60%;
       width: 100%;
-      align-items: center;
 
       @include media(desktop) {
         flex-direction: row;
+        justify-content: space-between;
       }
     }
 
@@ -90,21 +83,26 @@ const textos = [
       align-items: flex-start;
       align-self: center;
 
-      flex: 0 0 40%;
-
       @include media(mobile) {
         width: 100%;
       }
 
+      @include media(desktop) {
+        width: 40%;
+      }
+
       &-title {
-        // width: 100%;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        width: 120%;
       }
 
       h1 {
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
-        font-size: 2.9rem;
+        font-size: 2.8rem;
         gap: 0.8rem;
         width: 100%;
 
@@ -114,22 +112,27 @@ const textos = [
           flex-wrap: wrap;
         }
 
+        @include media(desktop) {
+          width: 125%;
+          font-size: 3rem;
+        }
+
         span {
           display: flex;
-          flex-direction: row;
+          display: inline-block !important;
           // flex-wrap: nowrap;
         }
 
-        @include media(mobile) {
-          display: inline-block;
-        }
+        // @include media(mobile) {
+        //   display: inline-block;
+        // }
       }
 
       h2 {
         color: var(--c-primary);
-
+        font-size: 1.75rem;
         @include media(mobile) {
-          font-size: 1.2rem;
+          font-size: 1rem;
           text-align: left;
           width: 100%;
         }
@@ -148,6 +151,7 @@ const textos = [
     &-imagen {
       display: flex;
       width: 100%;
+      height: 80vh;
       img {
         width: 100%;
         @include media(mobile) {
