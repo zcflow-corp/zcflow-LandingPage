@@ -10,9 +10,6 @@ const base = import.meta.env.BASE_URL
   <div class="container">
     <div class="about-text">
       <h2 id="about-title" class="about-title-contacto">{t('El flujo de caja es el rey')}</h2>
-      <p style="text-align: start;">
-        {t('Anticipa tu flujo de caja y toma decisiones con mayor seguridad.')}
-      </p>
       <a
         href="#contacto"
         class="btn emptyghost"
@@ -22,80 +19,36 @@ const base = import.meta.env.BASE_URL
         {t('Solicita una demo')}
       </a>
     </div>
-    <!-- Bloque de imágenes -->
-    <figure class="about-image">
-      <div style="display: flex; align-items: flex-end;">
-        <Image
-          src=`${base}assets/baseDashboard.webp`
-          alt={t('dashboard 3D')}
-          class="dashboard"
-          loading="lazy"
-          decoding="async"
-          width="500"
-          height="600"
-        />
-
-        <Image
-          src=`${base}assets/CFOS.svg`
-          alt={t('CFOS')}
-          class="fade-img"
-          loading="lazy"
-          decoding="async"
-          width="180"
-          height="174"
-        />
-      </div>
-    </figure>
   </div>
 </section>
-<script>
-  const imageFigure = document.querySelector('.about-image')
-
-  if ('IntersectionObserver' in window && imageFigure) {
-    const observer = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible')
-            observer.unobserve(entry.target)
-          }
-        })
-      },
-      {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1,
-      }
-    )
-    observer.observe(imageFigure)
-  }
-</script>
-
 <style lang="scss">
   .about-title-contacto {
     margin: 0%;
-    font-size: 59px;
+    font-size: 5rem;
     letter-spacing: 0.4px;
     font-weight: 500;
     line-height: 106%;
     text-align: start;
-    width: 104%;
   }
   .about-banner {
-    background-color: #0563fe;
-    color: #fff;
-    // text-align: center;
+    background-image: url('/assets/Banner.webp');
     padding-bottom: 0rem;
-    position: relative;
-    height: auto;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    max-height: 979px;
   }
 
-  .about-banner::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
+  @include media(mobile) {
+    .about-banner {
+      height: 50vh;
+      max-height: 400px;
+      background-position: center 30%;
+    }
   }
+
   .btn.emptyghost {
     background: transparent;
     border: 2px solid var(--c-white);
@@ -111,7 +64,10 @@ const base = import.meta.env.BASE_URL
     position: relative;
     padding-bottom: 0px;
     align-items: flex-end;
-    justify-content: left;
+    justify-content: center;
+    height: 100vh;
+    max-height: 651px;
+    width: 100%;
     gap: 0rem;
     z-index: 1;
   }
@@ -121,141 +77,31 @@ const base = import.meta.env.BASE_URL
     flex-direction: column;
     align-items: flex-start;
     flex: 1 1 400px;
-    gap: 25px;
+    gap: 34px;
     padding-bottom: 7rem;
-    max-width: 38%;
     justify-content: center;
+    align-items: center;
   }
   .about-text h2,
-  .about-text p,
   .about-text a {
     color: var(--c-white);
     margin: 0;
   }
 
-  .about-image {
-    display: flex;
-    // flex: 1 1 400px;
-    align-items: flex-end;
-    // column-gap: 14px;
-    // justify-content: center;
-    margin: 0px;
-    max-width: 57%;
-  }
-
-  .about-image .dashboard {
-    width: 100%;
-    max-width: 480px;
-    height: auto;
-    object-fit: contain;
-  }
-  .image-left {
-    border-radius: 10px;
-    box-shadow: 0px 1px 2px 0px #0000004d;
-    box-shadow: 0px 1px 3px 1px #00000026;
-  }
-  .image-right {
-    display: flex;
-    flex-direction: column;
-    row-gap: 16.5px;
-  }
-  .dashboard {
-    // transform: rotateY(39deg) rotateX(7deg) translateZ(131px);
-    transform: rotateY(49deg) rotateX(5deg) translateZ(153px);
-    transform-style: preserve-3d;
-    transition: transform 0.7s ease;
-    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
-  }
-
-  .dashboard-wrapper {
-    perspective: 1600px;
-  }
-  .fade-img {
-    width: 50%;
-  }
-  /*animaciones para las 3 imagenes*/
-  .image-right.fade-img {
-    object-fit: cover;
-    width: 140px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition:
-      opacity 0.6s ease,
-      transform 0.6s ease;
-  }
-
   @include media(mobile) {
     .about-banner .container {
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
       padding-bottom: 0px;
+      height: auto;
     }
-    .about-image {
-      flex: auto;
-      max-width: 100%;
-      justify-content: right;
+    .about-title-contacto {
+      font-size: 4rem;
     }
-
-    .about-image div {
-      display: contents !important;
-    }
-
     .about-text {
       flex: auto;
       max-width: 100%;
       padding-bottom: 2rem;
     }
-    .fade-img {
-      max-width: 50% !important;
-    }
-    .dashboard {
-      width: 1%;
-    }
-  }
-
-  @include media(mobile) {
-    .principles {
-      display: block !important;
-      row-gap: 8px;
-      grid-template-columns: 1fr !important;
-      justify-items: center;
-    }
-  }
-  @keyframes fadeInSlideUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /*Estado Inicial*/
-  .about-image .fade-img {
-    width: 160px;
-    opacity: 0;
-    transition: none;
-  }
-
-  /*Clase de Activacion*/
-  .about-image.is-visible .fade-img {
-    animation: fadeInSlideUp 1s ease-out forwards;
-  }
-
-  /*Secuencia Delays */
-
-  .about-image.is-visible .image-left img.fade-img {
-    animation-delay: 0.2s;
-  }
-
-  .about-image.is-visible .image-right img.fade-img:nth-child(1) {
-    animation-delay: 0.5s;
-  }
-
-  .about-image.is-visible .image-right img.fade-img:nth-child(2) {
-    animation-delay: 0.8s;
   }
 </style>
