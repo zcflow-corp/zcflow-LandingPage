@@ -13,7 +13,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
     <div class="container indicators card">
       <h4>{'Indicadores'}</h4>
       <div class="section-grafico">
-        <div>
+        <div class="section-grafico-left">
           <!-- Original id="indicadores-title" -->
           <h2 class="indicators-title">{t('Los resultados que importan')}</h2>
           <p>
@@ -58,29 +58,30 @@ const t = typeof _t === 'function' ? _t : (k) => k
           <div class="gradient-border-left">
             <CounterOnView client:visible end={-15} suffix="%" />
           </div>
-          <p>{t('Gastos')}</p>
-          <p>✓ {t('Ahorro potencial en comisiones bancarias')}</p>
-          <p>✓ {t('Control en tiempo real')}</p>
+          <p>{t('Reducción de Gastos')}</p>
         </div>
 
         <div class="counter" role="region" aria-label="Menos costos por riesgo: 15%">
           <div class="gradient-border-left">
             <CounterOnView client:visible end={-30} suffix="%" />
           </div>
-          <p>{t('Riesgo')}</p>
-          <p>✓ {t('Protege el cash flow')}</p>
+          <p>{t('Mitigación de Riesgo')}</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 <style lang="scss">
+  .section-grafico-left {
+    max-width: 41%;
+    align-self: center;
+  }
   .indicators {
     background: #141417 !important;
     border: 1px solid #3a3a3d;
     flex-direction: column;
     color: var(--c-bg);
-    padding: 2rem 4rem;
+    padding: 2rem 3rem;
 
     @include media(mobile) {
       padding: 1rem;
@@ -195,29 +196,27 @@ const t = typeof _t === 'function' ? _t : (k) => k
     //
     // }
   }
-
   .section-grafico {
-    display: grid;
+    display: flex;
 
     align-items: start;
     padding: 1rem 0;
-    gap: 2rem;
+    // gap: 2rem;
+    justify-content: space-between;
     width: 100%;
     text-wrap: wrap;
-
-    @include media(tablet) {
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    flex-wrap: wrap;
+    .section-grafico-indicador {
+      width: 55%;
     }
   }
 
   @include media(mobile) {
-    .section-grafico div {
-      width: 70%;
+    .section-grafico-left {
+      max-width: 100%;
     }
   }
-  .section-grafico div {
-    width: 100%;
-  }
+
   .section-grafico p {
     color: #c4c4c4;
   }
@@ -282,9 +281,8 @@ const t = typeof _t === 'function' ? _t : (k) => k
       flex-direction: column;
     }
     .section-grafico {
-      .section-grafico {
-        grid-template-columns: 1fr;
-        width: 86%;
+      .section-grafico-indicador {
+        width: 100%;
       }
     }
   }
