@@ -59,5 +59,5 @@ export default function LineChart() {
     }),
     []
   )
-  return <Line data={data} options={options} />
+  return <Line data={data} options={options} height={500}/>
 }
