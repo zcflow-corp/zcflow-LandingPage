@@ -20,7 +20,7 @@ footer {
   margin: auto;
 }
 
-.responsive-mode-dark{
+.responsive-mode-dark {
   max-width: 120px;
 }
 
@@ -89,23 +89,39 @@ a {
 }
 
 .gradient-blue-dark {
+
+  // background: var(--g-primary-dark);
+  // background-size: 200% 100%;
+  // background-clip: text;
+  // -webkit-background-clip: text;
+  // color: transparent;
+  // -webkit-text-fill-color: transparent;
+  // display: inline-block;
+  // animation: gradient-move 5s ease infinite;
+
   background: var(--g-primary-dark);
+  background-size: 200% 100%;
   background-clip: text;
   -webkit-background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
+  color: black;
+  /* Inicialmente color negro */
+  -webkit-text-fill-color: black;
   display: inline-block;
-  animation: gradient-move 15s ease infinite;
+  animation: gradient-move 5s ease infinite, color-change 5s ease infinite;
+  transition: color 1s ease, -webkit-text-fill-color 1s ease;
 }
 
 .gradient-blue-ligth {
   background: var(--g-primary-light);
   background-clip: text;
+  // background-size: 200% 100%;
+
   -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
   display: inline-block;
   animation: gradient-move 15s ease infinite;
+
 }
 
 html[data-theme='dark'] .gradient-blue-dark {
@@ -138,8 +154,8 @@ html[data-theme='dark'] .mode-light {
   display: block;
 }
 
-html[data-theme='dark'] .mode-responsive{
-   display: none;
+html[data-theme='dark'] .mode-responsive {
+  display: none;
 }
 
 html[data-theme='dark'] body {
@@ -261,6 +277,9 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
 @keyframes gradient-move {
   0% {
     background-position: 0% 0;
+
+
+
   }
 
   50% {
@@ -268,9 +287,30 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
   }
 
   100% {
-    background-position: 0% 0;
+    background-position: 10% 0;
   }
 }
+
+/* Animación para cambiar de color negro a gradiente */
+
+@keyframes color-change {
+  0% {
+    color: var(--c-text);
+    -webkit-text-fill-color: var(--c-text);
+  }
+
+  50% {
+    color: transparent;
+    /* Hacemos el texto transparente en el medio */
+    -webkit-text-fill-color: transparent;
+  }
+
+  100% {
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
 
 
 // Estilos generales para los inputs y textarea

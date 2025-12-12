@@ -30,7 +30,7 @@ const textos = [
 
       <p>{t('Decisiones en segundos, no en semanas.')}</p>
       <div class="cta">
-        <a class="btn primary" href="#zcflow">{t('Explorar')}</a>
+        <a class="btn primary" href="#zcflow">{t('Explorar ahora')} </a>
         <a href="/contacto" class="btn icon">{t('Pide una demo de inmediato')}</a>
       </div>
 
@@ -105,6 +105,7 @@ const textos = [
         font-size: 2.8rem;
         gap: 0.8rem;
         width: 100%;
+        animation: gradient-move 15s ease infinite;
 
         @include media(mobile) {
           font-size: 2rem;
@@ -151,7 +152,7 @@ const textos = [
     &-imagen {
       display: flex;
       width: 100%;
-      height: 80vh;
+      height: 88vh;
       img {
         width: 100%;
         @include media(mobile) {
@@ -165,7 +166,7 @@ const textos = [
       }
 
       @include media(extradesktop) {
-        height: 50vh;
+        height: 60vh;
       }
     }
 
