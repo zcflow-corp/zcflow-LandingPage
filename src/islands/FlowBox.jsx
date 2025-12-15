@@ -228,7 +228,7 @@ const FlowBox = () => {
       <div className="flowbox__header">
         <div>
           <h3 className="flowbox__title">{title}</h3>
-          <p className="flowbox__subtitle">PEN</p>
+          <p className="flowbox__subtitle">USD</p>
         </div>
       </div>
 

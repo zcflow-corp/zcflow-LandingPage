@@ -76,21 +76,21 @@ export default function CardZcflow({
     if (!slide) return null
 
     switch (slide.id) {
-      case 1:
+      case 2:
         return (
           <LanguageProvider>
             <FlowConexion rotationMs={9000} client:only />
           </LanguageProvider>
         )
 
-      case 2:
+      case 3:
         return (
           <LanguageProvider>
             <FlowDecision height={260} />
           </LanguageProvider>
         )
 
-      case 3:
+      case 1:
         return (
           <LanguageProvider>
             <FlowBox />
@@ -156,10 +156,10 @@ export default function CardZcflow({
             De hojas de cálculo y tareas manuales <span className="gradient-blue-ligth"> → </span> a
             decisiones precisas, confiables y asistidas desde una única plataforma.
           </p>
-          <ul class="checks" role="list">
+          <ul className="checks" role="list">
             {slides.map((c, i) => (
               <li
-                class={`check ${i === index ? 'gradient-blue-ligth' : 'check-desactive'}`}
+                className={`check ${i === index ? 'gradient-blue-ligth' : 'check-desactive'}`}
                 key={c.id}
               >
                 <IconoSvg name="check" />
