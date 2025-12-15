@@ -13,7 +13,7 @@ const base = import.meta.env.BASE_URL
       <a
         href="#contacto"
         class="btn emptyghost"
-        style="border: 4px solid #ffff;min-width: 186px;height:48px"
+        style="border: 2px solid #ffff;min-width: 186px;height:48px; background:var(--c-primary-accessible); border-radius:100px;"
         aria-label={t('Ir a la sección de contacto')}
       >
         {t('Solicita una demo')}
@@ -65,8 +65,8 @@ const base = import.meta.env.BASE_URL
     padding-bottom: 0px;
     align-items: flex-end;
     justify-content: center;
-    height: 100vh;
-    max-height: 651px;
+    height: 58%;
+    // max-height: 651px;
     width: 100%;
     gap: 0rem;
     z-index: 1;
@@ -78,7 +78,7 @@ const base = import.meta.env.BASE_URL
     align-items: flex-start;
     flex: 1 1 400px;
     gap: 34px;
-    padding-bottom: 7rem;
+    // padding-bottom: 7rem;
     justify-content: center;
     align-items: center;
   }
@@ -87,16 +87,20 @@ const base = import.meta.env.BASE_URL
     color: var(--c-white);
     margin: 0;
   }
-
+  .about-text h2 {
+    background: linear-gradient(to right, var(--c-white) 59%, var(--c-primary-accessible) 100%);
+    -webkit-background-clip: text;
+    color: transparent;
+  }
   @include media(mobile) {
     .about-banner .container {
       flex-direction: column;
       align-items: center;
       padding-bottom: 0px;
-      height: auto;
+      height: 317px;
     }
     .about-title-contacto {
-      font-size: 4rem;
+      font-size: 1.9rem;
     }
     .about-text {
       flex: auto;
