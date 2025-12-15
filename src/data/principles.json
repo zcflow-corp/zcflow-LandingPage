@@ -1,27 +1,32 @@
 [
   {
-    "title": "IA predictiva",
-    "desc": "La inteligencia artificial como núcleo que convierte datos en acciones financieras inteligentes y decisiones anticipadas.",
-    "img": "assets/section_fundamentos_OPT.svg"
-  },
-  {
     "title": "Security & compliance",
-    "desc": "Seguridad avanzada y cumplimiento normativo que garantizan procesos seguros, confiables y automatizados.",
-    "img": "assets/section_fundamentos_security.svg"
+    "key": "SOLIDEZ",
+    "desc": "Protegemos cada dato y cada interacción con estándares mundiales. La confianza se construye con seguridad, transparencia y cumplimiento absoluto.",
+    "img": "assets/section_fundamentos_security.webp"
   },
   {
-    "title": "Experiencia de Usuario",
-    "desc": "Pensado para las personas: una plataforma intuitiva, clara y sencilla, que se adapta al usuario y no al revés.",
-    "img": "assets/section_fundamentos_ux.svg"
+    "title": "IA predictiva",
+    "key": "PREDICCIÓN",
+    "desc": "La inteligencia artificial es el centro de nuestro diseño: cada funcionalidad nace para anticipar, aprender y mejorar decisiones financieras.",
+    "img": "assets/section_fundamentos_OPT.webp"
   },
   {
     "title": "Productividad",
-    "desc": "Optimización del tiempo: menos tareas repetitivas, más enfoque en lo estratégico y de valor para la empresa.",
-    "img": "assets/section_fundamentos_productivity.svg"
+    "key": "EFICIENCIA",
+    "desc": "Liberamos tiempo del equipo financiero para que se dedique a lo estratégico, no a tareas repetitivas. La eficiencia es un principio, no un resultado.",
+    "img": "assets/section_fundamentos_productivity.webp"
+  },
+  {
+    "title": "Experiencia de Usuario",
+    "key": "CLARIDAD",
+    "desc": "Creamos experiencias simples y humanas, donde la tecnología desaparece y el usuario solo ve claridad, velocidad y control.",
+    "img": "assets/section_fundamentos_ux.webp"
   },
   {
     "title": "Colaboración",
-    "desc": "Un ecosistema conectado donde tesorería, bancos, socios y equipos trabajan en sincronía y transparencia.",
-    "img": "assets/section_fundamentos_colaboradores.svg"
+    "key": "SINCRONÍA",
+    "desc": "Conectamos personas, sistemas y socios financieros en un mismo flujo, porque la tesorería moderna requiere coordinación, no aislamiento.",
+    "img": "assets/section_fundamentos_colaboradores.webp"
   }
 ]
