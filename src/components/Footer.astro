@@ -21,52 +21,93 @@ const base = import.meta.env.BASE_URL
           itemprop="logo"
         />
       </a>
+      <div class="footer-col">
+        <address>
+          <p style="font-size: 1rem; font-weight: bold;">Perú</p>
+          <p style="font-size: 1rem;">Jr. Vittore Carpaccio 250, San Borja 15036</p>
+        </address>
+      </div>
       <meta itemprop="name" content="ZCFlow" />
       <meta itemprop="url" content="https://www.zcflow.com" />
-      <p itemprop="description">{t('Predice el futuro, minimiza riesgos.')}</p>
-      <small>©2025 Seidor. All rights reserved.</small>
     </div>
 
     <div class="footer-col">
       <h3>{t('Platform')}</h3>
       <nav aria-label="Platform" style="background:var(--c-quinary)!important;">
         <a href="#soluciones" target="_blank" rel="noopener noreferrer">{t('Empresas')}</a>
+        <a href="#soluciones" target="_blank" rel="noopener noreferrer">{t('Socios')}</a>
         <a href="#soluciones" target="_blank" rel="noopener noreferrer">{t('Soluciones')}</a>
-        <a href="#fundamentos" target="_blank" rel="noopener noreferrer">{t('Fundamentos')}</a>
-        <a href="#zcflow" target="_blank" rel="noopener noreferrer">{t('Quiénes somos')}</a>
       </nav>
     </div>
-
     <div class="footer-col">
-      <h3>{t('Legal')}</h3>
-      <nav style="line-height: 2; background:var(--c-quinary)!important;" aria-label="Legal">
+      <h3>{t('Resources')}</h3>
+      <nav aria-label="resources" style="background:var(--c-quinary)!important;">
+        <a href="#zcflow" target="_blank" rel="noopener noreferrer">{t('Quiénes somos')}</a>
+        <a href="#fundamentos" target="_blank" rel="noopener noreferrer">{t('Fundamentos')}</a>
+        <a href="mailto:contacto@zcflow.com" target="_blank" rel="noopener noreferrer"
+          >Contactanos</a
+        >
+      </nav>
+    </div>
+    <div style="display: flex;max-width: 50%;gap:0.8rem">
+      <Image
+        src=`${base}assets/win_leader.svg`
+        alt="win_leader"
+        width={50}
+        height={50}
+        loading="lazy"
+        decoding="async"
+        itemprop="logo"
+      />
+      <Image
+        src=`${base}assets/win_milestone.svg`
+        alt="win_mileston"
+        width={50}
+        height={50}
+        loading="lazy"
+        decoding="async"
+        itemprop="logo"
+      />
+    </div>
+  </div>
+  <div
+    class="description-slogan"
+    style="display: flex;margin:0 auto; padding: 0rem 0rem 0rem 2rem; flex-wrap: wrap; max-width: 1200px;align-items: center; gap:2rem;"
+  >
+    <p itemprop="description" style="font-size: 1rem;max-width: 16rem;">
+      {t('Predice el futuro, minimiza riesgos.')}
+    </p>
+    <div class="footer-col">
+      <nav
+        style="flex-wrap: wrap; line-height: 2; background:var(--c-quinary)!important;flex-direction: row; gap:8rem; max-width: 100%;"
+        aria-label="Legal"
+      >
         <a href="#terminos" target="_blank" rel="noopener noreferrer"
           >{t('Términos y Condiciones')}</a
         >
-        <a href="#privacidad" target="_blank" rel="noopener noreferrer"
+        <a href="#privacidad" style="padding: 0 0.8rem;" target="_blank" rel="noopener noreferrer"
           >{t('Política de privacidad')}</a
         >
-      </nav>
-    </div>
-
-    <div class="footer-col">
-      <h3>{t('Ponte en contacto')}</h3>
-      <address>
-        <p>Dirección: Vittore Carpaccio 250, San Borja 15036</p>
-        <a href="mailto:contacto@zcflow.com" target="_blank" rel="noopener noreferrer"
-          >contacto@zcflow.com</a
+        <a href="#legal" style="padding: 0 7rem" ; target="_blank" rel="noopener noreferrer"
+          >{t('Aviso legal')}</a
         >
-      </address>
+      </nav>
     </div>
   </div>
 </footer>
 
 <style lang="scss">
+  .description-slogan p {
+    background: linear-gradient(to right, var(--c-white) -23%, var(--c-primary-accessible) 100%);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: bold;
+  }
   footer#contacto {
     color: var(--c-white);
     padding: 48px 1rem;
     font-size: 14px;
-    background: var(--c-quinary)!important;
+    background: var(--c-quinary) !important;
 
     .footer-grid {
       display: grid;
@@ -103,7 +144,11 @@ const base = import.meta.env.BASE_URL
     .footer-col address a {
       display: inline-block;
     }
-
+    @include media(mobile) {
+      .footer-col nav {
+        gap: 0rem;
+      }
+    }
     @media (max-width: 768px) {
       .footer-grid {
         grid-template-columns: 1fr;
