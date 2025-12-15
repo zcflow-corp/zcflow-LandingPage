@@ -4,47 +4,40 @@ import { Image } from 'astro:assets'
 const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k: unknown) => k
 const base = import.meta.env.BASE_URL
+const firstColumnItems = principles.slice(0, 2)
+const secondColumnItems = principles.slice(2, 5)
 ---
 
 <section id="fundamentos" class="section fundamentos" aria-labelledby="fundamentos-title">
   <div class="container container-fundamentos">
     <!-- Encabezado de la sección -->
-    <div class="section-header">
+    <div class="section-header" style="width: 100%;">
       <div class="fundamentos-header">
         <h6 class="gradient-blue-dark" style="margin: 0%;">{t('Nuestros fundamentos')}</h6>
         <div class="reveal-wrapper">
           <h2 class="reveal-target" style="margin: 0%;">{t('Los principios que nos guían')}</h2>
         </div>
+        <div class="reveal-wrapper description-wrapper">
+          <p class="reveal-target fundamentos-description">
+            {
+              t(
+                'Sabemos que la confianza en las finanzas nace de la innovación responsable. Por eso, en ZCflow nos regimos por cinco principios que definen cómo diseñamos, operamos y colaboramos. Estos fundamentos no son opcionales: son nuestro compromiso con las empresas y con el futuro.'
+              )
+            }
+          </p>
+        </div>
+        <!-- <div class="btn icon descubre-mas">
+          <a href="#fundamentos-card" class="btn" aria-label={t('Descubre más')}>
+            {t('Descubre más')}</a
+          >
+        </div> -->
       </div>
-      <div class="reveal-wrapper description-wrapper">
-        <p class="reveal-target fundamentos-description">
-          {
-            t(
-              'Sabemos que la confianza en las finanzas nace de la innovación responsable. Por eso, en ZCflow nos regimos por cinco principios que definen cómo diseñamos, operamos y colaboramos. Estos fundamentos no son opcionales: son nuestro compromiso con las empresas y con el futuro.'
-            )
-          }
-        </p>
-      </div>
-    </div>
-    <div class="btn icon descubre-mas">
-      <a href="#fundamentos-card" class="btn" aria-label={t('Descubre más')}>
-        {t('Descubre más')}</a
-      >
     </div>
     <!-- principios -->
     <section class="principles" aria-labelledby="Lista de principios fundamentales de ZCflow">
       {
-        principles.map((p) => (
+        firstColumnItems.map((p, index) => (
           <article id="fundamentos-card" class="card principle">
-            <section class="principles-container">
-              <div class="section-header">
-                <h3 class="principle-title">{t(p.title)}</h3>
-              </div>
-              <div class="section-body">
-                <p>{t(p.desc)}</p>
-              </div>
-            </section>
-
             {p.img && (
               <figure class="images-dinamyc">
                 <Image
@@ -57,6 +50,44 @@ const base = import.meta.env.BASE_URL
                 />
               </figure>
             )}
+            <section class="principles-container">
+              <span class="keyword">{p.key}</span>
+              <div class="section-header">
+                <h3 class="principle-title">{t(p.title)}</h3>
+              </div>
+              <div class="section-body">
+                <p style="font-size: 1rem;">{t(p.desc)}</p>
+              </div>
+            </section>
+          </article>
+        ))
+      }
+    </section>
+    <section class="principles" aria-labelledby="Lista de principios fundamentales de ZCflow">
+      {
+        secondColumnItems.map((p, index) => (
+          <article id="fundamentos-card" class="card principle">
+            {p.img && (
+              <figure class="images-dinamyc">
+                <Image
+                  src={`${base}${p.img}`}
+                  alt={t(p.title)}
+                  width={1200}
+                  height={200}
+                  loading="lazy"
+                  class="images-dinamyc"
+                />
+              </figure>
+            )}
+            <section class="principles-container">
+              <span class="keyword">{p.key}</span>
+              <div class="section-header">
+                <h3 class="principle-title">{t(p.title)}</h3>
+              </div>
+              <div class="section-body">
+                <p style="font-size: 1rem;">{t(p.desc)}</p>
+              </div>
+            </section>
           </article>
         ))
       }
@@ -97,16 +128,47 @@ const base = import.meta.env.BASE_URL
   </script>
 </section>
 <style lang="scss">
+  #fundamentos-card:nth-child(1) {
+    margin-top: 130px;
+    max-height: 500px;
+    border-radius: 8px;
+    padding: 13px;
+  }
+
+  #fundamentos-card {
+    background: var(--c-white);
+    max-height: 500px;
+    border-radius: 8px;
+  }
+
+  .keyword {
+    background: var(--c-bg-variant);
+    padding: 10px;
+    max-width: 23%;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 0.8rem;
+  }
+  .images-dinamyc {
+    background: var(--c-bg-variant);
+    border-radius: 2px;
+  }
   .container-fundamentos {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+    row-gap: 64px;
+    background: var(--c-bg-variant);
+  }
+  .principles .principle:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
   }
 
   .images-dinamyc {
-    width: 100%;
-    max-width: 100%;
-
     img {
       width: 100%;
       height: auto;
@@ -117,14 +179,23 @@ const base = import.meta.env.BASE_URL
     display: flex;
     flex-direction: column;
     row-gap: 8px;
-    align-items: center;
-    // padding: 0 0 20px 0;
+    padding: 32px;
+  }
+
+  @include media(mobile) {
+    #fundamentos-card:nth-child(1) {
+      margin: 0px;
+    }
+    .container-fundamentos {
+      row-gap: 15px;
+    }
   }
 
   .fundamentos-header {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
+    row-gap: 24px;
 
     h6 {
       font-size: 1rem;
@@ -142,80 +213,9 @@ const base = import.meta.env.BASE_URL
     }
   }
 
-  .fundamentos {
-    .principles {
-      display: grid;
-      justify-content: center;
-      justify-items: center;
-      row-gap: 1.5rem;
-      column-gap: 1.5rem;
-    }
-
-    header {
-      .fundamentos-header {
-        text-align: center;
-      }
-    }
-
-    .reveal-wrapper {
-      overflow: hidden;
-    }
-  }
-
   .descubre-mas {
     text-align: center;
     padding: 0;
-  }
-
-  .principles {
-    figure {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 0;
-
-      img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain;
-      }
-    }
-
-    .card.principle {
-      background: var(--c-bg-variant);
-      border-radius: 8px;
-      padding: 1.5rem;
-      cursor: default;
-      border: none;
-      outline: none;
-
-      &:focus,
-      &:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow);
-
-        transition:
-          transform 0.25s ease,
-          box-shadow 0.25s ease;
-      }
-    }
-
-    .principle-title {
-      font-size: 1.25rem;
-      font-weight: 600;
-      line-height: 28px;
-      color: var(--c-black);
-    }
-
-    .section-body {
-      p {
-        margin: 0;
-        font-size: 1rem;
-        line-height: 22px;
-        color: var(--c-secondary);
-        text-align: center;
-      }
-    }
   }
 
   .card {
@@ -229,47 +229,14 @@ const base = import.meta.env.BASE_URL
     }
   }
 
-  .section-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    align-items: self-start;
-
-    @include media(tablet) {
-      align-items: center;
-    }
-  }
-
   .fundamentos .reveal-wrapper .reveal-target {
     position: relative;
+    text-align: justify;
   }
 
   /* Breakpoints */
 
   @include media(desktop) {
     @include shared-mobile-tablet-principales;
-  }
-
-  @include media(mobile) {
-    .principles {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-
-      > .principle:nth-child(n) {
-        grid-column: auto;
-        grid-row: auto;
-      }
-    }
-
-    .reveal-target {
-      text-align: start;
-    }
-
-    .fundamentos-header {
-      align-items: flex-start;
-      width: 100%;
-    }
   }
 </style>
