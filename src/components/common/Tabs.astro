@@ -1,13 +1,15 @@
 ---
 // Recibe los datos como prop
 import CardSlider from 'src/islands/CardSlider.jsx'
-import IconoSvg from 'src/islands/IconoSvg.jsx'
 
 const { TabsJson } = Astro.props
 let active = 0
 ---
 
 <div class="tabs-container" id="tabs-root">
+  <div class="tabs-process">
+    <span class="process" id="out"> </span>
+  </div>
   <!-- Botones -->
   <div role="tablist" aria-label="Qué podrás hacer" class="tabs">
     {
@@ -17,12 +19,13 @@ let active = 0
           id={`tab-${i}`}
           class={`tab-btn ${i === active ? 'active' : ''}`}
           aria-selected={i === active}
+          data-process={Number(t.process)}
           aria-controls={`panel-${i}`}
           tabindex={i === active ? '0' : '-1'}
         >
-          <IconoSvg name={t.icono} />
+          <h4> {t.título} </h4>
 
-          {t.título}
+          <span>{t.titleSub}</span>
         </button>
       ))
     }
@@ -68,7 +71,17 @@ let active = 0
   const panels = container.querySelectorAll<HTMLElement>('.tab-panel')
   tabs[0].classList.add('activeTab')
 
+  const out = document.querySelector('#out')
+  function setWidth(percent) {
+    out.style.width = `${percent}%` // 👈 cambia el atributo CSS
+  }
+
   tabs.forEach((tab, i) => {
+    tab.addEventListener('click', (e) => {
+      const percent = Number(e.currentTarget.dataset.process)
+      setWidth(percent)
+    })
+
     tab.addEventListener('click', () => {
       tabs.forEach((t) => {
         t.classList.remove('activeTab')
@@ -87,59 +100,86 @@ let active = 0
 <style lang="scss">
   .tabs-container {
     width: 100%;
-    margin-top: 1rem;
+
     .tabs {
       display: flex;
-      justify-content: center;
-      align-items: center;
+      justify-content: flex-start;
+      align-items: flex-start;
+
       gap: 1rem;
       margin-bottom: 1rem;
       flex-wrap: wrap;
 
-      .tabs {
-        display: flex;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-        margin-bottom: 1rem;
+      &-process {
+        width: 100%;
+        height: 5px;
+        background: var(--c-bg-variant);
+        z-index: 0;
+        position: relative;
+        border-radius: 2px;
+        .process {
+          position: absolute;
+          height: 5px;
+          border-radius: 2px;
+          z-index: 1;
+          align-self: flex-start;
+          width: 25%;
+          background: var(--g-primary);
+          background: linear-gradient(90deg, #02bcf5, #0073e6 32.81%, #96f 55.73%, #635bff 83.85%);
+        }
       }
 
       .tab-btn {
         display: flex;
-        max-width: 10em;
-        padding: 1em 1.5em;
+        position: relative;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        display: inline-flex;
+        flex-direction: column;
         align-items: center;
-        gap: 0.5rem;
-        align-self: stretch;
-        border-radius: 0.5rem;
-        color: var(--c-line);
-        font-family: Inter;
-        font-size: 1rem;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 24px;
-        letter-spacing: -0.32px;
-        background: transparent;
-        border-style: none;
-        opacity: 0.6;
-
-        @include media(mobile) {
-          width: 9em;
-        }
+        background: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        flex: 1;
+        padding: 0.5rem;
 
         &:focus {
           outline: none;
-          box-shadow: var(--shadow);
+          h4 {
+            color: var(--g-primary);
+            background: var(--g-primary-dark);
+            background-size: 200% 100%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: black;
+            /* Inicialmente color negro */
+            -webkit-text-fill-color: black;
+            display: inline-block;
+            animation:
+              gradient-move 1s ease infinite,
+              color-change 1s ease infinite;
+            transition:
+              color 1s ease,
+              -webkit-text-fill-color 1s ease;
+          }
+
+          // box-shadow: var(--shadow);
+        }
+
+        h4 {
+          padding: 0.5rem;
+          margin: 0rem;
+        }
+        span {
+          font-size: small;
+          color: var(--c--text);
         }
       }
 
       .tab-btn[aria-selected='true'] {
         color: var(--c-black);
-        border-color: transparent;
-        display: flex;
-        max-width: 9rem;
-        padding: 1rem;
-        align-items: center;
-        gap: 0.5rem;
       }
     }
   }
