@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
 
 const FlowDecision = ({ t: _t }) => {
   const { t } = useLanguage()
+
   // 'table' -> se ve tabla, 'chart' -> se ve gráfica
   const [stage, setStage] = useState('table')
   const [animateLine, setAnimateLine] = useState(false)
+
   const TABLE_DATES = ['01/11/25', '02/11/25', '03/11/25', '04/11/25', '05/11/25', '06/11/25']
 
   const TOTAL_PERIODO = [
@@ -16,6 +18,7 @@ const FlowDecision = ({ t: _t }) => {
     '-30,000.00',
     '20,000.00',
   ]
+
   const TOTAL_ACUMULADO = [
     '450,000.00',
     '370,000.00',
@@ -33,6 +36,7 @@ const FlowDecision = ({ t: _t }) => {
     { label: '22-Nov', value: 23000 },
     { label: '23-Nov', value: 14000 },
   ]
+
   const TABLE_ROWS = [
     {
       label: '[-] ' + t('Saldo'),
@@ -71,16 +75,50 @@ const FlowDecision = ({ t: _t }) => {
       values: ['—', '—', '—', '—', '—', '—'],
     },
   ]
-  // cambio automático tabla -> gráfica
+
+  // ✅ Loop infinito tabla <-> gráfica + reinicio de animación
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setStage('chart')
-      setAnimateLine(true) // dispara animación del trazo
-    }, 6000) // tiempo que se muestra la tabla
-    return () => clearTimeout(timer)
+    const TABLE_MS = 6000
+    const CHART_MS = 6000
+
+    let isMounted = true
+    let timeoutId
+
+    const loop = () => {
+      // 1) Mostrar tabla
+      setStage('table')
+      setAnimateLine(false) // reset anim
+
+      timeoutId = setTimeout(() => {
+        if (!isMounted) return
+
+        // 2) Mostrar gráfica
+        setStage('chart')
+
+        // reset + re-trigger para reiniciar la animación CSS del path
+        setAnimateLine(false)
+        requestAnimationFrame(() => {
+          if (!isMounted) return
+          setAnimateLine(true)
+        })
+
+        // 3) Volver a tabla y repetir
+        timeoutId = setTimeout(() => {
+          if (!isMounted) return
+          loop()
+        }, CHART_MS)
+      }, TABLE_MS)
+    }
+
+    loop()
+
+    return () => {
+      isMounted = false
+      clearTimeout(timeoutId)
+    }
   }, [])
 
-  const chartPath = React.useMemo(() => {
+  const chartPath = useMemo(() => {
     if (!CHART_POINTS.length) return ''
     const values = CHART_POINTS.map((p) => p.value)
     const max = Math.max(...values, 1)
@@ -97,7 +135,16 @@ const FlowDecision = ({ t: _t }) => {
       const y = h - paddingY - ((point.value - min) / range) * (h - paddingY * 2)
       return `${index === 0 ? 'M' : 'L'} ${x} ${y}`
     }).join(' ')
-  }, [])
+  }, [CHART_POINTS])
+
+  // para puntos (evitar repetir cálculos en cada circle)
+  const chartMeta = useMemo(() => {
+    const values = CHART_POINTS.map((p) => p.value)
+    const max = Math.max(...values, 1)
+    const min = Math.min(...values, 0)
+    const range = max - min || 1
+    return { max, min, range }
+  }, [CHART_POINTS])
 
   return (
     <section className="flow-decision-box">
@@ -123,7 +170,7 @@ const FlowDecision = ({ t: _t }) => {
             </div>
             <div className="flow-decision-box__filter">
               <span>{t('Moneda:')}</span>
-              <button className="flow-decision-box__select"> PEN ▾</button>
+              <button className="flow-decision-box__select"> USD ▾</button>
             </div>
             <div className="flow-decision-box__filter">
               <span>{t('Sociedad:')}</span>
@@ -177,8 +224,8 @@ const FlowDecision = ({ t: _t }) => {
           }
         >
           <div className="flow-decision-box__chart-header">
-            <h3> {t('¿Cómo va mi liquidez?')}</h3>
-            <p> {t('Flujo de caja Real - PEN')}</p>
+            <h3>{t('¿Cómo va mi liquidez?')}</h3>
+            <p>{t('Flujo de caja Real - USD')}</p>
           </div>
 
           <div className="flow-decision-box__chart-body">
@@ -208,11 +255,6 @@ const FlowDecision = ({ t: _t }) => {
 
               {/* puntos */}
               {CHART_POINTS.map((point, index) => {
-                const values = CHART_POINTS.map((p) => p.value)
-                const max = Math.max(...values, 1)
-                const min = Math.min(...values, 0)
-                const range = max - min || 1
-
                 const w = 480
                 const h = 180
                 const paddingX = 30
@@ -220,7 +262,10 @@ const FlowDecision = ({ t: _t }) => {
 
                 const x =
                   paddingX + (index / Math.max(CHART_POINTS.length - 1, 1)) * (w - paddingX * 2)
-                const y = h - paddingY - ((point.value - min) / range) * (h - paddingY * 2)
+                const y =
+                  h -
+                  paddingY -
+                  ((point.value - chartMeta.min) / chartMeta.range) * (h - paddingY * 2)
 
                 return <circle key={point.label} cx={x} cy={y} r="3" fill="#4773ff" />
               })}

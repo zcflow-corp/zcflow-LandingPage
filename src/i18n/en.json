@@ -80,7 +80,7 @@
   "Posición - Periodo": "Position - Period",
   "Total Periodo": "Total Period",
   "Total Acumulado": "Total Accumulated",
-  "Flujo de caja Real - PEN": "Actual cash flow - PEN",
+  "Flujo de caja Real - USD": "Actual cash flow - USD",
   "Moneda:": "Currency:",
   "Sociedad:": "Society:",
   "Saldo": "Balance",
@@ -166,6 +166,14 @@
   "Genera proyecciones ajustadas a escenarios de negocio para tomar decisiones anticipadas.": "Generate projections adjusted to business scenarios to make proactive decisions.",
   "Escenarios": "Scenarios",
   "Crea escenarios optimista, pesimista y realista, comparando impactos en la liquidez en tiempo real.": "Create optimistic, pessimistic and realistic scenarios, comparing their impact on liquidity in real time.",
+  "agentes de IA": "AI agents",
+  "que anticipan tu liquidez y simulan escenarios para orientar decisiones financieras más precisas.": "that anticipate your liquidity and simulate scenarios to guide more precise financial decisions.",
+  "Hacemos que el": "We make the",
+  "mercado financiero compita por tu liquidez": "financial market compete for your liquidity",
+  ": el menor costo cuando necesitas caja y el mejor retorno cuando tienes excedentes.": ": the lowest cost when you need cash and the best return when you have surpluses.",
+  "De hojas de cálculo y tareas manuales": "From spreadsheets and manual tasks",
+  "→": "→",
+  "a decisiones precisas, confiables y asistidas desde una única plataforma.": "to precise, reliable, and assisted decisions from a single platform.",
   "Recomendaciones de costo/riesgo": "Cost/risk recommendations",
   "La IA sugiere el mejor uso de productos financieros para optimizar costos y minimizar riesgos.": "AI suggests the best use of financial products to optimize costs and minimize risks.",
 
@@ -176,5 +184,10 @@
   "Automatización de órdenes": "Order automation",
   "Envía instrucciones financieras automáticas para préstamos, coberturas o inversiones.": "Send automatic financial instructions for loans, hedges or investments.",
   "Gestión documental y auditoría": "Document management and auditing",
-  "Centraliza documentos clave y compártelos al instante para auditorías más ágiles.": "Centralize key documents and share them instantly for faster audits."
+  "Centraliza documentos clave y compártelos al instante para auditorías más ágiles.": "Centralize key documents and share them instantly for faster audits.",
+  "Con ZCFLOW integramos toda tu información financiera en una plataforma 100% data driven, potenciada por agentes de IA que anticipan tu liquidez y simulan escenarios para orientar decisiones financieras más precisas.": "With ZCFLOW we integrate all your financial information into a 100% data-driven platform, powered by AI agents that anticipate your liquidity and simulate scenarios to guide more precise financial decisions.",
+  "Hacemos que el mercado financiero compita por tu liquidez: el menor costo cuando necesitas caja y el mejor retorno cuando tienes excedentes.": "We make the financial market compete for your liquidity: the lowest cost when you need cash and the best return when you have surpluses.",
+  "De hojas de cálculo y tareas manuales → a decisiones precisas, confiables y asistidas desde una única plataforma.": "From spreadsheets and manual tasks → to precise, reliable, and assisted decisions from a single platform.",
+  "integramos toda tu información financiera en una plataforma 100% data driven, potenciada por": "we integrate all your financial information into a 100% data-driven platform, powered by",
+  "Así resolvemos lo que nadie resuelve": "This is how we solve what no one else solves"
 }
