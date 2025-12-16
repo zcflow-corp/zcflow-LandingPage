@@ -5,6 +5,7 @@ This guide shows you how to use the translation function `t` in different types 
 ## Overview
 
 The translation system works by:
+
 1. Loading locale JSON files (`en.json`, `es.json`) in page files
 2. Creating a `t` function that looks up translations
 3. Passing `t` as a prop to components
@@ -80,7 +81,7 @@ const slides = [
   {
     title: t('Integración total'),
     description: t('ZCFlow conecta tu ecosistema financiero...'),
-  }
+  },
 ]
 ---
 
@@ -88,7 +89,7 @@ const slides = [
 <section>
   <h1>{t('Revolucionando la tesorería')}</h1>
   <p>{t('Decisiones en segundos, no en semanas.')}</p>
-  
+
   <!-- ✅ Pass t to child components -->
   <CardSlider slides={slides} t={t} />
 </section>
@@ -128,7 +129,7 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
 import { useState } from 'react'
 
 export default function MyComponent({
-  t: _t,  // ✅ Receive t from props
+  t: _t, // ✅ Receive t from props
   // ... other props
 }) {
   // ✅ Create t function with fallback
@@ -181,19 +182,19 @@ import esMessages from '../i18n/es.json'
 
 export default function MyComponent() {
   const [messages, setMessages] = useState({})
-  
+
   useEffect(() => {
     // Get locale from document
     const getLocale = () => {
       if (typeof document === 'undefined') return 'es'
       return document.documentElement.lang === 'en' ? 'en' : 'es'
     }
-    
+
     const locale = getLocale()
     const localeMessages = locale === 'en' ? enMessages : esMessages
     setMessages(localeMessages)
   }, [])
-  
+
   const t = (key) => messages[key] ?? key
 
   return <div>{t('Hello')}</div>
@@ -253,6 +254,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
 ```
 
 This ensures:
+
 - If `t` is provided, use it
 - If `t` is missing, return the key as-is (no errors)
 
@@ -263,11 +265,7 @@ This ensures:
 const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k) => k
 
-const features = [
-  t('Feature 1'),
-  t('Feature 2'),
-  t('Feature 3'),
-]
+const features = [t('Feature 1'), t('Feature 2'), t('Feature 3')]
 
 const data = {
   title: t('Title'),
@@ -343,6 +341,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
 ### Problem: Translations not working
 
 **Check**:
+
 1. Is the key in your JSON file? (`src/i18n/en.json` or `src/i18n/es.json`)
 2. Is `t` being passed from the parent component?
 3. Is the locale being detected correctly?
@@ -350,6 +349,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
 ### Problem: Want to use `t` in a utility file
 
 **Solution**: Either:
+
 - Pass `t` as a parameter to the utility function
 - Import the JSON files directly in the utility file
 
@@ -357,19 +357,14 @@ const t = typeof _t === 'function' ? _t : (k) => k
 
 ## Summary
 
-| File Type | How to Use `t` |
-|-----------|----------------|
-| **Astro Pages** | Load JSON, create `t`, pass to components |
-| **Astro Components** | Receive `t` as prop, use in template |
-| **React Islands** | Receive `t` as prop, use in JSX |
-| **JS/TS Utils** | Pass `t` as parameter or import JSON directly |
+| File Type            | How to Use `t`                                |
+| -------------------- | --------------------------------------------- |
+| **Astro Pages**      | Load JSON, create `t`, pass to components     |
+| **Astro Components** | Receive `t` as prop, use in template          |
+| **React Islands**    | Receive `t` as prop, use in JSX               |
+| **JS/TS Utils**      | Pass `t` as parameter or import JSON directly |
 
 The key pattern is: **Load once at the page level, pass down as props**.
-
-
-
-
-
 
 
 

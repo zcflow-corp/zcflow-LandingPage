@@ -11,16 +11,20 @@
     "format": "prettier --write \"src/**/*.{astro,js,jsx,ts,tsx,css,scss,json,md}\""
   },
   "dependencies": {
+    "@ant-design/icons": "^6.1.0",
     "@astrojs/react": "^4.0.0",
     "@astrojs/vercel": "^9.0.1",
     "@lottiefiles/lottie-player": "^2.0.12",
+    "@vitejs/plugin-react": "^5.1.1",
+    "antd": "^6.0.1",
     "astro": "5.15.1",
     "chart.js": "^4.4.4",
     "clsx": "^2.1.1",
     "framer-motion": "^11.0.0",
     "react": "19.1.0",
     "react-chartjs-2": "^5.2.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "styled-components": "^6.1.19"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",

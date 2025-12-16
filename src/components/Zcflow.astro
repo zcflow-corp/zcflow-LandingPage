@@ -1,14 +1,21 @@
 ---
 import CardSlider from 'src/islands/CardSlider.jsx'
+import CardZcflow from '@/islands/CardZcflow'
 
-import TrustedBy from './TrustedBy.astro'
 const { t: _t, locale } = Astro.props
 const t = typeof _t === 'function' ? _t : (k) => k
 const base = import.meta.env.BASE_URL
 
-console.log('localee', locale)
-
 const slides = [
+  {
+    title: t('IA predictiva'),
+    description: t('Agentes de IA que anticipan escenarios, reducen riesgos y optimizan costos'),
+    image: `${base}assets/section_zcflow_2.svg`,
+    alt: 'Conectores y tablero',
+    Icono: 'automatizaciones',
+    hasFlow: true,
+    id: 1,
+  },
   {
     title: t('Integración total'),
     description: t(
@@ -18,7 +25,7 @@ const slides = [
     alt: 'Paneles de ZCflow con gráficos',
     Icono: 'conexion',
     hasFlow: true,
-    id: 1,
+    id: 2,
   },
 
   {
@@ -28,15 +35,6 @@ const slides = [
     alt: 'Proyecciones con IA',
     Icono: 'reporte',
     hasFlow: true,
-    id: 2,
-  },
-  {
-    title: t('IA predictiva'),
-    description: t('Agentes de IA que anticipan escenarios, reducen riesgos y optimizan costos'),
-    image: `${base}assets/section_zcflow_2.svg`,
-    alt: 'Conectores y tablero',
-    Icono: 'automatizaciones',
-    hasFlow: true,
     id: 3,
   },
 ]
@@ -45,23 +43,23 @@ const slides = [
 <section id="zcflow" class="section zcflow-who">
   <div class="container">
     <div class="zcflow-description">
+      <span class="gradient-blue-ligth">
+        {t('Zcflow')}
+      </span>
+      <h2 class="">
+        {t('Así resolvemos lo que nadie resuelve')}
+      </h2>
       <div>
-        <CardSlider
+        <CardZcflow
           slides={slides}
           interval={10000}
           startIndex={0}
-          title={t('ZCflow, tu IA para predecir tus finanzas')}
-          description={t(
-            'Plataforma financiera con IA que integra, reduce riesgos y transforma finanzas con decisiones precisas'
-          )}
-          word="Zcflow"
+          title={t('Asi resolvemos lo que nadie resuelve')}
           t={t}
           locale={locale}
           client:load
         />
       </div>
-
-      <TrustedBy t={t} />
     </div>
   </div>
 </section>
@@ -72,8 +70,20 @@ const slides = [
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
-    background: var(--c-bg-variant);
+    gap: 1rem;
+    background: var(--c-black);
+
+    h2 {
+      margin-bottom: 2rem;
+      color: var(--c-white);
+    }
+  }
+
+  .zcflow-description {
+    display: flex;
+    flex-direction: column;
+    // gap: 1rem;
+    align-items: center;
   }
 
   html[data-theme='dark'] .zcflow-who {
