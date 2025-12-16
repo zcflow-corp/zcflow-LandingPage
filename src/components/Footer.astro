@@ -7,96 +7,127 @@ const base = import.meta.env.BASE_URL
 ---
 
 <footer id="contacto" role="contentinfo" aria-label="Pie de página principal de ZCFlow">
-  <div class="container footer-grid">
-    <div class="footer-col" itemscope itemtype="https://schema.org/Organization">
-      <a href="/inicio" aria-label="Inicio - ZCFlow">
+  <div class="container" style="width: 100%;">
+    <div class="container-footer-col">
+      <div class="footer-col" itemscope itemtype="https://schema.org/Organization">
+        <a href="/inicio" aria-label="Inicio - ZCFlow">
+          <Image
+            src=`${base}assets/logo_header_light.webp`
+            alt="ZCFlow logo light"
+            class="responsive-mode-dark"
+            width={120}
+            height={120}
+            loading="lazy"
+            decoding="async"
+            itemprop="logo"
+          />
+        </a>
+        <div class="footer-col">
+          <address>
+            <p style="font-size: 0.8rem; font-weight: bold; font-style: normal;margin:0px;">Perú</p>
+            <p style="font-size: 0.8rem;font-style: normal;margin:0px;">
+              Jr. Vittore Carpaccio 250, San Borja 15036
+            </p>
+          </address>
+        </div>
+        <meta itemprop="name" content="ZCFlow" />
+        <meta itemprop="url" content="https://www.zcflow.com" />
+      </div>
+      <div class="slogan-text">
+        <p itemprop="description" class="slogan-footer">
+          {t('Predice el futuro, minimiza riesgos.')}
+        </p>
+      </div>
+    </div>
+    <div class="footer-grid" style="width: 62%;">
+      <div class="footer-col">
+        <h3>{t('Platform')}</h3>
+        <nav aria-label="Platform" style="background:var(--c-quinary)!important;">
+          <a href="#soluciones" target="_blank" rel="noopener noreferrer">{t('Empresas')}</a>
+          <a href="#soluciones" target="_blank" rel="noopener noreferrer">{t('Socios')}</a>
+          <a href="#soluciones" target="_blank" rel="noopener noreferrer">{t('Soluciones')}</a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <h3>{t('Resources')}</h3>
+        <nav aria-label="resources" style="background:var(--c-quinary)!important;">
+          <a href="#zcflow" target="_blank" rel="noopener noreferrer">{t('Quiénes somos')}</a>
+          <a href="#fundamentos" target="_blank" rel="noopener noreferrer">{t('Fundamentos')}</a>
+          <a href="mailto:contacto@zcflow.com" target="_blank" rel="noopener noreferrer"
+            >Contactanos</a
+          >
+        </nav>
+      </div>
+      <div style="display: flex;max-width: 50%;">
         <Image
-          src=`${base}assets/logo_header_light.webp`
-          alt="ZCFlow logo light"
-          class="responsive-mode-dark"
-          width={120}
-          height={120}
+          src=`${base}assets/win_leader.webp`
+          class="win"
+          alt="win_leader"
+          width={20}
+          height={20}
           loading="lazy"
           decoding="async"
           itemprop="logo"
         />
-      </a>
-      <div class="footer-col">
-        <address>
-          <p style="font-size: 1rem; font-weight: bold;">Perú</p>
-          <p style="font-size: 1rem;">Jr. Vittore Carpaccio 250, San Borja 15036</p>
-        </address>
+        <Image
+          src=`${base}assets/win_milestone.webp`
+          alt="win_mileston"
+          class="win"
+          width={20}
+          height={20}
+          loading="lazy"
+          decoding="async"
+          itemprop="logo"
+        />
       </div>
-      <meta itemprop="name" content="ZCFlow" />
-      <meta itemprop="url" content="https://www.zcflow.com" />
-    </div>
 
-    <div class="footer-col">
-      <h3>{t('Platform')}</h3>
-      <nav aria-label="Platform" style="background:var(--c-quinary)!important;">
-        <a href="#soluciones" target="_blank" rel="noopener noreferrer">{t('Empresas')}</a>
-        <a href="#soluciones" target="_blank" rel="noopener noreferrer">{t('Socios')}</a>
-        <a href="#soluciones" target="_blank" rel="noopener noreferrer">{t('Soluciones')}</a>
-      </nav>
-    </div>
-    <div class="footer-col">
-      <h3>{t('Resources')}</h3>
-      <nav aria-label="resources" style="background:var(--c-quinary)!important;">
-        <a href="#zcflow" target="_blank" rel="noopener noreferrer">{t('Quiénes somos')}</a>
-        <a href="#fundamentos" target="_blank" rel="noopener noreferrer">{t('Fundamentos')}</a>
-        <a href="mailto:contacto@zcflow.com" target="_blank" rel="noopener noreferrer"
-          >Contactanos</a
-        >
-      </nav>
-    </div>
-    <div style="display: flex;max-width: 50%;gap:0.8rem">
-      <Image
-        src=`${base}assets/win_leader.svg`
-        alt="win_leader"
-        width={50}
-        height={50}
-        loading="lazy"
-        decoding="async"
-        itemprop="logo"
-      />
-      <Image
-        src=`${base}assets/win_milestone.svg`
-        alt="win_mileston"
-        width={50}
-        height={50}
-        loading="lazy"
-        decoding="async"
-        itemprop="logo"
-      />
-    </div>
-  </div>
-  <div
-    class="description-slogan"
-    style="display: flex;margin:0 auto; padding: 0rem 0rem 0rem 2rem; flex-wrap: wrap; max-width: 1200px;align-items: center; gap:2rem;"
-  >
-    <p itemprop="description" style="font-size: 1rem;max-width: 16rem;">
-      {t('Predice el futuro, minimiza riesgos.')}
-    </p>
-    <div class="footer-col">
-      <nav
-        style="flex-wrap: wrap; line-height: 2; background:var(--c-quinary)!important;flex-direction: row; gap:8rem; max-width: 100%;"
-        aria-label="Legal"
-      >
-        <a href="#terminos" target="_blank" rel="noopener noreferrer"
-          >{t('Términos y Condiciones')}</a
-        >
-        <a href="#privacidad" style="padding: 0 0.8rem;" target="_blank" rel="noopener noreferrer"
-          >{t('Política de privacidad')}</a
-        >
-        <a href="#legal" style="padding: 0 7rem" ; target="_blank" rel="noopener noreferrer"
-          >{t('Aviso legal')}</a
-        >
-      </nav>
+      <div class="description-slogan" style="width: 80%;">
+        <div class="footer-col">
+          <nav
+            style="flex-wrap: wrap; line-height: 2; background:var(--c-quinary)!important;flex-direction: row; gap:0rem;justify-content: space-between;"
+            aria-label="Legal"
+          >
+            <a href="#terminos" target="_blank" rel="noopener noreferrer"
+              >{t('Términos y Condiciones')}</a
+            >
+            <a href="#privacidad" target="_blank" rel="noopener noreferrer"
+              >{t('Política de privacidad')}</a
+            >
+            <a href="#legal" target="_blank" rel="noopener noreferrer">{t('Aviso legal')}</a>
+          </nav>
+        </div>
+      </div>
     </div>
   </div>
 </footer>
 
 <style lang="scss">
+  .container-footer-col {
+    width: 38%;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    row-gap: 6rem;
+    // height: 100vh;
+    // max-height: 218px;
+    justify-content: space-between;
+  }
+  .slogan-footer {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0px;
+  }
+  .slogan-text p {
+    color: #00b0f0;
+    background: linear-gradient(to right, #ffff 14%, #00b0f0 67%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .win {
+    width: 50%;
+  }
   .description-slogan p {
     background: linear-gradient(to right, var(--c-white) -23%, var(--c-primary-accessible) 100%);
     -webkit-background-clip: text;
@@ -110,46 +141,65 @@ const base = import.meta.env.BASE_URL
     background: var(--c-quinary) !important;
 
     .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
       gap: 2rem;
       align-items: start;
     }
-
-    .footer-col h3 {
-      color: var(--c-white);
-      margin-bottom: 0.8rem;
-      font-size: 1rem;
-    }
-
-    .footer-col p,
-    .footer-col a,
-    .footer-col address {
-      color: var(--c-white);
-      text-decoration: none;
-    }
-    .footer-col nav {
+    .footer-col {
       display: flex;
       flex-direction: column;
-      gap: 15px;
-      width: 100%;
-      max-width: 150px;
-      min-width: 50px;
-      a:hover {
-        color: var(--c-eye);
+      flex-wrap: wrap;
+      row-gap: 1rem;
+
+      h3 {
+        color: var(--c-white);
+        font-size: 1rem;
+        margin: 0px;
+      }
+
+      p,
+      a,
+      address {
+        color: var(--c-white);
         text-decoration: none;
+      }
+
+      nav {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        a:hover {
+          color: var(--c-eye);
+          text-decoration: none;
+        }
+      }
+
+      address a {
+        display: inline-block;
       }
     }
 
-    .footer-col address a {
-      display: inline-block;
-    }
     @include media(mobile) {
       .footer-col nav {
-        gap: 0rem;
+        gap: 1rem;
+      }
+      .container {
+        flex-wrap: wrap;
+        height: auto;
+      }
+      .footer-grid {
+        width: 79%;
+        justify-content: flex-start;
+      }
+      .container-footer-col {
+        width: 100%;
+        gap: 0px;
       }
     }
-    @media (max-width: 768px) {
+    @include media(mobile) {
       .footer-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
