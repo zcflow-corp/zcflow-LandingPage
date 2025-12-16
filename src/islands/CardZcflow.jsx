@@ -24,6 +24,17 @@ function getLocaleFromDoc() {
   return document.documentElement.lang === 'en' ? 'en' : 'es'
 }
 
+/**
+ * Creates a translation function from a messages object
+ * @param {Object} messages - The translation messages object
+ * @returns {Function} A function that takes a key and returns the translated value
+ */
+function createTranslationFunction(messages) {
+  return (key) => {
+    return messages[key] || key
+  }
+}
+
 export default function CardZcflow({
   slides = [],
   interval = 5000,
@@ -33,7 +44,7 @@ export default function CardZcflow({
   word = '',
 }) {
   const [index, setIndex] = useState(startIndex)
-  const [t, setT] = useState(startIndex)
+  const [t, setT] = useState(() => createTranslationFunction(es))
 
   const timerRef = useRef(null)
   const total = slides.length
@@ -68,8 +79,8 @@ export default function CardZcflow({
 
   useEffect(() => {
     const messages = locale === 'en' ? en : es
-    setT(messages)
-  }, locale)
+    setT(() => createTranslationFunction(messages))
+  }, [locale])
 
   // Render extra components for flow items
   function renderExtraComponent(slide) {
@@ -140,21 +151,31 @@ export default function CardZcflow({
         {/* === CONTENT === */}
         <div className="card-slider__content zcflow-description">
           <p>
-            Con <h3> ZCFLOW </h3> integramos toda tu información financiera en una plataforma 100%
-            data driven, potenciada por
-            <span className="gradient-blue-ligth"> agentes de IA </span> que anticipan tu liquidez y
-            simulan escenarios para orientar decisiones financieras más precisas.
+            {t('Con')} <h3> ZCFLOW </h3>{' '}
+            {t(
+              'integramos toda tu información financiera en una plataforma 100% data driven, potenciada por'
+            )}
+            <span className="gradient-blue-ligth"> {t('agentes de IA')} </span>{' '}
+            {t(
+              'que anticipan tu liquidez y simulan escenarios para orientar decisiones financieras más precisas.'
+            )}
           </p>
 
           <p>
-            Hacemos que el{' '}
-            <span className="gradient-blue-ligth"> mercado financiero compita por tu liquidez</span>
-            : el menor costo cuando necesitas caja y el mejor retorno cuando tienes excedentes.
+            {t('Hacemos que el')}{' '}
+            <span className="gradient-blue-ligth">
+              {' '}
+              {t('mercado financiero compita por tu liquidez')}
+            </span>
+            {t(
+              ': el menor costo cuando necesitas caja y el mejor retorno cuando tienes excedentes.'
+            )}
           </p>
 
           <p className="driver">
-            De hojas de cálculo y tareas manuales <span className="gradient-blue-ligth"> → </span> a
-            decisiones precisas, confiables y asistidas desde una única plataforma.
+            {t('De hojas de cálculo y tareas manuales')}{' '}
+            <span className="gradient-blue-ligth"> {t('→')} </span>{' '}
+            {t('a decisiones precisas, confiables y asistidas desde una única plataforma.')}
           </p>
           <ul className="checks" role="list">
             {slides.map((c, i) => (
