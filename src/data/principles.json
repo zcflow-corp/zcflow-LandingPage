@@ -6,16 +6,16 @@
     "img": "assets/section_fundamentos_security.webp"
   },
   {
-    "title": "IA predictiva",
-    "key": "PREDICCIÓN",
-    "desc": "La inteligencia artificial es el centro de nuestro diseño: cada funcionalidad nace para anticipar, aprender y mejorar decisiones financieras.",
-    "img": "assets/section_fundamentos_OPT.webp"
-  },
-  {
     "title": "Productividad",
     "key": "EFICIENCIA",
     "desc": "Liberamos tiempo del equipo financiero para que se dedique a lo estratégico, no a tareas repetitivas. La eficiencia es un principio, no un resultado.",
     "img": "assets/section_fundamentos_productivity.webp"
+  },
+  {
+    "title": "IA predictiva",
+    "key": "PREDICCIÓN",
+    "desc": "La inteligencia artificial es el centro de nuestro diseño: cada funcionalidad nace para anticipar, aprender y mejorar decisiones financieras.",
+    "img": "assets/section_fundamentos_OPT.webp"
   },
   {
     "title": "Experiencia de Usuario",

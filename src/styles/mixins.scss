@@ -38,7 +38,7 @@ $Extralarge: 2560px;
 }
 
 @mixin shared-mobile-tablet-principales {
-  .conatiner-cards {
+  .container-cards {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
@@ -46,10 +46,14 @@ $Extralarge: 2560px;
     column-gap: 2rem;
     padding: 4px;
   }
-  #fundamentos .section-body p{
+  .column-card-two {
+    padding-top: 2rem;
+  }
+  #fundamentos .section-body p {
     font-size: 0.8rem;
     margin: 0px;
   }
+   
 }
 
 @mixin shared-mobile-table {
@@ -57,7 +61,7 @@ $Extralarge: 2560px;
     padding: 2rem;
   }
   .btn {
-    justify-content: center!important;
+    justify-content: center !important;
   }
 
   .nav-list {
@@ -75,16 +79,16 @@ $Extralarge: 2560px;
     flex-direction: column;
     color: var(--c-black);
   }
-  .mode-responsive{
+  .mode-responsive {
     display: block;
-        max-width: 73px;
+    max-width: 73px;
   }
 
-  html[data-theme='dark'] .mode-responsive{
-   display: none;
-}
+  html[data-theme='dark'] .mode-responsive {
+    display: none;
+  }
 
-  .mode-dark{
+  .mode-dark {
     display: none;
   }
   .logo img {
