@@ -50,16 +50,17 @@ const secondColumnItems = principles.slice(2, 5)
           firstColumnItems.map((p, index) => (
             <article id="fundamentos-card" class="card principle column-card-first">
               {p.img && (
-                <figure class="images-dinamyc">
-                  <Image
-                    src={`${base}${p.img}`}
-                    alt={t(p.title)}
-                    width={1200}
-                    height={200}
-                    loading="lazy"
-                    class="images-dinamyc"
-                  />
-                </figure>
+                <div class={`images-dinamyc${index}`}>
+                  <figure>
+                    <Image
+                      src={`${base}${p.img}`}
+                      alt={t(p.title)}
+                      width={1200}
+                      height={200}
+                      class="Image"
+                    />
+                  </figure>
+                </div>
               )}
               <section class="principles-container">
                 <span class="keyword">{t(p.key)}</span>
@@ -74,24 +75,23 @@ const secondColumnItems = principles.slice(2, 5)
           ))
         }
       </section>
-      <section
-        class="principles"
-        aria-labelledby="Lista de principios fundamentales de ZCflow"
-      >
+      <section class="principles column-card-two" aria-labelledby="Lista de principios fundamentales de ZCflow">
         {
           secondColumnItems.map((p, index) => (
-            <article id="fundamentos-card" class="card principle column-card-two">
+            <article id="fundamentos-card" class="card principle">
               {p.img && (
-                <figure class="images-dinamyc">
-                  <Image
-                    src={`${base}${p.img}`}
-                    alt={t(p.title)}
-                    width={1200}
-                    height={200}
-                    loading="lazy"
-                    class="images-dinamyc"
-                  />
-                </figure>
+                <div class={`images-dinamyc-second${index}`}>
+                  <figure>
+                    <Image
+                      src={`${base}${p.img}`}
+                      alt={t(p.title)}
+                      width={1200}
+                      height={200}
+                      class="Image"
+                      loading="lazy"
+                    />
+                  </figure>
+                </div>
               )}
               <section class="principles-container">
                 <span class="keyword">{t(p.key)}</span>
@@ -110,6 +110,41 @@ const secondColumnItems = principles.slice(2, 5)
   </div>
 </section>
 <style lang="scss">
+
+  .column-card-first .images-dinamyc0, .images-dinamyc1, .images-dinamyc-second0, .images-dinamyc-second1, .images-dinamyc-second2{
+    display: flex;
+    background: var(--c-bg-variant);
+    border-radius: 2px;
+    margin: 0px;
+    padding: 12px 12px;
+  }
+
+  .column-card-first .images-dinamyc0{
+    justify-content: flex-end;
+  }
+
+    .column-card-first .images-dinamyc1{
+    justify-content: flex-start;
+  }
+
+  .images-dinamyc-second0{
+    justify-content: flex-start;
+  } .images-dinamyc-second1{
+    justify-content: flex-end;
+  }
+  .images-dinamyc-second2{
+    justify-content: flex-start;
+  }
+
+  .fundamentos{
+    background: var(--c-bg-variant);
+  }
+
+  .column-card-two{
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 2rem;
+  }
   section .column-card-first:first-of-type {
     border-radius: 8px;
   }
@@ -118,6 +153,12 @@ const secondColumnItems = principles.slice(2, 5)
     background: var(--c-white);
     border-radius: 8px;
     padding: 13px;
+  }
+
+  .Image {
+    margin: 0;
+    width: 80%;
+    height: 259px;
   }
 
   .keyword {
@@ -136,8 +177,8 @@ const secondColumnItems = principles.slice(2, 5)
     margin: 0px;
     padding: 12px 12px;
     display: flex;
-    height: 58%;
   }
+
   .container-fundamentos {
     margin: 0 auto;
     display: flex;
@@ -156,7 +197,6 @@ const secondColumnItems = principles.slice(2, 5)
   .images-dinamyc {
     img {
       width: 100%;
-      height: auto;
     }
   }
 
@@ -193,12 +233,14 @@ const secondColumnItems = principles.slice(2, 5)
     text-align: center;
     padding: 0;
   }
-
   .card {
     figure {
+       margin: 0;
+    width: 100%;
+    max-width: 80%;
       img {
-        max-width: 80%;
-        object-fit: contain;
+        width: 100%;
+        object-fit: cover;
         display: block;
         padding: 0px;
       }
@@ -212,10 +254,21 @@ const secondColumnItems = principles.slice(2, 5)
 
   /* Breakpoints */
 
-  @include media(mobile){
-     .principles-container .keyword{
+  @include media(mobile) {
+    .principles-container .keyword {
       max-width: 31%;
     }
+    .images-dinamyc {
+     .card {
+    figure {
+    max-width: 100%;
+      img {
+        width: 125%;
+      }
+    }
+  }
+   
+  }
   }
 
   @include media(desktop) {
