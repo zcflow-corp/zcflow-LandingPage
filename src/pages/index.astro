@@ -9,6 +9,7 @@ import Indicators from '@/components/Indicators.astro'
 import Principles from '@/components/Principles.astro'
 import CTA from '@/components/CTA.astro'
 import Footer from '@/components/Footer.astro'
+import ChatBot from '@/components/ChatBot.astro'
 
 const locale = Astro.currentLocale || 'es'
 const messages = await import(`../i18n/${locale}.json`).then((m) => m.default)
@@ -24,6 +25,7 @@ const t = (k) => messages[k] ?? k
     <Indicators t={t} />
     <Principles t={t} />
     <CTA t={t} />
+    <ChatBot t={t} />
   </main>
   <Footer t={t} />
 </BaseLayout>

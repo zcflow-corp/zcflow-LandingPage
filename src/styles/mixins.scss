@@ -38,46 +38,22 @@ $Extralarge: 2560px;
 }
 
 @mixin shared-mobile-tablet-principales {
-  .principles {
+  .container-cards {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
+    width: 100%;
+    column-gap: 2rem;
+    padding: 4px;
   }
-
-
-  // /* --- Fila Superior 2 Tarjetas--- */
-
-  // /* 1. la primera tarjeta  ocupa 2 columnas */
-  // .principles > .principle:nth-child(1) {
-  //   grid-column: 1 / span 2;
-  //   grid-row: 1;
-  // }
-
-  // /* 2. la segunda tarjeta  ocupa 1 columna */
-  // .principles > .principle:nth-child(2) {
-  //   grid-column: 3 / 4;
-  //   grid-row: 1;
-  // }
-
-  // /* --- Fila Inferior 3 Tarjetas --- */
-
-  // /* 3. la tercera tarjeta ocupa la primera columna de la segunda fila */
-  // .principles > .principle:nth-child(3) {
-  //   grid-column: 1 / 2;
-  //   grid-row: 2;
-  // }
-
-  // /* 4. la cuarta tarjeta  ocupa la segunda columna de la segunda fila */
-  // .principles > .principle:nth-child(4) {
-  //   grid-column: 2 / 3;
-  //   grid-row: 2;
-  // }
-
-  // /* 5. la quinta tarjeta  ocupa la tercera columna de la segunda fila */
-  // .principles > .principle:nth-child(5) {
-  //   grid-column: 3 / 4;
-  //   grid-row: 2;
-  // }
+  .column-card-two {
+    padding-top: 2rem;
+  }
+  #fundamentos .section-body p {
+    font-size: 0.8rem;
+    margin: 0px;
+  }
+   
 }
 
 @mixin shared-mobile-table {
@@ -85,7 +61,7 @@ $Extralarge: 2560px;
     padding: 2rem;
   }
   .btn {
-    justify-content: center!important;
+    justify-content: center !important;
   }
 
   .nav-list {
@@ -103,16 +79,16 @@ $Extralarge: 2560px;
     flex-direction: column;
     color: var(--c-black);
   }
-  .mode-responsive{
+  .mode-responsive {
     display: block;
-        max-width: 73px;
+    max-width: 73px;
   }
 
-  html[data-theme='dark'] .mode-responsive{
-   display: none;
-}
+  html[data-theme='dark'] .mode-responsive {
+    display: none;
+  }
 
-  .mode-dark{
+  .mode-dark {
     display: none;
   }
   .logo img {

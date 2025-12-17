@@ -365,7 +365,10 @@ const t = typeof _t === 'function' ? _t : (k) => k
 | **JS/TS Utils**      | Pass `t` as parameter or import JSON directly |
 
 The key pattern is: **Load once at the page level, pass down as props**.
+<<<<<<< HEAD
 
 
 
 
+=======
+>>>>>>> f899b1f7cccd2f9a263980e6277cd9422c098046

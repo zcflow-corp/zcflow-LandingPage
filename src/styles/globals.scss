@@ -21,7 +21,7 @@ footer {
 }
 
 .responsive-mode-dark {
-  max-width: 120px;
+  max-width: 100px;
 }
 
 ul,
@@ -92,24 +92,21 @@ a {
   border-style: none;
 }
 
+/*
+ * @todos
+ * .gradient-blue-dark es utilizada seccion principios y
+ * depende de este comportamiento para evitar flicker inicial.
+ * Para customizaciones especificas de otros titulos,
+ * crear una nueva clase y no sobrescribir esta.
+ */
+
 .gradient-blue-dark {
-
-  // background: var(--g-primary-dark);
-  // background-size: 200% 100%;
-  // background-clip: text;
-  // -webkit-background-clip: text;
-  // color: transparent;
-  // -webkit-text-fill-color: transparent;
-  // display: inline-block;
-  // animation: gradient-move 5s ease infinite;
-
   background: var(--g-primary-dark);
   background-size: 200% 100%;
   background-clip: text;
   -webkit-background-clip: text;
-  color: black;
-  /* Inicialmente color negro */
-  -webkit-text-fill-color: black;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
   display: inline-block;
   animation: gradient-move 5s ease infinite, color-change 5s ease infinite;
   transition: color 1s ease, -webkit-text-fill-color 1s ease;
@@ -127,7 +124,6 @@ a {
   -webkit-text-fill-color: transparent;
   display: inline-block;
   animation: gradient-move 15s ease infinite;
-
 }
 
 html[data-theme='dark'] .gradient-blue-dark {
@@ -368,9 +364,6 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
 @keyframes gradient-move {
   0% {
     background-position: 0% 0;
-
-
-
   }
 
   50% {
@@ -402,8 +395,6 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
   }
 }
 
-
-
 // Estilos generales para los inputs y textarea
 
 .contact-form-container {
@@ -417,13 +408,10 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
   justify-content: center;
   gap: 2rem;
 
-
   h2,
   p {
     text-align: center;
   }
-
-
 
   .contact-form {
     background-color: red !important;
@@ -431,7 +419,6 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-
   }
 
   .form-fields {
@@ -552,7 +539,6 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
 }
 
 .form-group {
-
   width: 100%;
   display: flex;
   justify-content: center;
@@ -561,7 +547,6 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
   padding: 1rem 0rem;
 
   &-submit {
-
     width: 100%;
     display: flex;
     padding: 1rem;
@@ -569,12 +554,9 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
     justify-content: center;
   }
 
-
-
   @include media(tablet) {
     flex-direction: row;
   }
-
 }
 
 // Estilos para el checkbox de "Términos y condiciones"
