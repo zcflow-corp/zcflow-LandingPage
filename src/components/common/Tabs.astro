@@ -1,6 +1,6 @@
 ---
 // Recibe los datos como prop
-import CardSlider from 'src/islands/CardSlider.jsx'
+import CardSolution from 'src/islands/CardSolution.jsx'
 
 const { TabsJson } = Astro.props
 let active = 0
@@ -48,7 +48,7 @@ let active = 0
 
           <div class="slider-functions">
             {Array.isArray(t.slides) && t.slides.length > 0 && (
-              <CardSlider
+              <CardSolution
                 slides={t.slides}
                 interval={6000}
                 startIndex={0}

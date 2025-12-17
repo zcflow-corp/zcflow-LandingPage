@@ -43,50 +43,50 @@ const slides = [
 <section id="zcflow" class="section zcflow-who">
   <div class="container">
     <div class="zcflow-description">
-      <span class="gradient-blue-ligth">
-        {t('Zcflow')}
-      </span>
-      <h2 class="">
-        {t('Así resolvemos lo que nadie resuelve')}
-      </h2>
+      <div class="section-title-center">
+        <span class="gradient-blue-ligth">
+          {t('Conoce Zcflow')}
+        </span>
+        <h2 class="">
+          {t('Así resolvemos lo que nadie resuelve')}
+        </h2>
+      </div>
       <div>
-        <CardZcflow
-          slides={slides}
-          interval={10000}
-          startIndex={0}
-          title={t('Asi resolvemos lo que nadie resuelve')}
-          t={t}
-          locale={locale}
-          client:load
-        />
+        <div>
+          <CardZcflow
+            slides={slides}
+            interval={10000}
+            startIndex={0}
+            title={t('Asi resolvemos lo que nadie resuelve')}
+            t={t}
+            locale={locale}
+            client:load
+          />
+        </div>
       </div>
     </div>
   </div>
-</section>
 
-<style lang="scss">
-  .zcflow-who {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    background: var(--c-black);
+  <style lang="scss">
+    .zcflow-who {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      background: var(--c-black);
 
-    h2 {
-      margin-bottom: 2rem;
-      color: var(--c-white);
+      h2 {
+        color: var(--c-white);
+      }
     }
-  }
 
-  .zcflow-description {
-    display: flex;
-    flex-direction: column;
-    // gap: 1rem;
-    align-items: center;
-  }
+    .zcflow-description {
+      width: 100%;
+    }
 
-  html[data-theme='dark'] .zcflow-who {
-    background-color: transparent;
-  }
-</style>
+    html[data-theme='dark'] .zcflow-who {
+      background-color: transparent;
+    }
+  </style>
+</section>
