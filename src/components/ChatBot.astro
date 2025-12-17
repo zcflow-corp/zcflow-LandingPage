@@ -4,37 +4,113 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
 ---
 
 <section id="chatBot" aria-labelledby="chatbot-title">
-  <div class="container">
-    <div>
-      <span>Ask BOTO</span>
-      <h3>Converse con la tesorería del futuro.</h3>
-      <p>
+  <div class="container" style="width: 100%;">
+    <div class="container-section-description">
+      <span class="container-section-description-keyword">BETA</span>
+      <h1 class="container-section-description-title">Ask BOTO</h1>
+      <h3 class="container-section-description-slogan">Converse con la tesorería del futuro.</h3>
+      <p class="container-section-description-BOTO">
         {
           t(
-            ' Inicia una conversación con BOTO, tu nuevo asesor financiero digital. Disponible 24/7. Descubre ideas, recomendaciones y análisis en segundos. Hazle preguntas sobre liquidez,proyecciones, riesgos o estrategias financieras, y obtén respuestas claras y accionables.'
+            ' Inicia una conversación con BOTO, tu nuevo asesor financiero digital. Disponible 24/7.'
+          )
+        }
+      </p>
+      <p class="container-section-description-BOTO">
+        {
+          t(
+            'Descubre ideas, recomendaciones y análisis en segundos. Hazle preguntas sobre liquidez,proyecciones, riesgos o estrategias financieras, y obtén respuestas claras y accionables.'
           )
         }
       </p>
     </div>
-  </div>
-  <div>
-    <iframe
-      width="100%"
-      height="450"
-      src="https://www.canva.com/design/DAG7T8eAAqU/MXAc_bYcL9L3pMIyMve3hg/watch?utm_content=DAG7T8eAAqU&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h5c39d1dcbb"
-      title="Video de demostración del Asesor Financiero BOTO"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-      loading="lazy"
-    >
-      Tu navegador no soporta iframes. Por favor, visita el video directamente en [Enlace a tu
-      video].
-    </iframe>
+    <div class="container-section-iframe">
+      <iframe
+        width="100%"
+        height="450"
+        src="https://www.canva.com/design/DAG7T8eAAqU/MXAc_bYcL9L3pMIyMve3hg/watch?utm_content=DAG7T8eAAqU&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h5c39d1dcbb"
+        title="Video de demostración del Asesor Financiero BOTO"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        loading="lazy"
+      >
+      </iframe>
+    </div>
   </div>
 </section>
 <style lang="scss">
+  .container-section-description {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    max-width: 51%;
+    row-gap: 0.5rem;
+  }
+  .container-section-description-title {
+    font-size: 3rem;
+    font-weight: lighter;
+     color: var(--c-white);
+  //   background: linear-gradient(
+  //   90deg,
+  //   #1C4EE7 0%,
+  //   #A659E3 75%,
+  //   #E16ACF 100%
+  // );
+    // -webkit-background-clip: text;
+    // background-clip: text;
+    // -webkit-text-fill-color: transparent;
+    margin: 0px;
+  }
+  .container-section-description-keyword {
+    color: var(--c-black);
+    margin: 11px 0px;
+    background: var(--c-bg-variant);
+    max-width: 10%;
+    padding: 0.4rem;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    text-align: center;
+  }
+  .container-section-description-BOTO {
+    color: var(--c-white);
+    font-size: 1rem;
+    font-weight: normal;
+    margin: 0px;
+    line-height: 1.6;
+  }
+  .container-section-description-slogan {
+    color: #00b0f0;
+    background: linear-gradient(to right, #ffff 14%, #00b0f0 67%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+     margin: 10px 0px;
+     font-size: 1.3rem;
+     font-weight: bold;
+  }
   section {
     background: var(--c-primary-accessible);
+  }
+
+   .container-section-iframe{
+    width: 100%;
+      max-width: 49%;
+    }
+
+  @include media(mobile){
+   section .container{
+      flex-wrap: wrap;
+    }
+    .container-section-description{
+max-width: 100%;
+    }
+    .container-section-iframe{
+      max-width: 100%;
+    }
+    .container-section-description-keyword{
+      max-width: 22%;
+    }
   }
 </style>

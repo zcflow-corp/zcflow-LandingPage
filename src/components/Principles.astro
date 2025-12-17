@@ -17,15 +17,11 @@ const secondColumnItems = principles.slice(2, 5)
         <div class="reveal-wrapper">
           <h2 class="reveal-target" style="margin: 0%;">{t('Los principios que nos guían')}</h2>
         </div>
-        <div class="reveal-wrapper description-wrapper">
+        <!-- <div class="reveal-wrapper description-wrapper">
           <p class="reveal-target fundamentos-description">
-            {
-              t(
-                'Sabemos que la confianza en las finanzas nace de la innovación responsable. Por eso, en ZCflow nos regimos por cinco principios que definen cómo diseñamos, operamos y colaboramos. Estos fundamentos no son opcionales: son nuestro compromiso con las empresas y con el futuro.'
-              )
-            }
+           
           </p>
-        </div>
+        </div> -->
         <!-- <div class="btn icon descubre-mas">
           <a href="#fundamentos-card" class="btn" aria-label={t('Descubre más')}>
             {t('Descubre más')}</a
@@ -34,131 +30,120 @@ const secondColumnItems = principles.slice(2, 5)
       </div>
     </div>
     <!-- principios -->
-    <section class="principles" aria-labelledby="Lista de principios fundamentales de ZCflow">
-      {
-        firstColumnItems.map((p, index) => (
-          <article id="fundamentos-card" class="card principle">
-            {p.img && (
-              <figure class="images-dinamyc">
-                <Image
-                  src={`${base}${p.img}`}
-                  alt={t(p.title)}
-                  width={1200}
-                  height={200}
-                  loading="lazy"
-                  class="images-dinamyc"
-                />
-              </figure>
-            )}
-            <section class="principles-container">
-              <span class="keyword">{p.key}</span>
-              <div class="section-header">
-                <h3 class="principle-title">{t(p.title)}</h3>
-              </div>
-              <div class="section-body">
-                <p style="font-size: 1rem;">{t(p.desc)}</p>
-              </div>
-            </section>
-          </article>
-        ))
-      }
-    </section>
-    <section class="principles" aria-labelledby="Lista de principios fundamentales de ZCflow">
-      {
-        secondColumnItems.map((p, index) => (
-          <article id="fundamentos-card" class="card principle">
-            {p.img && (
-              <figure class="images-dinamyc">
-                <Image
-                  src={`${base}${p.img}`}
-                  alt={t(p.title)}
-                  width={1200}
-                  height={200}
-                  loading="lazy"
-                  class="images-dinamyc"
-                />
-              </figure>
-            )}
-            <section class="principles-container">
-              <span class="keyword">{p.key}</span>
-              <div class="section-header">
-                <h3 class="principle-title">{t(p.title)}</h3>
-              </div>
-              <div class="section-body">
-                <p style="font-size: 1rem;">{t(p.desc)}</p>
-              </div>
-            </section>
-          </article>
-        ))
-      }
-    </section>
-  </div>
-  <script>
-    const imageFigure = document.querySelector('.about-image')
-
-    const principlesSection = document.querySelector('.principles')
-
-    const fundamentosSection = document.querySelector('.fundamentos')
-
-    function setupObserver(element) {
-      if (!element || !('IntersectionObserver' in window)) return
-
-      const observer = new IntersectionObserver(
-        (entries, observerInstance) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible')
-              observerInstance.unobserve(entry.target)
-            }
-          })
-        },
+    <div class="conatiner-cards">
+      <section
+        class="principles"
+        style="display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    row-gap: 2rem;"
+        aria-labelledby="Lista de principios fundamentales de ZCflow"
+      >
+        <p>
+          {
+            t(
+              'Sabemos que la confianza en las finanzas nace de la innovación responsable. Por eso, en ZCflow nos regimos por cinco principios que definen cómo diseñamos, operamos y colaboramos. Estos fundamentos no son opcionales: son nuestro compromiso con las empresas y con el futuro.'
+            )
+          }
+        </p>
         {
-          root: null,
-          rootMargin: '0px',
-          threshold: 0.1,
+          firstColumnItems.map((p, index) => (
+            <article id="fundamentos-card" class="card principle column-card-first">
+              {p.img && (
+                <figure class="images-dinamyc">
+                  <Image
+                    src={`${base}${p.img}`}
+                    alt={t(p.title)}
+                    width={1200}
+                    height={200}
+                    loading="lazy"
+                    class="images-dinamyc"
+                  />
+                </figure>
+              )}
+              <section class="principles-container">
+                <span class="keyword">{t(p.key)}</span>
+                <div class="section-header">
+                  <h3 class="principle-title">{t(p.title)}</h3>
+                </div>
+                <div class="section-body">
+                  <p style="font-size: 1rem;">{t(p.desc)}</p>
+                </div>
+              </section>
+            </article>
+          ))
         }
-      )
-      observer.observe(element)
-    }
-
-    setupObserver(imageFigure)
-    setupObserver(principlesSection)
-
-    setupObserver(fundamentosSection)
-  </script>
+      </section>
+      <section
+        class="principles"
+        aria-labelledby="Lista de principios fundamentales de ZCflow"
+      >
+        {
+          secondColumnItems.map((p, index) => (
+            <article id="fundamentos-card" class="card principle column-card-two">
+              {p.img && (
+                <figure class="images-dinamyc">
+                  <Image
+                    src={`${base}${p.img}`}
+                    alt={t(p.title)}
+                    width={1200}
+                    height={200}
+                    loading="lazy"
+                    class="images-dinamyc"
+                  />
+                </figure>
+              )}
+              <section class="principles-container">
+                <span class="keyword">{t(p.key)}</span>
+                <div class="section-header">
+                  <h3 class="principle-title">{t(p.title)}</h3>
+                </div>
+                <div class="section-body">
+                  <p style="font-size: 1rem;">{t(p.desc)}</p>
+                </div>
+              </section>
+            </article>
+          ))
+        }
+      </section>
+    </div>
+  </div>
 </section>
 <style lang="scss">
-  #fundamentos-card:nth-child(1) {
-    margin-top: 130px;
-    max-height: 500px;
+  section .column-card-first:first-of-type {
     border-radius: 8px;
-    padding: 13px;
   }
 
   #fundamentos-card {
     background: var(--c-white);
-    max-height: 500px;
     border-radius: 8px;
+    padding: 13px;
   }
 
   .keyword {
+    width: 100%;
+    max-width: 16%;
     background: var(--c-bg-variant);
-    padding: 10px;
-    max-width: 23%;
+    padding: 8px;
     text-align: center;
     border-radius: 5px;
-    font-size: 0.8rem;
+    font-size: 0.6rem;
+    text-align: start;
   }
   .images-dinamyc {
     background: var(--c-bg-variant);
     border-radius: 2px;
+    margin: 0px;
+    padding: 12px 12px;
+    display: flex;
+    height: 58%;
   }
   .container-fundamentos {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    row-gap: 64px;
-    background: var(--c-bg-variant);
+    row-gap: 50px;
+    // background: var(--c-bg-variant);
   }
   .principles .principle:hover {
     box-shadow: var(--shadow);
@@ -179,16 +164,7 @@ const secondColumnItems = principles.slice(2, 5)
     display: flex;
     flex-direction: column;
     row-gap: 8px;
-    padding: 32px;
-  }
-
-  @include media(mobile) {
-    #fundamentos-card:nth-child(1) {
-      margin: 0px;
-    }
-    .container-fundamentos {
-      row-gap: 15px;
-    }
+    padding: 13px;
   }
 
   .fundamentos-header {
@@ -222,9 +198,9 @@ const secondColumnItems = principles.slice(2, 5)
     figure {
       img {
         max-width: 80%;
-        max-height: 80%;
         object-fit: contain;
         display: block;
+        padding: 0px;
       }
     }
   }
@@ -235,6 +211,12 @@ const secondColumnItems = principles.slice(2, 5)
   }
 
   /* Breakpoints */
+
+  @include media(mobile){
+     .principles-container .keyword{
+      max-width: 31%;
+    }
+  }
 
   @include media(desktop) {
     @include shared-mobile-tablet-principales;
