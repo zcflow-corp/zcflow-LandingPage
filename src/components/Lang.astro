@@ -1,18 +1,18 @@
 ---
-import { Astro } from 'astro'
 
 const current = Astro.currentLocale // 'es' o 'en'
 const next = current === 'es' ? 'en' : 'es'
-
+const base = import.meta.env.BASE_URL
 // quita prefijo /en/ si existe
-const cleanPath = Astro.url.pathname.replace(/^\/(en)\//, '/')
-
+const cleanPath = base.replace(/^\/(en)\//, '/')
+// zcflow-corp.github.io/zcflow-LandingPage/
+// https://zcflow-corp.github.io/en/zcflow-LandingPage/
 // asegura barra final para evitar 404 (match con trailingSlash: 'always')
 const ensureSlash = (p) => (p.endsWith('/') ? p : p + '/')
 const basePath = ensureSlash(cleanPath)
 
 // destino con idioma
-const nextPath = next === 'es' ? basePath : `/en${basePath}`
+const nextPath = next === 'es' ? cleanPath : `/en${basePath}`
 ---
 
 <a
