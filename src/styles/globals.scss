@@ -81,6 +81,7 @@ a {
   box-shadow: none;
   border-style: none;
 }
+
 /*
  * @todos
  * .gradient-blue-dark es utilizada seccion principios y
@@ -180,7 +181,6 @@ html[data-theme='light'] .fundamentos {
 .section {
   padding: 72px 0;
   scroll-margin-top: 80px;
-<<<<<<< HEAD
 
   &-title {
 
@@ -264,8 +264,6 @@ html[data-theme='light'] .fundamentos {
 
 
 
-=======
->>>>>>> 95d6da016d9841cfe6f1f982638b9129ad8fcc12
 }
 
 /*2. Estilos de componentes específicos */
@@ -414,6 +412,7 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
     width: 100%;
 
     .form-item {
+
       .ant-input,
       .ant-select,
       .ant-input-number {
@@ -549,7 +548,7 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
   font-size: 1rem;
   color: var(--c-text-muted);
 
-  .ant-checkbox-input:checked + .ant-checkbox-inner {
+  .ant-checkbox-input:checked+.ant-checkbox-inner {
     border-color: var(--c-primary);
     background-color: var(--c-primary);
   }
@@ -559,7 +558,6 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
   width: 100%;
 }
 
-<<<<<<< HEAD
 .gradient-border-left::before {
   content: '';
   position: absolute;
@@ -569,26 +567,3 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
   height: 100%;
   background: var(--g-primary-dark);
 }
-=======
-// // Estilos para los campos con errores (cuando no pasan la validación)
-// .ant-form-item-has-error .ant-input,
-// .ant-form-item-has-error .ant-select,
-// .ant-form-item-has-error .ant-input-number {
-//   border-color: var(--c-error);
-
-// }
-
-// .ant-form-item-has-error .ant-input:focus,
-// .ant-form-item-has-error .ant-select:focus,
-// .ant-form-item-has-error .ant-input-number:focus {
-//   border-color: var(--c-error);
-// }
-
-// .ant-form-item-explain-error {
-//   color: var(--c-error);
-//   font-size: 0.9rem;
-//   margin-top: 0.25rem;
-// }
-
-// Layout y espaciado general del formulario
->>>>>>> 95d6da016d9841cfe6f1f982638b9129ad8fcc12
