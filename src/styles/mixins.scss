@@ -53,7 +53,6 @@ $Extralarge: 2560px;
     font-size: 0.8rem;
     margin: 0px;
   }
-   
 }
 
 @mixin shared-mobile-table {
@@ -173,4 +172,29 @@ $Extralarge: 2560px;
   .btn.tertiary {
     width: 98%;
   }
+}
+
+/**
+ * Estilo de texto con gradiente animado base evitar
+ * sobreescribir estilos de otras secciones de la landing
+ * @param {Color} $color1 - 19.23% Color inicial del gradiente
+ * @param {Color} $color2 - 43.75% Color intermedio
+ * @param {Color} $color3 - 83.65% Color final
+ *
+ */
+@mixin gradient-text-indicadores-base($color1, $color2, $color3) {
+  background: linear-gradient(90deg, $color1 19.23%, $color2 43.75%, $color3 83.65%);
+  align-self: self-start;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 28px;
+  margin: 0;
+  height: 40px;
+  letter-spacing: 0.35px;
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-move 15s ease infinite;
 }
