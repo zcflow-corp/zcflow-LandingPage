@@ -8,36 +8,18 @@ import es from '../i18n/es.json'
 import en from '../i18n/en.json'
 import { LanguageProvider } from '@/context/LanguageContext.jsx'
 
-/**
- * @param {Object} props
- * @param {Function} props.t
- * @param {{ title: string; description: string; image: string; alt?: string; Icono?: string }[]} props.slides
- * @param {number} [props.interval]
- * @param {number} [props.startIndex]
- * @param {string} [props.title]
- * @param {string} [props.description]
- * @param {string} [props.word]
- */
-
 function getLocaleFromDoc() {
   if (typeof document === 'undefined') return 'es'
   return document.documentElement.lang === 'en' ? 'en' : 'es'
 }
 
-/**
- * Creates a translation function from a messages object
- * @param {Object} messages - The translation messages object
- * @returns {Function} A function that takes a key and returns the translated value
- */
 function createTranslationFunction(messages) {
-  return (key) => {
-    return messages[key] || key
-  }
+  return (key) => messages[key] || key
 }
 
 export default function CardZcflow({
   slides = [],
-  interval = 5000,
+  interval = 5000, // ✅ duración normal (ms)
   startIndex = 0,
   title = '',
   description = '',
@@ -46,26 +28,41 @@ export default function CardZcflow({
   const [index, setIndex] = useState(startIndex)
   const [t, setT] = useState(() => createTranslationFunction(es))
 
-  const timerRef = useRef(null)
   const total = slides.length
+
+  // ✅ SOLO usamos timeout (no interval) para poder variar la duración por slide
+  const timeoutRef = useRef(null)
+
+  const stop = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+      timeoutRef.current = null
+    }
+  }
 
   const next = () => setIndex((prev) => (prev + 1) % total)
   const prev = () => setIndex((prev) => (prev - 1 + total) % total)
 
-  const play = () => {
+  const scheduleNext = (currentIndex) => {
     stop()
-    timerRef.current = setInterval(next, interval)
+    if (total <= 1) return
+
+    // ✅ el primero dura menos (ajusta aquí)
+    const firstMs = 7000
+    const ms = currentIndex === 0 ? firstMs : interval
+
+    timeoutRef.current = setTimeout(() => {
+      setIndex((prev) => (prev + 1) % total)
+    }, ms)
   }
 
-  const stop = () => {
-    if (timerRef.current) clearInterval(timerRef.current)
-  }
-
+  // ✅ Autoplay: cada vez que cambia index, programamos el siguiente con duración dinámica
   useEffect(() => {
-    play()
+    scheduleNext(index)
     return stop
-  }, [])
+  }, [index, interval, total])
 
+  // ✅ teclado
   useEffect(() => {
     const handleKey = (e) => {
       if (e.key === 'ArrowRight') next()
@@ -73,8 +70,9 @@ export default function CardZcflow({
     }
     window.addEventListener('keydown', handleKey)
     return () => window.removeEventListener('keydown', handleKey)
-  }, [])
+  }, [total])
 
+  // ✅ i18n
   const locale = getLocaleFromDoc()
 
   useEffect(() => {
@@ -82,7 +80,6 @@ export default function CardZcflow({
     setT(() => createTranslationFunction(messages))
   }, [locale])
 
-  // Render extra components for flow items
   function renderExtraComponent(slide) {
     if (!slide) return null
 
@@ -93,21 +90,18 @@ export default function CardZcflow({
             <FlowConexion rotationMs={9000} client:only />
           </LanguageProvider>
         )
-
       case 3:
         return (
           <LanguageProvider>
             <FlowDecision height={260} />
           </LanguageProvider>
         )
-
       case 1:
         return (
           <LanguageProvider>
             <FlowBox />
           </LanguageProvider>
         )
-
       default:
         return null
     }
@@ -120,13 +114,13 @@ export default function CardZcflow({
         aria-roledescription="carrusel"
         aria-live="polite"
         onMouseEnter={stop}
-        onMouseLeave={play}
+        onMouseLeave={() => scheduleNext(index)}
       >
         {/* === MEDIA === */}
         <div className="card-slider__media card-slider__container">
           {slides.map((s, i) => (
             <figure
-              key={i}
+              key={s.id ?? i}
               className={`card-slider__figure${
                 i === index ? ' card-slider__figure--active card-slider__figure--stagger' : ''
               }`}
@@ -148,13 +142,14 @@ export default function CardZcflow({
             </figure>
           ))}
         </div>
+
         {/* === CONTENT === */}
         <div className="card-slider__content zcflow-description">
           <p>
             {t('Con')} Zcflow{' '}
             {t(
               'integramos toda tu información financiera en una plataforma 100% data driven, potenciada por'
-            )}
+            )}{' '}
             <span className="gradient-blue-ligth"> {t('agentes de IA')} </span>{' '}
             {t(
               'que anticipan tu liquidez y simulan escenarios para orientar decisiones financieras más precisas.'
@@ -172,19 +167,31 @@ export default function CardZcflow({
             )}
           </p>
 
-          <p className="driver">
-            {t('De hojas de cálculo y tareas manuales')}{' '}
-            <span className="gradient-blue-ligth"> {t('→')} </span>{' '}
-            {t('a decisiones precisas, confiables y asistidas desde una única plataforma.')}
-          </p>
+          <div className="driver ">
+            <p className="gradient-border-left">
+              {t('De hojas de cálculo y tareas manuales')}{' '}
+              <span className="arrow gradient-blue-ligth"> {t('→')} </span>{' '}
+              {t('a decisiones precisas, confiables y asistidas desde una única plataforma.')}
+            </p>
+          </div>
+
           <ul className="checks" role="list">
             {slides.map((c, i) => (
               <li
-                className={`check ${i === index ? 'gradient-blue-ligth' : 'check-desactive'}`}
-                key={c.id}
+                className={`check lis-checks ${i === index ? 'gradient-blue-ligth' : 'check-desactive'}`}
+                key={c.id ?? i}
+                role="tab"
+                aria-selected={i === index}
+                tabIndex={0}
+                onClick={() => setIndex(i)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    setIndex(i)
+                  }
+                }}
               >
                 <IconoSvg name="check" />
-
                 <div>{c.title}</div>
               </li>
             ))}

@@ -14,6 +14,7 @@
   &__container {
     width: min(var(--container), 62vw);
     margin-inline: auto;
+    margin-top: -2rem;
   }
 
   &__viewport {
@@ -643,12 +644,22 @@ html[data-theme='dark'] .card-slider {
     .driver {
 
       padding: 0.5rem;
-      text-transform: uppercase;
-      box-shadow: var(--shadowXL);
-      border-left: 2px solid var(--d9);
+      position: relative;
 
-      text-decoration: double;
-      font-size: medium;
+      margin: 1rem 0rem;
+
+      box-shadow: var(--shadowXL);
+
+
+
+
+
+      p {
+        padding: 0rem 0rem 0rem 0.5rem;
+        font-size: medium;
+
+        margin: 0rem;
+      }
 
 
 
@@ -664,10 +675,13 @@ html[data-theme='dark'] .card-slider {
     gap: 0rem;
 
     span {
-      color: var(--d9);
+
+      display: inline-block;
 
 
     }
+
+
 
     p {
       color: var(--c-bg-variant);
@@ -679,6 +693,20 @@ html[data-theme='dark'] .card-slider {
     h3 {
       display: inline-block;
     }
+
+    .arrow {
+
+
+      align-self: end;
+      font-size: large;
+      margin: 0rem 0.25rem;
+      text-align: initial;
+      transform: scaleX(2);
+      font-weight: 700;
+      color: var(--d9)
+    }
+
+
 
 
   }
@@ -1242,4 +1270,8 @@ html[data-theme='dark'] .zcflow-who {
   to {
     stroke-dashoffset: 0;
   }
+}
+
+.lis-checks {
+  cursor: pointer
 }

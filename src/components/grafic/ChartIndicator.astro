@@ -23,7 +23,6 @@ const { year = new Date().getFullYear() } = Astro.props
     /* 0 0 0 2px #4d90fe,
     inset 0 0 0 2px hsla(0, 0%, 100%, 0.9);
       */
-      
   }
   .indicator-row {
     display: flex;
@@ -109,7 +108,7 @@ const { year = new Date().getFullYear() } = Astro.props
     <div class="indicator-chip"><span class="indicator-dot"></span>Mes Enero {year}</div>
   </div>
 
-  <div id="amount" class="indicator-amount">S/ 0</div>
+  <div id="amount" class="indicator-amount">$ 0</div>
 
   <div class="indicator-wrap">
     <div class="indicator-grid"><hr style="top:30%" /><hr style="top:60%" /></div>
@@ -142,7 +141,7 @@ const { year = new Date().getFullYear() } = Astro.props
     })
   }
   const data = dataFor(YEAR)
-  amount.textContent = `S/ ${Math.round(data.at(-1)).toLocaleString('es-PE')}`
+  amount.textContent = `$ ${Math.round(data.at(-1)).toLocaleString('es-PE')}`
 
   // Tamaño canvas
   function resize() {
@@ -336,7 +335,7 @@ const { year = new Date().getFullYear() } = Astro.props
     const p = pts[idx]
     tip.style.left = `${p.x}px`
     tip.style.top = `${p.y}px`
-    tip.textContent = `S/ ${Math.round(data[idx]).toLocaleString('es-PE')} — día ${idx + 1}`
+    tip.textContent = `$ ${Math.round(data[idx]).toLocaleString('es-PE')} — día ${idx + 1}`
     tip.style.display = 'block'
   })
 

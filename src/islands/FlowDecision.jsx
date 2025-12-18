@@ -85,24 +85,20 @@ const FlowDecision = ({ t: _t }) => {
     let timeoutId
 
     const loop = () => {
-      // 1) Mostrar tabla
       setStage('table')
-      setAnimateLine(false) // reset anim
+      setAnimateLine(false)
 
       timeoutId = setTimeout(() => {
         if (!isMounted) return
 
-        // 2) Mostrar gráfica
         setStage('chart')
 
-        // reset + re-trigger para reiniciar la animación CSS del path
         setAnimateLine(false)
         requestAnimationFrame(() => {
           if (!isMounted) return
           setAnimateLine(true)
         })
 
-        // 3) Volver a tabla y repetir
         timeoutId = setTimeout(() => {
           if (!isMounted) return
           loop()
@@ -118,8 +114,10 @@ const FlowDecision = ({ t: _t }) => {
     }
   }, [])
 
+  // ✅ PATH SUAVE (Catmull-Rom -> Bézier)
   const chartPath = useMemo(() => {
     if (!CHART_POINTS.length) return ''
+
     const values = CHART_POINTS.map((p) => p.value)
     const max = Math.max(...values, 1)
     const min = Math.min(...values, 0)
@@ -130,11 +128,32 @@ const FlowDecision = ({ t: _t }) => {
     const paddingX = 30
     const paddingY = 20
 
-    return CHART_POINTS.map((point, index) => {
+    const pts = CHART_POINTS.map((point, index) => {
       const x = paddingX + (index / Math.max(CHART_POINTS.length - 1, 1)) * (w - paddingX * 2)
       const y = h - paddingY - ((point.value - min) / range) * (h - paddingY * 2)
-      return `${index === 0 ? 'M' : 'L'} ${x} ${y}`
-    }).join(' ')
+      return { x, y }
+    })
+
+    if (pts.length < 2) return ''
+
+    const tension = 0.45
+    let d = `M ${pts[0].x} ${pts[0].y}`
+
+    for (let i = 0; i < pts.length - 1; i++) {
+      const p0 = pts[i - 1] || pts[i]
+      const p1 = pts[i]
+      const p2 = pts[i + 1]
+      const p3 = pts[i + 2] || p2
+
+      const cp1x = p1.x + ((p2.x - p0.x) / 6) * tension * 2
+      const cp1y = p1.y + ((p2.y - p0.y) / 6) * tension * 2
+      const cp2x = p2.x - ((p3.x - p1.x) / 6) * tension * 2
+      const cp2y = p2.y - ((p3.y - p1.y) / 6) * tension * 2
+
+      d += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p2.x} ${p2.y}`
+    }
+
+    return d
   }, [CHART_POINTS])
 
   // para puntos (evitar repetir cálculos en cada circle)
@@ -243,9 +262,11 @@ const FlowDecision = ({ t: _t }) => {
                 />
               ))}
 
-              {/* línea principal con animación */}
+              {/* línea principal con animación + suavizado visual */}
               <path
                 d={chartPath}
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 className={
                   'flow-decision-box__chart-line ' +
                   (animateLine ? 'flow-decision-box__chart-line--animate' : '')

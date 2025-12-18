@@ -16,6 +16,10 @@ const IconoSvg = ({ name = '', className = '', title = '', ariaLabel = '' }) => 
   <path stroke="currentColor" stroke-linecap="square" stroke-width=".875"
         d="M12.833 6.467v.537a5.833 5.833 0 1 1-3.46-5.332m3.46.662L6.999 8.173l-1.75-1.75"/>
 </svg>`,
+    arrowr: `
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="#292D32" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M14.43 5.93 20.5 12l-6.07 6.07M3.5 12h16.83"/>
+</svg>`,
 
     sparkles: `
 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">

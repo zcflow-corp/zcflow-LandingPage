@@ -213,7 +213,7 @@ html[data-theme='dark'] body {
       max-width: 50%;
 
       @include media(mobile) {
-        width: 100%;
+        max-width: 100%;
       }
 
     }
@@ -224,13 +224,11 @@ html[data-theme='dark'] body {
   &-title-center {
     width: 100%;
     display: flex;
-
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-bottom: 1rem;
     align-self: center;
-
 
 
     p,
@@ -241,7 +239,7 @@ html[data-theme='dark'] body {
       max-width: 50%;
 
       @include media(mobile) {
-        width: 100%;
+        max-width: 100%;
       }
 
     }
@@ -266,7 +264,7 @@ html[data-theme='dark'] body {
       max-width: 50%;
 
       @include media(mobile) {
-        width: 100%;
+        max-width: 100%;
       }
 
     }
@@ -574,24 +572,12 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
   width: 100%;
 }
 
-// // Estilos para los campos con errores (cuando no pasan la validación)
-// .ant-form-item-has-error .ant-input,
-// .ant-form-item-has-error .ant-select,
-// .ant-form-item-has-error .ant-input-number {
-//   border-color: var(--c-error);
-
-// }
-
-// .ant-form-item-has-error .ant-input:focus,
-// .ant-form-item-has-error .ant-select:focus,
-// .ant-form-item-has-error .ant-input-number:focus {
-//   border-color: var(--c-error);
-// }
-
-// .ant-form-item-explain-error {
-//   color: var(--c-error);
-//   font-size: 0.9rem;
-//   margin-top: 0.25rem;
-// }
-
-// Layout y espaciado general del formulario
+.gradient-border-left::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: var(--g-primary-dark);
+}
