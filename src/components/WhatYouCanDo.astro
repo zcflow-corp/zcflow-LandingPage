@@ -11,6 +11,8 @@ const TabsJson = {
     {
       título: t('Conecta'),
       icono: 'conecta',
+      titleSub: 'Más rápido',
+      process: 25,
       SubTitle: t('Unifique todo.'),
       resumen: t(
         'Conecta bancos, ERPs y socios en un ecosistema seguro y confiable. Consolida información crítica con APIs seguras y decisiones ágiles desde una sola fuente.'
@@ -59,6 +61,8 @@ const TabsJson = {
     {
       título: t('Gestiona'),
       icono: 'gestiona',
+      process: 50,
+      titleSub: 'Con confianza​',
       SubTitle: t('Liquidez confiable.'),
       resumen: t(
         'Visualiza la liquidez en tiempo real y clasifica movimientos con IA. Controla flujos, riesgos y reportes automáticos con dashboards interactivos.'
@@ -117,6 +121,8 @@ const TabsJson = {
     {
       título: t('Optimiza'),
       icono: 'optimiza',
+      process: 75,
+      titleSub: 'Tus decisiones',
       SubTitle: t('Decide con confianza.'),
       resumen: t(
         'Evalúa tasas, plazos y monedas con IA. Construye estrategias financieras eficientes que reducen costos y riesgos.'
@@ -165,6 +171,8 @@ const TabsJson = {
     {
       título: t('Actúa'),
       icono: 'actua',
+      process: 100,
+      titleSub: 'con precisión​',
       SubTitle: t('Ejecución ágil.'),
       resumen: t(
         'Automatiza workflows y aprobaciones. Controla órdenes, documentos y auditorías con trazabilidad completa.'
@@ -214,17 +222,21 @@ const TabsJson = {
 ---
 
 <section id="soluciones" class="section">
-  <div class="container hero-solutions">
-    <span class="gradient-blue-dark"> Data driven </span>
-    <h2>
-      {t('Lo que ')}
-      <span class="">
-        {t('podrás hacer')}
-      </span>
-      {t('con Zcflow')}
-    </h2>
-    <p>{t('Obtiene visibilidad de la liquidez y automatiza procesos clave para tu tesorería.')}</p>
-    {/*client:visible */}
+  <div class="container title hero-solutions">
+    <div class="section-title">
+      <span class="gradient-blue-dark"> {t('Soluciones')} </span>
+      <h2>
+        {t('Lo que ')}
+        <span>
+          {t('podrás hacer')}
+        </span>
+        {t('con Zcflow')}
+      </h2>
+      <p>
+        {t('Zcflow ofrece diversas funcionalidades para el tesorero moderno')}
+      </p>
+    </div>
+
     <Tabs TabsJson={TabsJson} />
   </div>
 </section>
