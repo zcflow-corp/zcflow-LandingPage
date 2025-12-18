@@ -1,6 +1,4 @@
 ---
-import { Image } from 'astro:assets'
-
 const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k: unknown) => k
 const base = import.meta.env.BASE_URL
@@ -10,12 +8,7 @@ const base = import.meta.env.BASE_URL
   <div class="container">
     <div class="about-text">
       <h2 id="about-title" class="about-title-contacto">{t('El flujo de caja es el rey')}</h2>
-      <a
-        href="#contacto"
-        class="btn emptyghost"
-        style="border: 2px solid #ffff;min-width: 186px;height:48px; background:var(--c-primary-accessible); border-radius:100px;"
-        aria-label={t('Ir a la sección de contacto')}
-      >
+      <a href="#contacto" class="btn emptyghost" aria-label={t('Ir a la sección de contacto')}>
         {t('Solicita una demo')}
       </a>
     </div>
@@ -24,7 +17,7 @@ const base = import.meta.env.BASE_URL
 <style lang="scss">
   .about-title-contacto {
     margin: 0%;
-    font-size: 5rem;
+    font-size: 4rem;
     letter-spacing: 0.4px;
     font-weight: 500;
     line-height: 106%;
@@ -38,7 +31,7 @@ const base = import.meta.env.BASE_URL
     background-size: cover;
     background-position: center;
     height: 100vh;
-    max-height: 979px;
+    max-height: 404px;
   }
 
   @include media(mobile) {
@@ -77,7 +70,7 @@ const base = import.meta.env.BASE_URL
     flex-direction: column;
     align-items: flex-start;
     flex: 1 1 400px;
-    gap: 34px;
+    gap: 19px;
     // padding-bottom: 7rem;
     justify-content: center;
     align-items: center;
@@ -87,6 +80,88 @@ const base = import.meta.env.BASE_URL
     color: var(--c-white);
     margin: 0;
   }
+  /**
+* alojar css en un archivo a parte css
+ */
+  .about-text a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 200px;
+    padding: 24px;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    text-decoration: none;
+
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    color: var(--c-white);
+    border: 1.5px solid transparent;
+
+    background-clip: padding-box;
+    overflow: hidden;
+  }
+
+  .about-text a::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+
+    background: linear-gradient(
+      90deg,
+      var(--c-primary),
+      var(--d9),
+      var(--c-quinary),
+      var(--c-primary)
+    );
+    background-size: 300% 100%;
+    animation: infinityBorder 4s linear infinite;
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  @keyframes infinityText {
+    0%,
+    100% {
+      color: var(--c-white);
+      text-shadow: 0 0 4px rgba(0, 184, 217, 0.3);
+    }
+    50% {
+      color: var(--c-primary);
+      text-shadow:
+        0 0 10px rgba(5, 99, 255, 0.8),
+        0 0 20px rgba(0, 184, 217, 0.6);
+    }
+  }
+  @keyframes infinityBorder {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 300% 50%;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .about-text a,
+    .about-text a::before {
+      animation: none;
+    }
+  }
+  .about-text a:focus-visible {
+    outline: 2px solid var(--c-primary);
+    outline-offset: 4px;
+  }
+
   .about-text h2 {
     background: linear-gradient(to right, var(--c-white) 59%, var(--c-primary-accessible) 100%);
     -webkit-background-clip: text;
