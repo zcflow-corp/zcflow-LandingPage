@@ -51,7 +51,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
           <div class="gradient-border-left">
             <CounterOnView client:visible end={80} suffix="%" />
           </div>
-          <p>{t('Eficiencia')}</p>
+          <p>{t('Eficiencia operacional')}</p>
         </div>
 
         <div class="counter" role="region" aria-label="Menos costos por cobranza: -15%">
@@ -96,22 +96,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
     padding: 7px 0px;
   }
   .indicators h4 {
-    background: linear-gradient(90deg, #0563ff 19.23%, #90a9d5 43.75%, #f6f6f9 83.65%);
-    align-self: self-start;
-    font-weight: 500;
-    font-size: 1.3rem;
-    line-height: 28px;
-    margin: 0;
-    height: 40px;
-    font-weight: bold;
-    letter-spacing: 0.35px;
-    font-size: 1rem;
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-    animation: gradient-move 15s ease infinite;
+    @include gradient-text-indicadores-base(#0563ff, #90a9d5, #f6f6f9);
   }
 
   .imagen-indicador {
