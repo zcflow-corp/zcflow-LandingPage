@@ -13,7 +13,7 @@ const secondColumnItems = principles.slice(2, 5)
     <!-- Encabezado de la sección -->
     <div class="section-header" style="width: 100%;">
       <div class="fundamentos-header">
-        <h6 class="gradient-blue-dark" style="margin: 0%;">{t('Nuestros fundamentos')}</h6>
+        <h6 class="principales">{t('Nuestros fundamentos')}</h6>
         <div class="reveal-wrapper">
           <h2 class="reveal-target" style="margin: 0%;">{t('Los principios que nos guían')}</h2>
         </div>
@@ -134,10 +134,6 @@ const secondColumnItems = principles.slice(2, 5)
   }
   .images-dinamyc-second2{
     justify-content: flex-start;
-  }
-
-  .fundamentos{
-    background: var(--c-bg-variant);
   }
 
   .column-card-two{
@@ -275,4 +271,10 @@ const secondColumnItems = principles.slice(2, 5)
   @include media(desktop) {
     @include shared-mobile-tablet-principales;
   }
+
+   h6.principales {
+    margin: 0px;
+    @include gradient-text-indicadores-base(#0563ff, #90a9d5, var(--d8));
+  }
+
 </style>
