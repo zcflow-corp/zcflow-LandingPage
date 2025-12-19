@@ -4,33 +4,33 @@
 $small: 425px;
 $medium: 768px;
 $large: 1024px;
-$Extralarge: 2560px;
+$Extralarge: 1440px;
 
 @mixin media($types...) {
   @each $type in $types {
     //only mobile or mobile down
     @if $type ==mobile {
-      @media only screen and (max-width: ($medium - 1)) {
+      @media only screen and (max-width: #{$medium - 1}) {
         @content;
       }
     }
 
     //tablet up
     @if $type ==tablet {
-      @media only screen and (min-width: ($medium - 1)) {
+      @media only screen and (min-width: #{$medium}) {
         @content;
       }
     }
 
     //desktop up
     @if $type ==desktop {
-      @media only screen and (min-width: ($large - 1)) {
+      @media only screen and (min-width: #{$large}) {
         @content;
       }
     }
 
     @if $type ==extradesktop {
-      @media only screen and (min-width: ($Extralarge - 1)) {
+      @media only screen and (min-width: #{$Extralarge}) {
         @content;
       }
     }
