@@ -92,6 +92,7 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
     border-radius: 3px;
     font-size: 0.7rem;
     text-align: center;
+    letter-spacing: 2px;
   }
   .container-section-description-BOTO {
     color: var(--c-white);
@@ -122,7 +123,12 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
 
   @include media(mobile) {
     #chatBot .container {
-      height: 750px;
+      height: 625px;
+    }
+    .container-card {
+      display: flex;
+      flex-wrap: wrap;
+      row-gap: 1rem;
     }
     section .container {
       flex-wrap: wrap;
