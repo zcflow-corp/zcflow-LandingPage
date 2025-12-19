@@ -1,151 +1,266 @@
-import React from 'react'
-import { Form, Input, Button, Select, Checkbox, notification } from 'antd'
+'use client'
 
-const { Option } = Select
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import emailjs from '@emailjs/browser'
+import { toast } from 'sonner'
 
-const ContactForm = () => {
-  const [form] = Form.useForm()
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from '@/components/ui/select'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 
-  // Custom email validation to block public domains
-  const validateEmail = (rule, value) => {
-    if (!value) return Promise.reject('Por favor ingresa tu correo corporativo!')
-    const publicEmailDomains = ['gmail.com', 'hotmail.com', 'yahoo.com', 'outlook.com']
-    const domain = value.split('@')[1]
-    if (publicEmailDomains.includes(domain)) {
-      return Promise.reject('Por favor ingresa un correo corporativo!')
+/* ================== DATA ================== */
+
+const COUNTRIES = [
+  { code: 'PE', name: 'Perú', prefix: '+51' },
+  { code: 'MX', name: 'México', prefix: '+52' },
+  { code: 'CO', name: 'Colombia', prefix: '+57' },
+  { code: 'CL', name: 'Chile', prefix: '+56' },
+  { code: 'AR', name: 'Argentina', prefix: '+54' },
+  { code: 'ES', name: 'España', prefix: '+34' },
+  { code: 'US', name: 'Estados Unidos', prefix: '+1' },
+  { code: 'BR', name: 'Brasil', prefix: '+55' },
+]
+
+const PUBLIC_DOMAINS = ['gmail.com', 'hotmail.com', 'yahoo.com', 'outlook.com']
+
+/* ================== COMPONENT ================== */
+
+export default function ContactForm() {
+  const [step, setStep] = useState(1)
+  const [prefix, setPrefix] = useState('')
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { isSubmitting },
+    reset,
+  } = useForm({
+    defaultValues: {
+      email: '',
+      country: '',
+      name: '',
+      lastname: '',
+      phone: '',
+      company: '',
+      interest: '',
+      details: '',
+      terms: false,
+    },
+  })
+
+  const country = watch('country')
+
+  /* ================== EFFECT ================== */
+
+  useEffect(() => {
+    const found = COUNTRIES.find((c) => c.code === country)
+    setPrefix(found?.prefix || '')
+  }, [country])
+
+  /* ================== STEPS ================== */
+
+  const next = () => {
+    if (step === 1) {
+      const email = watch('email')
+      const domain = email?.split('@')[1]
+
+      if (!email) return toast.error('Ingresa tu correo corporativo')
+      if (PUBLIC_DOMAINS.includes(domain)) return toast.error('Usa un correo corporativo')
+      if (!country) return toast.error('Selecciona un país')
     }
-    return Promise.resolve()
-  }
 
-  // Phone validation to check for valid phone format
-  const validatePhone = (rule, value) => {
-    const phonePattern = /^\+?\d{1,4}?[\s\-]?\(?\d{1,5}?\)?[\s\-]?\d{1,5}[\s\-]?\d{1,9}$/
-    if (!value) return Promise.reject('Por favor ingresa tu teléfono de contacto!')
-    if (!phonePattern.test(value)) {
-      return Promise.reject('Por favor ingresa un número de teléfono válido con prefijo!')
+    if (step === 2) {
+      if (!watch('name') || !watch('lastname') || !watch('company')) {
+        return toast.error('Completa todos los campos')
+      }
     }
-    return Promise.resolve()
+
+    setStep(step + 1)
   }
 
-  // Handle form submission
-  const onFinish = (values) => {
-    const emailBody = `
-      Nombre Completo: ${values.name}
-      Correo: ${values.email}
-      Nombre de la Empresa: ${values.company}
-      Teléfono: ${values.phone}
-      Interés Principal: ${values.interest}
-      Detalles: ${values.details || 'No hay detalles adicionales'}
-    `
-    const mailtoLink = `mailto:nataliaespin@gmail.com?subject=Nuevo Formulario de Contacto&body=${encodeURIComponent(emailBody)}`
-    window.location.href = mailtoLink
+  const prev = () => setStep(step - 1)
 
-    notification.success({
-      message: 'Formulario Enviado',
-      description: 'Te contactaremos pronto.',
-    })
-    console.log('Formulario Enviado:', values)
+  /* ================== SUBMIT ================== */
+
+  const onSubmit = async (data) => {
+    if (!data.terms) {
+      return toast.error('Debes aceptar los términos')
+    }
+
+    try {
+      await emailjs.send(
+        'YOUR_SERVICE_ID',
+        'YOUR_TEMPLATE_ID',
+        {
+          ...data,
+          phone: `${prefix} ${data.phone}`,
+        },
+        'YOUR_PUBLIC_KEY'
+      )
+
+      toast.success('Formulario enviado', {
+        description: 'Te contactaremos pronto',
+      })
+
+      reset()
+      setStep(1)
+    } catch {
+      toast.error('No se pudo enviar el formulario')
+    }
   }
+
+  /* ================== UI ================== */
 
   return (
-    <section className="container">
-      <div className="container contact-form-container">
-        <Form form={form} name="contact-form" onFinish={onFinish} layout="vertical">
-          <h2 className="gradient-blue-dark">
-            ¿Listo para transformar tus operaciones financieras?
-          </h2>
-          <p>
-            Un especialista te contactará para ayudarte a integrar o evaluar la solución adecuada.
-          </p>
+    <div className="bg-[var(--c-bg-variant)] py-20">
+      <Card className="max-w-md mx-auto bg-[var(--c-panel)] shadow-xl rounded-[var(--radius)]">
+        <CardHeader className="space-y-2">
+          <CardTitle className="font-[var(--font-head)] text-[var(--h2)]">
+            ¿Cómo podemos contactarte?
+          </CardTitle>
+          <CardDescription className="text-base">
+            Proporciona tu información de contacto.
+          </CardDescription>
 
-          <div>
-            <div className="form-group">
-              <Form.Item
-                label="Nombre Completo"
-                name="name"
-                rules={[{ required: true, message: 'Por favor ingresa tu nombre completo!' }]}
-              >
-                <Input className="form-input" placeholder="Ingresa nombre completo" />
-              </Form.Item>
-
-              <Form.Item
-                label="Correo Electrónico Corporativo"
-                name="email"
-                rules={[
-                  { required: true, message: 'Por favor ingresa tu correo corporativo!' },
-                  { validator: validateEmail },
-                ]}
-              >
-                <Input className="form-input" placeholder="Ingresa correo corporativo" />
-              </Form.Item>
-            </div>
-
-            <div className="form-group">
-              <Form.Item
-                label="Nombre de la Empresa"
-                name="company"
-                rules={[{ required: true, message: 'Por favor ingresa el nombre de la empresa!' }]}
-              >
-                <Input className="form-input" placeholder="Ingresa nombre de la empresa" />
-              </Form.Item>
-
-              <Form.Item
-                label="Teléfono de Contacto"
-                name="phone"
-                rules={[
-                  { required: true, message: 'Por favor ingresa tu teléfono de contacto!' },
-                  { validator: validatePhone },
-                ]}
-              >
-                <Input className="form-input" placeholder="Ingresa tu teléfono" />
-              </Form.Item>
-            </div>
-
-            <div className="form-group">
-              <Form.Item
-                label="Interés Principal"
-                name="interest"
-                rules={[{ required: true, message: 'Por favor selecciona un interés!' }]}
-              >
-                <Select className="form-select" placeholder="Selecciona una opción">
-                  <Option value="demo">Solicitar una Demo Personalizada</Option>
-                  <Option value="solution">Pregunta sobre una solución específica</Option>
-                  <Option value="partnership">Asociación / Alianza Comercial</Option>
-                  <Option value="general">Otro Motivo / Consulta General</Option>
-                </Select>
-              </Form.Item>
-            </div>
-
-            <div className="form-group">
-              <Form.Item label="Detalles sobre tu Interés (Opcional)" name="details">
-                <textarea className="form-textarea" placeholder="Escribe tus detalles aquí..." />
-              </Form.Item>
-            </div>
-
-            <div className="form-group">
-              <Form.Item
-                name="terms"
-                valuePropName="checked"
-                rules={[{ required: true, message: 'Debes aceptar los términos y condiciones!' }]}
-              >
-                <Checkbox className="form-checkbox">
-                  Acepto la Política de Privacidad y los Términos y Condiciones
-                </Checkbox>
-              </Form.Item>
-            </div>
+          {/* Progress bar */}
+          <div className="h-1 w-full rounded-full bg-[var(--c-line)] overflow-hidden">
+            <div
+              className="h-full transition-all duration-300"
+              style={{
+                width: `${(step / 3) * 100}%`,
+                background: 'var(--g-primary)',
+              }}
+            />
           </div>
+        </CardHeader>
 
-          <div className="form-group-submit">
-            <Form.Item>
-              <Button className="btn primary" type="submit">
-                Hablar con un especialista
-              </Button>
-            </Form.Item>
-          </div>
-        </Form>
-      </div>
-    </section>
+        <CardContent>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            {/* STEP 1 */}
+            {step === 1 && (
+              <>
+                <Field label="Correo corporativo">
+                  <Input placeholder="nombre@empresa.com" {...register('email')} />
+                </Field>
+
+                <Field label="País">
+                  <Select onValueChange={(v) => setValue('country', v)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Selecciona tu país" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white border border-gray-200 shadow-lg">
+                      {COUNTRIES.map((c) => (
+                        <SelectItem key={c.code} value={c.code}>
+                          {c.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </Field>
+              </>
+            )}
+
+            {/* STEP 2 */}
+            {step === 2 && (
+              <>
+                <Field label="Nombre">
+                  <Input placeholder="Ej. Elena" {...register('name')} />
+                </Field>
+
+                <Field label="Apellido">
+                  <Input placeholder="Ej. Díaz" {...register('lastname')} />
+                </Field>
+
+                <Field label="Empresa">
+                  <Input placeholder="Ej. Zcflow" {...register('company')} />
+                </Field>
+
+                <Field label="Número de teléfono">
+                  <div className="flex gap-2">
+                    <div className="px-3 flex items-center border rounded-md text-sm bg-[var(--c-bg-variant)]">
+                      {prefix || '--'}
+                    </div>
+                    <Input placeholder="999 999 999" {...register('phone')} />
+                  </div>
+                </Field>
+              </>
+            )}
+
+            {/* STEP 3 */}
+            {step === 3 && (
+              <>
+                <Field label="Interés">
+                  <Select onValueChange={(v) => setValue('interest', v)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Selecciona una opción" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white border shadow-lg">
+                      <SelectItem value="demo">Solicitar demo</SelectItem>
+                      <SelectItem value="solution">Solución específica</SelectItem>
+                      <SelectItem value="partner">Alianza</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </Field>
+
+                <Field label="Detalles">
+                  <Textarea
+                    rows={4}
+                    placeholder="Cuéntanos brevemente qué necesitas…"
+                    {...register('details')}
+                  />
+                </Field>
+
+                <div className="flex items-center gap-2">
+                  <Checkbox {...register('terms')} />
+                  <span className="text-sm">Acepto términos y condiciones</span>
+                </div>
+              </>
+            )}
+
+            {/* ACTIONS */}
+            <div className="flex justify-between pt-4">
+              {step > 1 && (
+                <Button type="button" variant="outline" onClick={prev}>
+                  Atrás
+                </Button>
+              )}
+              {step < 3 && (
+                <Button type="button" onClick={next}>
+                  Continuar
+                </Button>
+              )}
+              {step === 3 && (
+                <Button type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? 'Enviando…' : 'Enviar'}
+                </Button>
+              )}
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
   )
 }
 
-export default ContactForm
+/* ================== FIELD ================== */
+
+function Field({ label, children }) {
+  return (
+    <div className="space-y-1">
+      <label className="text-sm font-medium text-[var(--c-text)]">{label}</label>
+      {children}
+    </div>
+  )
+}

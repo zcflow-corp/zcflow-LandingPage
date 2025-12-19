@@ -14,7 +14,7 @@ const t = (k) => messages[k] ?? k
 <BaseLayout>
   <Header t={t} />
   <main>
-    <ContactForm />
+    <ContactForm client:load />
   </main>
   <Footer t={t} />
 </BaseLayout>

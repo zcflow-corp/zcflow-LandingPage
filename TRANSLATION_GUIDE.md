@@ -111,7 +111,7 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
       <li><a href="#soluciones">{t('Soluciones')}</a></li>
     </ul>
     <a href="#">{t('Ingresar')}</a>
-    <a href="/contacto">{t('Ver demo')}</a>
+    <a href="/contacto/">{t('Ver demo')}</a>
   </nav>
 </header>
 ```
@@ -367,9 +367,6 @@ const t = typeof _t === 'function' ? _t : (k) => k
 The key pattern is: **Load once at the page level, pass down as props**.
 <<<<<<< HEAD
 
-
-
-
 =======
->>>>>>> f899b1f7cccd2f9a263980e6277cd9422c098046
 
+> > > > > > > f899b1f7cccd2f9a263980e6277cd9422c098046

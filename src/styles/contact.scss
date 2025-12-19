@@ -1,0 +1,81 @@
+/*Clases pequeñas y helpers*/
+
+.no-margin {
+  margin: 0;
+}
+
+// Estilos generales para los inputs y textarea
+
+.contact-steps-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 4rem 1rem;
+  background: #f6f9fc;
+
+  .card {
+    width: 100%;
+    max-width: 520px;
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  }
+}
+
+
+
+.form-select {
+  width: auto; // ❌ ROMPE AntD
+  padding: 0.8rem; // ❌
+  border: 1px solid;
+}
+
+
+.steps {
+  margin-bottom: 2rem;
+}
+
+.contact-form {
+  h2 {
+    font-size: 1.6rem;
+    margin-bottom: 0.3rem;
+  }
+
+  p {
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+  }
+
+  .ant-input,
+  .ant-select-selector {
+    border-radius: 10px !important;
+    padding: 0.6rem;
+  }
+
+  .ant-form-item {
+    margin-bottom: 1rem;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+
+  button {
+    border-radius: 999px;
+    padding: 0.6rem 1.6rem;
+  }
+}
+
+.ant-select-selector {
+  height: 48px !important;
+  display: flex;
+  align-items: center;
+  border-radius: 10px !important;
+}
+
+.ant-select-selection-placeholder {
+  color: #9ca3af;
+}

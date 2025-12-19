@@ -1,9 +1,13 @@
 ---
 import '@/styles/tokens.scss'
+import '@/styles/global.css'
+
 import '@/styles/globals.scss'
 import '@/styles/buttons.scss'
 import '@/styles/components.scss'
-// import '@/styles/mixins.scss'  .. estos se importa en astro.config.msj porque tienen mixins
+import '@/styles/contact.scss'
+
+import ToastProvider from '@/islands/ToastProvider.jsx'
 
 interface BaseLayoutProps {
   title?: string
@@ -14,29 +18,28 @@ const {
   title = 'Automatización de tesorería para CFOs | Zcflow',
   description = 'Plataforma fintech que automatiza la tesorería, mejora la liquidez y ofrece previsión financiera en tiempo real con IA.',
 } = Astro.props as BaseLayoutProps
+
 const base = import.meta.env.BASE_URL
 const url = Astro.site?.toString() ?? 'http://localhost:4321/'
 const locale = Astro.currentLocale || 'es_ES'
 const ogImage = `${base}assets/logo_header_light.webp`
 ---
 
-<!--
-  Meta tags y estructura optimizada siguiendo guías oficiales de SEO y accesibilidad:
-  - Google SEO: https://developers.google.com/search/docs
-  - WCAG: https://www.w3.org/WAI/WCAG21/quickref/
--->
+<!doctype html>
 <html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <!-- SEO básico -->
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#141417" />
     <link rel="canonical" href={url} />
+
     <title>{title}</title>
     <meta name="description" content={description} />
 
-    <!-- Redes sociales -->
+    <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
@@ -45,32 +48,25 @@ const ogImage = `${base}assets/logo_header_light.webp`
     <meta property="og:locale" content={locale} />
 
     <!-- Favicon -->
-    <link rel="icon" href=`${base}img/favicon.ico` />
+    <link rel="icon" href={`${base}img/favicon.ico`} />
 
-    <!-- Fonts-->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap"
-      as="style"
-    />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <!-- Tema dark/light sin flash o parpadeo visual -->
+
+    <!-- Tema dark/light sin flash -->
     <script>
       try {
         const t = localStorage.getItem('tema_activo') || 'light'
         document.documentElement.setAttribute('data-theme', t)
       } catch {}
     </script>
-    {
-      /*sameAs: agregar cuando tenga redes sociales verificables 
-    por ejemplo sameAs: ['https://www.linkedin.com/company/zcflow'] 
-    */
-    }
+
+    <!-- Schema.org -->
     <script
       type="application/ld+json"
       set:html={JSON.stringify({
@@ -82,7 +78,11 @@ const ogImage = `${base}assets/logo_header_light.webp`
       })}
     />
   </head>
+
   <body>
     <slot />
+
+    <!-- React island global (toasts) -->
+    <ToastProvider client:only="react" />
   </body>
 </html>
