@@ -76,7 +76,7 @@ const base = import.meta.env.BASE_URL
         <Lang />
         <ThemeSwitch client:idle />
         <a class="btn icon" href="#">{t('Ingresar')}</a>
-        <a class="btn tertiary" href="/contacto">{t('Solicita una demo')}</a>
+        <a class="btn tertiary" href=`${base}src/islands/ContactForm.jsx`>{t('Solicita una demo')}</a>
       </div>
     </nav>
   </div>
