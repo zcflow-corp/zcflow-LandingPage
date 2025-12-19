@@ -1,6 +1,7 @@
 ---
 const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k: unknown) => k
+const base = import.meta.env.BASE_URL
 ---
 
 <section id="chatBot" aria-labelledby="chatbot-title">
@@ -37,7 +38,7 @@ const t = typeof _t === 'function' ? _t : (k: unknown) => k
         controls
         class="boto-video"
       >
-        <source src="/assets/videos/BOTO_Chatbot_Web.mp4" type="video/mp4" />
+        <source src=`${base}assets/videos/BOTO_Chatbot_Web.mp4` type="video/mp4" />
       </video>
     </div>
   </div>
