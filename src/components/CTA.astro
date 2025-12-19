@@ -15,9 +15,7 @@ const base = import.meta.env.BASE_URL
   </div>
 </section>
 <style lang="scss">
-  // .about-banner {
-  //   background-color: var(--c-primary);
-  // }
+
   .about-title-contacto {
     margin: 0%;
     font-size: 4rem;
@@ -34,15 +32,6 @@ const base = import.meta.env.BASE_URL
     background-size: cover;
     background-position: center;
     height: 100vh;
-    max-height: 404px;
-  }
-
-  @include media(mobile) {
-    .about-banner {
-      height: 50vh;
-      max-height: 400px;
-      background-position: center 30%;
-    }
   }
 
   .btn.emptyghost {
@@ -180,5 +169,24 @@ const base = import.meta.env.BASE_URL
       max-width: 100%;
       padding-bottom: 2rem;
     }
+    .about-banner {
+      height: 400px;
+      background-position: center 30%;
+    }
   }
+
+  @include media(desktop) {
+    .about-banner {
+      height: 404px;
+    }
+
+  }
+
+  @include media(extradesktop) {
+    .about-banner {
+      height: 600px;
+    }
+
+  }
+
 </style>
