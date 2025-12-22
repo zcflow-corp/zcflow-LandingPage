@@ -15,6 +15,9 @@ const base = import.meta.env.BASE_URL
   </div>
 </section>
 <style lang="scss">
+  // .about-banner {
+  //   background-color: var(--c-primary);
+  // }
   .about-title-contacto {
     margin: 0%;
     font-size: 4rem;
@@ -112,14 +115,7 @@ const base = import.meta.env.BASE_URL
     inset: 0;
     border-radius: inherit;
     padding: 1.5px;
-
-    background: linear-gradient(
-      90deg,
-      var(--c-primary),
-      var(--d9),
-      var(--c-quinary),
-      var(--c-primary)
-    );
+    background: var(--g-primary-light);
     background-size: 300% 100%;
     animation: infinityBorder 4s linear infinite;
     -webkit-mask:
