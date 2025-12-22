@@ -75,7 +75,10 @@ const secondColumnItems = principles.slice(2, 5)
           ))
         }
       </section>
-      <section class="principles column-card-two" aria-labelledby="Lista de principios fundamentales de ZCflow">
+      <section
+        class="principles column-card-two"
+        aria-labelledby="Lista de principios fundamentales de ZCflow"
+      >
         {
           secondColumnItems.map((p, index) => (
             <article id="fundamentos-card" class="card principle">
@@ -110,33 +113,59 @@ const secondColumnItems = principles.slice(2, 5)
   </div>
 </section>
 <style lang="scss">
-
-  .column-card-first .images-dinamyc0, .images-dinamyc1, .images-dinamyc-second0, .images-dinamyc-second1, .images-dinamyc-second2{
+  .column-card-first .images-dinamyc0,
+  .images-dinamyc1,
+  .images-dinamyc-second0,
+  .images-dinamyc-second1,
+  .images-dinamyc-second2 {
     display: flex;
     background: var(--c-bg-variant);
     border-radius: 2px;
     margin: 0px;
     padding: 12px 12px;
   }
+  html[data-theme='light'] .images-dinamyc1 {
+    background: var(--c-bg-variant);
+  }
 
-  .column-card-first .images-dinamyc0{
+  html[data-theme='light'] .images-dinamyc-second0 {
+    background: var(--c-bg-variant);
+  }
+
+  html[data-theme='light'] .images-dinamyc-second1 {
+    background: var(--c-bg-variant);
+  }
+
+  html[data-theme='light'] .images-dinamyc-second2 {
+    background: var(--c-bg-variant);
+  }
+
+  .column-card-first .images-dinamyc0 {
     justify-content: flex-end;
   }
 
-    .column-card-first .images-dinamyc1{
+  .column-card-first .images-dinamyc1 {
     justify-content: flex-start;
   }
 
-  .images-dinamyc-second0{
+  .images-dinamyc-second0 {
     justify-content: flex-start;
-  } .images-dinamyc-second1{
+  }
+  html[data-theme='dark'] .column-card-first .images-dinamyc0,
+  .images-dinamyc1,
+  .images-dinamyc-second0,
+  .images-dinamyc-second1,
+  .images-dinamyc-second2 {
+    background: var(--c-black);
+  }
+  .images-dinamyc-second1 {
     justify-content: flex-end;
   }
-  .images-dinamyc-second2{
+  .images-dinamyc-second2 {
     justify-content: flex-start;
   }
 
-  .column-card-two{
+  .column-card-two {
     display: flex;
     flex-wrap: wrap;
     row-gap: 2rem;
@@ -232,9 +261,9 @@ const secondColumnItems = principles.slice(2, 5)
   }
   .card {
     figure {
-       margin: 0;
-    width: 100%;
-    max-width: 80%;
+      margin: 0;
+      width: 100%;
+      max-width: 80%;
       img {
         width: 100%;
         object-fit: cover;
@@ -256,25 +285,23 @@ const secondColumnItems = principles.slice(2, 5)
       max-width: 31%;
     }
     .images-dinamyc {
-     .card {
-    figure {
-    max-width: 100%;
-      img {
-        width: 125%;
+      .card {
+        figure {
+          max-width: 100%;
+          img {
+            width: 125%;
+          }
+        }
       }
     }
-  }
-   
-  }
   }
 
   @include media(desktop) {
     @include shared-mobile-tablet-principales;
   }
 
-   h6.principales {
+  h6.principales {
     margin: 0px;
     @include gradient-text-indicadores-base(#0563ff, #90a9d5, var(--d8));
   }
-
 </style>

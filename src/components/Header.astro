@@ -35,8 +35,8 @@ const base = import.meta.env.BASE_URL
         src=`${base}assets/logo_header_light.webp`
         alt="ZCFlow logo light"
         class="mode-light"
-        width={180}
-        height={180}
+        width={150}
+        height={150}
         loading="lazy"
         decoding="async"
         itemprop="logo"
@@ -76,7 +76,9 @@ const base = import.meta.env.BASE_URL
         <Lang />
         <ThemeSwitch client:idle />
         <a class="btn icon" href="#">{t('Ingresar')}</a>
-        <a class="btn tertiary" href="/contacto/">{t('Solicita una demo')}</a>
+        <a class="btn tertiary" href=`${base}src/islands/ContactForm.jsx`
+          >{t('Solicita una demo')}</a
+        >
       </div>
     </nav>
   </div>
@@ -110,9 +112,11 @@ const base = import.meta.env.BASE_URL
       width: 100%;
       justify-content: space-between;
     }
-
-    .menu-toggle {
+    .container-toggle {
       display: none;
+    }
+    .menu-toggle {
+      display: flex;
       flex-direction: column;
       justify-content: space-between;
       width: 35px;
@@ -140,10 +144,6 @@ const base = import.meta.env.BASE_URL
     .menu-toggle.active .bar:nth-child(2) {
       transform: translateY(-8px) rotate(-45deg);
     }
-
-    // .menu-toggle.active .bar:nth-child(3) {
-    //   transform: translateY(-8px) rotate(-45deg);
-    // }
     .nav-list {
       display: flex;
       gap: 1.5rem;
@@ -169,8 +169,8 @@ const base = import.meta.env.BASE_URL
 
     .logo .mode-dark,
     .mode-light {
-      width: auto;
-      height: 30px;
+      width: 116%;
+      height: 24px;
       object-fit: contain;
     }
     .mobile-actions {
@@ -181,13 +181,14 @@ const base = import.meta.env.BASE_URL
       display: none;
     }
 
-    @include media(mobile) {
+    @include media(tablet-down) {
       @include shared-mobile-table;
     }
 
     @include media(tablet) {
       @include shared-mobile-tablet-principales;
     }
+
     .logo-row {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
