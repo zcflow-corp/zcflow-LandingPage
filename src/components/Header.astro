@@ -117,7 +117,7 @@ const path = (url) => `${base}${locale}/${url}/`.replace(/\/+/g, '/')
     }
 
     .menu-toggle {
-      display: none;
+      display: flex;
       flex-direction: column;
       justify-content: space-between;
       width: 35px;
@@ -145,10 +145,6 @@ const path = (url) => `${base}${locale}/${url}/`.replace(/\/+/g, '/')
     .menu-toggle.active .bar:nth-child(2) {
       transform: translateY(-8px) rotate(-45deg);
     }
-
-    // .menu-toggle.active .bar:nth-child(3) {
-    //   transform: translateY(-8px) rotate(-45deg);
-    // }
     .nav-list {
       display: flex;
       gap: 1.5rem;
@@ -186,7 +182,7 @@ const path = (url) => `${base}${locale}/${url}/`.replace(/\/+/g, '/')
       display: none;
     }
 
-    @include media(mobile) {
+    @include media(tablet-down) {
       @include shared-mobile-table;
     }
     // @include media(tablet) {
