@@ -71,15 +71,6 @@ const base = import.meta.env.BASE_URL
     font-size: 3rem;
     font-weight: lighter;
     color: var(--c-white);
-    //   background: linear-gradient(
-    //   90deg,
-    //   #1C4EE7 0%,
-    //   #A659E3 75%,
-    //   #E16ACF 100%
-    // );
-    // -webkit-background-clip: text;
-    // background-clip: text;
-    // -webkit-text-fill-color: transparent;
     margin: 0px;
   }
   .container-section-description-keyword {
@@ -112,12 +103,17 @@ const base = import.meta.env.BASE_URL
     font-weight: bold;
   }
   section {
-    background: #006FFD;
+    background: #006ffd;
   }
 
   .container-section-iframe {
     width: 100%;
     max-width: 49%;
+  }
+  @include media(tablet-down) {
+    .container-section-description-keyword {
+      max-width: 15%;
+    }
   }
 
   @include media(mobile) {
