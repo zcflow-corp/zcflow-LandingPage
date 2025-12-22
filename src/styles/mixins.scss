@@ -14,15 +14,18 @@ $Extralarge: 1440px;
         @content;
       }
     }
-
-    //tablet up
-    @if $type ==tablet {
-      @media only screen and (min-width: #{$medium}) {
+    @if $type == tablet-down {
+      @media (max-width: #{$large - 1}) {
         @content;
       }
     }
 
-    //desktop up
+    @if $type ==tablet {
+      @media (min-width: #{$medium}) and (max-width: #{$large - 1}) {
+        @content;
+      }
+    }
+
     @if $type ==desktop {
       @media only screen and (min-width: #{$large}) {
         @content;

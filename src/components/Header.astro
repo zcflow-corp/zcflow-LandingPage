@@ -76,7 +76,9 @@ const base = import.meta.env.BASE_URL
         <Lang />
         <ThemeSwitch client:idle />
         <a class="btn icon" href="#">{t('Ingresar')}</a>
-        <a class="btn tertiary" href=`${base}src/islands/ContactForm.jsx`>{t('Solicita una demo')}</a>
+        <a class="btn tertiary" href=`${base}src/islands/ContactForm.jsx`
+          >{t('Solicita una demo')}</a
+        >
       </div>
     </nav>
   </div>
@@ -112,7 +114,7 @@ const base = import.meta.env.BASE_URL
     }
 
     .menu-toggle {
-      display: none;
+      display: flex;
       flex-direction: column;
       justify-content: space-between;
       width: 35px;
@@ -140,10 +142,6 @@ const base = import.meta.env.BASE_URL
     .menu-toggle.active .bar:nth-child(2) {
       transform: translateY(-8px) rotate(-45deg);
     }
-
-    // .menu-toggle.active .bar:nth-child(3) {
-    //   transform: translateY(-8px) rotate(-45deg);
-    // }
     .nav-list {
       display: flex;
       gap: 1.5rem;
@@ -181,13 +179,14 @@ const base = import.meta.env.BASE_URL
       display: none;
     }
 
-    @include media(mobile) {
+    @include media(tablet-down) {
       @include shared-mobile-table;
     }
 
     @include media(tablet) {
       @include shared-mobile-tablet-principales;
     }
+
     .logo-row {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
