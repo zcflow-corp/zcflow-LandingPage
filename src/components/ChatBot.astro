@@ -20,9 +20,11 @@ const base = import.meta.env.BASE_URL
         }
       </p>
       <p class="container-section-description-BOTO">
+        {t('Descubre ideas, recomendaciones y análisis en segundos.')}
+
         {
           t(
-            'Descubre ideas, recomendaciones y análisis en segundos. Hazle preguntas sobre liquidez,proyecciones, riesgos o estrategias financieras, y obtén respuestas claras y accionables.'
+            'Hazle preguntas sobre liquidez, proyecciones, riesgos o estrategias financieras, y obtén respuestas claras y accionables.'
           )
         }
       </p>
@@ -117,6 +119,29 @@ const base = import.meta.env.BASE_URL
   .container-section-iframe {
     width: 100%;
     max-width: 49%;
+    // overflow: hidden;
+    // video {
+    //   display: block;
+    //   // border: 16px solid #006ffd;
+
+    //   outline: none !important;
+    //   box-shadow: none;
+    //   width: 100%;
+    //   height: 100%;
+    //   object-fit: contain;
+    //   position: relative;
+
+    //   &::after {
+    //     display: block;
+    //     position: absolute;
+    //     content: '';
+    //     z-index: 3;
+    //     width: 2px;
+    //     top: 3px;
+    //     height: 5px;
+    //     background: red;
+    //   }
+    // }
   }
   @include media(tablet-down) {
     .container-section-description-keyword {
