@@ -211,14 +211,7 @@
       }
     }
 
-    .beta-card {
-      display: flex;
-      width: 100%;
-      justify-content: flex-start;
 
-
-
-    }
 
 
 
@@ -285,8 +278,9 @@
 }
 
 
+
 .beta {
-  background-color: transparent;
+  background-color: var(--c-bg-variant);
   padding: 0.25rem 0.5rem;
   letter-spacing: 3px;
   border-radius: 5px;
@@ -360,8 +354,8 @@
   }
 
   &__badge {
-    font: 600 12px/1 var(--font-body);
-    letter-spacing: 0.2px;
+    font: 600 10px/1 var(--font-body);
+    letter-spacing: 0.9px;
     color: var(--c-quinary);
     background: color-mix(in srgb, var(--d4) 22%, transparent);
     border: 1px solid color-mix(in srgb, var(--d4) 35%, transparent);
@@ -439,6 +433,21 @@
 
   &__preview {
     margin-top: 6px;
+    position: relative;
+
+    .beta-card {
+      display: flex;
+      width: 100%;
+      justify-content: flex-start;
+      position: absolute;
+      bottom: 4%;
+      left: 4%;
+      align-self: flex-end;
+
+    }
+
+
+
   }
 
   &__frame {
@@ -474,6 +483,7 @@
       height: 210px;
     }
   }
+
 
   &--reveal {
     opacity: 0;

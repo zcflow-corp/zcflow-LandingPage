@@ -1,9 +1,10 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import emailjs from '@emailjs/browser'
 import { toast } from 'sonner'
+import { TermsModal } from './TermsModal'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -38,15 +39,19 @@ const PUBLIC_DOMAINS = ['gmail.com', 'hotmail.com', 'yahoo.com', 'outlook.com']
 export default function ContactForm() {
   const [step, setStep] = useState(1)
   const [prefix, setPrefix] = useState('')
+  const [openTerms, setOpenTerms] = useState(false)
 
   const {
     register,
     handleSubmit,
     watch,
     setValue,
-    formState: { isSubmitting },
+    trigger,
+    control,
+    formState: { errors, isSubmitting },
     reset,
   } = useForm({
+    mode: 'onTouched',
     defaultValues: {
       email: '',
       country: '',
@@ -71,21 +76,15 @@ export default function ContactForm() {
 
   /* ================== STEPS ================== */
 
-  const next = () => {
-    if (step === 1) {
-      const email = watch('email')
-      const domain = email?.split('@')[1]
-
-      if (!email) return toast.error('Ingresa tu correo corporativo')
-      if (PUBLIC_DOMAINS.includes(domain)) return toast.error('Usa un correo corporativo')
-      if (!country) return toast.error('Selecciona un país')
+  const next = async () => {
+    const fieldsByStep = {
+      1: ['email', 'country'],
+      2: ['name', 'lastname', 'company'],
+      3: ['interest', 'terms'],
     }
 
-    if (step === 2) {
-      if (!watch('name') || !watch('lastname') || !watch('company')) {
-        return toast.error('Completa todos los campos')
-      }
-    }
+    const valid = await trigger(fieldsByStep[step])
+    if (!valid) return
 
     setStep(step + 1)
   }
@@ -95,10 +94,6 @@ export default function ContactForm() {
   /* ================== SUBMIT ================== */
 
   const onSubmit = async (data) => {
-    if (!data.terms) {
-      return toast.error('Debes aceptar los términos')
-    }
-
     try {
       await emailjs.send(
         'YOUR_SERVICE_ID',
@@ -124,24 +119,21 @@ export default function ContactForm() {
   /* ================== UI ================== */
 
   return (
-    <div className="bg-[var(--c-bg-variant)] py-20">
-      <Card className="max-w-md mx-auto bg-[var(--c-panel)] shadow-xl rounded-[var(--radius)]">
-        <CardHeader className="space-y-2">
-          <CardTitle className="font-[var(--font-head)] text-[var(--h2)]">
+    <section className="bg-bg-variant py-20 section-contact">
+      <Card className="max-w-md mx-auto bg-panel shadow-xl rounded-base">
+        <CardHeader className="space-y-3 text-h3">
+          <CardTitle className="font-head text-h2 leading-tight text-text">
             ¿Cómo podemos contactarte?
           </CardTitle>
-          <CardDescription className="text-base">
+
+          <CardDescription className="text-muted">
             Proporciona tu información de contacto.
           </CardDescription>
 
-          {/* Progress bar */}
-          <div className="h-1 w-full rounded-full bg-[var(--c-line)] overflow-hidden">
+          <div className="h-1 w-full rounded-full bg-line overflow-hidden">
             <div
-              className="h-full transition-all duration-300"
-              style={{
-                width: `${(step / 3) * 100}%`,
-                background: 'var(--g-primary)',
-              }}
+              className="h-full transition-all duration-300 bg-g-primary"
+              style={{ width: `${(step / 3) * 100}%` }}
             />
           </div>
         </CardHeader>
@@ -151,16 +143,27 @@ export default function ContactForm() {
             {/* STEP 1 */}
             {step === 1 && (
               <>
-                <Field label="Correo corporativo">
-                  <Input placeholder="nombre@empresa.com" {...register('email')} />
+                <Field label="Correo corporativo" error={errors.email?.message}>
+                  <Input
+                    placeholder="nombre@empresa.com"
+                    {...register('email', {
+                      required: 'El correo es obligatorio',
+                      validate: (value) => {
+                        const domain = value.split('@')[1]
+                        if (!domain) return 'Correo inválido'
+                        if (PUBLIC_DOMAINS.includes(domain)) return 'Usa un correo corporativo'
+                        return true
+                      },
+                    })}
+                  />
                 </Field>
 
-                <Field label="País">
-                  <Select onValueChange={(v) => setValue('country', v)}>
+                <Field label="País" error={errors.country?.message}>
+                  <Select onValueChange={(v) => setValue('country', v, { shouldValidate: true })}>
                     <SelectTrigger>
                       <SelectValue placeholder="Selecciona tu país" />
                     </SelectTrigger>
-                    <SelectContent className="bg-white border border-gray-200 shadow-lg">
+                    <SelectContent className="bg-panel">
                       {COUNTRIES.map((c) => (
                         <SelectItem key={c.code} value={c.code}>
                           {c.name}
@@ -168,6 +171,12 @@ export default function ContactForm() {
                       ))}
                     </SelectContent>
                   </Select>
+                  <input
+                    type="hidden"
+                    {...register('country', {
+                      required: 'Selecciona un país',
+                    })}
+                  />
                 </Field>
               </>
             )}
@@ -175,21 +184,36 @@ export default function ContactForm() {
             {/* STEP 2 */}
             {step === 2 && (
               <>
-                <Field label="Nombre">
-                  <Input placeholder="Ej. Elena" {...register('name')} />
+                <Field label="Nombre" error={errors.name?.message}>
+                  <Input
+                    placeholder="Ej. Elena"
+                    {...register('name', {
+                      required: 'El nombre es obligatorio',
+                    })}
+                  />
                 </Field>
 
-                <Field label="Apellido">
-                  <Input placeholder="Ej. Díaz" {...register('lastname')} />
+                <Field label="Apellido" error={errors.lastname?.message}>
+                  <Input
+                    placeholder="Ej. Díaz"
+                    {...register('lastname', {
+                      required: 'El apellido es obligatorio',
+                    })}
+                  />
                 </Field>
 
-                <Field label="Empresa">
-                  <Input placeholder="Ej. Zcflow" {...register('company')} />
+                <Field label="Empresa" error={errors.company?.message}>
+                  <Input
+                    placeholder="Ej. Zcflow"
+                    {...register('company', {
+                      required: 'La empresa es obligatoria',
+                    })}
+                  />
                 </Field>
 
                 <Field label="Número de teléfono">
                   <div className="flex gap-2">
-                    <div className="px-3 flex items-center border rounded-md text-sm bg-[var(--c-bg-variant)]">
+                    <div className="px-3 flex items-center border rounded-md text-sm bg-bg-variant">
                       {prefix || '--'}
                     </div>
                     <Input placeholder="999 999 999" {...register('phone')} />
@@ -201,17 +225,25 @@ export default function ContactForm() {
             {/* STEP 3 */}
             {step === 3 && (
               <>
-                <Field label="Interés">
-                  <Select onValueChange={(v) => setValue('interest', v)}>
+                <Field label="Interés" error={errors.interest?.message}>
+                  <Select onValueChange={(v) => setValue('interest', v, { shouldValidate: true })}>
                     <SelectTrigger>
                       <SelectValue placeholder="Selecciona una opción" />
                     </SelectTrigger>
-                    <SelectContent className="bg-white border shadow-lg">
+                    <SelectContent className="bg-panel">
                       <SelectItem value="demo">Solicitar demo</SelectItem>
                       <SelectItem value="solution">Solución específica</SelectItem>
-                      <SelectItem value="partner">Alianza</SelectItem>
+                      <SelectItem value="alianza">Alianza Comercial</SelectItem>
+
+                      <SelectItem value="partner">Otro Motivo </SelectItem>
                     </SelectContent>
                   </Select>
+                  <input
+                    type="hidden"
+                    {...register('interest', {
+                      required: 'Selecciona un interés',
+                    })}
+                  />
                 </Field>
 
                 <Field label="Detalles">
@@ -222,13 +254,35 @@ export default function ContactForm() {
                   />
                 </Field>
 
-                <div className="flex items-center gap-2">
-                  <Checkbox {...register('terms')} />
-                  <span className="text-sm">Acepto términos y condiciones</span>
-                </div>
+                <Field error={errors.terms?.message}>
+                  <Controller
+                    name="terms"
+                    control={control}
+                    rules={{
+                      required: 'Debes aceptar los términos',
+                    }}
+                    render={({ field }) => (
+                      <div className="flex items-start gap-2">
+                        <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+
+                        <p className="text-sm text-text leading-snug">
+                          Acepto los{' '}
+                          <button
+                            type="button"
+                            onClick={() => setOpenTerms(true)}
+                            className="underline text-primary hover:opacity-80 "
+                          >
+                            términos y condiciones
+                          </button>
+                        </p>
+                      </div>
+                    )}
+                  />
+                </Field>
               </>
             )}
 
+            <TermsModal open={openTerms} onOpenChange={setOpenTerms} />
             {/* ACTIONS */}
             <div className="flex justify-between pt-4">
               {step > 1 && (
@@ -236,13 +290,15 @@ export default function ContactForm() {
                   Atrás
                 </Button>
               )}
+
               {step < 3 && (
-                <Button type="button" onClick={next}>
+                <Button type="button" onClick={next} className="btn primary">
                   Continuar
                 </Button>
               )}
+
               {step === 3 && (
-                <Button type="submit" disabled={isSubmitting}>
+                <Button type="submit" className="btn primary" disabled={isSubmitting}>
                   {isSubmitting ? 'Enviando…' : 'Enviar'}
                 </Button>
               )}
@@ -250,17 +306,18 @@ export default function ContactForm() {
           </form>
         </CardContent>
       </Card>
-    </div>
+    </section>
   )
 }
 
 /* ================== FIELD ================== */
 
-function Field({ label, children }) {
+function Field({ label, error, children }) {
   return (
     <div className="space-y-1">
-      <label className="text-sm font-medium text-[var(--c-text)]">{label}</label>
+      {label && <label className="text-sm font-medium text-text">{label}</label>}
       {children}
+      {error && <p className="text-sm text-error">{error}</p>}
     </div>
   )
 }

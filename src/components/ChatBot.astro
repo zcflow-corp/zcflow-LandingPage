@@ -7,7 +7,9 @@ const base = import.meta.env.BASE_URL
 <section id="chatBot" aria-labelledby="chatbot-title">
   <div class="container" style="width: 100%;">
     <div class="container-section-description">
-      <span class="container-section-description-keyword">BETA</span>
+      <div class="container-beta">
+        <span class="beta"> BETA </span>
+      </div>
       <h1 class="container-section-description-title">Ask BOTO</h1>
       <h3 class="container-section-description-slogan">Converse con la tesorería del futuro.</h3>
       <p class="container-section-description-BOTO">
@@ -66,6 +68,12 @@ const base = import.meta.env.BASE_URL
     flex-direction: column;
     max-width: 51%;
     row-gap: 0.3rem;
+    .beta {
+      background-color: transparent;
+      color: var(--c-white);
+
+      border: 1px solid var(--c-white);
+    }
   }
   .container-section-description-title {
     font-size: 3rem;

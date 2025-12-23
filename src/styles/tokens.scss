@@ -38,7 +38,11 @@
   --d9: #00b8d9;
   --d10: #ff9f40;
   --g-primary: linear-gradient(135deg, #0563ff 0%, #071381 100%); //nuevoo
-  --g-primary-light: linear-gradient(90deg, #7faeff 19.23%, #90a9d5 43.75%, #f6f6f9 83.65%);
+  --g-primary-light: linear-gradient(90deg,
+      var(--c-primary),
+      var(--d9),
+      var(--c-quinary),
+      var(--c-primary));
   --g-primary-dark: linear-gradient(90deg, #0563ff 0%, #476aa6 47.12%, #e2e2e2 100%);
   --g-cta: linear-gradient(90deg, #00084d 20%, #1d63ed 99%);
   --g-hero: radial-gradient(60% 80% at 70% 30%, #ffff 0%, #fff 70%);
@@ -62,6 +66,11 @@
   --c-panel: #11172a;
   --g-hero: radial-gradient(60% 80% at 70% 30%, #071381 0%, #000 70%);
   --c-line: #1f2a44;
+  --g-primary-light: linear-gradient(90deg,
+      #7faeff,
+      #8fdfff,
+      #9aa8ff,
+      #7faeff);
 
 }
 

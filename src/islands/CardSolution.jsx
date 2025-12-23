@@ -110,12 +110,6 @@ export default function CardSolution({
               >
                 <div className="dCard__top">
                   <span className="dCard__badge">{word}</span>
-
-                  {s.status === 'beta' && (
-                    <div className="beta-card">
-                      <span className="beta gradient-blue-dark">beta</span>
-                    </div>
-                  )}
                 </div>
 
                 <div className="dCard__body">
@@ -138,6 +132,11 @@ export default function CardSolution({
                       loading="lazy"
                     />
                   </div>
+                  {s.status === 'beta' && (
+                    <div className="beta-card">
+                      <span className="beta gradient-blue-dark">beta</span>
+                    </div>
+                  )}
                 </div>
               </article>
             ))}

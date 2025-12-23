@@ -13,7 +13,7 @@ export default defineConfig({
     allowedHosts: ['porky-nonpossessively-kimberlie.ngrok-free.dev', 'localhost'],
   },
 
-  trailingSlash: 'always',
+  trailingSlash: 'ignore',
 
   integrations: [react(), tailwind()],
 

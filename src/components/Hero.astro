@@ -16,10 +16,9 @@ const textos = [
     <div class="hero-description">
       <div class="hero-description-title">
         <h1>
-          <span>
-            {t('Revolucionando la')}
+          <span class="gradient-blue-dark">
+            {t('Revolucionando la tesorería')}
           </span>
-          <span class="gradient-blue-dark"> {t('tesorería')} </span>
         </h1>
 
         <h2>
@@ -48,6 +47,43 @@ const textos = [
   .hero {
     overflow: hidden;
     flex-wrap: wrap;
+    position: relative;
+
+    // background-image: url('/assets/hero.gif');
+    // background-repeat: no-repeat;
+    // background-size: cover;
+    // background-position: top center;
+    // transform: rotate(-180deg);
+    // transform-origin: center;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -100;
+      background-image: url('/assets/hero.gif');
+      background-repeat: no-repeat;
+      background-size: contain;
+      transform: rotate(-60deg);
+      // background-position: right bottom;
+      // background-position: 70% bottom;
+      // background-position: calc(100% + 50px) bottom;
+      background-position: 70% 90%;
+
+      // transform-origin: right bottom;
+
+      transform: rotate(-50deg);
+      background-position: 145% 30%;
+      bottom: 0%;
+      right: -25%;
+
+      @include media(mobile) {
+        transform: rotate(60deg);
+        background-position: 149%;
+        bottom: -39%;
+        right: 0%;
+      }
+    }
 
     .container {
       padding-top: 0rem;
@@ -75,7 +111,6 @@ const textos = [
     }
 
     &-description {
-      padding-top: 2rem;
       padding-bottom: 2rem;
       display: flex;
       flex-direction: column;
@@ -88,6 +123,7 @@ const textos = [
 
       @include media(desktop) {
         width: 40%;
+        margin-top: -4rem;
       }
 
       &-title {
@@ -113,19 +149,10 @@ const textos = [
         }
 
         @include media(desktop) {
-          width: 125%;
-          font-size: 3rem;
+          width: 180%;
+          flex-wrap: nowrap;
+          font-size: 3.2rem;
         }
-
-        span {
-          display: flex;
-          display: inline-block !important;
-          // flex-wrap: nowrap;
-        }
-
-        // @include media(mobile) {
-        //   display: inline-block;
-        // }
       }
 
       h2 {
@@ -172,10 +199,10 @@ const textos = [
     .cta {
       display: flex;
       gap: 1rem;
-      gap: 1rem;
-      flex-wrap: wrap;
+
       margin-top: 2rem;
-      margin-top: 2rem;
+      @include media(desktop) {
+      }
     }
 
     .hero-check {
@@ -183,7 +210,6 @@ const textos = [
       justify-content: flex-start;
       width: auto;
       align-items: flex-start;
-      padding: 1rem 0rem;
       padding: 1rem 0rem;
     }
   }

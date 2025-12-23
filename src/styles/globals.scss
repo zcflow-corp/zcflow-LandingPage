@@ -82,16 +82,11 @@ a {
   border-style: none;
 }
 
-/*
- * @todos
- * .gradient-blue-dark es utilizada seccion principios y
- * depende de este comportamiento para evitar flicker inicial.
- * Para customizaciones especificas de otros titulos,
- * crear una nueva clase y no sobrescribir esta.
- */
+
 
 .gradient-blue-dark {
-  background: var(--g-primary-dark);
+
+  background: var(--g-primary-light);
   background-size: 200% 100%;
   background-clip: text;
   -webkit-background-clip: text;
@@ -99,28 +94,31 @@ a {
   -webkit-text-fill-color: transparent;
   display: inline-block;
   animation: gradient-move 5s ease infinite;
+  background-size: 300% 100%;
+  animation: infinityBorder 4s linear infinite;
+  // background: linear-gradient(to right, var(--c-white) 59%, var(--c-primary-accessible) 100%);
 }
 
 .gradient-blue-ligth {
-  background: var(--g-primary-light);
+
+  background: linear-gradient(to right, white 14%, #00b0f0 67%);
+  // background: linear-gradient(90deg,
+  //     #5f6e7c,
+  //     #fbfcfd,
+  //     #49a0bf,
+  //     #00b0f0);
+  // ;
+  background-size: 200% 100%;
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
   display: inline-block;
-  animation: gradient-move 15s ease infinite;
+  // animation: gradient-move 5s ease infinite;
+  // background-size: 300% 100%;
+  // animation: infinityBorder 4s linear infinite;
 }
 
-html[data-theme='dark'] .gradient-blue-dark {
-  background: linear-gradient(90deg, #0563ff 0%, #476aa6 47.12%, #e2e2e2 100%);
-  letter-spacing: 0.35px;
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-  animation: gradient-move 15s ease infinite;
-}
 
 .mode-dark {
   display: block;

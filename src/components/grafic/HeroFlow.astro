@@ -124,14 +124,9 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
   .hero {
     &--flow {
       position: relative;
-      // height: 80vh;
       min-height: 40px;
-      background: transparent;
-      background-image: url('/assets/section_hero_flow.svg');
-      background-repeat: no-repeat;
-      background-size: cover;
       width: 100%;
-      background-position: top left;
+      // z-index: -10;
 
       @include media(tablet) {
         overflow: hidden;
@@ -253,8 +248,8 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
         }
 
         @include media(desktop) {
-          top: 50%;
-          left: 32%;
+          top: 60%;
+          left: 30%;
         }
 
         @include media(extradesktop) {
@@ -271,12 +266,12 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
 
       &--gestiona {
         top: 19%;
-        left: 55%;
+        left: 68%;
       }
 
       &--optimiza {
         top: 38%;
-        left: 68%;
+        left: 80%;
       }
 
       &--actua {
@@ -284,7 +279,7 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
         left: 77%;
         @include media(desktop) {
           top: 60%;
-          left: 72%;
+          left: 65%;
         }
 
         @include media(extradesktop) {
