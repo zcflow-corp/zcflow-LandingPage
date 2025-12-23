@@ -5,7 +5,10 @@ import Lang from './Lang.astro'
 
 const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k: unknown) => k
+const locale = Astro.currentLocale ?? 'es'
 const base = import.meta.env.BASE_URL
+
+const path = (url) => `${base}${locale}/${url}/`.replace(/\/+/g, '/')
 ---
 
 <header class="site-header" itemscope itemtype="https://schema.org/Organization">
@@ -76,7 +79,9 @@ const base = import.meta.env.BASE_URL
         <Lang />
         <ThemeSwitch client:idle />
         <a class="btn icon" href="#">{t('Ingresar')}</a>
-        <a class="btn tertiary" href="/contacto/">{t('Solicita una demo')}</a>
+        <a class="btn tertiary" href={path('contacto')}>
+          {t('Solicita una demo')}
+        </a>
       </div>
     </nav>
   </div>

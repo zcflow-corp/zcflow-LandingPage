@@ -1,20 +1,17 @@
 ---
-const current = Astro.currentLocale // 'es' o 'en'
+const current = Astro.currentLocale // 'es' | 'en'
 const next = current === 'es' ? 'en' : 'es'
-const base = import.meta.env.BASE_URL
-// quita prefijo /en/ si existe
-const cleanPath = base.replace(/^\/(en)\//, '/')
-// asegura barra final para evitar 404 (match con trailingSlash: 'always')
-const ensureSlash = (p) => (p.endsWith('/') ? p : p + '/')
-const basePath = ensureSlash(cleanPath)
 
-// destino con idioma
-const nextPath = next === 'es' ? cleanPath : `${basePath}en`
-// esta es la salida = https://zcflow-corp.github.io/zcflow-LandingPage/en
+const pathname = Astro.url.pathname
+
+// quitamos /es/ o /en/
+const cleanPath = pathname.replace(/^\/(es|en)/, '')
+
+const finalPath = `/${next}${cleanPath || '/'}`
 ---
 
 <a
-  href={nextPath}
+  href={finalPath}
   class="btn"
   aria-label={current === 'es' ? 'Cambiar a inglés' : 'Switch to Spanish'}
 >

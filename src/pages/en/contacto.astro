@@ -1,0 +1,31 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Header from '@/components/Header.astro'
+import Footer from '@/components/Footer.astro'
+import ContactForm from '@/islands/ContactForm.jsx'
+
+const pathname = Astro.url.pathname
+
+// ✅ detectamos idioma desde la URL
+const locale = pathname.startsWith('/en') ? 'en' : 'es'
+
+// ✅ glob seguro con alias
+const dictionaries = import.meta.glob('@/i18n/*.json', { eager: true })
+
+const messages = dictionaries[`/src/i18n/${locale}.json`]?.default ?? {}
+
+const t = (key) => messages[key] ?? key
+
+console.log('locale:', locale)
+console.log('Soluciones:', t('Soluciones'))
+---
+
+<BaseLayout title="Contacto" />
+
+<BaseLayout>
+  <Header t={t} />
+  <main>
+    <ContactForm client:load />
+  </main>
+  <Footer t={t} />
+</BaseLayout>

@@ -13,13 +13,16 @@ export default defineConfig({
     allowedHosts: ['porky-nonpossessively-kimberlie.ngrok-free.dev', 'localhost'],
   },
 
-  trailingSlash: 'always',
+  trailingSlash: 'ignore',
 
   integrations: [react(), tailwind()],
 
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en'],
+    routing: {
+      prefixDefaultLocale: true,
+    },
   },
 
   vite: {
