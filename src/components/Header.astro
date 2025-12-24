@@ -189,10 +189,14 @@ const path = (url) => `${base}${locale}/${url}/`.replace(/\/+/g, '/')
     @include media(mobile) {
       @include shared-mobile-table;
     }
+    // @include media(tablet) {
+    //   @include shared-mobile-table;
+    // }
 
-    @include media(tablet) {
+    @include media(desktop) {
       @include shared-mobile-tablet-principales;
     }
+
     .logo-row {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));

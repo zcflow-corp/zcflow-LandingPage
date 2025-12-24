@@ -124,7 +124,7 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
   .hero {
     &--flow {
       position: relative;
-      min-height: 40px;
+      min-height: 30px;
       width: 100%;
       // z-index: -10;
 
@@ -245,8 +245,8 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
       }
 
       &--conecta {
-        top: 13%;
-        left: 40%;
+        top: 78%;
+        left: 25%;
 
         @include media(tablet) {
           top: 45%;
@@ -272,13 +272,19 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
       }
 
       &--gestiona {
-        top: 25%;
-        left: 95%;
+        // top: 25%;
+        // left: 95%;
+
+        @include media(mobile) {
+          top: 60%;
+          left: 90%;
+        }
 
         @include media(tablet) {
           top: 60%;
           left: 65%;
         }
+
         @include media(extradesktop) {
           left: 55%;
         }
@@ -298,8 +304,9 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
       }
 
       &--actua {
-        top: 70%;
-        left: 77%;
+        top: 20%;
+        left: 90%;
+
         @include media(tablet) {
           top: 60%;
           left: 77%;
@@ -351,7 +358,7 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
       opacity: 1;
       transform: scale(0.68);
       padding: 0.75em 0.75em;
-      left: -25%;
+      left: -15%;
       bottom: 10%;
       width: max-content;
       gap: 0.25rem;
