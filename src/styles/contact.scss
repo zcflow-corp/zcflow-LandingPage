@@ -11,7 +11,7 @@
     position: absolute;
     inset: 0;
     z-index: -100;
-    background-image: url('/assets/hero.gif');
+    background-image: url('/assets/hero2.gif');
     background-repeat: no-repeat;
     background-size: 200%;
     background-position: bottom;
@@ -25,6 +25,12 @@
 html[data-theme='dark'] .section-contact {
 
   &::before {
-    position: relative;
+    background-image: url('/assets/herob.webp');
+    background-size: 95%;
+    background-position: bottom;
+    transform: rotate(20deg);
+    bottom: -30%;
+    top: 20%;
+
   }
 }

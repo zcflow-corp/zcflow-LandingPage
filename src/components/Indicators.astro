@@ -252,11 +252,20 @@ const t = typeof _t === 'function' ? _t : (k) => k
   }
   @include media(mobile) {
     .container-counter {
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 2 columnas iguales */
+      gap: 2rem;
+      width: 100%;
+      padding: 0rem;
+    }
+
+    .container-counter {
+      transform: scale(0.9);
     }
     .section-grafico {
       .section-grafico-indicador {
         width: 100%;
+        margin-top: 2rem;
       }
     }
   }

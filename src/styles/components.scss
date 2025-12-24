@@ -14,7 +14,8 @@
   &__container {
     width: min(var(--container), 62vw);
     margin-inline: auto;
-    margin-top: -2rem;
+
+
   }
 
   &__viewport {
@@ -105,6 +106,8 @@
     display: grid;
     gap: 1rem;
     width: 100%;
+
+
   }
 
   &__title {
@@ -170,6 +173,7 @@
       text-wrap: wrap;
       line-height: 24px;
       padding-top: 0rem;
+
     }
 
     .beta {
@@ -203,6 +207,7 @@
     opacity: 1;
     position: relative;
     display: flex;
+
 
     svg {
       path {
@@ -607,7 +612,7 @@ html[data-theme='dark'] .card-slider {
       display: none;
     }
 
-    .card-slider__img-wrap {
+    .card-slider__description .card-slider__img-wrap {
       box-shadow: none;
     }
   }
@@ -648,6 +653,16 @@ html[data-theme='dark'] .card-slider {
 }
 
 .card-zcflow {
+
+  .card-slider__container {
+
+    margin-top: 0rem;
+
+    @include media(tablet) {
+      margin-top: -4.2rem;
+    }
+
+  }
 
   .zcflow-description {
 
