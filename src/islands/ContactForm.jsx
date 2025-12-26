@@ -111,10 +111,9 @@ export default function ContactForm() {
   const prev = () => setStep(step - 1)
 
   /* ================== SUBMIT ================== */
+  console.log('variables', meta.env.PUBLIC_EMAILJS_SERVICE_ID)
 
   const onSubmit = async (data) => {
-    console.log('variables', meta.env.PUBLIC_EMAILJS_SERVICE_ID)
-
     try {
       await emailjs.send(
         import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
@@ -133,6 +132,7 @@ export default function ContactForm() {
       reset()
       setStep(1)
     } catch {
+      console.log(toast.error.message)
       toast.error(t('No se pudo enviar el formulario'))
     }
   }
