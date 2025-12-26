@@ -132,7 +132,6 @@ export default function ContactForm() {
       reset()
       setStep(1)
     } catch {
-      console.log(toast.error.message)
       toast.error(t('No se pudo enviar el formulario'))
     }
   }
