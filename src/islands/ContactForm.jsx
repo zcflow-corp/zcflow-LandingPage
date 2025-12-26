@@ -111,22 +111,33 @@ export default function ContactForm() {
   const prev = () => setStep(step - 1)
 
   /* ================== SUBMIT ================== */
-  console.log('[ENV]', {
-    SERVICE_ID: import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
-    TEMPLATE_ID: import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
-    PUBLIC_KEY: import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY,
+  const SERVICE_ID = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID
+  const TEMPLATE_ID = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID
+  const PUBLIC_KEY = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY
+
+  console.log('[EmailJS ENV]', {
+    SERVICE_ID,
+    TEMPLATE_ID,
+    PUBLIC_KEY,
   })
 
   const onSubmit = async (data) => {
     try {
+      // 🔍 Debug temporal (eliminar luego)
+      console.log('[EmailJS ENV]', {
+        SERVICE_ID,
+        TEMPLATE_ID,
+        PUBLIC_KEY,
+      })
+
       await emailjs.send(
-        import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
-        import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
+        SERVICE_ID,
+        TEMPLATE_ID,
         {
           ...data,
           phone: `${prefix} ${data.phone}`,
         },
-        import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY
+        PUBLIC_KEY
       )
 
       toast.success('Formulario enviado', {
@@ -135,11 +146,12 @@ export default function ContactForm() {
 
       reset()
       setStep(1)
-    } catch {
+    } catch (error) {
+      console.error('[EmailJS ERROR]', error)
+
       toast.error(t('No se pudo enviar el formulario'))
     }
   }
-
   /* ================== UI ================== */
 
   return (
