@@ -111,9 +111,13 @@ export default function ContactForm() {
   const prev = () => setStep(step - 1)
 
   /* ================== SUBMIT ================== */
-  const SERVICE_ID = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID
-  const TEMPLATE_ID = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID
-  const PUBLIC_KEY = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY
+  // const SERVICE_ID = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID
+  // const TEMPLATE_ID = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID
+  // const PUBLIC_KEY = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY
+
+  const SERVICE_ID = 'service_3avdpu8'
+  const TEMPLATE_ID = 'template_32m276g'
+  const PUBLIC_KEY = 'OxhdmLgo61idmBNlb'
 
   console.log('[EmailJS ENV]', {
     SERVICE_ID,
