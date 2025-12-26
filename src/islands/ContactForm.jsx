@@ -111,7 +111,11 @@ export default function ContactForm() {
   const prev = () => setStep(step - 1)
 
   /* ================== SUBMIT ================== */
-  console.log('variables', meta.env.PUBLIC_EMAILJS_SERVICE_ID)
+  console.log('[ENV]', {
+    SERVICE_ID: import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
+    TEMPLATE_ID: import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
+    PUBLIC_KEY: import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY,
+  })
 
   const onSubmit = async (data) => {
     try {
