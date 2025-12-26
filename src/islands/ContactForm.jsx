@@ -115,23 +115,23 @@ export default function ContactForm() {
   const onSubmit = async (data) => {
     try {
       await emailjs.send(
-        'YOUR_SERVICE_ID',
-        'YOUR_TEMPLATE_ID',
+        import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
+        import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
         {
           ...data,
           phone: `${prefix} ${data.phone}`,
         },
-        'YOUR_PUBLIC_KEY'
+        import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY
       )
 
       toast.success('Formulario enviado', {
-        description: 'Te contactaremos pronto',
+        description: t('Te contactaremos pronto'),
       })
 
       reset()
       setStep(1)
     } catch {
-      toast.error('No se pudo enviar el formulario')
+      toast.error(t('No se pudo enviar el formulario'))
     }
   }
 
@@ -139,16 +139,14 @@ export default function ContactForm() {
 
   return (
     <section className="bg-bg-variant py-20 section-contact">
-      {t('Hacemos que el')}
-
       <Card className="max-w-md mx-auto bg-panel shadow-xl rounded-base">
         <CardHeader className="space-y-3 text-h3">
           <CardTitle className="font-head text-h2 leading-tight text-text">
-            ¿Cómo podemos contactarte?
+            {t('¿Cómo podemos contactarte?')}
           </CardTitle>
 
           <CardDescription className="text-muted">
-            Proporciona tu información de contacto.
+            {t('Proporciona tu información de contacto')}
           </CardDescription>
 
           <div className="h-1 w-full rounded-full bg-line overflow-hidden">
@@ -164,25 +162,25 @@ export default function ContactForm() {
             {/* STEP 1 */}
             {step === 1 && (
               <>
-                <Field label="Correo corporativo" error={errors.email?.message}>
+                <Field label={t('Correo corporativo')} error={errors.email?.message}>
                   <Input
                     placeholder="nombre@empresa.com"
                     {...register('email', {
-                      required: 'El correo es obligatorio',
+                      required: t('El correo es obligatorio'),
                       validate: (value) => {
                         const domain = value.split('@')[1]
-                        if (!domain) return 'Correo inválido'
-                        if (PUBLIC_DOMAINS.includes(domain)) return 'Usa un correo corporativo'
+                        if (!domain) return t('Correo inválido')
+                        if (PUBLIC_DOMAINS.includes(domain)) return t('Usa un correo corporativo')
                         return true
                       },
                     })}
                   />
                 </Field>
 
-                <Field label="País" error={errors.country?.message}>
+                <Field label={t('País')} error={errors.country?.message}>
                   <Select onValueChange={(v) => setValue('country', v, { shouldValidate: true })}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Selecciona tu país" />
+                      <SelectValue placeholder={t('Selecciona tu país')} />
                     </SelectTrigger>
                     <SelectContent className="bg-panel">
                       {COUNTRIES.map((c) => (
@@ -195,7 +193,7 @@ export default function ContactForm() {
                   <input
                     type="hidden"
                     {...register('country', {
-                      required: 'Selecciona un país',
+                      required: t('Selecciona un país'),
                     })}
                   />
                 </Field>
@@ -205,34 +203,34 @@ export default function ContactForm() {
             {/* STEP 2 */}
             {step === 2 && (
               <>
-                <Field label="Nombre" error={errors.name?.message}>
+                <Field label={t('Nombre')} error={errors.name?.message}>
                   <Input
                     placeholder="Ej. Elena"
                     {...register('name', {
-                      required: 'El nombre es obligatorio',
+                      required: t('El nombre es obligatorio'),
                     })}
                   />
                 </Field>
 
-                <Field label="Apellido" error={errors.lastname?.message}>
+                <Field label={t('Apellido')} error={errors.lastname?.message}>
                   <Input
                     placeholder="Ej. Díaz"
                     {...register('lastname', {
-                      required: 'El apellido es obligatorio',
+                      required: t('El apellido es obligatorio'),
                     })}
                   />
                 </Field>
 
-                <Field label="Empresa" error={errors.company?.message}>
+                <Field label={t('Empresa')} error={errors.company?.message}>
                   <Input
                     placeholder="Ej. Zcflow"
                     {...register('company', {
-                      required: 'La empresa es obligatoria',
+                      required: t('La empresa es obligatoria'),
                     })}
                   />
                 </Field>
 
-                <Field label="Número de teléfono">
+                <Field label={t('Número de teléfono')}>
                   <div className="flex gap-2">
                     <div className="px-3 flex items-center border rounded-md text-sm bg-bg-variant">
                       {prefix || '--'}
@@ -246,31 +244,31 @@ export default function ContactForm() {
             {/* STEP 3 */}
             {step === 3 && (
               <>
-                <Field label="Interés" error={errors.interest?.message}>
+                <Field label={t('Interés')} error={errors.interest?.message}>
                   <Select onValueChange={(v) => setValue('interest', v, { shouldValidate: true })}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Selecciona una opción" />
+                      <SelectValue placeholder={t('Selecciona una opción')} />
                     </SelectTrigger>
                     <SelectContent className="bg-panel">
-                      <SelectItem value="demo">Solicitar demo</SelectItem>
-                      <SelectItem value="solution">Solución específica</SelectItem>
-                      <SelectItem value="alianza">Alianza Comercial</SelectItem>
+                      <SelectItem value="demo">{t('Solicitar demo')} </SelectItem>
+                      <SelectItem value="solution">{t('Solución específica')} </SelectItem>
+                      <SelectItem value="alianza">{t('Alianza Comercial')} </SelectItem>
 
-                      <SelectItem value="partner">Otro Motivo </SelectItem>
+                      <SelectItem value="partner"> {t('Otro Motivo')} </SelectItem>
                     </SelectContent>
                   </Select>
                   <input
                     type="hidden"
                     {...register('interest', {
-                      required: 'Selecciona un interés',
+                      required: t('Selecciona un interés'),
                     })}
                   />
                 </Field>
 
-                <Field label="Detalles">
+                <Field label={t('Detalles')}>
                   <Textarea
                     rows={4}
-                    placeholder="Cuéntanos brevemente qué necesitas…"
+                    placeholder={t('Cuéntanos brevemente qué necesitas…')}
                     {...register('details')}
                   />
                 </Field>
@@ -280,20 +278,29 @@ export default function ContactForm() {
                     name="terms"
                     control={control}
                     rules={{
-                      required: 'Debes aceptar los términos',
+                      required: t('Debes aceptar los términos'),
                     }}
                     render={({ field }) => (
                       <div className="flex items-start gap-2">
-                        <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                        <Checkbox
+                          className="
+                        border-muted
+                        data-[state=checked]:bg-primary
+                        data-[state=checked]:border-primary
+                        data-[state=checked]:text-white
+                      "
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
 
                         <p className="text-sm text-text leading-snug">
-                          Acepto los{' '}
+                          {t('Acepto los')}{' '}
                           <button
                             type="button"
                             onClick={() => setOpenTerms(true)}
                             className="underline text-primary hover:opacity-80 "
                           >
-                            términos y condiciones
+                            {t('términos y condiciones')}
                           </button>
                         </p>
                       </div>
@@ -308,19 +315,19 @@ export default function ContactForm() {
             <div className="flex justify-between pt-4">
               {step > 1 && (
                 <Button type="button" variant="outline" onClick={prev}>
-                  Atrás
+                  {t('Atrás')}
                 </Button>
               )}
 
               {step < 3 && (
                 <Button type="button" onClick={next} className="btn primary">
-                  Continuar
+                  {t('Continuar')}
                 </Button>
               )}
 
               {step === 3 && (
                 <Button type="submit" className="btn primary" disabled={isSubmitting}>
-                  {isSubmitting ? 'Enviando…' : 'Enviar'}
+                  {isSubmitting ? t('Enviando…') : t('Enviar')}
                 </Button>
               )}
             </div>
