@@ -113,6 +113,8 @@ export default function ContactForm() {
   /* ================== SUBMIT ================== */
 
   const onSubmit = async (data) => {
+    console.log('variables', meta.env.PUBLIC_EMAILJS_SERVICE_ID)
+
     try {
       await emailjs.send(
         import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
