@@ -1,17 +1,20 @@
 ---
+import { localeHelper } from '../i18n/index';
 import LineChart from '@/islands/LineChart.jsx'
 import CounterOnView from '@/islands/CounterOnView.jsx'
 import ChartIndicator from './grafic/ChartIndicator.astro'
-import { Image } from 'astro:assets'
-const { t: _t } = Astro.props
-const t = typeof _t === 'function' ? _t : (k) => k
+
+// const { t: _t } = Astro.props
+// const t = typeof _t === 'function' ? _t : (k) => k
+
+const { locale, t } = localeHelper(Astro);
 ---
 
 <!-- Original id="indicadores" -->
 <section class="section" aria-labelledby="indicadores-title">
   <div style="padding: 2rem;">
     <div class="container indicators card">
-      <h4 class="gradient-blue-dark">{'Indicadores'}</h4>
+      <h4 class="gradient-blue-dark">{t('Indicadores')}</h4>
       <div class="section-grafico">
         <div class="section-grafico-left">
           <!-- Original id="indicadores-title" -->
