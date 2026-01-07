@@ -119,7 +119,7 @@ const path = (url) => `${base}${locale}/${url}/`.replace(/\/+/g, '/')
     display: none;
   }
     .menu-toggle {
-      display: flex;
+      display: none;
       flex-direction: column;
       justify-content: space-between;
       width: 35px;
@@ -187,13 +187,14 @@ const path = (url) => `${base}${locale}/${url}/`.replace(/\/+/g, '/')
     @include media(tablet-down) {
       @include shared-mobile-table;
     }
-    // @include media(tablet) {
-    //   @include shared-mobile-table;
-    // }
 
-    @include media(desktop) {
+    @include media(tablet) {
       @include shared-mobile-tablet-principales;
     }
+
+    // @include media(desktop) {
+    //   @include shared-mobile-tablet-principales;
+    // }
 
     .logo-row {
       display: grid;
