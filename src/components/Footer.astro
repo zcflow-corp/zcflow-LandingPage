@@ -1,9 +1,14 @@
 ---
+import { localeHelper } from '../i18n/index';
 import { Image } from 'astro:assets'
 
-const { t: _t } = Astro.props
-const t = typeof _t === 'function' ? _t : (k: unknown) => k
+// const { t: _t } = Astro.props
+// const t = typeof _t === 'function' ? _t : (k: unknown) => k
 const base = import.meta.env.BASE_URL
+const { locale, t } = localeHelper(Astro);
+const contactPath = `/${locale}/soluciones`.replace(/\/+/g, '/');
+const contactPathFundamentos = `/${locale}/fundamentos`.replace(/\/+/g, '/');
+const contactPathcontacto = `/${locale}/contacto`.replace(/\/+/g, '/');
 ---
 
 <footer id="contacto" role="contentinfo" aria-label="Pie de página principal de ZCFlow">
@@ -43,17 +48,17 @@ const base = import.meta.env.BASE_URL
       <div class="footer-col">
         <h3>{t('Platform')}</h3>
         <nav aria-label="Platform" style="background:var(--c-quinary)!important;">
-          <a href="#soluciones" target="_blank" rel="noopener noreferrer">{t('Empresas')}</a>
-          <a href="#soluciones" target="_blank" rel="noopener noreferrer">{t('Socios')}</a>
-          <a href="#soluciones" target="_blank" rel="noopener noreferrer">{t('Soluciones')}</a>
+          <a href={contactPath} target="_blank" rel="noopener noreferrer">{t('Empresas')}</a>
+          <a href={contactPath} target="_blank" rel="noopener noreferrer">{t('Socios')}</a>
+          <a href={contactPath} target="_blank" rel="noopener noreferrer">{t('Soluciones')}</a>
         </nav>
       </div>
       <div class="footer-col">
         <h3>{t('Resources')}</h3>
         <nav aria-label="resources" style="background:var(--c-quinary)!important;">
           <a href="#zcflow" target="_blank" rel="noopener noreferrer">{t('Quiénes somos')}</a>
-          <a href="#fundamentos" target="_blank" rel="noopener noreferrer">{t('Fundamentos')}</a>
-          <a href="mailto:contacto@zcflow.com" target="_blank" rel="noopener noreferrer"
+          <a href={contactPathFundamentos} target="_blank" rel="noopener noreferrer">{t('Fundamentos')}</a>
+          <a href={contactPathcontacto} target="_blank" rel="noopener noreferrer"
             >Contáctanos</a
           >
         </nav>
