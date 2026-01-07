@@ -1,14 +1,16 @@
 ---
-const { t: _t } = Astro.props
-const t = typeof _t === 'function' ? _t : (k: unknown) => k
-const base = import.meta.env.BASE_URL
+import { localeHelper } from '../i18n/index';
+// const { t: _t } = Astro.props
+// const t = typeof _t === 'function' ? _t : (k: unknown) => k
+const { locale, t } = localeHelper(Astro);
+const contactPath = `/${locale}/contacto`.replace(/\/+/g, '/');
 ---
 
 <section id="about" class="section about-banner" aria-labelledby="about-title">
   <div class="container">
     <div class="about-text">
       <h2 id="about-title" class="about-title-contacto">{t('El flujo de caja es el rey')}</h2>
-      <a href="#contacto" class="btn emptyghost" aria-label={t('Ir a la sección de contacto')}>
+      <a href={contactPath} class="btn emptyghost" aria-label={t('Ir a la sección de contacto')}>
         {t('Solicita una demo')}
       </a>
     </div>
