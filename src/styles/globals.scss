@@ -2,19 +2,27 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
   font-family: var(--font-body);
   color: var(--c-text);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 main {
   position: relative;
-  margin: auto;
-}
-
-footer {
-  margin: auto;
+  // flex: 1 0 auto;
+  flex-grow: 1;
+  // margin: auto;
 }
 
 .responsive-mode-dark {
@@ -82,10 +90,7 @@ a {
   border-style: none;
 }
 
-
-
 .gradient-blue-dark {
-
   background: var(--g-primary-light);
   background-size: 200% 100%;
   background-clip: text;
@@ -100,7 +105,6 @@ a {
 }
 
 .gradient-blue-ligth {
-
   background: linear-gradient(to right, white 14%, #00b0f0 67%);
   // background: linear-gradient(90deg,
   //     #5f6e7c,
@@ -118,7 +122,6 @@ a {
   // background-size: 300% 100%;
   // animation: infinityBorder 4s linear infinite;
 }
-
 
 .mode-dark {
   display: block;
@@ -181,7 +184,6 @@ html[data-theme='light'] .fundamentos {
   scroll-margin-top: 80px;
 
   &-title {
-
     width: 100%;
     display: flex;
     gap: 0rem;
@@ -190,8 +192,6 @@ html[data-theme='light'] .fundamentos {
     align-items: flex-start;
     margin-bottom: 1rem;
     align-self: flex-start;
-
-
 
     p,
     h1,
@@ -203,10 +203,7 @@ html[data-theme='light'] .fundamentos {
       @include media(mobile) {
         max-width: 100%;
       }
-
     }
-
-
   }
 
   &-title-center {
@@ -218,7 +215,6 @@ html[data-theme='light'] .fundamentos {
     margin-bottom: 1rem;
     align-self: center;
 
-
     p,
     h1,
     h2 {
@@ -229,9 +225,7 @@ html[data-theme='light'] .fundamentos {
       @include media(mobile) {
         max-width: 100%;
       }
-
     }
-
   }
 
   &-title-end {
@@ -254,14 +248,8 @@ html[data-theme='light'] .fundamentos {
       @include media(mobile) {
         max-width: 100%;
       }
-
     }
-
-
   }
-
-
-
 }
 
 /*2. Estilos de componentes específicos */
@@ -376,8 +364,6 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
     -webkit-text-fill-color: transparent;
   }
 }
-
-
 
 .gradient-border-left::before {
   content: '';
