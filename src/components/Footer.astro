@@ -5,19 +5,16 @@ import { Image } from 'astro:assets'
 // const { t: _t } = Astro.props
 // const t = typeof _t === 'function' ? _t : (k: unknown) => k
 const base = import.meta.env.BASE_URL
-const { locale, t } = localeHelper(Astro);
-const contactPath = `/${locale}/soluciones`.replace(/\/+/g, '/');
-const contactPathFundamentos = `/${locale}/fundamentos`.replace(/\/+/g, '/');
-const contactPathcontacto = `/${locale}/contacto`.replace(/\/+/g, '/');
+const { t, path } = localeHelper(Astro);
 ---
 
 <footer id="contacto" role="contentinfo" aria-label="Pie de página principal de ZCFlow">
   <div class="container" style="width: 100%; padding:0rem">
     <div class="container-footer-col">
       <div class="footer-col" itemscope itemtype="https://schema.org/Organization">
-        <a href="/inicio" aria-label="Inicio - ZCFlow">
+        <a href={`${base}`} aria-label="Inicio - ZCFlow">
           <Image
-            src=`${base}assets/logo_header_light.webp`
+            src={`${base}assets/logo_header_light.webp`}
             alt="ZCFlow logo light"
             class="responsive-mode-dark"
             width={120}
@@ -48,24 +45,24 @@ const contactPathcontacto = `/${locale}/contacto`.replace(/\/+/g, '/');
       <div class="footer-col">
         <h3>{t('Platform')}</h3>
         <nav aria-label="Platform" style="background:var(--c-quinary)!important;">
-          <a href={contactPath} target="_blank" rel="noopener noreferrer">{t('Empresas')}</a>
-          <a href={contactPath} target="_blank" rel="noopener noreferrer">{t('Socios')}</a>
-          <a href={contactPath} target="_blank" rel="noopener noreferrer">{t('Soluciones')}</a>
+          <a href={'#soluciones'} target="_blank" rel="noopener noreferrer">{t('Empresas')}</a>
+          <a href={'#soluciones'} target="_blank" rel="noopener noreferrer">{t('Socios')}</a>
+          <a href={'#soluciones'} target="_blank" rel="noopener noreferrer">{t('Soluciones')}</a>
         </nav>
       </div>
       <div class="footer-col">
         <h3>{t('Resources')}</h3>
         <nav aria-label="resources" style="background:var(--c-quinary)!important;">
           <a href="#zcflow" target="_blank" rel="noopener noreferrer">{t('Quiénes somos')}</a>
-          <a href={contactPathFundamentos} target="_blank" rel="noopener noreferrer">{t('Fundamentos')}</a>
-          <a href={contactPathcontacto} target="_blank" rel="noopener noreferrer"
+          <a href={'#fundamentos'} target="_blank" rel="noopener noreferrer">{t('Fundamentos')}</a>
+          <a href={'#contacto'} target="_blank" rel="noopener noreferrer"
             >Contáctanos</a
           >
         </nav>
       </div>
       <div style="display: flex;max-width: 50%;">
         <Image
-          src=`${base}assets/win_leader.webp`
+          src={`${base}assets/win_leader.webp`}
           class="win"
           alt="win_leader"
           width={20}
@@ -75,7 +72,7 @@ const contactPathcontacto = `/${locale}/contacto`.replace(/\/+/g, '/');
           itemprop="logo"
         />
         <Image
-          src=`${base}assets/win_milestone.webp`
+          src={`${base}assets/win_milestone.webp`}
           alt="win_mileston"
           class="win"
           width={20}
