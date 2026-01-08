@@ -45,17 +45,17 @@ const { t, path } = localeHelper(Astro);
       <div class="footer-col">
         <h3>{t('Platform')}</h3>
         <nav aria-label="Platform" style="background:var(--c-quinary)!important;">
-          <a href={'#soluciones'} target="_blank" rel="noopener noreferrer">{t('Empresas')}</a>
-          <a href={'#soluciones'} target="_blank" rel="noopener noreferrer">{t('Socios')}</a>
-          <a href={'#soluciones'} target="_blank" rel="noopener noreferrer">{t('Soluciones')}</a>
+          <a href={`${path('')}#soluciones`} target="_blank" rel="noopener noreferrer">{t('Empresas')}</a>
+          <a href={`${path('')}#soluciones`} target="_blank" rel="noopener noreferrer">{t('Socios')}</a>
+          <a href={`${path('')}#soluciones`} target="_blank" rel="noopener noreferrer">{t('Soluciones')}</a>
         </nav>
       </div>
       <div class="footer-col">
         <h3>{t('Resources')}</h3>
         <nav aria-label="resources" style="background:var(--c-quinary)!important;">
           <a href="#zcflow" target="_blank" rel="noopener noreferrer">{t('Quiénes somos')}</a>
-          <a href={'#fundamentos'} target="_blank" rel="noopener noreferrer">{t('Fundamentos')}</a>
-          <a href={'#contacto'} target="_blank" rel="noopener noreferrer"
+          <a href={`${path('')}#fundamentos`} target="_blank" rel="noopener noreferrer">{t('Fundamentos')}</a>
+          <a href={`${path('')}#contacto`} target="_blank" rel="noopener noreferrer"
             >Contáctanos</a
           >
         </nav>
