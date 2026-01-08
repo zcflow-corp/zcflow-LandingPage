@@ -4,25 +4,13 @@ import ThemeSwitch from '../islands/ThemeSwitch.jsx'
 import Lang from './Lang.astro'
 import { localeHelper } from '../i18n'
 
-// const { t: _t } = Astro.props
 const { t, path } = localeHelper(Astro)
-// const locale = Astro.currentLocale ?? 'es'
 const base = import.meta.env.BASE_URL
 ---
 
 <header class="site-header" itemscope itemtype="https://schema.org/Organization">
   <div class="container">
     <a href=`${base}` aria-label="Inicio - ZCFlow">
-      <Image
-        src={`${base}assets/logo_header_version_bgdarks.webp`}
-        alt="ZCFlow logo dark"
-        class="mode-responsive"
-        width={150}
-        height={150}
-        loading="lazy"
-        decoding="async"
-        itemprop="logo"
-      />
       <Image
         src={`${base}assets/logo_header_darks.webp`}
         alt="ZCFlow logo dark"
@@ -37,6 +25,17 @@ const base = import.meta.env.BASE_URL
         src={`${base}assets/logo_header_light.webp`}
         alt="ZCFlow logo light"
         class="mode-light"
+        width={150}
+        height={150}
+        loading="lazy"
+        decoding="async"
+        itemprop="logo"
+      />
+      <!-- MOBILE -->
+      <Image
+        src={`${base}assets/logo_header_version_bgdarks.webp`}
+        alt="ZCFlow logo dark"
+        class="mode-responsive"
         width={150}
         height={150}
         loading="lazy"
@@ -170,7 +169,8 @@ const base = import.meta.env.BASE_URL
     }
 
     .logo .mode-dark,
-    .mode-light {
+    .mode-light,
+    .mode-responsive {
       width: 116%;
       height: 24px;
       object-fit: contain;
@@ -182,18 +182,28 @@ const base = import.meta.env.BASE_URL
     .mode-responsive {
       display: none;
     }
+    :global(html[data-theme='light']) .mode-light {
+      display: block;
+    }
+
+    :global(html[data-theme='dark']) .mode-dark {
+      display: block;
+    }
 
     @include media(tablet-down) {
       @include shared-mobile-table;
+      :global(html[data-theme='light']) .mode-responsive {
+        display: block;
+      }
+
+      :global(html[data-theme='dark']) .mode-light {
+        display: block;
+      }
     }
 
     @include media(tablet) {
       @include shared-mobile-tablet-principales;
     }
-
-    // @include media(desktop) {
-    //   @include shared-mobile-tablet-principales;
-    // }
 
     .logo-row {
       display: grid;
