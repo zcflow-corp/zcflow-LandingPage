@@ -53,9 +53,9 @@ const { t, path } = localeHelper(Astro);
       <div class="footer-col">
         <h3>{t('Resources')}</h3>
         <nav aria-label="resources" style="background:var(--c-quinary)!important;">
-          <a href="#zcflow" target="_blank" rel="noopener noreferrer">{t('Quiénes somos')}</a>
+          <a href={`${path('')}#zcflow`} target="_blank" rel="noopener noreferrer">{t('Quiénes somos')}</a>
           <a href={`${path('')}#fundamentos`} target="_blank" rel="noopener noreferrer">{t('Fundamentos')}</a>
-          <a href={`${path('')}#contacto`} target="_blank" rel="noopener noreferrer"
+          <a href={path('contacto')} target="_blank" rel="noopener noreferrer"
             >Contáctanos</a
           >
         </nav>

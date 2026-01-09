@@ -2,6 +2,16 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-offset);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.5s;
+}
+
 html,
 body {
   height: 100%;
@@ -268,12 +278,12 @@ html[data-theme='light'] .fundamentos {
 }
 
 [data-theme='light'] header {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.85)!important;
   backdrop-filter: blur(8px);
 }
 
 [data-theme='dark'] header {
-  background: rgb(0, 0, 0, 0.8);
+  background: rgb(0, 0, 0, 0.8)!important;
   backdrop-filter: blur(8px);
 }
 
