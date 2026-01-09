@@ -152,7 +152,7 @@ export default function ContactForm() {
   /* ================== UI ================== */
 
   return (
-    <section className="bg-bg-variant py-20 section-contact">
+    <section className="bg-bg-variant py-40 section-contact">
       <Card className="max-w-md mx-auto bg-panel shadow-xl rounded-base">
         <CardHeader className="space-y-3 text-h3">
           <CardTitle className="font-head text-h2 leading-tight text-text">

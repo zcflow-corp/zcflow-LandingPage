@@ -100,12 +100,21 @@ const base = import.meta.env.BASE_URL
 
 <style lang="scss">
   .site-header {
-    position: sticky;
+    // position: sticky !important;
+    position: fixed !important;
     padding: 0px 0px;
-    top: 0;
+    width: 100%;
+    margin: 0 auto;
+    // top: 0;
+    top: 0 !important;
+    height: 80px;
     z-index: 1000;
+    // background: red !important;
     border-bottom: none;
     font-weight: 500;
+    // backface-visibility: hidden;
+    width: 100vw;
+    // align-self: flex-start;
 
     .container {
       padding: 0rem 2rem;
