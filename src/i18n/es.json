@@ -162,13 +162,16 @@
   "Escenarios": "Escenarios",
   "Con": "Con",
   "Conoce Zcflow": "Conoce Zcflow",
-
+  "Lo que": "Lo que",
+  "podrás hacer": "podrás hacer",
+  "con Zcflow": "con Zcflow",
   "Definición": "Definición",
   "Más rápido": "Más rápido",
   "Con confianza": "Con confianza",
   "Tus decisiones": "Tus decisiones",
   "Con Precisión": "Con precisión",
   "agentes de IA": "agentes de IA",
+  "Más información": "Más información",
   "que anticipan tu liquidez y simulan escenarios para orientar decisiones financieras más precisas.": "que anticipan tu liquidez y simulan escenarios para orientar decisiones financieras más precisas.",
   "Hacemos que el": "Hacemos que el",
   "mercado financiero compita por tu liquidez": "mercado financiero compita por tu liquidez",
@@ -230,5 +233,10 @@
   "Tus datos serán tratados de forma confidencial y no serán compartidos con terceros sin tu consentimiento, salvo obligación legal.": "Tus datos serán tratados de forma confidencial y no serán compartidos con terceros sin tu consentimiento, salvo obligación legal.",
   "Puedes solicitar la modificación o eliminación de tus datos en cualquier momento escribiéndonos a soporte@zcflow.com.": "Puedes solicitar la modificación o eliminación de tus datos en cualquier momento escribiéndonos a soporte@zcflow.com.",
   "Última actualización: Enero 2026": "Última actualización: Enero 2026",
-  "Cerrar": "Cerrar"
+  "Cerrar": "Cerrar",
+
+  "Converse con la tesorería del futuro.": "Converse con la tesorería del futuro.",
+  "Inicia una conversación con BOTO, tu nuevo asesor financiero digital. Disponible 24/7.": "Inicia una conversación con BOTO, tu nuevo asesor financiero digital. Disponible 24/7.",
+  "Descubre ideas, recomendaciones y análisis en segundos.": "Descubre ideas, recomendaciones y análisis en segundos.",
+  "Hazle preguntas sobre liquidez, proyecciones, riesgos o estrategias financieras, y obtén respuestas claras y accionables.": "Hazle preguntas sobre liquidez, proyecciones, riesgos o estrategias financieras, y obtén respuestas claras y accionables."
 }
