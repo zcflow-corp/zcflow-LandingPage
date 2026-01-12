@@ -4,6 +4,10 @@ import HeroFlow from './grafic/HeroFlow.astro'
 const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k) => k
 const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
+const locale = Astro.currentLocale ?? 'es'
+const base = import.meta.env.BASE_URL
+
+const path = (url) => `${base}${locale}/${url}/`.replace(/\/+/g, '/')
 
 const textos = [
   t('¿Cuál es el saldo de mi cuenta global en USD?'),
@@ -29,7 +33,7 @@ const textos = [
       <p>{t('Decisiones en segundos, no en semanas.')}</p>
       <div class="cta">
         <a class="btn primary" href="#zcflow">{t('Explorar ahora')} </a>
-        <a href="/contacto/" class="btn icon">{t('Pide una demo de inmediato')}</a>
+        <a href={path('contacto')} class="btn icon">{t('Pide una demo de inmediato')}</a>
       </div>
 
       <!-- <div class="hero-check">
@@ -116,6 +120,10 @@ const textos = [
 
       @include media(mobile) {
         width: 100%;
+      }
+
+      @include media(tablet) {
+        margin-top: 5rem;
       }
 
       @include media(desktop) {
