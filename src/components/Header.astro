@@ -64,7 +64,7 @@ const path = (url) => `${base}${locale}/${url}/`.replace(/\/+/g, '/')
     <nav
       aria-label="Navegación principal"
       class="nav"
-      style="display: flex; align-items:center; column-gap: 15px; width: 100%; justify-content:space-between; padding: 1rem 2rem;"
+      style="display: flex; align-items:center; column-gap: 15px; width: 100%; justify-content:space-between; padding: 1rem;"
       itemscope
       itemtype="https://schema.org/SiteNavigationElement"
     >
@@ -102,22 +102,32 @@ const path = (url) => `${base}${locale}/${url}/`.replace(/\/+/g, '/')
 
 <style lang="scss">
   .site-header {
-    position: sticky;
+    // position: sticky !important;
+    position: fixed !important;
     padding: 0px 0px;
-    top: 0;
+    width: 100%;
+    margin: 0 auto;
+    // top: 0;
+    top: 0 !important;
+    height: auto;
     z-index: 1000;
+    // background: red !important;
     border-bottom: none;
     font-weight: 500;
-
+    // backface-visibility: hidden;
+    width: 100vw;
+    // align-self: flex-start;
+    background-color: white;
+    transition: background 0.3s ease;
     .container {
-      padding: 0rem 2rem;
+      padding: 0rem 1rem;
       gap: 8px !important;
       width: 100%;
       justify-content: space-between;
     }
-.container-toggle {
-    display: none;
-  }
+    .container-toggle {
+      display: none;
+    }
     .menu-toggle {
       display: flex;
       flex-direction: column;
@@ -171,7 +181,8 @@ const path = (url) => `${base}${locale}/${url}/`.replace(/\/+/g, '/')
     }
 
     .logo .mode-dark,
-    .mode-light {
+    .mode-light,
+    .mode-responsive {
       width: 116%;
       height: 24px;
       object-fit: contain;
@@ -183,15 +194,26 @@ const path = (url) => `${base}${locale}/${url}/`.replace(/\/+/g, '/')
     .mode-responsive {
       display: none;
     }
+    :global(html[data-theme='light']) .mode-light {
+      display: block;
+    }
+
+    :global(html[data-theme='dark']) .mode-dark {
+      display: block;
+    }
 
     @include media(tablet-down) {
       @include shared-mobile-table;
-    }
-    // @include media(tablet) {
-    //   @include shared-mobile-table;
-    // }
+      :global(html[data-theme='light']) .mode-responsive {
+        display: block;
+      }
 
-    @include media(desktop) {
+      :global(html[data-theme='dark']) .mode-light {
+        display: block;
+      }
+    }
+
+    @include media(tablet) {
       @include shared-mobile-tablet-principales;
     }
 
@@ -201,5 +223,9 @@ const path = (url) => `${base}${locale}/${url}/`.replace(/\/+/g, '/')
       gap: 1.25rem;
       align-items: center;
     }
+  }
+
+  html[data-theme='dark'] .site-header {
+    background: var(--c-black);
   }
 </style>
