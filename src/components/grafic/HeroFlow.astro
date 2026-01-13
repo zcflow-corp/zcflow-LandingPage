@@ -156,6 +156,10 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
         min-width: 100%;
       }
 
+      @include media(desktop) {
+        min-height: 100vh;
+      }
+
       @include media(extradesktop) {
         min-height: 80vh;
       }
