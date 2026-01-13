@@ -17,15 +17,21 @@ const { locale, t } = localeHelper(Astro)
         {t('Converse con la tesorería del futuro.')}
       </h3>
       <p class="container-section-description-BOTO">
-        {t(' Inicia una conversación con BOTO,')}
-        {t('tu nuevo asesor financiero digital. Disponible 24/7.')}
+        {
+          t(
+            'Inicia una conversación con BOTO, tu nuevo asesor financiero digital. Disponible 24/7.'
+          )
+        }
       </p>
       <p class="container-section-description-BOTO">
         {t('Descubre ideas, recomendaciones y análisis en segundos.')}
         <br />
 
-        {t('Hazle preguntas sobre liquidez, proyecciones, riesgos o estrategias')}
-        {t('financieras, y obtén respuestas claras y accionables.')}
+        {
+          t(
+            'Hazle preguntas sobre liquidez, proyecciones, riesgos o estrategias financieras, y obtén respuestas claras y accionables.'
+          )
+        }
       </p>
     </div>
     <div class="container-section-iframe">
@@ -48,6 +54,10 @@ const { locale, t } = localeHelper(Astro)
 </section>
 <style lang="scss">
   .chatBot {
+    @include media(mobile) {
+      height: 120vh !important;
+    }
+
     .container {
       width: 100%;
       height: auto;
@@ -122,7 +132,7 @@ const { locale, t } = localeHelper(Astro)
     font-weight: bold;
   }
   section {
-    background: #0858fd;
+    background: #006ffd;
   }
 
   .container-section-iframe {

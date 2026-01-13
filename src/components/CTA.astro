@@ -1,9 +1,9 @@
 ---
-import { localeHelper } from '../i18n/index';
+import { localeHelper } from '../i18n/index'
 // const { t: _t } = Astro.props
 // const t = typeof _t === 'function' ? _t : (k: unknown) => k
-const { locale, t } = localeHelper(Astro);
-const contactPath = `/${locale}/contacto`.replace(/\/+/g, '/');
+const { locale, t } = localeHelper(Astro)
+const contactPath = `/${locale}/contacto`.replace(/\/+/g, '/')
 ---
 
 <section id="about" class="section about-banner" aria-labelledby="about-title">
@@ -17,7 +17,6 @@ const contactPath = `/${locale}/contacto`.replace(/\/+/g, '/');
   </div>
 </section>
 <style lang="scss">
-
   .about-title-contacto {
     margin: 0%;
     font-size: 4rem;
@@ -155,8 +154,7 @@ const contactPath = `/${locale}/contacto`.replace(/\/+/g, '/');
     color: transparent;
   }
 
-    @include media(tablet-down) {
-    
+  @include media(tablet-down) {
     .about-banner .container {
       flex-direction: column;
       align-items: center;
@@ -181,14 +179,11 @@ const contactPath = `/${locale}/contacto`.replace(/\/+/g, '/');
     .about-banner {
       height: 404px;
     }
-
   }
 
   @include media(extradesktop) {
     .about-banner {
       height: 600px;
     }
-
   }
-
 </style>

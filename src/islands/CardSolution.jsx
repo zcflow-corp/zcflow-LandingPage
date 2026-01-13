@@ -16,6 +16,7 @@ export default function CardSolution({
   title = '',
   description = '',
   word = '',
+  textinfo = '',
 }) {
   const [index, setIndex] = useState(startIndex)
   const [t, setT] = useState(startIndex)
@@ -112,13 +113,19 @@ export default function CardSolution({
                   <span className="dCard__badge">{word}</span>
                 </div>
 
+                {s.status === 'beta' && (
+                  <div className="beta-card">
+                    <span className="beta-ribbon ">beta</span>
+                  </div>
+                )}
+
                 <div className="dCard__body">
                   <h3 className="dCard__title">{s.title}</h3>
                   <p className="dCard__desc">{s.description}</p>
 
                   <button type="button" className="dCard__link">
                     <span className="dCard__arrow" aria-hidden="true">
-                      Más información →
+                      {textinfo}
                     </span>
                   </button>
                 </div>
@@ -132,11 +139,6 @@ export default function CardSolution({
                       loading="lazy"
                     />
                   </div>
-                  {s.status === 'beta' && (
-                    <div className="beta-card">
-                      <span className="beta gradient-blue-dark">beta</span>
-                    </div>
-                  )}
                 </div>
               </article>
             ))}

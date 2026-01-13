@@ -4,6 +4,10 @@ import HeroFlow from './grafic/HeroFlow.astro'
 const { t: _t } = Astro.props
 const t = typeof _t === 'function' ? _t : (k) => k
 const ChecksHero = ['Fácil de usar', 'Seguro', 'Inteligente']
+const locale = Astro.currentLocale ?? 'es'
+const base = import.meta.env.BASE_URL
+
+const path = (url) => `${base}${locale}/${url}/`.replace(/\/+/g, '/')
 
 const textos = [
   t('¿Cuál es el saldo de mi cuenta global en USD?'),
@@ -29,7 +33,7 @@ const textos = [
       <p>{t('Decisiones en segundos, no en semanas.')}</p>
       <div class="cta">
         <a class="btn primary" href="#zcflow">{t('Explorar ahora')} </a>
-        <a href="/contacto/" class="btn icon">{t('Pide una demo de inmediato')}</a>
+        <a href={path('contacto')} class="btn icon">{t('Pide una demo de inmediato')}</a>
       </div>
 
       <!-- <div class="hero-check">
@@ -48,6 +52,10 @@ const textos = [
     overflow: hidden;
     flex-wrap: wrap;
     position: relative;
+
+    @include media(desktop) {
+      height: 90vh;
+    }
 
     &::before {
       content: '';
@@ -118,9 +126,13 @@ const textos = [
         width: 100%;
       }
 
+      @include media(tablet) {
+        margin-top: 2rem;
+      }
+
       @include media(desktop) {
-        width: 40%;
-        margin-top: -4rem;
+        width: 45%;
+        margin-top: -2rem;
       }
 
       &-title {
@@ -163,11 +175,11 @@ const textos = [
       }
 
       p {
-        text-wrap: wrap;
         text-align: left;
-
+        text-wrap: nowrap !important;
         @include media(mobile) {
           font-size: 0.5rem;
+          text-wrap: wrap;
         }
       }
     }
@@ -205,6 +217,10 @@ const textos = [
         padding-left: 0rem;
       }
       @include media(tablet) {
+        flex-wrap: nowrap;
+      }
+
+      @include media(desktop) {
         flex-wrap: nowrap;
       }
     }

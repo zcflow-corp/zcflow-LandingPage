@@ -119,12 +119,6 @@ export default function ContactForm() {
   const TEMPLATE_ID = 'template_32m276g'
   const PUBLIC_KEY = 'OxhdmLgo61idmBNlb'
 
-  console.log('[EmailJS ENV]', {
-    SERVICE_ID,
-    TEMPLATE_ID,
-    PUBLIC_KEY,
-  })
-
   const onSubmit = async (data) => {
     try {
       await emailjs.send(
