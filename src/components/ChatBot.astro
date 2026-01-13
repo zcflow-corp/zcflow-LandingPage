@@ -1,7 +1,9 @@
 ---
-const { t: _t } = Astro.props
-const t = typeof _t === 'function' ? _t : (k: unknown) => k
+import { localeHelper } from '../i18n/index'
+// const { t: _t } = Astro.props
+// const t = typeof _t === 'function' ? _t : (k: unknown) => k
 const base = import.meta.env.BASE_URL
+const { locale, t } = localeHelper(Astro)
 ---
 
 <section class="chatBot" id="chatBot" aria-labelledby="chatbot-title">
@@ -53,7 +55,7 @@ const base = import.meta.env.BASE_URL
 <style lang="scss">
   .chatBot {
     @include media(mobile) {
-      height: 110vh !important;
+      height: 120vh !important;
     }
 
     .container {
@@ -130,7 +132,7 @@ const base = import.meta.env.BASE_URL
     font-weight: bold;
   }
   section {
-    background: #0858fd;
+    background: #006ffd;
   }
 
   .container-section-iframe {

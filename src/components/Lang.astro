@@ -2,12 +2,23 @@
 const current = Astro.currentLocale // 'es' | 'en'
 const next = current === 'es' ? 'en' : 'es'
 
-const pathname = Astro.url.pathname
+const base = import.meta.env.BASE_URL || '/';
+
+const escape = (s:string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+/**limpiar la ruta */
+const cleanPath = Astro.url.pathname.replace(new RegExp(`^${escape(base)}(es|en)`), '');
+
+
+// const pathname = Astro.url.pathname
 
 // quitamos /es/ o /en/
-const cleanPath = pathname.replace(/^\/(es|en)/, '')
+// const cleanPath = pathname.replace(/^\/(es|en)/, '')
 
-const finalPath = `/${next}${cleanPath || '/'}`
+
+const finalPath = `${base}${next}${cleanPath}`.replace(/\/+/g, '/')
+console.log(current, next, cleanPath, finalPath)
+// const finalPath = `/${next}${cleanPath || '/'}`
 ---
 
 <a

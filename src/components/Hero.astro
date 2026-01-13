@@ -53,6 +53,10 @@ const textos = [
     flex-wrap: wrap;
     position: relative;
 
+    @include media(desktop) {
+      height: 90vh;
+    }
+
     &::before {
       content: '';
       position: absolute;
@@ -123,12 +127,12 @@ const textos = [
       }
 
       @include media(tablet) {
-        margin-top: 5rem;
+        margin-top: 2rem;
       }
 
       @include media(desktop) {
-        width: 40%;
-        margin-top: -4rem;
+        width: 45%;
+        margin-top: -2rem;
       }
 
       &-title {
@@ -171,11 +175,11 @@ const textos = [
       }
 
       p {
-        text-wrap: wrap;
         text-align: left;
-
+        text-wrap: nowrap !important;
         @include media(mobile) {
           font-size: 0.5rem;
+          text-wrap: wrap;
         }
       }
     }
@@ -213,6 +217,10 @@ const textos = [
         padding-left: 0rem;
       }
       @include media(tablet) {
+        flex-wrap: nowrap;
+      }
+
+      @include media(desktop) {
         flex-wrap: nowrap;
       }
     }

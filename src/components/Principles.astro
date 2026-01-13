@@ -1,8 +1,10 @@
 ---
+import { localeHelper } from '../i18n/index'
 import principles from '@/data/principles.json'
 import { Image } from 'astro:assets'
-const { t: _t } = Astro.props
-const t = typeof _t === 'function' ? _t : (k: unknown) => k
+// const { t: _t } = Astro.props
+// const t = typeof _t === 'function' ? _t : (k: unknown) => k
+const { locale, t } = localeHelper(Astro)
 const base = import.meta.env.BASE_URL
 const firstColumnItems = principles.slice(0, 2)
 const secondColumnItems = principles.slice(2, 5)
