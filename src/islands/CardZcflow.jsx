@@ -175,24 +175,26 @@ export default function CardZcflow({
             </p>
           </div>
 
-          <ul className="checks" role="list">
+          <ul className="checks" role="tablist" aria-label="Slide selector">
             {slides.map((c, i) => (
-              <li
-                className={`check lis-checks ${i === index ? 'gradient-blue-ligth' : 'check-desactive'}`}
-                key={c.id ?? i}
-                role="tab"
-                aria-selected={i === index}
-                tabIndex={0}
-                onClick={() => setIndex(i)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
-                    setIndex(i)
-                  }
-                }}
-              >
-                <IconoSvg name="check" />
-                <div>{c.title}</div>
+              <li key={c.id ?? i} role="presentation">
+                <button
+                  type="button"
+                  className={`check lis-checks ${
+                    i === index ? 'gradient-blue-ligth' : 'check-desactive'
+                  }`}
+                  role="tab"
+                  aria-selected={i === index}
+                  tabIndex={i === index ? 0 : -1}
+                  onClick={() => setIndex(i)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'ArrowRight') setIndex((i + 1) % total)
+                    if (e.key === 'ArrowLeft') setIndex((i - 1 + total) % total)
+                  }}
+                >
+                  <IconoSvg name="check" />
+                  <span>{c.title}</span>
+                </button>
               </li>
             ))}
           </ul>

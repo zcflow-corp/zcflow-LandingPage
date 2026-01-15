@@ -123,10 +123,12 @@ export default function CardSolution({
                   <h3 className="dCard__title">{s.title}</h3>
                   <p className="dCard__desc">{s.description}</p>
 
-                  <button type="button" className="dCard__link">
-                    <span className="dCard__arrow" aria-hidden="true">
-                      {textinfo}
-                    </span>
+                  <button
+                    type="button"
+                    className="dCard__button"
+                    aria-label="Ver detalle de la tarjeta"
+                  >
+                    <span className="dCard__arrow">{textinfo}</span>
                   </button>
                 </div>
 

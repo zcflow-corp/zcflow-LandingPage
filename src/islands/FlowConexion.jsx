@@ -326,7 +326,7 @@ const FlowConexion = ({ labels = '', rotationMs = 9000 }) => {
         {/* Logo Zcflow (posición fija, el canvas dibuja glow + línea hasta aquí) */}
         <div className="flow-logo">
           <img
-            src={`${base}assets/logo_header_light.webp`}
+            src={`${base}assets/logo_header_light-m.webp`}
             alt="ZCFlow"
             className="flow-logo__img"
             loading="lazy"

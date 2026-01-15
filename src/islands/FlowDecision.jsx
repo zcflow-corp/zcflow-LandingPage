@@ -248,7 +248,7 @@ const FlowDecision = ({ t: _t }) => {
           </div>
 
           <div className="flow-decision-box__chart-body">
-            <svg viewBox="0 0 480 220" className="flow-decision-box__chart-svg" aria-hidden="true">
+            <svg viewBox="0 0 480 220" className="flow-decision-box__chart-svg">
               {/* líneas guía */}
               {[0.25, 0.5, 0.75].map((ratio) => (
                 <line
