@@ -71,6 +71,27 @@ const textos = [
       bottom: -39%;
       right: 0%;
 
+
+     
+
+      @include media(mobile) {
+      
+
+      // transform: rotate(-78deg);
+      // background-position: 186%;
+      // bottom: -5%;
+      // right: -55%;
+      // background-size: 117%;
+      transform: rotate(-10deg);
+        background-position: 52%;
+        bottom: -46%;
+        right: -270%;
+        background-size: 165%;
+
+      }
+
+
+
       @include media(desktop) {
         transform: rotate(-50deg);
         background-position: 145% 30% center right;
@@ -140,6 +161,10 @@ const textos = [
         align-items: flex-start;
         flex-direction: column;
         width: 120%;
+
+        @include media(mobile) {
+          width: 100%;
+        }
       }
 
       h1 {

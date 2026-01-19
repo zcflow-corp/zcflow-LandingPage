@@ -150,9 +150,14 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
 
     &__canvas {
       width: 100%;
-      height: 62vh;
+      height: 60vh !important;
       min-width: 20rem;
+
       @include media(tablet-down) {
+        height: 80vh;
+        min-width: 100%;
+      }
+      @include media(tablet) {
         height: 80vh;
         min-width: 100%;
       }
@@ -317,7 +322,7 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
       }
 
       &--actua {
-        top: 20%;
+        top: 31%;
         left: 90%;
 
         @include media(tablet) {
@@ -372,11 +377,19 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
       opacity: 1;
       transform: scale(0.68);
       padding: 0.75em 0.75em;
-      left: -29%;
+      left: -15%;
       bottom: 10%;
       width: max-content;
       gap: 0.25rem;
       justify-content: space-between;
+
+
+      @include media(mobile) {
+        transform: scale(0.65);
+  
+      left: -22%;
+      bottom: 15%;
+      }
 
       @include media(tablet) {
         transform: scale(0.9);
