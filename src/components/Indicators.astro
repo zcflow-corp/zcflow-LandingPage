@@ -1,5 +1,5 @@
 ---
-import { localeHelper } from '../i18n/index';
+import { localeHelper } from '../i18n/index'
 import LineChart from '@/islands/LineChart.jsx'
 import CounterOnView from '@/islands/CounterOnView.jsx'
 import ChartIndicator from './grafic/ChartIndicator.astro'
@@ -7,13 +7,13 @@ import ChartIndicator from './grafic/ChartIndicator.astro'
 // const { t: _t } = Astro.props
 // const t = typeof _t === 'function' ? _t : (k) => k
 
-const { locale, t } = localeHelper(Astro);
+const { locale, t } = localeHelper(Astro)
 ---
 
 <!-- Original id="indicadores" -->
 <section class="section" aria-labelledby="indicadores-title">
   <div style="padding: 2rem;">
-    <div class="container indicators card">
+    <div class="container indicators">
       <h4 class="gradient-blue-dark">{t('Indicadores')}</h4>
       <div class="section-grafico">
         <div class="section-grafico-left">
@@ -35,10 +35,9 @@ const { locale, t } = localeHelper(Astro);
               aria-label={t('Gráfico de línea mostrando indicadores financieros clave')}
             />
           </figure>
-
-          <div>
-            <ChartIndicator year={2025} />
-          </div>
+          <figure>
+            <ChartIndicator client:visible year={2026} />
+          </figure>
         </div>
       </div>
       <!-- Contadores con roles y aria-labels -->
@@ -194,6 +193,7 @@ const { locale, t } = localeHelper(Astro);
     flex-wrap: wrap;
     .section-grafico-indicador {
       width: 55%;
+      height: auto;
     }
   }
 
@@ -265,12 +265,12 @@ const { locale, t } = localeHelper(Astro);
     .container-counter {
       transform: scale(0.9);
     }
-    .section-grafico {
-      .section-grafico-indicador {
-        width: 100%;
-        margin-top: 2rem;
-      }
-    }
+    // .section-grafico {
+    //   .section-grafico-indicador {
+    //     width: 100%;
+    //     margin-top: 2rem;
+    //   }
+    // }
   }
 
   html[data-theme='dark'] .indicators {
