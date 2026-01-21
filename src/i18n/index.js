@@ -12,10 +12,7 @@ export const localeHelper = (Astro) => {
   /**url puede ser '' para home */
   const path = (url = '') => `${base}${locale}/${url}/`.replace(/\/+/g, '/')
 
-  console.log({
-    base: import.meta.env.BASE_URL,
-    locale: Astro.currentLocale,
-  })
+ 
 
   return { locale, t, path }
 }
