@@ -1,11 +1,18 @@
 ---
-import { localeHelper } from '../i18n/index';
+import { getImageMetadata } from '@/utils/imageHelper'
+import { localeHelper } from '../i18n/index'
 import { Image } from 'astro:assets'
 
 // const { t: _t } = Astro.props
 // const t = typeof _t === 'function' ? _t : (k: unknown) => k
 const base = import.meta.env.BASE_URL
-const { t, path } = localeHelper(Astro);
+const { t, path } = localeHelper(Astro)
+
+const [logoLight, win_leader, win_milestone] = await Promise.all([
+  getImageMetadata('logo_header_light.webp'),
+  getImageMetadata('win_leader.webp'),
+  getImageMetadata('win_milestone.webp'),
+])
 ---
 
 <footer id="contacto" role="contentinfo" aria-label="Pie de página principal de ZCFlow">
@@ -13,16 +20,20 @@ const { t, path } = localeHelper(Astro);
     <div class="container-footer-col">
       <div class="footer-col" itemscope itemtype="https://schema.org/Organization">
         <a href={`${base}`} aria-label="Inicio - ZCFlow">
-          <Image
-            src={`${base}assets/logo_header_light.webp`}
-            alt="ZCFlow logo light"
-            class="responsive-mode-dark"
-            width={120}
-            height={120}
-            loading="lazy"
-            decoding="async"
-            itemprop="logo"
-          />
+          {
+            logoLight && (
+              <Image
+                src={logoLight}
+                alt="ZCFlow logo light"
+                class="responsive-mode-dark"
+                width={120}
+                height={120}
+                loading="lazy"
+                decoding="async"
+                itemprop="logo"
+              />
+            )
+          }
         </a>
         <div class="footer-col">
           <address>
@@ -45,42 +56,59 @@ const { t, path } = localeHelper(Astro);
       <div class="footer-col">
         <h3>{t('Platform')}</h3>
         <nav aria-label="Platform" style="background:var(--c-quinary)!important;">
-          <a href={`${path('')}#soluciones`} target="_blank" rel="noopener noreferrer">{t('Empresas')}</a>
-          <a href={`${path('')}#soluciones`} target="_blank" rel="noopener noreferrer">{t('Socios')}</a>
-          <a href={`${path('')}#soluciones`} target="_blank" rel="noopener noreferrer">{t('Soluciones')}</a>
+          <a href={`${path('')}#soluciones`} target="_blank" rel="noopener noreferrer"
+            >{t('Empresas')}</a
+          >
+          <a href={`${path('')}#soluciones`} target="_blank" rel="noopener noreferrer"
+            >{t('Socios')}</a
+          >
+          <a href={`${path('')}#soluciones`} target="_blank" rel="noopener noreferrer"
+            >{t('Soluciones')}</a
+          >
         </nav>
       </div>
       <div class="footer-col">
         <h3>{t('Resources')}</h3>
         <nav aria-label="resources" style="background:var(--c-quinary)!important;">
-          <a href={`${path('')}#zcflow`} target="_blank" rel="noopener noreferrer">{t('Quiénes somos')}</a>
-          <a href={`${path('')}#fundamentos`} target="_blank" rel="noopener noreferrer">{t('Fundamentos')}</a>
-          <a href={path('contacto')} target="_blank" rel="noopener noreferrer"
-            >{t('Contáctanos')}</a
+          <a href={`${path('')}#zcflow`} target="_blank" rel="noopener noreferrer"
+            >{t('Quiénes somos')}</a
+          >
+          <a href={`${path('')}#fundamentos`} target="_blank" rel="noopener noreferrer"
+            >{t('Fundamentos')}</a
+          >
+          <a href={path('contacto')} target="_blank" rel="noopener noreferrer">{t('Contáctanos')}</a
           >
         </nav>
       </div>
       <div style="display: flex;max-width: 50%;">
-        <Image
-          src={`${base}assets/win_leader.webp`}
-          class="win"
-          alt="win_leader"
-          width={20}
-          height={20}
-          loading="lazy"
-          decoding="async"
-          itemprop="logo"
-        />
-        <Image
-          src={`${base}assets/win_milestone.webp`}
-          alt="win_mileston"
-          class="win"
-          width={20}
-          height={20}
-          loading="lazy"
-          decoding="async"
-          itemprop="logo"
-        />
+        {
+          win_leader && (
+            <Image
+              src={win_leader}
+              class="win"
+              alt="win_leader"
+              width={200}
+              height={200}
+              loading="lazy"
+              decoding="async"
+              itemprop="logo"
+            />
+          )
+        }
+        {
+          win_milestone && (
+            <Image
+              src={win_milestone}
+              alt="win_mileston"
+              class="win"
+              width={200}
+              height={200}
+              loading="lazy"
+              decoding="async"
+              itemprop="logo"
+            />
+          )
+        }
       </div>
 
       <div class="description-slogan" style="width: 80%;">
@@ -95,7 +123,9 @@ const { t, path } = localeHelper(Astro);
             <a href="#privacidad" target="_blank" rel="noopener noreferrer"
               >{t('Política de privacidad')}</a
             >
-            <a href="#legal" target="_blank" rel="noopener noreferrer">{t('Derechos reservados')} @Zcflow</a>
+            <a href="#legal" target="_blank" rel="noopener noreferrer"
+              >{t('Derechos reservados')} @Zcflow</a
+            >
           </nav>
         </div>
       </div>

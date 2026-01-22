@@ -1,9 +1,10 @@
 ---
+import { getImageMetadata } from '@/utils/imageHelper'
 import { localeHelper } from '../i18n/index'
-// const { t: _t } = Astro.props
-// const t = typeof _t === 'function' ? _t : (k: unknown) => k
 const { locale, t } = localeHelper(Astro)
 const contactPath = `/${locale}/contacto`.replace(/\/+/g, '/')
+
+const banner = await getImageMetadata('Banner.webp');
 ---
 
 <section id="about" class="section about-banner" aria-labelledby="about-title">
@@ -16,7 +17,7 @@ const contactPath = `/${locale}/contacto`.replace(/\/+/g, '/')
     </div>
   </div>
 </section>
-<style lang="scss">
+<style define:vars={{ bannerUrl: `url("${banner?.src}")` }} lang="scss">
   .about-title-contacto {
     margin: 0%;
     font-size: 4rem;
@@ -26,7 +27,7 @@ const contactPath = `/${locale}/contacto`.replace(/\/+/g, '/')
     text-align: start;
   }
   .about-banner {
-    background-image: url('/assets/Banner.webp');
+    background-image: var(--bannerUrl);
     padding-bottom: 0rem;
     width: 100%;
     background-repeat: no-repeat;

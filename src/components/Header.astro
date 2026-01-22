@@ -3,45 +3,65 @@ import { Image } from 'astro:assets'
 import ThemeSwitch from '../islands/ThemeSwitch.jsx'
 import Lang from './Lang.astro'
 import { localeHelper } from '../i18n'
+import { getImageMetadata } from '@/utils/imageHelper'
 
 const { t, path } = localeHelper(Astro)
 const base = import.meta.env.BASE_URL
+
+const [logo_header_darks, logo_header_light, logo_header_version_bgdarks] = await Promise.all([
+  getImageMetadata('logo_header_darks.webp'),
+  getImageMetadata('logo_header_light.webp'),
+  getImageMetadata('logo_header_version_bgdarks.webp'),
+])
 ---
 
 <header class="site-header" itemscope itemtype="https://schema.org/Organization" transition:persist>
   <div class="container">
     <a href=`${base}` aria-label="Inicio - ZCFlow">
-      <Image
-        src={`${base}assets/logo_header_darks.webp`}
-        alt="ZCFlow logo dark"
-        class="mode-dark responsive-mode-dark"
-        width={150}
-        height={150}
-        loading="lazy"
-        decoding="async"
-        itemprop="logo"
-      />
-      <Image
-        src={`${base}assets/logo_header_light.webp`}
-        alt="ZCFlow logo light"
-        class="mode-light"
-        width={150}
-        height={150}
-        loading="lazy"
-        decoding="async"
-        itemprop="logo"
-      />
+      {
+        logo_header_darks && (
+          <Image
+            src={logo_header_darks}
+            alt="ZCFlow logo dark"
+            class="mode-dark responsive-mode-dark"
+            width={150}
+            height={150}
+            loading="lazy"
+            decoding="async"
+            itemprop="logo"
+          />
+        )
+      }
+      {
+        logo_header_light && (
+          <Image
+            src={logo_header_light}
+            alt="ZCFlow logo light"
+            class="mode-light"
+            width={150}
+            height={150}
+            loading="lazy"
+            decoding="async"
+            itemprop="logo"
+          />
+        )
+      }
+
       <!-- MOBILE -->
-      <Image
-        src={`${base}assets/logo_header_version_bgdarks.webp`}
-        alt="ZCFlow logo dark"
-        class="mode-responsive"
-        width={150}
-        height={150}
-        loading="lazy"
-        decoding="async"
-        itemprop="logo"
-      />
+      {
+        logo_header_version_bgdarks && (
+          <Image
+            src={logo_header_version_bgdarks}
+            alt="ZCFlow logo dark"
+            class="mode-responsive"
+            width={150}
+            height={150}
+            loading="lazy"
+            decoding="async"
+            itemprop="logo"
+          />
+        )
+      }
     </a>
     <meta itemprop="name" content="ZCFlow" />
     <meta itemprop="url" content="https://www.zcflow.com" />

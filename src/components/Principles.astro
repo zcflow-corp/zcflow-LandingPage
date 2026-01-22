@@ -60,9 +60,6 @@ const itemsSecondWithImages = await Promise.all(
         </p>
         {
           itemsWithImages.map((p, index) => {
-            // const imagePath = `/${p.img.replace('assets/', 'src/assets/')}`
-            // const imageMetadata = allImage[imagePath]?.default
-
             return (
               <article id="fundamentos-card" class="card principle column-card-first">
                 {p.imageMetadata && (
