@@ -14,5 +14,5 @@ export const localeHelper = (Astro) => {
 
  
 
-  return { locale, t, path }
+  return { locale, t, path, base }
 }

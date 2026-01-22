@@ -9,16 +9,7 @@ const escape = (s:string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 /**limpiar la ruta */
 const cleanPath = Astro.url.pathname.replace(new RegExp(`^${escape(base)}(es|en)`), '');
 
-
-// const pathname = Astro.url.pathname
-
-// quitamos /es/ o /en/
-// const cleanPath = pathname.replace(/^\/(es|en)/, '')
-
-
 const finalPath = `${base}${next}${cleanPath}`.replace(/\/+/g, '/')
-
-// const finalPath = `/${next}${cleanPath || '/'}`
 ---
 
 <a
