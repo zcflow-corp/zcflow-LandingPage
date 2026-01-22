@@ -1,0 +1,5 @@
+export const PHASES = {
+  NEGATIVE: 'NEGATIVE',
+  ACTING: 'ACTING',
+  SOLVED: 'SOLVED',
+}

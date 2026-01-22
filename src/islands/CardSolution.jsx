@@ -136,7 +136,7 @@ export default function CardSolution({
                   <div className="dCard__frame">
                     <img
                       className="dCard__img"
-                      src={s.image}
+                      src={s.image.src}
                       alt={s.alt || s.title}
                       loading="lazy"
                     />
