@@ -23,7 +23,7 @@ export default function CardZcflow({
   startIndex = 0,
   title = '',
   description = '',
-  word = '',
+  word = ''
 }) {
   const [index, setIndex] = useState(startIndex)
   const [t, setT] = useState(() => createTranslationFunction(es))
@@ -119,6 +119,7 @@ export default function CardZcflow({
         {/* === MEDIA === */}
         <div className="card-slider__media card-slider__container">
           {slides.map((s, i) => (
+            
             <figure
               key={s.id ?? i}
               className={`card-slider__figure${
@@ -133,7 +134,7 @@ export default function CardZcflow({
                 ) : (
                   <img
                     className="card-slider__img"
-                    src={s.image}
+                    src={s.image?.src}
                     alt={s.alt ?? s.title}
                     loading={i === index ? 'eager' : 'lazy'}
                   />

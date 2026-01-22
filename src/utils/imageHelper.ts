@@ -1,7 +1,7 @@
 import { ImageMetadata } from 'astro'
 
 const allImages = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/assets/*.{jpeg,jpg,png,gif,webp}'
+  '/src/assets/*.{jpeg,jpg,png,gif,webp,svg}'
 )
 
 export const getImageMetadata = async (path: string): Promise<ImageMetadata | null> => {
