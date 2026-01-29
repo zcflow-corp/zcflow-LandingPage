@@ -128,6 +128,12 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
       width: 100%;
       // z-index: -10;
 
+      @include media(mobile){
+        .hero__canvas{
+          height: 50vh;
+        }
+      }
+
       @include media(tablet) {
         overflow: hidden;
         background-size: contain;

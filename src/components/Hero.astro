@@ -19,7 +19,7 @@ const textos = [
   <div class="container hero-inner">
     <div class="hero-description">
       <div class="hero-description-title">
-        <h1>
+        <h1 class="hero-description-title-h1">
           <span class="gradient-blue-dark">
             {t('Revolucionando la tesorería')}
           </span>
@@ -28,9 +28,8 @@ const textos = [
         <h2>
           {t('Impulsado por agentes de IA')}
         </h2>
+        <p>{t('Decisiones en segundos, no en semanas.')}</p>
       </div>
-
-      <p>{t('Decisiones en segundos, no en semanas.')}</p>
       <div class="cta">
         <a class="btn primary" href="#zcflow">{t('Explorar ahora')} </a>
         <a href={path('contacto')} class="btn icon">{t('Pide una demo de inmediato')}</a>
@@ -53,9 +52,6 @@ const textos = [
     flex-wrap: wrap;
     position: relative;
 
-    @include media(desktop) {
-      height: 90vh;
-    }
 
     &::before {
       content: '';
@@ -71,26 +67,21 @@ const textos = [
       bottom: -39%;
       right: 0%;
 
-
-     
-
-      @include media(mobile) {
-      
-
-      // transform: rotate(-78deg);
-      // background-position: 186%;
-      // bottom: -5%; 
-      // right: -55%;
-      // background-size: 117%;
-      transform: rotate(-10deg);
+      @include media(tablet-down) {
+        .hero-description {
+          align-self: center;
+        }
+        // transform: rotate(-78deg);
+        // background-position: 186%;
+        // bottom: -5%;
+        // right: -55%;
+        // background-size: 117%;
+        transform: rotate(-10deg);
         background-position: 52%;
         bottom: -56%;
         right: -270%;
         background-size: 165%;
-
       }
-
-
 
       @include media(desktop) {
         transform: rotate(-50deg);
@@ -194,8 +185,8 @@ const textos = [
         font-size: 1.75rem;
         @include media(mobile) {
           font-size: 1rem;
-          text-align: left;
           width: 100%;
+          text-align: center;
         }
       }
 
@@ -203,8 +194,11 @@ const textos = [
         text-align: left;
         text-wrap: nowrap !important;
         @include media(mobile) {
-          font-size: 0.5rem;
+          font-size: 0.9rem;
+          font-weight: 800;
           text-wrap: wrap;
+          width: 100%;
+          text-align: center;
         }
       }
     }
@@ -241,6 +235,9 @@ const textos = [
       .icon {
         padding-left: 0rem;
       }
+      @include media(mobile) {
+        justify-content: center;
+      }
       @include media(tablet) {
         flex-wrap: nowrap;
       }
@@ -257,6 +254,20 @@ const textos = [
       align-items: flex-start;
       padding: 1rem 0rem;
     }
+
+        @include media(desktop) {
+      height: 90vh;
+    }
+
+     @include media(tablet-down) {
+        .hero-description-title-h1 {
+         justify-content: center;
+        }
+   .gradient-blue-dark {
+          text-align: center!important;
+          max-width: 68%!important;
+        }
+     }
   }
 
   @keyframes changeBgHero {

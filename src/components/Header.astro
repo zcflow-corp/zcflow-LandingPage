@@ -8,10 +8,10 @@ import { getImageMetadata } from '@/utils/imageHelper'
 const { t, path } = localeHelper(Astro)
 const base = import.meta.env.BASE_URL
 
-const [logo_header_darks, logo_header_light, logo_header_version_bgdarks] = await Promise.all([
+const [logo_header_darks, logo_header_light] = await Promise.all([
   getImageMetadata('logo_header_darks.webp'),
   getImageMetadata('logo_header_light.webp'),
-  getImageMetadata('logo_header_version_bgdarks.webp'),
+  // getImageMetadata('logo_header_version_bgdarks.webp'),
 ])
 ---
 
@@ -38,22 +38,6 @@ const [logo_header_darks, logo_header_light, logo_header_version_bgdarks] = awai
             src={logo_header_light}
             alt="ZCFlow logo light"
             class="mode-light"
-            width={150}
-            height={150}
-            loading="lazy"
-            decoding="async"
-            itemprop="logo"
-          />
-        )
-      }
-
-      <!-- MOBILE -->
-      {
-        logo_header_version_bgdarks && (
-          <Image
-            src={logo_header_version_bgdarks}
-            alt="ZCFlow logo dark"
-            class="mode-responsive"
             width={150}
             height={150}
             loading="lazy"
@@ -91,12 +75,15 @@ const [logo_header_darks, logo_header_light, logo_header_version_bgdarks] = awai
         <li><a href={`${path('')}#soluciones`} itemprop="name">{t('Socios')}</a></li>
         <li><a href={`${path('')}#soluciones`} itemprop="name">{t('Soluciones')}</a></li>
         <li><a href={`${path('')}#fundamentos`} itemprop="name">{t('Fundamentos')}</a></li>
+        <li><a href="#" itemprop="name">{t('Ingresar')}</a></li>
       </ul>
       <!--Otras Acciones -->
+
       <div class="mobile-actions">
-        <Lang />
-        <ThemeSwitch client:idle />
-        <a class="btn icon" href="#">{t('Ingresar')}</a>
+        <div style="display: flex;">
+          <Lang />
+          <ThemeSwitch client:idle />
+        </div>
         <a class="btn tertiary" href={path('contacto')}>
           {t('Solicita una demo')}
         </a>
@@ -207,8 +194,7 @@ const [logo_header_darks, logo_header_light, logo_header_version_bgdarks] = awai
     }
 
     .logo .mode-dark,
-    .mode-light,
-    .mode-responsive {
+    .mode-light {
       width: 116%;
       height: 24px;
       object-fit: contain;
@@ -216,9 +202,6 @@ const [logo_header_darks, logo_header_light, logo_header_version_bgdarks] = awai
     .mobile-actions {
       column-gap: 18px;
       display: flex;
-    }
-    .mode-responsive {
-      display: none;
     }
     :global(html[data-theme='light']) .mode-light {
       display: block;
@@ -230,7 +213,7 @@ const [logo_header_darks, logo_header_light, logo_header_version_bgdarks] = awai
 
     @include media(tablet-down) {
       @include shared-mobile-table;
-      :global(html[data-theme='light']) .mode-responsive {
+      :global(html[data-theme='light']) .mode-light {
         display: block;
       }
 

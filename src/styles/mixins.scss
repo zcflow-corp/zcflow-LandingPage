@@ -230,20 +230,6 @@ $Extralarge: 1440px;
     color: var(--c-black);
   }
 
-  .mode-responsive {
-    display: block;
-    width: 80px;
-    width: 80px;
-  }
-
-  html[data-theme='dark'] .mode-responsive {
-    display: none;
-  }
-
-  .mode-dark {
-    display: none;
-  }
-
   .logo img {
     height: 31px;
     object-fit: contain;
