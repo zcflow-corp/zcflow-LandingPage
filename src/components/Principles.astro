@@ -285,6 +285,9 @@ const itemsSecondWithImages = await Promise.all(
       margin: 0;
       width: 100%;
       max-width: 80%;
+       @include media(mobile) {
+        max-width: 100%;
+       }
       img {
         width: 100%;
         object-fit: cover;

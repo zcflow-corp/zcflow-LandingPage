@@ -1,16 +1,21 @@
 @use 'sass:math';
 
 //Breakpoints
-$small: 425px;
+$small: 430px;
 $medium: 768px;
 $large: 1024px;
 $Extralarge: 1440px;
 
 @mixin media($types...) {
   @each $type in $types {
-
     //only mobile or mobile down
-    @if $type ==mobile {
+    @if $type == mobile-small {
+      @media only screen and (max-width: #{$small}) {
+        @content;
+      }
+    }
+
+    @if $type == mobile {
       @media only screen and (max-width: #{$medium - 1}) {
         @content;
       }
@@ -41,8 +46,6 @@ $Extralarge: 1440px;
     }
   }
 }
-
-
 
 // @mixin shared-mobile-tablet-principales {
 //   .container-cards {
@@ -206,10 +209,7 @@ $Extralarge: 1440px;
   }
 }
 
-
 @mixin shared-mobile-table {
-
-
   .btn {
     justify-content: center !important;
   }
@@ -251,7 +251,7 @@ $Extralarge: 1440px;
     top: 100%;
     left: 0;
     width: 100%;
-    background: var(--c-white);
+    background: rgba(280, 280, 280, 1.0);
     display: none;
     flex-direction: column;
     align-items: center;
@@ -295,9 +295,9 @@ $Extralarge: 1440px;
   .mobile-actions {
     flex-direction: column;
     row-gap: 13px;
-    width: 94%;
+    width: 100%;
+    padding: 12px 0px;
   }
-
   .site-header,
   .container {
     width: 100%;
@@ -313,8 +313,6 @@ $Extralarge: 1440px;
     width: 98%;
   }
 }
-
-
 
 /**
  * Estilo de texto con gradiente animado base evitar

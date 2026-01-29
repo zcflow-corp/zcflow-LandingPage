@@ -170,6 +170,16 @@ html[data-theme='light'] .fundamentos {
   background: var(--c-bg-variant);
 }
 
+@include media(tablet-down) {
+  html[data-theme='dark'] .mobile-actions {
+    border-top: 1px solid #3a3a3d;
+  }
+
+  html[data-theme='light'] .mobile-actions {
+    border-top: 1px solid #3a3a3d;
+  }
+}
+
 .container {
   max-width: var(--container);
   margin: 0 auto;
@@ -279,12 +289,12 @@ html[data-theme='light'] .fundamentos {
 }
 
 [data-theme='light'] header {
-  background: rgba(255, 255, 255, 0.85)!important;
+  background: rgba(255, 255, 255, 0.85) !important;
   backdrop-filter: blur(8px);
 }
 
 [data-theme='dark'] header {
-  background: rgb(0, 0, 0, 0.8)!important;
+  background: rgb(0, 0, 0, 0.8) !important;
   backdrop-filter: blur(8px);
 }
 
@@ -305,8 +315,12 @@ html[data-theme='light'] .fundamentos {
   color: #eaf0ff !important;
 }
 
-[data-theme='dark'] nav {
-  background: var(--c-black) !important;
+@include media(mobile) {
+  [data-theme='dark'] nav {
+    // background: var(--c-black) !important;
+    background: rgba(0, 0, 0, 0.9) !important;
+    backdrop-filter: blur(8px);
+  }
 }
 
 nav a {

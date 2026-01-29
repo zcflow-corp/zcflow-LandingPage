@@ -156,6 +156,9 @@ let active = 0
         span {
           font-size: small;
           color: var(--c-text-muted);
+          @include media(mobile) {
+            font-size: 0.7rem;
+          }
         }
       }
 
