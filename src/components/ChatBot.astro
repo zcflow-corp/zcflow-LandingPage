@@ -1,11 +1,10 @@
 ---
 import { localeHelper } from '../i18n/index'
-import videoChatBoto from '@/assets/BOTO_Chatbot_Web.mp4';
+import videoChatBoto from '@/assets/BOTO_Chatbot_Web.mp4'
 // const { t: _t } = Astro.props
 // const t = typeof _t === 'function' ? _t : (k: unknown) => k
 const base = import.meta.env.BASE_URL
 const { locale, t } = localeHelper(Astro)
-
 ---
 
 <section class="chatBot" id="chatBot" aria-labelledby="chatbot-title">
@@ -49,7 +48,10 @@ const { locale, t } = localeHelper(Astro)
         controls
         class="boto-video"
       >
-        <source src={typeof videoChatBoto === 'string' ? videoChatBoto : videoChatBoto} type="video/mp4"/>
+        <source
+          src={typeof videoChatBoto === 'string' ? videoChatBoto : videoChatBoto}
+          type="video/mp4"
+        />
       </video>
     </div>
   </div>

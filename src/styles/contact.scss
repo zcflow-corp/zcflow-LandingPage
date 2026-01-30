@@ -27,11 +27,16 @@
     background-position: center;
 
     @include media(mobile) {
-      top: 100%;
-      right: 70%;
-      background-size: contain;
-      transform: rotate(-50deg);
+      transform: rotate(64deg);
       background-size: 150%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-position: right bottom;
+      background-size: contain;
+      overflow: hidden;
+      right: 0;
+      bottom: 0;
+      height: 13vh;
     }
 
     transform: rotate(30deg);
