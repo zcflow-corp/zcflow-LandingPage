@@ -1,9 +1,8 @@
 // FlowConexion.jsx
 import React, { useEffect, useRef } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
-const base = import.meta.env.BASE_URL
-import { getImageMetadata } from '@/utils/imageHelper'
-import logo_movil_dark from '../assets/logo_movil_dark.webp'
+
+
 const BANK_SVG_BASE = `
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
   <path fill="#292D32" d="M13.05 16.25h-1.88c-1.33 0-2.42-1.12-2.42-2.5 0-.41.34-.75.75-.75s.75.34.75.75c0 .55.41 1 .92 1h1.88c.39 0 .7-.35.7-.78 0-.54-.15-.62-.49-.74l-3.01-1.05c-.64-.23-1.5-.69-1.5-2.16 0-1.25.99-2.28 2.2-2.28h1.88c1.33 0 2.42 1.12 2.42 2.5 0 .41-.34.75-.75.75s-.75-.34-.75-.75c0-.55-.41-1-.92-1h-1.88c-.39 0-.7.35-.7.78 0 .54.15.62.49.74l3.01 1.05c.64.23 1.5.69 1.5 2.16 0 1.26-.99 2.28-2.2 2.28Z"/>
@@ -25,13 +24,14 @@ const MOVEMENT_SVG_BASE = `
   <path fill="#292D32" d="M22 22.75H2c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h20c.41 0 .75.34.75.75s-.34.75-.75.75Z"/>
 </svg>`
 
-const [logo_movil_darkss] = await Promise.all([getImageMetadata('logo_movil_dark.webp')])
+
 
 const ICON_SVGS_BASE = {
   bank: BANK_SVG_BASE,
   data: DATA_SVG_BASE,
   movement: MOVEMENT_SVG_BASE,
 }
+
 
 // Crea imágenes para un color dado (gris/azul)
 const createIconImages = (color) => {
@@ -45,7 +45,7 @@ const createIconImages = (color) => {
   return imgs
 }
 
-const FlowConexion = ({ labels = '', rotationMs = 9000 }) => {
+const FlowConexion = ({ labels = '', rotationMs = 9000, logo_movil_dark }) => {
   const containerRef = useRef(null)
   const { t } = useLanguage()
   const DEFAULT_LABELS = {
@@ -330,7 +330,7 @@ const FlowConexion = ({ labels = '', rotationMs = 9000 }) => {
         {/* Logo Zcflow (posición fija, el canvas dibuja glow + línea hasta aquí) */}
         <div className="flow-logo">
           <img
-            src={logo_movil_dark}
+            src={logo_movil_dark.src}
             alt="ZCFlow"
             className="flow-logo__img"
             loading="lazy"

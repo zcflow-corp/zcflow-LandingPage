@@ -6,7 +6,7 @@ import { getImageMetadata } from '@/utils/imageHelper'
 const { t: _t, locale } = Astro.props
 const t = typeof _t === 'function' ? _t : (k) => k
 const slides = getSlides(t)
-
+const logo_movil_dark = await getImageMetadata('logo_movil_dark.webp')
 const itemsWithImages = await Promise.all(
   slides.map(async (p) => {
     const imagePath = p.image?.src
@@ -35,6 +35,7 @@ const itemsWithImages = await Promise.all(
         <div>
           <CardZcflow
             slides={itemsWithImages}
+            logo_movil_dark={logo_movil_dark}
             interval={10000}
             startIndex={0}
             title={t('Asi resolvemos lo que nadie resuelve')}

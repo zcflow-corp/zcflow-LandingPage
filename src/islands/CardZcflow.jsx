@@ -23,7 +23,8 @@ export default function CardZcflow({
   startIndex = 0,
   title = '',
   description = '',
-  word = ''
+  word = '',
+  logo_movil_dark
 }) {
   const [index, setIndex] = useState(startIndex)
   const [t, setT] = useState(() => createTranslationFunction(es))
@@ -87,7 +88,7 @@ export default function CardZcflow({
       case 2:
         return (
           <LanguageProvider>
-            <FlowConexion rotationMs={9000} client:only />
+            <FlowConexion rotationMs={9000} client:only logo_movil_dark={logo_movil_dark}/>
           </LanguageProvider>
         )
       case 3:
