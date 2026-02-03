@@ -24,7 +24,7 @@ export default function CardZcflow({
   title = '',
   description = '',
   word = '',
-  logo_movil_dark
+  logo_movil_dark,
 }) {
   const [index, setIndex] = useState(startIndex)
   const [t, setT] = useState(() => createTranslationFunction(es))
@@ -88,7 +88,7 @@ export default function CardZcflow({
       case 2:
         return (
           <LanguageProvider>
-            <FlowConexion rotationMs={9000} client:only logo_movil_dark={logo_movil_dark}/>
+            <FlowConexion rotationMs={9000} client:only logo_movil_dark={logo_movil_dark} />
           </LanguageProvider>
         )
       case 3:
@@ -120,7 +120,6 @@ export default function CardZcflow({
         {/* === MEDIA === */}
         <div className="card-slider__media card-slider__container">
           {slides.map((s, i) => (
-            
             <figure
               key={s.id ?? i}
               className={`card-slider__figure${
@@ -159,13 +158,11 @@ export default function CardZcflow({
           </p>
 
           <p>
-            {t('')}<span className="gradient-blue-ligth">
-              {' '}
-              {t('Hacemos que el mercado financiero compita por tu liquidez : ')}
-            </span>
-            {t(
-              'El menor costo cuando necesitas caja y el mejor retorno cuando tienes excedentes.'
-            )}
+            {t('')}
+            <span className="gradient-blue-ligth">
+              {t('Hacemos que el mercado financiero compita por tu liquidez')}:{' '}
+            </span>{' '}
+            {t('El menor costo cuando necesitas caja y el mejor retorno cuando tienes excedentes.')}
           </p>
 
           <div className="driver ">
