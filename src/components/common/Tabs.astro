@@ -181,16 +181,21 @@ let active = 0
           align-self: self-end;
           transform: scale(0.85);
           box-shadow: var(--shadowX);
-          background: #000207e6;
           padding-top: 1rem;
 
           .tab-title {
             color: var(--c-white);
+            @include media(mobile) {
+              color: var(--c-line);
+            }
           }
 
           .activeTab {
             span {
-              color: var(--d7) !important;
+              color: var(--d7);
+              @include media(mobile) {
+                color: var(--c-line);
+              }
             }
           }
         }
@@ -232,11 +237,19 @@ let active = 0
       background-color: transparent;
       span {
         color: var(--c-text-muted) !important;
+        @include media(mobile) {
+          color: var(--c-white) !important;
+        }
       }
     }
   }
 
   html[data-theme='dark'] .activeTab {
+    .tab-title {
+      @include media(mobile) {
+        color: var(--c-white) !important;
+      }
+    }
     span {
       color: var(--c-white) !important;
     }
