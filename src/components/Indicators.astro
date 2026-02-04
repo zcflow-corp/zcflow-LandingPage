@@ -36,7 +36,7 @@ const { locale, t } = localeHelper(Astro)
             />
           </figure>
           <figure>
-            <ChartIndicator  year={2026} />
+            <ChartIndicator year={2026} />
           </figure>
         </div>
       </div>
@@ -194,19 +194,21 @@ const { locale, t } = localeHelper(Astro)
     .section-grafico-indicador {
       width: 55%;
       height: auto;
-       @include media(mobile) {
+      @include media(mobile) {
         width: 100%;
-       }
-      
+      }
     }
   }
 
-  @include media(mobile) {
+  @include media(tablet-down) {
     .section-grafico-left {
       max-width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      row-gap: 1.4rem;
     }
-    .section-grafico{
-  row-gap: 5rem;
+    .section-grafico {
+      row-gap: 5rem;
     }
   }
 
@@ -223,7 +225,7 @@ const { locale, t } = localeHelper(Astro)
     font-size: 0.8rem;
     font-weight: normal;
     padding: 0px 12.5px;
-    color: #c4c4c4;;
+    color: #c4c4c4;
   }
   .counter {
     font-size: 2rem;

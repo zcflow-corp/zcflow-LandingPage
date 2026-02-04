@@ -161,10 +161,10 @@ export default function CardZcflow({
           <p>
             {t('')}<span className="gradient-blue-ligth">
               {' '}
-              {t('Hacemos que el mercado financiero compita por tu liquidez : ')}
+              {t('Hacemos que el mercado financiero compita por tu liquidez: ')}
             </span>
             {t(
-              'El menor costo cuando necesitas caja y el mejor retorno cuando tienes excedentes.'
+              ' El menor costo cuando necesitas caja y el mejor retorno cuando tienes excedentes.'
             )}
           </p>
 
