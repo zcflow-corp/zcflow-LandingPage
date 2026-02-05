@@ -7,28 +7,30 @@ let active = 0
 ---
 
 <div class="tabs-container" id="tabs-root">
-  <div class="tabs-process">
-    <span class="process" id="out"> </span>
-  </div>
-  <!-- Botones -->
-  <div role="tablist" aria-label="Qué podrás hacer" class="tabs">
-    {
-      TabsJson.pestañas.map((t, i) => (
-        <button
-          role="tab"
-          id={`tab-${i}`}
-          class={`tab-btn ${i === active ? 'active' : ''}`}
-          aria-selected={i === active}
-          data-process={Number(t.process)}
-          aria-controls={`panel-${i}`}
-          tabindex={i === active ? '0' : '-1'}
-        >
-          <h4> {t.título} </h4>
+  <div class="tabs-solutions">
+    <div class="tabs-process">
+      <span class="process" id="out"> </span>
+    </div>
+    <!-- Botones -->
+    <div role="tablist" aria-label="Qué podrás hacer" class="tabs">
+      {
+        TabsJson.pestañas.map((t, i) => (
+          <button
+            role="tab"
+            id={`tab-${i}`}
+            class={`tab-btn ${i === active ? 'active' : ''}`}
+            aria-selected={i === active}
+            data-process={Number(t.process)}
+            aria-controls={`panel-${i}`}
+            tabindex={i === active ? '0' : '-1'}
+          >
+            <p class="tab-title"> {t.título} </p>
 
-          <span>{t.titleSub}</span>
-        </button>
-      ))
-    }
+            <span>{t.titleSub}</span>
+          </button>
+        ))
+      }
+    </div>
   </div>
 
   <!-- Paneles -->
@@ -43,9 +45,6 @@ let active = 0
           class="tab-panel"
           style={`display: ${i === active ? 'block' : 'none'}`}
         >
-          {/* <h3>{t.título}</h3>
-          {t.resumen && <p>{t.resumen}</p>} */}
-
           <div class="slider-functions">
             {Array.isArray(t.slides) && t.slides.length > 0 && (
               <CardSolution
@@ -101,6 +100,7 @@ let active = 0
 <style lang="scss">
   .tabs-container {
     width: 100%;
+    position: relative;
 
     .tabs {
       display: flex;
@@ -145,41 +145,60 @@ let active = 0
         flex: 1;
         padding: 0.5rem;
 
+        p {
+          font-size: medium;
+          &:focus {
+            box-shadow: var(--shadow);
+          }
+        }
+
         &:focus {
           outline: none;
-          h4 {
-            color: var(--g-primary);
-            background: var(--g-primary-light);
-            background-size: 200% 100%;
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: black;
-            /* Inicialmente color negro */
-            -webkit-text-fill-color: black;
-            display: inline-block;
-            animation:
-              gradient-move 1s ease infinite,
-              color-change 1s ease infinite;
-            transition:
-              color 1s ease,
-              -webkit-text-fill-color 1s ease;
-          }
-
-          // box-shadow: var(--shadow);
         }
 
-        h4 {
-          padding: 0.5rem;
-          margin: 0rem;
-        }
         span {
           font-size: small;
-          color: var(--c--text);
+          color: var(--c-text-muted);
+          @include media(mobile) {
+            font-size: 0.7rem;
+          }
         }
       }
 
       .tab-btn[aria-selected='true'] {
         color: var(--c-black);
+      }
+
+      &-solutions {
+        @include media(mobile) {
+          position: sticky;
+          top: 12%;
+          z-index: 10;
+          width: 100%;
+          left: 100%;
+          border-radius: 5px;
+          gap: 0rem;
+          align-self: self-end;
+          transform: scale(0.85);
+          box-shadow: var(--shadowX);
+          padding-top: 1rem;
+
+          .tab-title {
+            color: var(--c-white);
+            @include media(mobile) {
+              color: var(--c-line);
+            }
+          }
+
+          .activeTab {
+            span {
+              color: var(--d7);
+              @include media(mobile) {
+                color: var(--c-line);
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -189,15 +208,50 @@ let active = 0
     background: transparent;
     autoline: none;
     opacity: 1;
-  }
+    p {
+      color: var(--g-primary);
+      font-size: medium;
+      background: var(--g-primary-light);
+      background-size: 200% 100%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: black;
+      /* Inicialmente color negro */
+      -webkit-text-fill-color: black;
+      display: inline-block;
+      animation:
+        gradient-move 1s ease infinite,
+        color-change 1s ease infinite;
+      transition:
+        color 1s ease,
+        -webkit-text-fill-color 1s ease;
+    }
 
-  html[data-theme='dark'] .activeTab {
-    color: var(--c-white) !important;
+    span {
+      color: var(--c-black) !important;
+    }
   }
 
   html[data-theme='dark'] .tabs-container {
     .tab-btn {
       background-color: transparent;
+      span {
+        color: var(--c-text-muted) !important;
+        @include media(mobile) {
+          color: var(--c-white) !important;
+        }
+      }
+    }
+  }
+
+  html[data-theme='dark'] .activeTab {
+    .tab-title {
+      @include media(mobile) {
+        color: var(--c-white) !important;
+      }
+    }
+    span {
+      color: var(--c-white) !important;
     }
   }
 </style>

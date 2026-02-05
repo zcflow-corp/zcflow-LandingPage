@@ -14,7 +14,7 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
 
   <!-- Buscador -->
   <div class="hero__search hero__search--hidden">
-    <input class="hero__search-input" type="text" disabled />
+    <input class="hero__search-input" type="text" disabled aria-label="Buscar en la plataforma" />
     <button class="hero__search-button">BOTO</button>
   </div>
 </section>
@@ -128,6 +128,12 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
       width: 100%;
       // z-index: -10;
 
+      @include media(mobile){
+        .hero__canvas{
+          height: 50vh;
+        }
+      }
+
       @include media(tablet) {
         overflow: hidden;
         background-size: contain;
@@ -135,7 +141,8 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
       }
 
       @include media(desktop) {
-        overflow: hidden;
+        // overflow: hidden;
+        overflow: clip;
         background-size: contain;
         background-position: top;
       }
@@ -149,19 +156,25 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
 
     &__canvas {
       width: 100%;
-      height: 62vh;
+      height: 60vh !important;
       min-width: 20rem;
+
+      @include media(tablet-down) {
+        height: 80vh;
+        min-width: 100%;
+      }
       @include media(tablet) {
         height: 80vh;
         min-width: 100%;
       }
 
       @include media(desktop) {
-        min-height: 100vh;
+        min-height: 95vh;
       }
 
       @include media(extradesktop) {
-        min-height: 80vh;
+        // min-height: 80vh;
+        min-height: 69vh;
       }
     }
 
@@ -249,12 +262,12 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
       }
 
       &--conecta {
-        top: 78%;
-        left: 25%;
+        top: 70%;
+        left: 40%;
 
         @include media(tablet) {
-          top: 45%;
-          left: 26%;
+          top: 54%;
+          left: 40%;
         }
 
         @include media(desktop) {
@@ -264,8 +277,8 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
 
         @include media(extradesktop) {
           // top: 40%;
-          top: 55%;
-          left: 30%;
+          top: 70%;
+          left: 25%;
         }
 
         &::before {
@@ -276,21 +289,22 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
       }
 
       &--gestiona {
-        // top: 25%;
-        // left: 95%;
-
-        @include media(mobile) {
-          top: 60%;
-          left: 90%;
-        }
+        top: 60%;
+        left: 90%;
 
         @include media(tablet) {
+          top: 20%;
+          left: 65%;
+        }
+
+        @include media(desktop) {
           top: 60%;
           left: 65%;
         }
 
         @include media(extradesktop) {
           left: 55%;
+          top: 70%;
         }
       }
 
@@ -300,7 +314,7 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
 
         @include media(tablet) {
           top: 38%;
-          left: 80%;
+          left: 65%;
         }
 
         @include media(desktop) {
@@ -309,16 +323,17 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
         }
         @include media(extradesktop) {
           top: 55%;
+          left: 60%;
         }
       }
 
       &--actua {
-        top: 20%;
+        top: 31%;
         left: 90%;
 
         @include media(tablet) {
-          top: 60%;
-          left: 77%;
+          top: 70%;
+          left: 40%;
         }
         @include media(desktop) {
           top: 28%;
@@ -326,7 +341,8 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
         }
 
         @include media(extradesktop) {
-          top: 45%;
+          top: 40%;
+          left: 48%;
         }
       }
 
@@ -367,11 +383,19 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
       opacity: 1;
       transform: scale(0.68);
       padding: 0.75em 0.75em;
-      left: -29%;
+      left: -15%;
       bottom: 10%;
       width: max-content;
       gap: 0.25rem;
       justify-content: space-between;
+
+
+      @include media(mobile) {
+        transform: scale(0.65);
+  
+      left: -22%;
+      bottom: 15%;
+      }
 
       @include media(tablet) {
         transform: scale(0.9);
@@ -387,14 +411,14 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
         transform: scale(0.75);
         width: 85%;
         left: 8%;
-        bottom: 12%;
+        bottom: 20%;
       }
 
       @include media(extradesktop) {
         transform: scale(0.95);
-        width: 90%;
-        left: 10%;
-        bottom: 35%;
+        width: 80%;
+        left: 9%;
+        bottom: 20%;
       }
 
       &--hidden {
@@ -426,6 +450,7 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
       @include media(desktop) {
         font-size: 1rem;
         font-weight: 500;
+        width: 100%;
       }
 
       &::placeholder {

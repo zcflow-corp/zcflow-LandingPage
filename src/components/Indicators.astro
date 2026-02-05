@@ -1,17 +1,20 @@
 ---
+import { localeHelper } from '../i18n/index'
 import LineChart from '@/islands/LineChart.jsx'
 import CounterOnView from '@/islands/CounterOnView.jsx'
 import ChartIndicator from './grafic/ChartIndicator.astro'
-import { Image } from 'astro:assets'
-const { t: _t } = Astro.props
-const t = typeof _t === 'function' ? _t : (k) => k
+
+// const { t: _t } = Astro.props
+// const t = typeof _t === 'function' ? _t : (k) => k
+
+const { locale, t } = localeHelper(Astro)
 ---
 
 <!-- Original id="indicadores" -->
 <section class="section" aria-labelledby="indicadores-title">
   <div style="padding: 2rem;">
-    <div class="container indicators card">
-      <h4 class="gradient-blue-dark">{'Indicadores'}</h4>
+    <div class="container indicators">
+      <h4 class="gradient-blue-dark">{t('Indicadores')}</h4>
       <div class="section-grafico">
         <div class="section-grafico-left">
           <!-- Original id="indicadores-title" -->
@@ -32,10 +35,9 @@ const t = typeof _t === 'function' ? _t : (k) => k
               aria-label={t('Gráfico de línea mostrando indicadores financieros clave')}
             />
           </figure>
-
-          <div>
-            <ChartIndicator year={2025} />
-          </div>
+          <figure>
+            <ChartIndicator year={2026} />
+          </figure>
         </div>
       </div>
       <!-- Contadores con roles y aria-labels -->
@@ -191,12 +193,22 @@ const t = typeof _t === 'function' ? _t : (k) => k
     flex-wrap: wrap;
     .section-grafico-indicador {
       width: 55%;
+      height: auto;
+      @include media(mobile) {
+        width: 100%;
+      }
     }
   }
 
-  @include media(mobile) {
+  @include media(tablet-down) {
     .section-grafico-left {
       max-width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      row-gap: 1.4rem;
+    }
+    .section-grafico {
+      row-gap: 5rem;
     }
   }
 
@@ -213,6 +225,7 @@ const t = typeof _t === 'function' ? _t : (k) => k
     font-size: 0.8rem;
     font-weight: normal;
     padding: 0px 12.5px;
+    color: #c4c4c4;
   }
   .counter {
     font-size: 2rem;
@@ -262,12 +275,12 @@ const t = typeof _t === 'function' ? _t : (k) => k
     .container-counter {
       transform: scale(0.9);
     }
-    .section-grafico {
-      .section-grafico-indicador {
-        width: 100%;
-        margin-top: 2rem;
-      }
-    }
+    // .section-grafico {
+    //   .section-grafico-indicador {
+    //     width: 100%;
+    //     margin-top: 2rem;
+    //   }
+    // }
   }
 
   html[data-theme='dark'] .indicators {

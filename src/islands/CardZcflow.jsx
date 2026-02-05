@@ -24,6 +24,7 @@ export default function CardZcflow({
   title = '',
   description = '',
   word = '',
+  logo_movil_dark,
 }) {
   const [index, setIndex] = useState(startIndex)
   const [t, setT] = useState(() => createTranslationFunction(es))
@@ -87,7 +88,7 @@ export default function CardZcflow({
       case 2:
         return (
           <LanguageProvider>
-            <FlowConexion rotationMs={9000} client:only />
+            <FlowConexion rotationMs={9000} client:only logo_movil_dark={logo_movil_dark} />
           </LanguageProvider>
         )
       case 3:
@@ -133,7 +134,7 @@ export default function CardZcflow({
                 ) : (
                   <img
                     className="card-slider__img"
-                    src={s.image}
+                    src={s.image?.src}
                     alt={s.alt ?? s.title}
                     loading={i === index ? 'eager' : 'lazy'}
                   />
@@ -157,14 +158,11 @@ export default function CardZcflow({
           </p>
 
           <p>
-            {t('Hacemos que el')}{' '}
+            {t('')}
             <span className="gradient-blue-ligth">
-              {' '}
-              {t('mercado financiero compita por tu liquidez')}
-            </span>
-            {t(
-              ': el menor costo cuando necesitas caja y el mejor retorno cuando tienes excedentes.'
-            )}
+              {t('Hacemos que el mercado financiero compita por tu liquidez')}:{' '}
+            </span>{' '}
+            {t('El menor costo cuando necesitas caja y el mejor retorno cuando tienes excedentes.')}
           </p>
 
           <div className="driver ">
@@ -175,24 +173,26 @@ export default function CardZcflow({
             </p>
           </div>
 
-          <ul className="checks" role="list">
+          <ul className="checks" role="tablist" aria-label="Slide selector">
             {slides.map((c, i) => (
-              <li
-                className={`check lis-checks ${i === index ? 'gradient-blue-ligth' : 'check-desactive'}`}
-                key={c.id ?? i}
-                role="tab"
-                aria-selected={i === index}
-                tabIndex={0}
-                onClick={() => setIndex(i)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
-                    setIndex(i)
-                  }
-                }}
-              >
-                <IconoSvg name="check" />
-                <div>{c.title}</div>
+              <li key={c.id ?? i} role="presentation">
+                <button
+                  type="button"
+                  className={`check lis-checks ${
+                    i === index ? 'gradient-blue-ligth' : 'check-desactive'
+                  }`}
+                  role="tab"
+                  aria-selected={i === index}
+                  tabIndex={i === index ? 0 : -1}
+                  onClick={() => setIndex(i)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'ArrowRight') setIndex((i + 1) % total)
+                    if (e.key === 'ArrowLeft') setIndex((i - 1 + total) % total)
+                  }}
+                >
+                  <IconoSvg name="check" />
+                  <span>{c.title}</span>
+                </button>
               </li>
             ))}
           </ul>

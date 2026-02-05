@@ -64,10 +64,16 @@
     opacity: 0;
     transform: scale(0.995);
     margin: 1rem;
+
     pointer-events: none;
     transition:
       opacity 0.6s ease,
       transform 0.6s ease;
+
+    @include media(desktop) {
+      margin-top: -6.6rem;
+
+    }
   }
 
   &__figure--active {
@@ -383,6 +389,8 @@
     text-transform: uppercase;
 
 
+
+
   }
 
   &__icon {
@@ -421,7 +429,7 @@
 
   }
 
-  &__link {
+  &__button {
     appearance: none;
     border: 0;
     background: transparent;
@@ -521,6 +529,25 @@
     box-shadow: none;
     background: var(--c-panel);
   }
+
+  .dCard__badge {
+    background: var(--c-panel);
+    color: var(--c-white)
+  }
+
+
+
+
+}
+
+[data-theme='dark'] {
+  .principles-container {
+    .keyword {
+      background: transparent;
+      border: 0.25px solid var(--c-bg-variant);
+    }
+  }
+
 }
 
 
@@ -546,11 +573,16 @@
   flex-wrap: wrap;
   margin-top: 1rem;
 
+  // button {
+  //   border-style: none;
+  //   background: transparent;
+  // }
+
   .check {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    opacity: 0.9;
+    opacity: 0.5;
     color: var(--c-text-muted);
 
     svg {
@@ -561,6 +593,11 @@
   }
 
   .gradient-blue-ligth {
+
+    font-weight: 600;
+    opacity: 1;
+
+
     svg {
       path {
         stroke: var(--d9);

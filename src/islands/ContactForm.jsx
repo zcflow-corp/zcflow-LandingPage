@@ -5,9 +5,8 @@ import { useForm, Controller } from 'react-hook-form'
 import emailjs from '@emailjs/browser'
 import { toast } from 'sonner'
 import { TermsModal } from './TermsModal'
-import { LanguageProvider } from '@/context/LanguageContext.jsx'
-import es from '../i18n/es.json'
-import en from '../i18n/en.json'
+import es from '@/i18n/es.json'
+import en from '@/i18n/en.json'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -146,7 +145,7 @@ export default function ContactForm() {
   /* ================== UI ================== */
 
   return (
-    <section className="bg-bg-variant py-20 section-contact">
+    <section className="bg-bg-variant py-40 section-contact">
       <Card className="max-w-md mx-auto bg-panel shadow-xl rounded-base">
         <CardHeader className="space-y-3 text-h3">
           <CardTitle className="font-head text-h2 leading-tight text-text">

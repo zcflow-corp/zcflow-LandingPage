@@ -7,7 +7,8 @@
 // Estilos generales para los inputs y textarea
 .section-contact {
   position: relative;
-
+  /*se agrega esta propiedad clave*/
+  overflow: hidden;
 
   @include media(mobile) {
     max-width: 100%;
@@ -25,22 +26,23 @@
     background-size: contain;
     background-position: center;
 
-
     @include media(mobile) {
 
-      top: 100%;
-      right: 70%;
+      transform: rotate(92deg);
+      top: -37%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-position: right bottom;
       background-size: contain;
-      transform: rotate(-50deg);
-      background-size: 150%;
-
-
+      overflow: hidden;
+      right: -120%;
+      bottom: 10%;
+      height: 100vh;
 
     }
 
-
-    transform: rotate(30deg);
-    bottom: 0%;
+    // transform: rotate(30deg);
+    // bottom: 0%;
 
     @include media(tablet) {
       transform: rotate(-80deg);
@@ -69,20 +71,17 @@
     }
 
     @include media(extradesktop) {
-      max-height: 300px;
+      // max-height: 300px;
+      max-height: 660px;
       transform: rotate(-100deg);
       background-size: 100%;
       left: 0;
       bottom: 0;
-
     }
-
-
   }
 }
 
 html[data-theme='dark'] .section-contact {
-
   &::before {
     background-image: url('/assets/herob.webp');
     background-size: 95%;
@@ -90,6 +89,5 @@ html[data-theme='dark'] .section-contact {
     transform: rotate(20deg);
     bottom: -30%;
     top: 20%;
-
   }
 }

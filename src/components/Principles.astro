@@ -1,11 +1,33 @@
 ---
+import { localeHelper } from '../i18n/index'
 import principles from '@/data/principles.json'
 import { Image } from 'astro:assets'
-const { t: _t } = Astro.props
-const t = typeof _t === 'function' ? _t : (k: unknown) => k
-const base = import.meta.env.BASE_URL
+import { getImageMetadata } from '@/utils/imageHelper'
+// import type { ImageMetadata } from 'astro'
+
+const { locale, t } = localeHelper(Astro)
+
+// const allImage = import.meta.glob<{ default: ImageMetadata }>(
+//   '/src/assets/*.{jpeg,jpg,png,gif,webp}',
+//   { eager: true }
+// )
+
 const firstColumnItems = principles.slice(0, 2)
 const secondColumnItems = principles.slice(2, 5)
+
+const itemsWithImages = await Promise.all(
+  firstColumnItems.map(async (p) => {
+    const metadata = await getImageMetadata(p.img)
+    return { ...p, imageMetadata: metadata }
+  })
+)
+
+const itemsSecondWithImages = await Promise.all(
+  secondColumnItems.map(async (p) => {
+    const metadata = await getImageMetadata(p.img)
+    return { ...p, imageMetadata: metadata }
+  })
+)
 ---
 
 <section id="fundamentos" class="section fundamentos" aria-labelledby="fundamentos-title">
@@ -17,16 +39,6 @@ const secondColumnItems = principles.slice(2, 5)
         <div class="reveal-wrapper">
           <h2 class="reveal-target" style="margin: 0%;">{t('Los principios que nos guían')}</h2>
         </div>
-        <!-- <div class="reveal-wrapper description-wrapper">
-          <p class="reveal-target fundamentos-description">
-           
-          </p>
-        </div> -->
-        <!-- <div class="btn icon descubre-mas">
-          <a href="#fundamentos-card" class="btn" aria-label={t('Descubre más')}>
-            {t('Descubre más')}</a
-          >
-        </div> -->
       </div>
     </div>
     <!-- principios -->
@@ -47,32 +59,36 @@ const secondColumnItems = principles.slice(2, 5)
           }
         </p>
         {
-          firstColumnItems.map((p, index) => (
-            <article id="fundamentos-card" class="card principle column-card-first">
-              {p.img && (
-                <div class={`images-dinamyc${index}`}>
-                  <figure>
-                    <Image
-                      src={`${base}${p.img}`}
-                      alt={t(p.title)}
-                      width={1200}
-                      height={200}
-                      class="Image"
-                    />
-                  </figure>
-                </div>
-              )}
-              <section class="principles-container">
-                <span class="keyword">{t(p.key)}</span>
-                <div class="section-header">
-                  <h3 class="principle-title">{t(p.title)}</h3>
-                </div>
-                <div class="section-body">
-                  <p style="font-size: 1rem;">{t(p.desc)}</p>
-                </div>
-              </section>
-            </article>
-          ))
+          itemsWithImages.map((p, index) => {
+            return (
+              <article id="fundamentos-card" class="card principle column-card-first">
+                {p.imageMetadata && (
+                  <div class={`images-dinamyc${index}`}>
+                    <figure>
+                      <Image
+                        src={p.imageMetadata}
+                        alt={t(p.title)}
+                        width={1200}
+                        height={200}
+                        class="Image"
+                        format="webp"
+                        loading="eager"
+                      />
+                    </figure>
+                  </div>
+                )}
+                <section class="principles-container">
+                  <span class="keyword">{t(p.key)}</span>
+                  <div class="section-header">
+                    <h3 class="principle-title">{t(p.title)}</h3>
+                  </div>
+                  <div class="section-body">
+                    <p style="font-size: 1rem;">{t(p.desc)}</p>
+                  </div>
+                </section>
+              </article>
+            )
+          })
         }
       </section>
       <section
@@ -80,33 +96,37 @@ const secondColumnItems = principles.slice(2, 5)
         aria-labelledby="Lista de principios fundamentales de ZCflow"
       >
         {
-          secondColumnItems.map((p, index) => (
-            <article id="fundamentos-card" class="card principle">
-              {p.img && (
-                <div class={`images-dinamyc-second${index}`}>
-                  <figure>
-                    <Image
-                      src={`${base}${p.img}`}
-                      alt={t(p.title)}
-                      width={1200}
-                      height={200}
-                      class="Image"
-                      loading="lazy"
-                    />
-                  </figure>
-                </div>
-              )}
-              <section class="principles-container">
-                <span class="keyword">{t(p.key)}</span>
-                <div class="section-header">
-                  <h3 class="principle-title">{t(p.title)}</h3>
-                </div>
-                <div class="section-body">
-                  <p style="font-size: 1rem;">{t(p.desc)}</p>
-                </div>
-              </section>
-            </article>
-          ))
+          itemsSecondWithImages.map((p, index) => {
+            // const imagePath = `/${p.img.replace('assets/', 'src/assets/')}`
+            // const imageMetadata = allImage[imagePath]?.default
+            return (
+              <article id="fundamentos-card" class="card principle">
+                {p.imageMetadata && (
+                  <div class={`images-dinamyc-second${index}`}>
+                    <figure>
+                      <Image
+                        src={p.imageMetadata}
+                        alt={t(p.title)}
+                        width={1200}
+                        height={200}
+                        class="Image"
+                        loading="lazy"
+                      />
+                    </figure>
+                  </div>
+                )}
+                <section class="principles-container">
+                  <span class="keyword">{t(p.key)}</span>
+                  <div class="section-header">
+                    <h3 class="principle-title">{t(p.title)}</h3>
+                  </div>
+                  <div class="section-body">
+                    <p style="font-size: 1rem;">{t(p.desc)}</p>
+                  </div>
+                </section>
+              </article>
+            )
+          })
         }
       </section>
     </div>
@@ -265,6 +285,9 @@ const secondColumnItems = principles.slice(2, 5)
       margin: 0;
       width: 100%;
       max-width: 80%;
+       @include media(mobile) {
+        max-width: 100%;
+       }
       img {
         width: 100%;
         object-fit: cover;
@@ -305,4 +328,6 @@ const secondColumnItems = principles.slice(2, 5)
     margin: 0px;
     // @include gradient-text-indicadores-base(#0563ff, #90a9d5, var(--d8));
   }
+
+  /* Dark theme */
 </style>

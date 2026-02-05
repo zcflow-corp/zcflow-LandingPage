@@ -6,7 +6,6 @@ import '@/styles/globals.scss'
 import '@/styles/buttons.scss'
 import '@/styles/components.scss'
 import '@/styles/contact.scss'
-
 import ToastProvider from '@/islands/ToastProvider.jsx'
 
 interface BaseLayoutProps {
@@ -48,7 +47,7 @@ const ogImage = `${base}assets/logo_header_light.webp`
     <meta property="og:locale" content={locale} />
 
     <!-- Favicon -->
-    <link rel="icon" href={`${base}img/favicon.ico`} />
+    <link rel="icon" href={`${base}favicon.ico`} />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -59,7 +58,7 @@ const ogImage = `${base}assets/logo_header_light.webp`
     />
 
     <!-- Tema dark/light sin flash -->
-    <script>
+    <script is:inline>
       try {
         const t = localStorage.getItem('tema_activo') || 'light'
         document.documentElement.setAttribute('data-theme', t)

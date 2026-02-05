@@ -20,6 +20,9 @@ const { year = new Date().getFullYear() } = Astro.props
     height: 321.651px; */
     background: rgba(255, 255, 255, 0.15);
     height: 246px;
+    height: 246px; 
+    min-height: 246px; 
+    contain: size layout;
     /* 0 0 0 2px #4d90fe,
     inset 0 0 0 2px hsla(0, 0%, 100%, 0.9);
       */
@@ -64,6 +67,7 @@ const { year = new Date().getFullYear() } = Astro.props
     position: relative;
     width: 100%;
     height: 108px;
+    min-height: 108px;
     border-radius: 12px;
     overflow: hidden;
   }
@@ -86,6 +90,14 @@ const { year = new Date().getFullYear() } = Astro.props
     height: 100%;
     display: block;
   }
+
+
+canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+    contain: strict; 
+}
   .indicator-tip {
     position: absolute;
     pointer-events: none;
@@ -117,7 +129,7 @@ const { year = new Date().getFullYear() } = Astro.props
   </div>
 </section>
 
-<script is:client>
+<script>
   const $ = (s, r = document) => r.querySelector(s)
   const canvas = $('#cv'),
     tip = $('#tip'),
@@ -145,9 +157,12 @@ const { year = new Date().getFullYear() } = Astro.props
 
   // Tamaño canvas
   function resize() {
-    const rect = canvas.getBoundingClientRect()
-    W = Math.floor(rect.width)
-    H = Math.floor(rect.height)
+    // const rect = canvas.getBoundingClientRect()
+    // W = Math.floor(rect.width)
+    // H = Math.floor(rect.height)
+    const parent = canvas.parentElement;
+    W = parent.clientWidth;
+    H = parent.clientHeight;
     canvas.width = Math.floor(W * DPR)
     canvas.height = Math.floor(H * DPR)
   }

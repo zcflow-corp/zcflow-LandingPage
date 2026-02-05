@@ -2,23 +2,42 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-offset);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.5s;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
   font-family: var(--font-body);
   color: var(--c-text);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 80px;
 }
 
 main {
   position: relative;
-  margin: auto;
-}
-
-footer {
-  margin: auto;
+  // flex: 1 0 auto;
+  flex-grow: 1;
+  // margin: auto;
 }
 
 .responsive-mode-dark {
-  max-width: 100px;
+  max-width: 85px;
 }
 
 ul,
@@ -54,7 +73,7 @@ h3 {
 }
 
 p {
-  font-size: 18px;
+  font-size: 16.5px;
   line-height: 148%;
   font-weight: 400;
   letter-spacing: 0.36px;
@@ -82,10 +101,7 @@ a {
   border-style: none;
 }
 
-
-
 .gradient-blue-dark {
-
   background: var(--g-primary-light);
   background-size: 200% 100%;
   background-clip: text;
@@ -100,7 +116,6 @@ a {
 }
 
 .gradient-blue-ligth {
-
   background: linear-gradient(to right, white 14%, #00b0f0 67%);
   // background: linear-gradient(90deg,
   //     #5f6e7c,
@@ -118,7 +133,6 @@ a {
   // background-size: 300% 100%;
   // animation: infinityBorder 4s linear infinite;
 }
-
 
 .mode-dark {
   display: block;
@@ -156,6 +170,16 @@ html[data-theme='light'] .fundamentos {
   background: var(--c-bg-variant);
 }
 
+@include media(tablet-down) {
+  html[data-theme='dark'] .mobile-actions {
+    border-top: 1px solid #3a3a3d;
+  }
+
+  html[data-theme='light'] .mobile-actions {
+    border-top: 1px solid #3a3a3d;
+  }
+}
+
 .container {
   max-width: var(--container);
   margin: 0 auto;
@@ -177,11 +201,10 @@ html[data-theme='light'] .fundamentos {
 }
 
 .section {
-  padding: 72px 0;
+  padding: 14px 0;
   scroll-margin-top: 80px;
 
   &-title {
-
     width: 100%;
     display: flex;
     gap: 0rem;
@@ -190,8 +213,6 @@ html[data-theme='light'] .fundamentos {
     align-items: flex-start;
     margin-bottom: 1rem;
     align-self: flex-start;
-
-
 
     p,
     h1,
@@ -203,10 +224,7 @@ html[data-theme='light'] .fundamentos {
       @include media(mobile) {
         max-width: 100%;
       }
-
     }
-
-
   }
 
   &-title-center {
@@ -218,7 +236,6 @@ html[data-theme='light'] .fundamentos {
     margin-bottom: 1rem;
     align-self: center;
 
-
     p,
     h1,
     h2 {
@@ -229,9 +246,7 @@ html[data-theme='light'] .fundamentos {
       @include media(mobile) {
         max-width: 100%;
       }
-
     }
-
   }
 
   &-title-end {
@@ -254,14 +269,8 @@ html[data-theme='light'] .fundamentos {
       @include media(mobile) {
         max-width: 100%;
       }
-
     }
-
-
   }
-
-
-
 }
 
 /*2. Estilos de componentes específicos */
@@ -280,12 +289,17 @@ html[data-theme='light'] .fundamentos {
 }
 
 [data-theme='light'] header {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.85) !important;
   backdrop-filter: blur(8px);
 }
-
+[data-theme='light'] .tabs{
+  background: var(--c-white);
+}
+[data-theme='dark'] .tabs {
+ background: var(--c-black);
+}
 [data-theme='dark'] header {
-  background: rgb(0, 0, 0, 0.8);
+  background: rgb(0, 0, 0, 0.8) !important;
   backdrop-filter: blur(8px);
 }
 
@@ -306,8 +320,12 @@ html[data-theme='light'] .fundamentos {
   color: #eaf0ff !important;
 }
 
-[data-theme='dark'] nav {
-  background: var(--c-black) !important;
+@include media(mobile) {
+  [data-theme='dark'] nav {
+    // background: var(--c-black) !important;
+    background: rgba(0, 0, 0, 0.9) !important;
+    backdrop-filter: blur(8px);
+  }
 }
 
 nav a {
@@ -376,8 +394,6 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
     -webkit-text-fill-color: transparent;
   }
 }
-
-
 
 .gradient-border-left::before {
   content: '';

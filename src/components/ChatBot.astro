@@ -1,7 +1,10 @@
 ---
-const { t: _t } = Astro.props
-const t = typeof _t === 'function' ? _t : (k: unknown) => k
+import { localeHelper } from '../i18n/index'
+import videoChatBoto from '@/assets/BOTO_Chatbot_Web.mp4'
+// const { t: _t } = Astro.props
+// const t = typeof _t === 'function' ? _t : (k: unknown) => k
 const base = import.meta.env.BASE_URL
+const { locale, t } = localeHelper(Astro)
 ---
 
 <section class="chatBot" id="chatBot" aria-labelledby="chatbot-title">
@@ -11,9 +14,9 @@ const base = import.meta.env.BASE_URL
         <span class="beta"> BETA </span>
       </div>
       <h1 class="container-section-description-title">Ask BOTO</h1>
-      <h3 class="container-section-description-slogan">
+      <h2 class="container-section-description-slogan">
         {t('Converse con la tesorería del futuro.')}
-      </h3>
+      </h2>
       <p class="container-section-description-BOTO">
         {
           t(
@@ -45,15 +48,20 @@ const base = import.meta.env.BASE_URL
         controls
         class="boto-video"
       >
-        <source src=`${base}assets/videos/BOTO_Chatbot_Web.mp4` type="video/mp4" />
+        <source
+          src={typeof videoChatBoto === 'string' ? videoChatBoto : videoChatBoto}
+          type="video/mp4"
+        />
       </video>
     </div>
   </div>
 </section>
 <style lang="scss">
   .chatBot {
+    background: #0858fd;
+    padding: 0rem;
     @include media(mobile) {
-      height: 110vh !important;
+      height: 125vh !important;
     }
 
     .container {
@@ -62,7 +70,7 @@ const base = import.meta.env.BASE_URL
       background: #0858fd;
 
       @include media(mobile) {
-        height: 100vh !important;
+        height: auto !important;
       }
 
       @include media(tablet) {
@@ -130,7 +138,9 @@ const base = import.meta.env.BASE_URL
     font-weight: bold;
   }
   section {
-    background: #006ffd;
+    // background: #006ffd;
+    background: #0858fd;
+    padding: 3rem;
   }
 
   .container-section-iframe {

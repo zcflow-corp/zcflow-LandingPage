@@ -1,11 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { PHASES } from '@/enum/enum'
 import { useLanguage } from '@/context/LanguageContext' // Accede al contexto
 
-const PHASES = {
-  NEGATIVE: 'NEGATIVE',
-  ACTING: 'ACTING',
-  SOLVED: 'SOLVED',
-}
 
 const labelsX = ['24-Nov', '25-Nov', '26-Nov', '27-Nov', '28-Nov', '29-Nov']
 

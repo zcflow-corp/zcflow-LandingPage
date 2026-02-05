@@ -1,7 +1,7 @@
 @use 'sass:math';
 
 //Breakpoints
-$small: 425px;
+$small: 430px;
 $medium: 768px;
 $large: 1024px;
 $Extralarge: 1440px;
@@ -10,8 +10,14 @@ $Extralarge: 1440px;
   @each $type in $types {
 
     //only mobile or mobile down
+    @if $type ==mobile-small {
+      @media only screen and (max-width: #{$small}) {
+        @content;
+      }
+    }
+
     @if $type ==mobile {
-      @media only screen and (max-width: ($medium - 1)) {
+      @media only screen and (max-width: #{$medium - 1}) {
         @content;
       }
     }
@@ -28,9 +34,6 @@ $Extralarge: 1440px;
       }
     }
 
-
-
-    //desktop up
     @if $type ==desktop {
       @media only screen and (min-width: #{$large}) {
         @content;
@@ -44,8 +47,6 @@ $Extralarge: 1440px;
     }
   }
 }
-
-
 
 // @mixin shared-mobile-tablet-principales {
 //   .container-cards {
@@ -209,10 +210,7 @@ $Extralarge: 1440px;
   }
 }
 
-
 @mixin shared-mobile-table {
-
-
   .btn {
     justify-content: center !important;
   }
@@ -231,19 +229,6 @@ $Extralarge: 1440px;
     display: flex;
     flex-direction: column;
     color: var(--c-black);
-  }
-
-  .mode-responsive {
-    display: block;
-    width: 80px;
-  }
-
-  html[data-theme='dark'] .mode-responsive {
-    display: none;
-  }
-
-  .mode-dark {
-    display: none;
   }
 
   .logo img {
@@ -267,7 +252,7 @@ $Extralarge: 1440px;
     top: 100%;
     left: 0;
     width: 100%;
-    background: var(--c-white);
+    background: rgba(280, 280, 280, 1.0);
     display: none;
     flex-direction: column;
     align-items: center;
@@ -311,7 +296,8 @@ $Extralarge: 1440px;
   .mobile-actions {
     flex-direction: column;
     row-gap: 13px;
-    width: 94%;
+    width: 100%;
+    padding: 12px 0px;
   }
 
   .site-header,
@@ -329,8 +315,6 @@ $Extralarge: 1440px;
     width: 98%;
   }
 }
-
-
 
 /**
  * Estilo de texto con gradiente animado base evitar
