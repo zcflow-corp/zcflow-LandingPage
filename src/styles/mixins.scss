@@ -8,14 +8,15 @@ $Extralarge: 1440px;
 
 @mixin media($types...) {
   @each $type in $types {
+
     //only mobile or mobile down
-    @if $type == mobile-small {
+    @if $type ==mobile-small {
       @media only screen and (max-width: #{$small}) {
         @content;
       }
     }
 
-    @if $type == mobile {
+    @if $type ==mobile {
       @media only screen and (max-width: #{$medium - 1}) {
         @content;
       }
@@ -298,6 +299,7 @@ $Extralarge: 1440px;
     width: 100%;
     padding: 12px 0px;
   }
+
   .site-header,
   .container {
     width: 100%;

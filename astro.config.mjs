@@ -6,6 +6,7 @@ import tailwind from '@astrojs/tailwind'
 const isProd = process.env.NODE_ENV === 'production'
 
 export default defineConfig({
+  output: 'static',
   site: isProd ? 'https://zcflow-corp.github.io' : 'http://localhost:4321',
   base: isProd ? '/zcflow-LandingPage/' : '/',
 
@@ -21,7 +22,8 @@ export default defineConfig({
     defaultLocale: 'es',
     locales: ['es', 'en'],
     routing: {
-      prefixDefaultLocale: true,
+      prefixDefaultLocale: false,
+      fallbackType: 'rewrite',
     },
   },
 

@@ -80,7 +80,7 @@ const [logo_header_darks, logo_header_light] = await Promise.all([
 
       <div class="mobile-actions">
         <div style="display: flex;column-gap: 1rem;">
-          <Lang client:load transition:persist/>
+          <Lang client:load transition:persist />
           <ThemeSwitch client:load />
         </div>
         <a class="btn tertiary" href={path('contacto')}>
@@ -219,14 +219,13 @@ const [logo_header_darks, logo_header_light] = await Promise.all([
       :global(html[data-theme='dark']) .mode-light {
         display: block;
       }
-          html[data-theme='dark'] .mobile-actions {
-    border-top: 1px solid #3a3a3d;
-  }
-  
+      html[data-theme='dark'] .mobile-actions {
+        border-top: 1px solid #3a3a3d;
+      }
 
-  html[data-theme='light'] .mobile-actions {
-    border-top: 1px solid rgba(0, 0, 0, 0.15)!important;
-  }
+      html[data-theme='light'] .mobile-actions {
+        border-top: 1px solid rgba(0, 0, 0, 0.15) !important;
+      }
     }
 
     @include media(tablet) {
