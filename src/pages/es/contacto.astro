@@ -15,8 +15,6 @@ const dictionaries = import.meta.glob('@/i18n/*.json', { eager: true })
 const messages = dictionaries[`/src/i18n/${locale}.json`]?.default ?? {}
 
 const t = (key) => messages[key] ?? key
-
-
 ---
 
 <BaseLayout title="Contacto" />

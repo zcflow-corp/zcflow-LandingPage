@@ -1,8 +1,7 @@
 ---
 import { getImageMetadata } from '@/utils/imageHelper'
 import { localeHelper } from '../i18n/index'
-const { locale, t } = localeHelper(Astro)
-const contactPath = `/${locale == 'en' ? 'en' : ''}contacto`.replace(/\/+/g, '/')
+const { locale, t, path } = localeHelper(Astro)
 
 const banner = await getImageMetadata('Banner.webp')
 ---
@@ -11,7 +10,11 @@ const banner = await getImageMetadata('Banner.webp')
   <div class="container">
     <div class="about-text">
       <h2 id="about-title" class="about-title-contacto">{t('El flujo de caja es el rey')}</h2>
-      <a href={contactPath} class="btn emptyghost" aria-label={t('Ir a la sección de contacto')}>
+      <a
+        href={path('contacto')}
+        class="btn emptyghost"
+        aria-label={t('Ir a la sección de contacto')}
+      >
         {t('Solicita una demo')}
       </a>
     </div>

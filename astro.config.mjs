@@ -2,14 +2,14 @@ import { defineConfig } from 'astro/config'
 import { fileURLToPath } from 'node:url'
 import react from '@astrojs/react'
 import tailwind from '@astrojs/tailwind'
-import node from '@astrojs/node' // 👈 ESTA LÍNEA FALTABA
 
 const isProd = process.env.NODE_ENV === 'production'
 
 export default defineConfig({
+  output: 'static',
   site: isProd ? 'https://zcflow-corp.github.io' : 'http://localhost:4321',
 
-  base: isProd ? '/zcflow-LandingPage/es/' : '/',
+  base: isProd ? '/zcflow-LandingPage/' : '/',
 
   server: {
     allowedHosts: ['porky-nonpossessively-kimberlie.ngrok-free.dev', 'localhost'],
@@ -23,7 +23,7 @@ export default defineConfig({
     defaultLocale: 'es',
     locales: ['es', 'en'],
     routing: {
-      prefixDefaultLocale: true,
+      prefixDefaultLocale: false,
       fallbackType: 'rewrite',
     },
   },
