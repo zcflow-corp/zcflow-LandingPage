@@ -58,8 +58,10 @@ const { locale, t } = localeHelper(Astro)
 </section>
 <style lang="scss">
   .chatBot {
+    background: #0858fd;
+    padding: 0rem;
     @include media(mobile) {
-      height: 108vh !important;
+      height: 125vh !important;
     }
 
     .container {
@@ -68,7 +70,7 @@ const { locale, t } = localeHelper(Astro)
       background: #0858fd;
 
       @include media(mobile) {
-        height: 100vh !important;
+        height: auto !important;
       }
 
       @include media(tablet) {

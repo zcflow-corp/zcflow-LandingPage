@@ -7,7 +7,9 @@ const isProd = process.env.NODE_ENV === 'production'
 
 export default defineConfig({
   site: isProd ? 'https://zcflow-corp.github.io' : 'http://localhost:4321',
+
   base: isProd ? '/zcflow-LandingPage/' : '/',
+
   server: {
     allowedHosts: ['porky-nonpossessively-kimberlie.ngrok-free.dev', 'localhost'],
   },

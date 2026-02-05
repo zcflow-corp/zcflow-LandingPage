@@ -185,11 +185,17 @@ let active = 0
 
           .tab-title {
             color: var(--c-white);
+            @include media(mobile) {
+              color: var(--c-line);
+            }
           }
 
           .activeTab {
             span {
-              color: var(--d7) !important;
+              color: var(--d7);
+              @include media(mobile) {
+                color: var(--c-line);
+              }
             }
           }
         }
@@ -231,11 +237,19 @@ let active = 0
       background-color: transparent;
       span {
         color: var(--c-text-muted) !important;
+        @include media(mobile) {
+          color: var(--c-white) !important;
+        }
       }
     }
   }
 
   html[data-theme='dark'] .activeTab {
+    .tab-title {
+      @include media(mobile) {
+        color: var(--c-white) !important;
+      }
+    }
     span {
       color: var(--c-white) !important;
     }

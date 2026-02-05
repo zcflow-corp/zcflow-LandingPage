@@ -2,9 +2,9 @@
 import { getImageMetadata } from '@/utils/imageHelper'
 import { localeHelper } from '../i18n/index'
 const { locale, t } = localeHelper(Astro)
-const contactPath = `/${locale}/contacto`.replace(/\/+/g, '/')
+const contactPath = `/${locale == 'en' ? 'en' : ''}contacto`.replace(/\/+/g, '/')
 
-const banner = await getImageMetadata('Banner.webp');
+const banner = await getImageMetadata('Banner.webp')
 ---
 
 <section id="about" class="section about-banner" aria-labelledby="about-title">
