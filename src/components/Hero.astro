@@ -322,7 +322,19 @@ const textos = [
       transform: rotate(59deg);
       background-position: top center;
       bottom: -10%;
-      right: -43%;
+      left: 30%;
+      transform: rotate(-60deg);
+      opacity: 0.4;
+
+      @include media(mobile) {
+        // left: 2%;
+        // transform: rotate(-90deg);
+        background-position: top center;
+        bottom: -22%;
+        left: -315%;
+        transform: rotate(-55deg);
+        background-size: contain;
+      }
     }
   }
 </style>
