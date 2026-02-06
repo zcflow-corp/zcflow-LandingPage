@@ -6,8 +6,8 @@ import { Image } from 'astro:assets'
 // const { t: _t } = Astro.props
 // const t = typeof _t === 'function' ? _t : (k: unknown) => k
 const base = import.meta.env.BASE_URL
-const { t, path } = localeHelper(Astro)
-
+const { t, path, locale } = localeHelper(Astro)
+const terminosPath = path('/terminos');
 const [logoLight, win_leader, win_milestone] = await Promise.all([
   getImageMetadata('logo_header_light.webp'),
   getImageMetadata('win_leader.webp'),
@@ -117,9 +117,9 @@ const [logoLight, win_leader, win_milestone] = await Promise.all([
             style="flex-wrap: wrap; line-height: 2; background:var(--c-quinary)!important;flex-direction: row; gap:0rem;justify-content: space-between;"
             aria-label="Legal"
           >
-            <a href="#terminos" target="_blank" rel="noopener noreferrer"
-              >{t('Términos y Condiciones')}</a
-            >
+            <a href={path('/terminos')} target="_blank" rel="noopener noreferrer"
+              >{t('Términos y Condiciones')}</a>
+            
             <a href="#privacidad" target="_blank" rel="noopener noreferrer"
               >{t('Política de privacidad')}</a
             >
