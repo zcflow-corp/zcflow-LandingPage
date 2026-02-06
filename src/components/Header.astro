@@ -16,7 +16,7 @@ const [logo_header_darks, logo_header_light] = await Promise.all([
 
 <header class="site-header" itemscope itemtype="https://schema.org/Organization" transition:persist>
   <div class="container">
-    <a href=`${base}` aria-label="Inicio - ZCFlow">
+    <a href={`${path('')}#hero`} aria-label="Inicio - ZCFlow">
       {
         logo_header_darks && (
           <Image
