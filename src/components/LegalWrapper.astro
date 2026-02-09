@@ -13,22 +13,15 @@ const { t } = localeHelper(Astro)
   </main>
   <Footer t={t} />
 </BaseLayout>
-       <style is:global>
+<style is:global>
   .legal-page {
-    /* IMPORTANTE: Necesitas un ancho máximo para que el margin auto funcione */
-    max-width: 1150px; 
-    
-    /* Centrado horizontal */
+    max-width: 1150px;
     margin-left: auto;
     margin-right: auto;
-    
-    /* Espaciado opcional para que no respire pegado al header/footer */
-    padding: 4rem 1.5rem; 
+    padding: 4rem 1.5rem;
     color: #1a1a1a;
     line-height: 1.6;
-    /* Opcional: para que se vea más limpio */
-    width: 100%; 
-
+    width: 100%;
   }
 
   .legal-header h1 {
@@ -38,7 +31,7 @@ const { t } = localeHelper(Astro)
     margin-bottom: 0.5rem;
     letter-spacing: -0.02em;
   }
-.last-updated {
+  .last-updated {
     color: #666;
     font-size: 0.95rem;
     margin-bottom: 3rem;
@@ -54,7 +47,7 @@ const { t } = localeHelper(Astro)
   .legal-content p {
     margin-bottom: 1.2rem;
     font-size: 1.05rem;
-    text-align: justify; /* O left, según prefieras */
+    text-align: justify;
     hyphens: auto;
   }
   .legal-content ul {
@@ -67,30 +60,27 @@ const { t } = localeHelper(Astro)
     list-style-type: disc;
   }
 
-  /* Resaltados (Negritas) */
   .legal-content strong {
     color: #000;
     font-weight: 600;
   }
 
-  /* El cuadro de "Aceptación" (Blockquote) */
   blockquote {
     background-color: #f9f9f9;
-    border-left: 4px solid #000; /* O el color principal de Zcflow */
+    border-left: 4px solid #000;
     padding: 1.5rem;
     margin: 2rem 0;
     font-style: italic;
     border-radius: 0 8px 8px 0;
   }
 
-  /* Links dentro del texto */
   .legal-content a {
-    color: #0066ff; /* Cambia al color de tu marca */
+    color: #0066ff;
     text-decoration: underline;
     text-underline-offset: 3px;
   }
   .legal-header {
-    text-align: center; /* Centra el título y la fecha */
+    text-align: center;
     margin-bottom: 3rem;
   }
 </style>
