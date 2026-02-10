@@ -165,7 +165,7 @@ export default function ContactForm() {
         </CardHeader>
 
         <CardContent>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
             {/* STEP 1 */}
             {step === 1 && (
               <>

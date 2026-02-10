@@ -1,0 +1,146 @@
+---
+import LegalWrapper from '@/components/LegalWrapper.astro'
+import { localeHelper } from '@/i18n'
+const { t } = localeHelper(Astro)
+const fechaHoy = new Date().toLocaleDateString('es-ES', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+})
+
+const fechaISO = new Date().toISOString()
+---
+
+<LegalWrapper t={t}>
+<article class="legal-page">
+  <header class="legal-header">
+    <h1>{t('TÉRMINOS Y CONDICIONES DE USO')}</h1>
+    <p class="last-updated">
+      {t('Última actualización:')} <time datetime={fechaISO}>{fechaHoy}</time>
+    </p>
+  </header>
+
+  <section class="legal-content">
+    <section id="identificacion">
+      <h2>{t('1. Identificación del titular del sitio web')}</h2>
+      <p>
+        {t('El presente documento regula el acceso y uso del sitio web')}
+        <a href="https://www.zcflow.com">www.zcflow.com</a>
+        {t('(en adelante, el “Sitio”), de titularidad de')}
+        <strong>{t('SEIDOR CONSULTING PERU S.A.C.')}</strong>,
+        {t('identificada con RUC 20517426726, con domicilio en la ciudad de Lima, República del Perú, y correo electrónico de contacto')}
+        <a href="mailto:info@zcflow.com">info@zcflow.com</a>
+        {t('(en adelante, la “Empresa”).')}
+      </p>
+      <p>
+        {t('El Sitio puede ser accedido por usuarios ubicados en distintos países, no obstante, la Empresa tiene su sede en el Perú y opera conforme a la legislación peruana.')}
+      </p>
+    </section>
+
+    <section id="objeto">
+      <h2>{t('2. Objeto del sitio web')}</h2>
+      <p>
+        {t('El Sitio está dirigido a personas naturales y personas jurídicas, así como a sus representantes, colaboradores y usuarios debidamente autorizados, quienes declaran contar con la capacidad legal necesaria para aceptar los presentes Términos y Condiciones y utilizar el Sitio conforme a su finalidad y a la normativa vigente.')}
+      </p>
+      <blockquote>
+        {t('Al acceder, navegar, registrarse o hacer clic en “Aceptar” en el Sitio, el usuario declara haber leído, comprendido y aceptado de forma expresa los presentes Términos y Condiciones, así como la Política de Privacidad de la Empresa. En caso de no estar de acuerdo con alguno de los términos aquí establecidos, el usuario deberá abstenerse de utilizar el Sitio, caso contrario y de acceder no podrá desconocer estos términos y condiciones, los cuales los acepta a su entera conformidad.')}
+      </blockquote>
+      <p>
+        {t('La información publicada en el Sitio tiene fines informativos y referenciales, y no constituye asesoría legal, financiera, contable ni de ningún otro tipo, ni una recomendación personalizada, ni una oferta vinculante, salvo que se indique expresamente lo contrario.')}
+      </p>
+      <p>
+        {t('La Empresa se reserva el derecho unilateral de modificar, suspender o eliminar, total o parcialmente, el contenido, funcionalidades o disponibilidad del Sitio, en cualquier momento y sin previo aviso.')}
+      </p>
+    </section>
+
+    <section id="condiciones">
+      <h2>{t('3. Condiciones de uso')}</h2>
+      <p>
+        {t('El usuario se compromete a utilizar el Sitio de forma responsable, diligente y conforme a la legislación vigente, la buena fe, la moral y el orden público.')}
+      </p>
+      <p>{t('En particular, el usuario se abstendrá de:')}</p>
+      <ul>
+        <li>{t('Utilizar el Sitio con fines ilícitos o no autorizados.')}</li>
+        <li>{t('Utilizar el Sitio de forma que cause o pueda causar daño, interrupción, sobrecarga o perjuicio a la plataforma o a la Empresa.')}</li>
+        <li>{t('Introducir, difundir o ejecutar virus informáticos, malware o cualquier otro sistema que pueda causar daños.')}</li>
+        <li>{t('Intentar acceder sin autorización a sistemas, servidores, bases de datos o información de la Empresa.')}</li>
+      </ul>
+      <p>
+        {t('La Empresa se reserva el derecho de restringir, suspender o bloquear el acceso al Sitio a aquellos usuarios que incumplan estas condiciones, ello al solo criterio de la Empresa y sin que sea necesario probanza alguna de tal o cual hecho realizado por el usuario.')}
+      </p>
+    </section>
+
+    <section id="propiedad-intelectual">
+      <h2>{t('4. Propiedad intelectual')}</h2>
+      <p>
+        {t('Todos los contenidos del Sitio, incluyendo textos, imágenes, gráficos, logotipos, marcas, nombres comerciales, diseños, software, códigos fuente y demás elementos, son propiedad de la Empresa o de terceros que han autorizado su uso, y se encuentran protegidos por la normativa vigente en materia de propiedad intelectual.')}
+      </p>
+      <p>
+        {t('Queda prohibida la reproducción, distribución, comunicación pública, transformación o cualquier otro uso de los contenidos del Sitio sin la autorización previa y expresa de la Empresa.')}
+      </p>
+    </section>
+
+    <section id="responsabilidad">
+      <h2>{t('5. Responsabilidad')}</h2>
+      <p>
+        {t('La Empresa no garantiza que el Sitio esté libre de errores, interrupciones o fallas técnicas, ni que el acceso sea continuo o ininterrumpido.')}
+      </p>
+      <p>
+        {t('En ningún caso la Empresa será responsable por daños directos o indirectos, pérdidas económicas, pérdida de datos, lucro cesante u otros perjuicios derivados del uso o la imposibilidad de uso del Sitio, salvo en los casos en que la ley establezca expresamente una responsabilidad obligatoria.')}
+      </p>
+      <p>
+        {t('El Usuario es el único responsable del uso que realice del Sitio, así como de la información que registre, procese o administre a través de este.')}
+      </p>
+      <p>
+        {t('La Empresa no será responsable por fallas, interrupciones, errores o daños que puedan derivarse del uso de servicios, plataformas o integraciones de terceros a los que el usuario acceda a través del Sitio.')}
+      </p>
+    </section>
+
+    <section id="enlaces-terceros">
+      <h2>{t('6. Enlaces a sitios de terceros')}</h2>
+      <p>
+        {t('El Sitio puede contener enlaces, integraciones o referencias a plataformas, servicios o sitios web de terceros que no son operados ni controlados por la Empresa.')}
+      </p>
+      <p>
+        {t('La Empresa no asume responsabilidad alguna por los contenidos, servicios, disponibilidad, funcionamiento, políticas de privacidad o prácticas de dichos terceros, siendo responsabilidad del usuario revisar y aceptar los términos aplicables de cada uno de ellos.')}
+      </p>
+    </section>
+
+    <section id="proteccion-datos">
+      <h2>{t('7. Protección de datos personales y derechos ARCO')}</h2>
+      <p>
+        {t('El tratamiento de los datos personales recopilados a través del Sitio se realiza de conformidad con la Política de Privacidad de la Empresa y con la')}
+        <strong>{t('Ley Peruana N.º 29733 – Ley de Protección de Datos Personales')}</strong>,
+        {t('su reglamento y demás normas aplicables.')}
+      </p>
+      <p>
+        {t('El titular de los datos personales podrá ejercer en cualquier momento sus derechos de Acceso, Rectificación, Cancelación y Oposición (derechos ARCO), conforme a lo establecido en la normativa vigente.')}
+      </p>
+      <p>
+        {t('El detalle de las finalidades del tratamiento, medidas de seguridad implementadas y el procedimiento para ejercer los derechos ARCO se encuentra descrito en la Política de Privacidad disponible en el Sitio. Cualquier solicitud relacionada con datos personales podrá ser dirigida al correo electrónico info@zcflow.com.')}
+      </p>
+    </section>
+
+    <section id="modificaciones">
+      <h2>{t('8. Modificaciones de los términos y condiciones')}</h2>
+      <p>
+        {t('La Empresa se reserva el derecho de modificar los presentes Términos y Condiciones en cualquier momento, como consecuencia de cambios normativos, técnicos, operativos o comerciales.')}
+      </p>
+      <p>
+        {t('Las modificaciones entrarán en vigencia desde su publicación en el Sitio.')}
+      </p>
+    </section>
+
+    <section id="jurisdiccion">
+      <h2>{t('9. Legislación aplicable y jurisdicción')}</h2>
+      <p>
+        {t('Los presentes Términos y Condiciones se rigen por las leyes de la')}
+        <strong>{t('República del Perú')}</strong>.
+      </p>
+      <p>
+        {t('Las partes procurarán resolver cualquier controversia mediante trato directo. De no llegarse a un acuerdo, cualquier disputa será sometida a la jurisdicción de los jueces y tribunales competentes de Lima, Perú.')}
+      </p>
+    </section>
+  </section>
+</article>
+</LegalWrapper>
