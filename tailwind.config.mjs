@@ -25,6 +25,7 @@ export default {
       colors: {
         primary: 'var(--c-primary)',
         secondary: 'var(--c-secondary)',
+        cuaternary: 'var(--c-quaternary)',
         text: 'var(--c-text)',
         muted: 'var(--c-text-muted)',
         line: 'var(--c-line)',

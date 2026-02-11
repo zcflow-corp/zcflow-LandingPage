@@ -91,3 +91,148 @@ html[data-theme='dark'] .section-contact {
     top: 20%;
   }
 }
+
+
+.section-reclamo {
+  background: var(--c-bg-variant);
+}
+
+.claim-container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+
+  @include media(desktop) {
+
+    padding: 2rem 1rem;
+    grid-template-columns: 1fr 1fr;
+
+    align-content: flex-start;
+    align-items: flex-start;
+  }
+}
+
+/* ==============================
+   COLUMNA IZQUIERDA
+================================ */
+.claim-left {
+  background-color: var(--c-bg-variant);
+  border-radius: var(--radius);
+
+  padding: 2rem 1.5rem;
+
+  @include media(desktop) {
+    padding: 2.5rem;
+  }
+}
+
+/* ==============================
+   INFO GENERAL
+================================ */
+.claim-info {
+  font-weight: 600;
+
+
+  p {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--c-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  strong {
+    font-weight: 600;
+    color: var(--c-text);
+  }
+
+  a {
+    color: var(--c-primary-accessible);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--c-primary-accessible-hover);
+      text-decoration: underline;
+    }
+  }
+
+
+  .claim-entity {
+    margin: 2rem 0;
+
+
+  }
+
+
+  .claim-deadline {
+    background-color: #EDF0FF;
+
+    border-left: 4px solid var(--c-primary);
+    padding: 1rem 1.25rem;
+    border-radius: calc(var(--radius) / 2);
+    margin-bottom: 1.75rem;
+
+    p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--c-text);
+    }
+  }
+
+
+  .claim-legal {
+    h3 {
+      font-weight: 600;
+      margin: 1.25rem 0 0.5rem;
+      color: var(--c-secondary);
+    }
+
+    p {
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+      color: var(--c-text-muted);
+    }
+  }
+
+  /* ==============================
+     FIRMA / FECHA
+  ================================ */
+  .claim-sign {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--c-text);
+  }
+
+  .claim-right {
+    background-color: var(--c-panel);
+    border-radius: var(--radius);
+
+    padding: 2rem 1.5rem;
+    box-shadow: var(--shadow);
+
+    @include media(desktop) {
+      padding: 2.5rem;
+    }
+
+
+  }
+}
+
+
+.claim-form {
+
+  .form-claim {
+
+    min-height: 100vh;
+
+
+    .btn {
+      border-radius: 10px;
+    }
+
+  }
+
+
+}

@@ -252,5 +252,46 @@
   "Converse con la tesorería del futuro.": "Talk to the treasury of the future.",
   "Inicia una conversación con BOTO, tu nuevo asesor financiero digital. Disponible 24/7.": "Start a conversation with BOTO, your new digital financial advisor. Available 24/7.",
   "Descubre ideas, recomendaciones y análisis en segundos.": "Discover insights, recommendations, and analysis in seconds.",
-  "Hazle preguntas sobre liquidez, proyecciones, riesgos o estrategias financieras, y obtén respuestas claras y accionables.": "Ask questions about liquidity, forecasts, risks, or financial strategies and get clear, actionable answers."
+  "Hazle preguntas sobre liquidez, proyecciones, riesgos o estrategias financieras, y obtén respuestas claras y accionables.": "Ask questions about liquidity, forecasts, risks, or financial strategies and get clear, actionable answers.",
+  "Libro de Reclamaciones": "Complaints Book",
+  "Completa el formulario para registrar tu reclamo o queja": "Complete the form to register your claim or complaint",
+
+  "Datos personales": "Personal information",
+  "Apellidos": "Last name",
+  "Nombres": "First name",
+  "Campo obligatorio": "Required field",
+
+  "Tipo de documento": "Document type",
+  "Seleccionar": "Select",
+  "DNI": "National ID",
+  "Pasaporte": "Passport",
+  "N° Documento": "Document number",
+
+  "Medios de contacto": "Contact information",
+
+  "Correo electrónico": "Email address",
+
+  "Debes aceptar la política de privacidad": "You must accept the privacy policy",
+  "Acepto la": "I accept the",
+  "Política de Privacidad": "Privacy Policy",
+
+  "Detalles de la solicitud": "Request details",
+
+  "Reclamo": "Claim",
+  "Disconformidad relacionada a un producto o servicio.": "Dissatisfaction related to a product or service.",
+
+  "Queja": "Complaint",
+  "Disconformidad relacionada a la atención recibida.": "Dissatisfaction related to the service received.",
+
+  "Fecha de ocurrencia": "Date of occurrence",
+  "Servicio reclamado": "Claimed service",
+  "Detalle del reclamo": "Claim details",
+  "Pedido del reclamo": "Requested resolution",
+
+  "Adjuntar documentación": "Attach documentation",
+  "Adjuntar archivos": "Attach files",
+
+  "También puedes registrar tu reclamo escribiendo a:": "You can also register your claim by writing to:",
+
+  "Registrar reclamo": "Submit claim"
 }
