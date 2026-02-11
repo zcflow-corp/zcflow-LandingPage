@@ -296,7 +296,7 @@ export default function FormClaim() {
                           type="radio"
                           checked={field.value === 'reclamo'}
                           onChange={() => field.onChange('reclamo')}
-                          className="mt-1"
+                          className="mt-1 accent-blue-600"
                         />
                         <div>
                           <p className="font-medium">{t('Reclamo')}</p>
@@ -311,7 +311,7 @@ export default function FormClaim() {
                           type="radio"
                           checked={field.value === 'queja'}
                           onChange={() => field.onChange('queja')}
-                          className="mt-1"
+                          className="mt-1 accent-blue-600"
                         />
                         <div>
                           <p className="font-medium">{t('Queja')}</p>
@@ -351,11 +351,24 @@ export default function FormClaim() {
             {/* STEP 3 */}
             {step === 3 && (
               <>
-                <h3 className="font-medium">{t('Adjuntar documentación')}</h3>
+                <h3 className="font-medium">
+                  {t('Adjuntar documentación')} {t('(opcional)')}{' '}
+                </h3>
 
-                <label className="flex items-center gap-2 cursor-pointer text-primary">
-                  <Upload size={18} />
-                  <span>{t('Adjuntar archivos')}</span>
+                <label
+                  className="relative flex flex-col items-center justify-center w-full p-8 border-2 border-dashed rounded-lg cursor-pointer transition
+  border-gray-300 bg-gray-50 hover:bg-gray-100 hover:border-blue-500"
+                >
+                  {/* Icono */}
+                  <Upload className="w-8 h-8 text-gray-400 mb-3" />
+
+                  {/* Texto principal */}
+                  <p className="text-sm text-gray-500 font-medium">
+                    {t('Adjunta tu archivo aquí')}
+                  </p>
+
+                  {/* Texto secundario */}
+                  <p className="text-xs text-gray-400 mt-1">JPG, PNG, PDF, DOC, DOCX (Máx. 10MB)</p>
 
                   <input
                     type="file"
@@ -388,7 +401,7 @@ export default function FormClaim() {
                         }
 
                         if (file.size > maxSize) {
-                          toast.error(`El archivo ${file.name} supera los 20MB`)
+                          toast.error(`El archivo ${file.name} supera los 10MB`)
                           return false
                         }
 
@@ -447,15 +460,6 @@ export default function FormClaim() {
                     ))}
                   </ul>
                 )}
-
-                <div className="mt-4 rounded-md bg-muted/40 p-3 text-xs text-muted flex gap-2 bg-cuaternary">
-                  <span>ℹ️</span>
-                  <p>
-                    {t(
-                      'Los archivos adjuntos deben pesar 10 MB máx. y estar en formato JPG, JPEG, PNG, PDF, DOC o DOCX. Puedes subir hasta 5 archivos como máximo.'
-                    )}
-                  </p>
-                </div>
 
                 <p className="text-xs text-muted pt-3">
                   {t('También puedes registrar tu reclamo escribiendo a:')}
