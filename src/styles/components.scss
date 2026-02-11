@@ -99,10 +99,9 @@
     width: 100%;
     height: 100%;
     border-radius: var(--radius);
-    // box-shadow: var(--shadow);
-    overflow: hidden;
+    /*se elimina -> se oculta en modo safari */
+    // overflow: hidden;
     padding: 0;
-    /* marco limpio y consistente */
   }
 
   &__img {
