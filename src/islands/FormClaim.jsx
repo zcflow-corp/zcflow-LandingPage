@@ -42,7 +42,7 @@ export default function FormClaim() {
   const UPLOAD_PRESET = 'zcflow-reclamos'
 
   const MAX_FILES = 5
-  const MAX_SIZE_BYTES = 20 * 1024 * 1024
+  const MAX_SIZE_BYTES = 10 * 1024 * 1024
 
   const ALLOWED_TYPES = [
     'image/jpeg',
@@ -83,29 +83,50 @@ export default function FormClaim() {
     setFiles((prev) => [...prev, ...validFiles])
   }
 
+  // const uploadToCloudinary = async (file) => {
+  //   const formData = new FormData()
+  //   formData.append('file', file)
+  //   formData.append('upload_preset', UPLOAD_PRESET)
+  //   formData.append('folder', 'reclamos')
+
+  //   // Detectar si es imagen
+  //   const isImage = file.type.startsWith('image/')
+
+  //   const resourceType = isImage ? 'image' : 'raw'
+
+  //   const response = await fetch(
+  //     `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resourceType}/upload`,
+  //     {
+  //       method: 'POST',
+  //       body: formData,
+  //     }
+  //   )
+
+  //   const data = await response.json()
+
+  //   if (!response.ok) {
+  //     console.error('Cloudinary error:', data)
+  //     throw new Error('Cloudinary upload failed')
+  //   }
+
+  //   return data.secure_url
+  // }
+
   const uploadToCloudinary = async (file) => {
     const formData = new FormData()
     formData.append('file', file)
     formData.append('upload_preset', UPLOAD_PRESET)
     formData.append('folder', 'reclamos')
 
-    // Detectar si es imagen
-    const isImage = file.type.startsWith('image/')
-
-    const resourceType = isImage ? 'image' : 'raw'
-
-    const response = await fetch(
-      `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resourceType}/upload`,
-      {
-        method: 'POST',
-        body: formData,
-      }
-    )
+    const response = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`, {
+      method: 'POST',
+      body: formData,
+    })
 
     const data = await response.json()
 
     if (!response.ok) {
-      console.error('Cloudinary error:', data)
+      console.error(data)
       throw new Error('Cloudinary upload failed')
     }
 
@@ -155,7 +176,18 @@ export default function FormClaim() {
         {
           ...data,
           type: data.type === 'reclamo' ? 'Reclamo' : 'Queja',
-          attachments: uploadedLinks.join('\n'),
+          attachments:
+            uploadedLinks.length > 0
+              ? `
+      <ul>
+        ${uploadedLinks
+          .map(
+            (link, i) => `<li><a href="${link}" target="_blank">Descargar adjunto ${i + 1}</a></li>`
+          )
+          .join('')}
+      </ul>
+    `
+              : '<p>No se adjuntaron archivos.</p>',
         },
         PUBLIC_KEY
       )
@@ -341,7 +373,7 @@ export default function FormClaim() {
                         'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                       ]
 
-                      const maxSize = 20 * 1024 * 1024
+                      const maxSize = 10 * 1024 * 1024
                       const maxFiles = 5
 
                       if (files.length + selectedFiles.length > maxFiles) {
@@ -420,7 +452,7 @@ export default function FormClaim() {
                   <span>ℹ️</span>
                   <p>
                     {t(
-                      'Los archivos adjuntos deben pesar 20 MB máx. y estar en formato JPG, JPEG, PNG, PDF, DOC o DOCX. Puedes subir hasta 5 archivos como máximo.'
+                      'Los archivos adjuntos deben pesar 10 MB máx. y estar en formato JPG, JPEG, PNG, PDF, DOC o DOCX. Puedes subir hasta 5 archivos como máximo.'
                     )}
                   </p>
                 </div>
