@@ -4,15 +4,13 @@ import { useEffect, useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import es from '@/i18n/es.json'
 import en from '@/i18n/en.json'
-import emailjs from '@emailjs/browser' // ✅ EMAILJS
+import emailjs from '@emailjs/browser'
 import { toast } from 'sonner'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Checkbox } from '@/components/ui/checkbox'
 import { Upload, X } from 'lucide-react'
-// import FileUploader from './FileUploader'
 
 function getLocaleFromDoc() {
   if (typeof document === 'undefined') return 'es'
@@ -26,8 +24,8 @@ function createTranslationFunction(messages) {
 export default function FormClaim() {
   const [step, setStep] = useState(1)
   const [files, setFiles] = useState([])
+  const [loading, setLoading] = useState(false)
 
-  // ✅ i18n
   const locale = getLocaleFromDoc()
   const [t, setT] = useState(() => createTranslationFunction(es))
 
@@ -39,27 +37,93 @@ export default function FormClaim() {
   const SERVICE_ID = 'service_fg8dkbj'
   const TEMPLATE_ID = 'template_aeexhcd'
   const PUBLIC_KEY = 'OxhdmLgo61idmBNlb'
-  // helper para adjuntos
-  const fileToBase64 = (file) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader()
-      reader.onload = () => resolve(reader.result)
-      reader.onerror = reject
-      reader.readAsDataURL(file)
-    })
+
+  const CLOUD_NAME = 'drbbpfygo'
+  const UPLOAD_PRESET = 'zcflow-reclamos'
+
+  const MAX_FILES = 5
+  const MAX_SIZE_BYTES = 20 * 1024 * 1024
+
+  const ALLOWED_TYPES = [
+    'image/jpeg',
+    'image/jpg',
+    'image/png',
+    'application/pdf',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  ]
+
+  const handleFileChange = (e) => {
+    const selectedFiles = Array.from(e.target.files)
+
+    if (files.length + selectedFiles.length > MAX_FILES) {
+      toast.error('Puedes subir hasta 5 archivos como máximo.')
+      return
+    }
+
+    const validFiles = []
+
+    for (let file of selectedFiles) {
+      if (file.size > MAX_SIZE_BYTES) {
+        toast.error(`El archivo "${file.name}" supera los 20MB.`)
+        continue
+      }
+
+      if (!ALLOWED_TYPES.includes(file.type)) {
+        toast.error(`Formato no permitido en "${file.name}".`)
+        continue
+      }
+
+      validFiles.push({
+        file,
+        preview: file.type.startsWith('image/') ? URL.createObjectURL(file) : null,
+      })
+    }
+
+    setFiles((prev) => [...prev, ...validFiles])
+  }
+
+  const uploadToCloudinary = async (file) => {
+    const formData = new FormData()
+    formData.append('file', file)
+    formData.append('upload_preset', UPLOAD_PRESET)
+    formData.append('folder', 'reclamos')
+
+    // Detectar si es imagen
+    const isImage = file.type.startsWith('image/')
+
+    const resourceType = isImage ? 'image' : 'raw'
+
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resourceType}/upload`,
+      {
+        method: 'POST',
+        body: formData,
+      }
+    )
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      console.error('Cloudinary error:', data)
+      throw new Error('Cloudinary upload failed')
+    }
+
+    return data.secure_url
+  }
 
   const {
     register,
-    handleSubmit,
+    handleSubmit: hookFormSubmit,
     control,
     trigger,
     reset,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm({ mode: 'onTouched' })
 
   const next = async () => {
     const fieldsByStep = {
-      1: ['lastname', 'name', 'docType', 'docNumber', 'phone', 'email', 'address', 'privacy'],
+      1: ['lastname', 'name', 'docType', 'docNumber', 'phone', 'email', 'address'],
       2: ['type', 'date', 'service', 'detail', 'request'],
     }
 
@@ -71,12 +135,19 @@ export default function FormClaim() {
 
   const onSubmit = async (data) => {
     try {
-      const attachments = await Promise.all(
-        files.map(async (item) => ({
-          name: item.file.name,
-          content: await fileToBase64(item.file),
-        }))
-      )
+      setLoading(true)
+
+      let uploadedLinks = []
+
+      if (files.length > 0) {
+        toast.loading(t('Subiendo archivos...'), { id: 'upload' })
+
+        uploadedLinks = await Promise.all(files.map((item) => uploadToCloudinary(item.file)))
+
+        toast.success(t('Archivos subidos correctamente'), { id: 'upload' })
+      }
+
+      toast.loading(t('Enviando reclamo...'), { id: 'send' })
 
       await emailjs.send(
         SERVICE_ID,
@@ -84,20 +155,23 @@ export default function FormClaim() {
         {
           ...data,
           type: data.type === 'reclamo' ? 'Reclamo' : 'Queja',
-          attachments: JSON.stringify(attachments),
+          attachments: uploadedLinks.join('\n'),
         },
         PUBLIC_KEY
       )
+
+      toast.success(t('Reclamo enviado correctamente'), { id: 'send' })
 
       files.forEach((item) => item.preview && URL.revokeObjectURL(item.preview))
 
       reset()
       setFiles([])
       setStep(1)
-      toast.success(t('Reclamo enviado correctamente'))
     } catch (error) {
-      console.error('EMAILJS ERROR', error)
+      console.error('ERROR', error)
       toast.error(t('No se pudo enviar el reclamo'))
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -105,7 +179,7 @@ export default function FormClaim() {
     <section className="form-claim py-0 bg-bg-variant">
       <Card className="max-w-xl mx-auto shadow-xl bg-white">
         <CardHeader className="space-y-2">
-          <CardTitle className="text-h3 ">{t('Libro de Reclamaciones')}</CardTitle>
+          <CardTitle className="text-h3">{t('Libro de Reclamaciones')}</CardTitle>
 
           <CardDescription>
             {t('Completa el formulario para registrar tu reclamo o queja')}
@@ -120,27 +194,19 @@ export default function FormClaim() {
         </CardHeader>
 
         <CardContent>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            {/* ================= STEP 1 ================= */}
+          <form onSubmit={hookFormSubmit(onSubmit)} className="space-y-6">
+            {/* STEP 1 */}
             {step === 1 && (
               <>
                 <h3 className="font-medium">{t('Datos personales')}</h3>
 
                 <div className="grid grid-cols-2 gap-4">
                   <Field label={t('Apellidos')} error={errors.lastname?.message}>
-                    <Input
-                      {...register('lastname', {
-                        required: t('Campo obligatorio'),
-                      })}
-                    />
+                    <Input {...register('lastname', { required: t('Campo obligatorio') })} />
                   </Field>
 
                   <Field label={t('Nombres')} error={errors.name?.message}>
-                    <Input
-                      {...register('name', {
-                        required: t('Campo obligatorio'),
-                      })}
-                    />
+                    <Input {...register('name', { required: t('Campo obligatorio') })} />
                   </Field>
                 </div>
 
@@ -148,9 +214,7 @@ export default function FormClaim() {
                   <Field label={t('Tipo de documento')}>
                     <select
                       className="w-full h-10 px-3 border rounded-md bg-transparent"
-                      {...register('docType', {
-                        required: t('Campo obligatorio'),
-                      })}
+                      {...register('docType', { required: t('Campo obligatorio') })}
                     >
                       <option value="">{t('Seleccionar')}</option>
                       <option value="dni">{t('DNI')}</option>
@@ -159,11 +223,7 @@ export default function FormClaim() {
                   </Field>
 
                   <Field label={t('N° Documento')}>
-                    <Input
-                      {...register('docNumber', {
-                        required: t('Campo obligatorio'),
-                      })}
-                    />
+                    <Input {...register('docNumber', { required: t('Campo obligatorio') })} />
                   </Field>
                 </div>
 
@@ -171,34 +231,24 @@ export default function FormClaim() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <Field label={t('Teléfono')}>
-                    <Input
-                      {...register('phone', {
-                        required: t('Campo obligatorio'),
-                      })}
-                    />
+                    <Input {...register('phone', { required: t('Campo obligatorio') })} />
                   </Field>
 
                   <Field label={t('Correo electrónico')}>
                     <Input
                       type="email"
-                      {...register('email', {
-                        required: t('Campo obligatorio'),
-                      })}
+                      {...register('email', { required: t('Campo obligatorio') })}
                     />
                   </Field>
                 </div>
 
                 <Field label={t('Dirección')}>
-                  <Input
-                    {...register('address', {
-                      required: t('Campo obligatorio'),
-                    })}
-                  />
+                  <Input {...register('address', { required: t('Campo obligatorio') })} />
                 </Field>
               </>
             )}
 
-            {/* ================= STEP 2 ================= */}
+            {/* STEP 2 */}
             {step === 2 && (
               <>
                 <h3 className="font-medium">{t('Detalles de la solicitud')}</h3>
@@ -243,43 +293,30 @@ export default function FormClaim() {
                 />
 
                 <Field label={t('Fecha de ocurrencia')}>
-                  <Input
-                    type="date"
-                    {...register('date', {
-                      required: t('Campo obligatorio'),
-                    })}
-                  />
+                  <Input type="date" {...register('date', { required: t('Campo obligatorio') })} />
                 </Field>
 
                 <Field label={t('Servicio reclamado')}>
-                  <Input
-                    {...register('service', {
-                      required: t('Campo obligatorio'),
-                    })}
-                  />
+                  <Input {...register('service', { required: t('Campo obligatorio') })} />
                 </Field>
 
                 <Field label={t('Detalle del reclamo')}>
                   <Textarea
                     rows={4}
-                    {...register('detail', {
-                      required: t('Campo obligatorio'),
-                    })}
+                    {...register('detail', { required: t('Campo obligatorio') })}
                   />
                 </Field>
 
                 <Field label={t('Pedido del reclamo')}>
                   <Textarea
                     rows={3}
-                    {...register('request', {
-                      required: t('Campo obligatorio'),
-                    })}
+                    {...register('request', { required: t('Campo obligatorio') })}
                   />
                 </Field>
               </>
             )}
 
-            {/* ================= STEP 3 ================= */}
+            {/* STEP 3 */}
             {step === 3 && (
               <>
                 <h3 className="font-medium">{t('Adjuntar documentación')}</h3>
@@ -287,44 +324,55 @@ export default function FormClaim() {
                 <label className="flex items-center gap-2 cursor-pointer text-primary">
                   <Upload size={18} />
                   <span>{t('Adjuntar archivos')}</span>
+
                   <input
                     type="file"
                     multiple
-                    accept="image/jpeg,image/png,image/jpg,application/pdf,.doc,.docx"
                     className="hidden"
+                    accept=".jpg,.jpeg,.png,.pdf,.doc,.docx"
                     onChange={(e) => {
-                      if (!e.target.files) return
+                      const selectedFiles = Array.from(e.target.files || [])
 
-                      const selectedFiles = Array.from(e.target.files)
+                      const allowedTypes = [
+                        'image/jpeg',
+                        'image/png',
+                        'application/pdf',
+                        'application/msword',
+                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                      ]
 
-                      if (files.length + selectedFiles.length > 5) {
-                        alert(t('Puedes subir hasta 5 archivos como máximo'))
+                      const maxSize = 20 * 1024 * 1024
+                      const maxFiles = 5
+
+                      if (files.length + selectedFiles.length > maxFiles) {
+                        toast.error('Solo puedes subir hasta 5 archivos.')
                         return
                       }
 
-                      const mapped = selectedFiles
-                        .map((file) => {
-                          if (file.size > 20 * 1024 * 1024) {
-                            alert(t('Cada archivo debe pesar como máximo 20 MB'))
-                            return null
-                          }
+                      const validFiles = selectedFiles.filter((file) => {
+                        if (!allowedTypes.includes(file.type)) {
+                          toast.error(`Formato no permitido: ${file.name}`)
+                          return false
+                        }
 
-                          return {
-                            file,
-                            preview: file.type.startsWith('image/')
-                              ? URL.createObjectURL(file)
-                              : null,
-                          }
-                        })
-                        .filter(Boolean)
+                        if (file.size > maxSize) {
+                          toast.error(`El archivo ${file.name} supera los 20MB`)
+                          return false
+                        }
 
-                      setFiles((prev) => [...prev, ...mapped])
-                      e.target.value = ''
+                        return true
+                      })
+
+                      const mappedFiles = validFiles.map((file) => ({
+                        file,
+                        preview: file.type.startsWith('image/') ? URL.createObjectURL(file) : null,
+                      }))
+
+                      setFiles((prev) => [...prev, ...mappedFiles])
                     }}
                   />
                 </label>
 
-                {/* PREVIEW */}
                 {files.length > 0 && (
                   <ul className="space-y-2 pt-3">
                     {files.map((item, index) => (
@@ -341,7 +389,7 @@ export default function FormClaim() {
                             />
                           ) : (
                             <span className="text-xs font-medium bg-muted px-2 py-1 rounded">
-                              {item.file.name.split('.').pop().toUpperCase()}
+                              {item.file.name.split('.').pop()?.toUpperCase()}
                             </span>
                           )}
 
@@ -368,8 +416,7 @@ export default function FormClaim() {
                   </ul>
                 )}
 
-                {/* TEXTO INFORMATIVO (IMAGEN) */}
-                <div className="mt-4 rounded-md bg-muted/40 p-3 text-xs text-muted flex gap-2">
+                <div className="mt-4 rounded-md bg-muted/40 p-3 text-xs text-muted flex gap-2 bg-cuaternary">
                   <span>ℹ️</span>
                   <p>
                     {t(
@@ -386,7 +433,6 @@ export default function FormClaim() {
               </>
             )}
 
-            {/* ================= ACTIONS ================= */}
             <div className="flex justify-between pt-4">
               {step > 1 && (
                 <Button type="button" variant="outline" onClick={prev}>
@@ -401,8 +447,8 @@ export default function FormClaim() {
               )}
 
               {step === 3 && (
-                <Button type="submit" className="btn primary" disabled={isSubmitting}>
-                  {t('Registrar reclamo')}
+                <Button type="submit" className="btn primary" disabled={loading}>
+                  {loading ? 'Enviando...' : 'Enviar reclamo'}
                 </Button>
               )}
             </div>
@@ -412,8 +458,6 @@ export default function FormClaim() {
     </section>
   )
 }
-
-/* ================= FIELD ================= */
 
 function Field({ label, error, children }) {
   return (
