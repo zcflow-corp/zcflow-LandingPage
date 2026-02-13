@@ -137,10 +137,10 @@ html[data-theme='dark'] .section-contact {
 
 
   p {
-    font-size: 0.95rem;
-    line-height: 1.65;
+
     color: var(--c-text-muted);
-    margin-bottom: 0.75rem;
+    font-style: normal;
+    // margin-bottom: 0.75rem;
   }
 
   strong {
@@ -161,6 +161,8 @@ html[data-theme='dark'] .section-contact {
 
   .claim-entity {
     margin: 2rem 0;
+    text-decoration: none;
+
 
 
   }
@@ -177,20 +179,26 @@ html[data-theme='dark'] .section-contact {
     p {
       margin: 0;
       font-size: 0.9rem;
+      font-style: oblique;
       color: var(--c-text);
+
+
+      strong {
+        font-style: normal;
+        font-size: 1rem;
+
+
+
+      }
     }
   }
 
 
   .claim-legal {
-    h3 {
-      font-weight: 600;
-      margin: 1.25rem 0 0.5rem;
-      color: var(--c-secondary);
-    }
+
 
     p {
-      font-size: 0.9rem;
+
       margin-bottom: 0.75rem;
       color: var(--c-text-muted);
     }
@@ -201,7 +209,7 @@ html[data-theme='dark'] .section-contact {
   ================================ */
   .claim-sign {
     margin-top: 1.5rem;
-    font-size: 0.9rem;
+    // font-size: 0.9rem;
     color: var(--c-text);
   }
 
@@ -223,9 +231,20 @@ html[data-theme='dark'] .section-contact {
 
 .claim-form {
 
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.5);
+    cursor: pointer;
+  }
+
   .form-claim {
 
     min-height: 100vh;
+
+    h3 {
+      color: var(--c-text-muted);
+      font-size: large;
+      margin-bottom: -0.75rem;
+    }
 
 
     .btn {

@@ -21,6 +21,8 @@ function createTranslationFunction(messages) {
   return (key) => messages[key] || key
 }
 
+const localeR = getLocaleFromDoc()
+
 export default function FormClaim() {
   const [step, setStep] = useState(1)
   const [files, setFiles] = useState([])
@@ -53,64 +55,7 @@ export default function FormClaim() {
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
   ]
 
-  const handleFileChange = (e) => {
-    const selectedFiles = Array.from(e.target.files)
-
-    if (files.length + selectedFiles.length > MAX_FILES) {
-      toast.error('Puedes subir hasta 5 archivos como máximo.')
-      return
-    }
-
-    const validFiles = []
-
-    for (let file of selectedFiles) {
-      if (file.size > MAX_SIZE_BYTES) {
-        toast.error(`El archivo "${file.name}" supera los 20MB.`)
-        continue
-      }
-
-      if (!ALLOWED_TYPES.includes(file.type)) {
-        toast.error(`Formato no permitido en "${file.name}".`)
-        continue
-      }
-
-      validFiles.push({
-        file,
-        preview: file.type.startsWith('image/') ? URL.createObjectURL(file) : null,
-      })
-    }
-
-    setFiles((prev) => [...prev, ...validFiles])
-  }
-
-  // const uploadToCloudinary = async (file) => {
-  //   const formData = new FormData()
-  //   formData.append('file', file)
-  //   formData.append('upload_preset', UPLOAD_PRESET)
-  //   formData.append('folder', 'reclamos')
-
-  //   // Detectar si es imagen
-  //   const isImage = file.type.startsWith('image/')
-
-  //   const resourceType = isImage ? 'image' : 'raw'
-
-  //   const response = await fetch(
-  //     `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resourceType}/upload`,
-  //     {
-  //       method: 'POST',
-  //       body: formData,
-  //     }
-  //   )
-
-  //   const data = await response.json()
-
-  //   if (!response.ok) {
-  //     console.error('Cloudinary error:', data)
-  //     throw new Error('Cloudinary upload failed')
-  //   }
-
-  //   return data.secure_url
-  // }
+  const PUBLIC_DOMAINS = ['gmail.com', 'hotmail.com', 'yahoo.com', 'outlook.com']
 
   const uploadToCloudinary = async (file) => {
     const formData = new FormData()
@@ -133,21 +78,27 @@ export default function FormClaim() {
     return data.secure_url
   }
 
+  const fieldsByStep = {
+    1: ['lastname', 'name', 'docType', 'docNumber', 'phone', 'email'],
+    2: ['type', 'service', 'detail', 'request'],
+  }
+
   const {
     register,
     handleSubmit: hookFormSubmit,
     control,
     trigger,
     reset,
+    watch,
+    getValues,
     formState: { errors },
-  } = useForm({ mode: 'onTouched' })
+  } = useForm({ mode: 'onChange' })
 
   const next = async () => {
     const fieldsByStep = {
       1: ['lastname', 'name', 'docType', 'docNumber', 'phone', 'email', 'address'],
-      2: ['type', 'date', 'service', 'detail', 'request'],
+      2: ['type', 'date', 'service', 'detail'],
     }
-
     const valid = await trigger(fieldsByStep[step])
     if (valid) setStep(step + 1)
   }
@@ -219,7 +170,7 @@ export default function FormClaim() {
 
           <div className="h-1 w-full bg-line rounded-full overflow-hidden">
             <div
-              className="h-full bg-primary transition-all duration-300"
+              className="h-full bg-g-primary transition-all duration-300"
               style={{ width: `${(step / 3) * 100}%` }}
             />
           </div>
@@ -243,7 +194,7 @@ export default function FormClaim() {
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <Field label={t('Tipo de documento')}>
+                  <Field label={t('Tipo de documento')} error={errors.docType?.message}>
                     <select
                       className="w-full h-10 px-3 border rounded-md bg-transparent"
                       {...register('docType', { required: t('Campo obligatorio') })}
@@ -262,21 +213,43 @@ export default function FormClaim() {
                 <h3 className="font-medium pt-4">{t('Medios de contacto')}</h3>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <Field label={t('Teléfono')}>
+                  <Field label={t('Teléfono')} error={errors.phone?.message}>
                     <Input {...register('phone', { required: t('Campo obligatorio') })} />
                   </Field>
 
-                  <Field label={t('Correo electrónico')}>
+                  <Field label={t('Correo electrónico')} error={errors.email?.message}>
                     <Input
                       type="email"
-                      {...register('email', { required: t('Campo obligatorio') })}
+                      {...register('email', {
+                        required: t('Campo obligatorio'),
+                        validate: (value) => {
+                          const domain = value.split('@')[1]
+                          if (!domain) return t('Correo inválido')
+                          // if (PUBLIC_DOMAINS.includes(domain)) return t('Usa un correo corporativo')
+                          return true
+                        },
+                      })}
                     />
                   </Field>
                 </div>
 
                 <Field label={t('Dirección')}>
-                  <Input {...register('address', { required: t('Campo obligatorio') })} />
+                  <Input {...register('address')} />
                 </Field>
+
+                <div className="flex items-start gap-2 pt-2">
+                  <p className="text-sm leading-snug">
+                    {t('Al continuar acepto la')}{' '}
+                    <a
+                      href={`/${localeR}/privacidad`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline text-primary cursor-pointer"
+                    >
+                      {t('Política de Privacidad')}
+                    </a>
+                  </p>
+                </div>
               </>
             )}
 
@@ -284,7 +257,6 @@ export default function FormClaim() {
             {step === 2 && (
               <>
                 <h3 className="font-medium">{t('Detalles de la solicitud')}</h3>
-
                 <Controller
                   name="type"
                   control={control}
@@ -323,22 +295,25 @@ export default function FormClaim() {
                     </div>
                   )}
                 />
-
-                <Field label={t('Fecha de ocurrencia')}>
-                  <Input type="date" {...register('date', { required: t('Campo obligatorio') })} />
+                <Field label={t('Fecha de ocurrencia')} error={errors.date?.message}>
+                  <Input
+                    type="date"
+                    className="h-11 px-4 rounded-lg border border-gray-300 
+                  focus:ring-2 focus:ring-primary focus:border-primary
+                  transition-all duration-200
+                  text-gray-700"
+                    {...register('date')}
+                  />
                 </Field>
-
-                <Field label={t('Servicio reclamado')}>
+                <Field label={t('Servicio reclamado')} error={errors.service?.message}>
                   <Input {...register('service', { required: t('Campo obligatorio') })} />
                 </Field>
-
-                <Field label={t('Detalle del reclamo')}>
+                <Field label={t('Detalle del reclamo')} error={errors.detail?.message}>
                   <Textarea
                     rows={4}
                     {...register('detail', { required: t('Campo obligatorio') })}
                   />
                 </Field>
-
                 <Field label={t('Pedido del reclamo')}>
                   <Textarea
                     rows={3}
@@ -352,7 +327,7 @@ export default function FormClaim() {
             {step === 3 && (
               <>
                 <h3 className="font-medium">
-                  {t('Adjuntar documentación')} {t('(opcional)')}{' '}
+                  {t('Adjuntar documentación')} ({t('opcional')})
                 </h3>
 
                 <label
@@ -477,7 +452,19 @@ export default function FormClaim() {
               )}
 
               {step < 3 && (
-                <Button type="button" className="btn primary" onClick={next}>
+                <Button
+                  type="button"
+                  className="btn primary"
+                  onClick={next}
+                  disabled={
+                    errors.lastname ||
+                    errors.name ||
+                    errors.docNumber ||
+                    errors.phone ||
+                    errors.email ||
+                    errors.docType
+                  }
+                >
                   {t('Continuar')}
                 </Button>
               )}
