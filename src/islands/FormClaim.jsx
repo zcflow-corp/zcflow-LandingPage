@@ -183,7 +183,7 @@ export default function FormClaim() {
               <>
                 <h3 className="font-medium">{t('Datos personales')}</h3>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2  gap-4">
                   <Field label={t('Apellidos')} error={errors.lastname?.message}>
                     <Input {...register('lastname', { required: t('Campo obligatorio') })} />
                   </Field>
@@ -193,7 +193,7 @@ export default function FormClaim() {
                   </Field>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Field label={t('Tipo de documento')} error={errors.docType?.message}>
                     <select
                       className="w-full h-10 px-3 border rounded-md bg-transparent"
@@ -212,7 +212,7 @@ export default function FormClaim() {
 
                 <h3 className="font-medium pt-4">{t('Medios de contacto')}</h3>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Field label={t('Teléfono')} error={errors.phone?.message}>
                     <Input {...register('phone', { required: t('Campo obligatorio') })} />
                   </Field>

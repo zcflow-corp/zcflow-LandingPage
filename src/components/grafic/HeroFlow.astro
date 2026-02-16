@@ -262,12 +262,17 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
       }
 
       &--conecta {
-        top: 7%;
-        left: 40%;
+        top: 14%;
+        left: 50%;
 
         @include media(tablet) {
           top: 54%;
           left: 40%;
+        }
+
+        @include media(tablet-down) {
+          top: 20%;
+          left: 50%;
         }
 
         @include media(desktop) {
@@ -297,6 +302,11 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
           left: 65%;
         }
 
+        @include media(tablet-down) {
+          top: 31%;
+          left: 90%;
+        }
+
         @include media(desktop) {
           top: 60%;
           left: 65%;
@@ -315,6 +325,11 @@ const t = typeof _t === 'function' ? _t : (k: string) => k
         @include media(tablet) {
           top: 38%;
           left: 65%;
+        }
+
+        @include media(tablet-down) {
+          top: 46%;
+          left: 80%;
         }
 
         @include media(desktop) {
