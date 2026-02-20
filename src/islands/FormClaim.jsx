@@ -163,7 +163,6 @@ export default function FormClaim() {
       <Card className="max-w-xl mx-auto shadow-xl bg-white">
         <CardHeader className="space-y-2">
           <CardTitle className="text-h3">{t('Libro de Reclamaciones')}</CardTitle>
-
           <CardDescription>
             {t('Completa el formulario para registrar tu reclamo o queja')}
           </CardDescription>
