@@ -27,7 +27,6 @@
     background-position: center;
 
     @include media(mobile) {
-
       transform: rotate(92deg);
       top: -37%;
       background-position: center;
@@ -38,7 +37,6 @@
       right: -120%;
       bottom: 10%;
       height: 100vh;
-
     }
 
     // transform: rotate(30deg);
@@ -92,23 +90,33 @@ html[data-theme='dark'] .section-contact {
   }
 }
 
-
-.section-reclamo {
-  background: var(--c-bg-variant);
+html[data-theme='dark'] .form-claim {
+  .bg-white {
+    background: black;
+  }
 }
+
+html[data-theme='light'] .form-claim {
+  .bg-white {
+    background: white;
+  }
+}
+
+// .section-reclamo {
+//   background: var(--c-bg-variant);
+// }
 
 .claim-container {
   max-width: var(--container);
   margin: 0 auto;
   padding: 3rem 1.5rem;
   display: grid;
-  grid-template-columns: 1fr;
+  // grid-template-columns: 1fr;
   gap: 3rem;
 
   @include media(desktop) {
-
     padding: 2rem 1rem;
-    grid-template-columns: 1fr 1fr;
+    // grid-template-columns: 1fr 1fr;
 
     align-content: flex-start;
     align-items: flex-start;
@@ -135,9 +143,7 @@ html[data-theme='dark'] .section-contact {
 .claim-info {
   font-weight: 600;
 
-
   p {
-
     color: var(--c-text-muted);
     font-style: normal;
     // margin-bottom: 0.75rem;
@@ -158,19 +164,13 @@ html[data-theme='dark'] .section-contact {
     }
   }
 
-
   .claim-entity {
     margin: 2rem 0;
     text-decoration: none;
-
-
-
   }
 
-
   .claim-deadline {
-    background-color: #EDF0FF;
-
+    background-color: #edf0ff;
     border-left: 4px solid var(--c-primary);
     padding: 1rem 1.25rem;
     border-radius: calc(var(--radius) / 2);
@@ -182,23 +182,15 @@ html[data-theme='dark'] .section-contact {
       font-style: oblique;
       color: var(--c-text);
 
-
       strong {
         font-style: normal;
         font-size: 1rem;
-
-
-
       }
     }
   }
 
-
   .claim-legal {
-
-
     p {
-
       margin-bottom: 0.75rem;
       color: var(--c-text-muted);
     }
@@ -223,22 +215,19 @@ html[data-theme='dark'] .section-contact {
     @include media(desktop) {
       padding: 2.5rem;
     }
-
-
   }
 }
 
-
 .claim-form {
-
-  input[type="date"]::-webkit-calendar-picker-indicator {
+  input[type='date']::-webkit-calendar-picker-indicator {
     filter: invert(0.5);
     cursor: pointer;
   }
 
-  .form-claim {
+  padding-bottom: 15px;
 
-    min-height: 100vh;
+  .form-claim {
+    min-height: 54vh;
 
     h3 {
       color: var(--c-text-muted);
@@ -246,12 +235,8 @@ html[data-theme='dark'] .section-contact {
       margin-bottom: -0.75rem;
     }
 
-
     .btn {
       border-radius: 10px;
     }
-
   }
-
-
 }
