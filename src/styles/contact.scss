@@ -27,7 +27,6 @@
     background-position: center;
 
     @include media(mobile) {
-
       transform: rotate(92deg);
       top: -37%;
       background-position: center;
@@ -38,7 +37,6 @@
       right: -120%;
       bottom: 10%;
       height: 100vh;
-
     }
 
     // transform: rotate(30deg);
@@ -89,5 +87,156 @@ html[data-theme='dark'] .section-contact {
     transform: rotate(20deg);
     bottom: -30%;
     top: 20%;
+  }
+}
+
+html[data-theme='dark'] .form-claim {
+  .bg-white {
+    background: black;
+  }
+}
+
+html[data-theme='light'] .form-claim {
+  .bg-white {
+    background: white;
+  }
+}
+
+// .section-reclamo {
+//   background: var(--c-bg-variant);
+// }
+
+.claim-container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  display: grid;
+  // grid-template-columns: 1fr;
+  gap: 3rem;
+
+  @include media(desktop) {
+    padding: 2rem 1rem;
+    // grid-template-columns: 1fr 1fr;
+
+    align-content: flex-start;
+    align-items: flex-start;
+  }
+}
+
+/* ==============================
+   COLUMNA IZQUIERDA
+================================ */
+.claim-left {
+  background-color: var(--c-bg-variant);
+  border-radius: var(--radius);
+
+  padding: 2rem 1.5rem;
+
+  @include media(desktop) {
+    padding: 2.5rem;
+  }
+}
+
+/* ==============================
+   INFO GENERAL
+================================ */
+.claim-info {
+  font-weight: 600;
+
+  p {
+    color: var(--c-text-muted);
+    font-style: normal;
+    // margin-bottom: 0.75rem;
+  }
+
+  strong {
+    font-weight: 600;
+    color: var(--c-text);
+  }
+
+  a {
+    color: var(--c-primary-accessible);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--c-primary-accessible-hover);
+      text-decoration: underline;
+    }
+  }
+
+  .claim-entity {
+    margin: 2rem 0;
+    text-decoration: none;
+  }
+
+  .claim-deadline {
+    background-color: #edf0ff;
+    border-left: 4px solid var(--c-primary);
+    padding: 1rem 1.25rem;
+    border-radius: calc(var(--radius) / 2);
+    margin-bottom: 1.75rem;
+
+    p {
+      margin: 0;
+      font-size: 0.9rem;
+      font-style: oblique;
+      color: var(--c-text);
+
+      strong {
+        font-style: normal;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .claim-legal {
+    p {
+      margin-bottom: 0.75rem;
+      color: var(--c-text-muted);
+    }
+  }
+
+  /* ==============================
+     FIRMA / FECHA
+  ================================ */
+  .claim-sign {
+    margin-top: 1.5rem;
+    // font-size: 0.9rem;
+    color: var(--c-text);
+  }
+
+  .claim-right {
+    background-color: var(--c-panel);
+    border-radius: var(--radius);
+
+    padding: 2rem 1.5rem;
+    box-shadow: var(--shadow);
+
+    @include media(desktop) {
+      padding: 2.5rem;
+    }
+  }
+}
+
+.claim-form {
+  input[type='date']::-webkit-calendar-picker-indicator {
+    filter: invert(0.5);
+    cursor: pointer;
+  }
+
+  padding-bottom: 15px;
+
+  .form-claim {
+    min-height: 54vh;
+
+    h3 {
+      color: var(--c-text-muted);
+      font-size: large;
+      margin-bottom: -0.75rem;
+    }
+
+    .btn {
+      border-radius: 10px;
+    }
   }
 }

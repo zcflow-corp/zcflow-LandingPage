@@ -1,0 +1,145 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import LegalWrapper from '@/components/LegalWrapper.astro'
+import Header from '@/components/Header.astro'
+import Footer from '@/components/Footer.astro'
+import FormClaim from '@/islands/FormClaim'
+import AppProvider from '@/layouts/AppProvider'
+
+const pathname = Astro.url.pathname
+
+// ✅ detectamos idioma desde la URL
+const locale = pathname.startsWith('/en') ? 'en' : 'es'
+
+// ✅ glob seguro con alias
+const dictionaries = import.meta.glob('@/i18n/*.json', { eager: true })
+
+const messages = dictionaries[`/src/i18n/${locale}.json`]?.default ?? {}
+
+const t = (key) => messages[key] ?? key
+const fechaHoy = new Date().toLocaleDateString('es-ES', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+})
+
+const fechaISO = new Date().toISOString()
+---
+
+<BaseLayout title="libro de reclamaciones" />
+
+<LegalWrapper t={t}>
+  <article class="legal-page">
+    <header class="legal-header" style={{ margin: '0px' }}>
+      <h1 id="claim-title" class="gradient-blue-dark">Registra tu reclamo</h1>
+    </header>
+
+    <section class="legal-content">
+      <!-- Datos de la empresa -->
+
+      <dl>
+        <div><dt><strong>Razón social:</strong></dt><dd class="description-text">SEIDOR CONSULTING PERU S.A.C.</dd></div>
+        <div><dt><strong>RUC:</strong></dt><dd class="description-text">20517426726</dd></div>
+        <div>
+          <dt><strong>Domicilio:</strong></dt><dd class="description-text">
+            Vittore Carpaccio 250, Of. 501, San Borja, Lima, Perú
+          </dd>
+        </div>
+        <div>
+          <dt><strong>Correo electrónico:</strong></dt><dd class="description-text">
+            <a href="mailto:info@zcflow.com">info@zcflow.com</a>
+          </dd>
+        </div>
+      </dl>
+
+      <!-- Plazo de atención -->
+      <section aria-labelledby="claim-deadline-title">
+        <blockquote>
+          ZCFLOW dará respuesta al reclamo o queja en un plazo máximo de treinta (30) días calendario,
+          conforme a la normativa vigente.
+        </blockquote>
+      </section>
+
+      <!-- Información legal -->
+      <section>
+        <p>
+          La formulación del reclamo o queja no impide al consumidor acudir a otras vías de solución
+          de controversias ni constituye requisito previo para interponer una denuncia ante el
+          INDECOPI.
+        </p>
+        <h2>1. Protección de datos personales</h2>
+        <p>
+          SEIDOR CONSULTING PERU S.A.C. (en adelante, “SEIDOR”), informa al usuario que, de
+          conformidad con la Ley N.º 29733 - Ley de Protección de Datos Personales, su Reglamento y
+          demás normas complementarias, los datos personales proporcionados a través del presente
+          Libro de Reclamaciones de ZCFLOW serán tratados conforme a las siguientes condiciones:
+        </p>
+      </section>
+      <section>
+        <h2>2. Finalidad del tratamiento y datos obligatorios</h2>
+        <p>
+          Los datos personales recopilados son necesarios para atender, gestionar y dar respuesta al
+          reclamo o queja presentado por el usuario.
+        </p>
+        <p>
+          Los datos personales obligatorios son: nombres y apellidos, tipo y número de documento de
+          identidad, dirección de domicilio, teléfono y correo electrónico. En caso de no
+          proporcionar dicha información, SEIDOR no podrá atender ni gestionar el reclamo o queja.
+        </p>
+      </section>
+      <section>
+        <h2>3. Destinatarios y transferencias</h2>
+        <p>
+          Los datos personales podrán ser tratados por encargados del tratamiento, únicamente para
+          la gestión del reclamo o queja, bajo estrictas obligaciones de confidencialidad y
+          seguridad.
+        </p>
+      </section>
+
+      <section>
+        <h2>4. Banco de datos</h2>
+        <p>
+          Los datos personales serán almacenados en el banco de datos personales de titularidad de
+          SEIDOR, debidamente inscrito o en proceso de inscripción ante el Registro Nacional de
+          Protección de Datos Personales.
+        </p>
+      </section>
+
+      <section>
+        <h2>5. Plazo de conservación</h2>
+        <p>
+          Los datos personales serán conservados durante el tiempo necesario para la atención y
+          cierre del reclamo o queja y, posteriormente, por el plazo legal aplicable, hasta por diez
+          (10) años.
+        </p>
+      </section>
+
+      <section>
+        <h2>6. Ejercicio de derechos ARCO</h2>
+        <p>
+          El usuario podrá ejercer sus derechos de acceso, rectificación, cancelación y oposición
+          (ARCO) mediante solicitud dirigida al correo electrónico
+          <a href="mailto:ayuda@zcflow.com">ayuda@zcflow.com</a>.
+        </p>
+      </section>
+      <section>
+        <p>
+          En caso de considerar que no ha sido atendido adecuadamente en el ejercicio de sus
+          derechos, podrá presentar una reclamación ante la Autoridad Nacional de Protección de
+          Datos Personales, dependiente del Ministerio de Justicia y Derechos Humanos.
+        </p>
+      </section>
+    </section>
+
+    <div class="claim-sign">
+      <p class="">
+        <time datetime={fechaISO}>{fechaHoy}</time>
+      </p>
+    </div>
+  </article>
+   <section class="claim-form">
+      <AppProvider client:load>
+        <FormClaim client:load />
+      </AppProvider>
+    </section>
+</LegalWrapper>

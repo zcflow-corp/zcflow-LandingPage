@@ -1,0 +1,112 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Header from '@/components/Header.astro'
+import Footer from '@/components/Footer.astro'
+import { localeHelper } from '@/i18n'
+const { t } = localeHelper(Astro)
+---
+
+<BaseLayout>
+  <Header t={t} />
+  <main class="py-20 px-4 max-w-4xl mx-auto">
+    <slot />
+  </main>
+  <Footer t={t} />
+</BaseLayout>
+<style is:global>
+  .legal-page {
+    max-width: 1150px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 4rem 1.5rem;
+    color: var(--c-line);
+    line-height: 1.6;
+    width: 100%;
+  }
+
+  .legal-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #000;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+  .last-updated {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 3rem;
+  }
+
+  .legal-content h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: #111;
+  }
+  .legal-content p {
+    margin-bottom: 1.2rem;
+    font-size: 1.05rem;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .legal-content ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    list-style-type: none;
+    display: contents;
+  }
+
+  .legal-content li {
+    margin-bottom: 0.5rem;
+    list-style-type: disc;
+    padding-left: 1rem;
+    list-style-position: inside !important;
+  }
+
+  .legal-content strong {
+    color: #000;
+    font-weight: 600;
+  }
+
+  blockquote {
+    background-color: #f9f9f9;
+    border-left: 4px solid var(--c-primary);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .legal-content a {
+    color: #0066ff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .legal-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  html[data-theme='dark'] {
+    blockquote {
+      background-color: #ffffff;
+    }
+
+    .legal-header h1,
+    .legal-content h2,
+    .legal-content strong {
+      color: #ffffff !important;
+    }
+
+    .last-updated {
+      color: #aaa;
+    }
+    .legal-content li::marker {
+      color: #0066ff;
+    }
+    li,
+    .description-text{
+      color: #ffffff;
+    }
+  }
+</style>

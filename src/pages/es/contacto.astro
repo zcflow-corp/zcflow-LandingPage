@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
 import Header from '@/components/Header.astro'
 import Footer from '@/components/Footer.astro'
 import ContactForm from '@/islands/ContactForm.jsx'
+import FormClaim from '@/islands/FormClaim'
 
 const pathname = Astro.url.pathname
 
@@ -23,6 +24,7 @@ const t = (key) => messages[key] ?? key
   <Header t={t} />
   <main>
     <ContactForm client:load />
+    <!-- <FormClaim client:load /> -->
   </main>
   <Footer t={t} />
 </BaseLayout>

@@ -1,0 +1,249 @@
+---
+import LegalWrapper from '@/components/LegalWrapper.astro'
+import { localeHelper } from '@/i18n'
+const { t } = localeHelper(Astro)
+const fechaHoy = new Date().toLocaleDateString('es-ES', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+})
+
+const fechaISO = new Date().toISOString()
+---
+
+<LegalWrapper t={t}>
+  <article class="legal-page">
+    <header class="legal-header">
+      <h1>{t('TERMS AND CONDITIONS OF USE')}</h1>
+      <p class="last-updated">
+        {t('Last updated:')}
+        <time datetime={fechaISO}>{fechaHoy}</time>
+      </p>
+    </header>
+
+    <section class="legal-content">
+      <section id="identification">
+        <h2>{t('1. Identification of the website owner')}</h2>
+        <p>
+          {t('This document regulates the access and use of the website')}
+          <a href="https://www.zcflow.com">www.zcflow.com</a>
+          {t('(hereinafter, the “Site”), owned by')}
+          <strong>{t('SEIDOR CONSULTING PERU S.A.C.')}</strong>,
+          {
+            t(
+              'identified with RUC 20517426726, located in the city of Lima, Republic of Peru, and contact email'
+            )
+          }
+          <a href="mailto:info@zcflow.com">info@zcflow.com</a>
+          {t('(hereinafter, the “Company”).')}
+        </p>
+        <p>
+          {
+            t(
+              'The Site may be accessed by users located in different countries; however, the Company is based in Peru and operates in accordance with Peruvian law.'
+            )
+          }
+        </p>
+      </section>
+
+      <section id="object">
+        <h2>{t('2. Website object')}</h2>
+        <p>
+          {
+            t(
+              'The Site is addressed to natural and legal persons, as well as their representatives, collaborators, and duly authorized users, who declare that they have the necessary legal capacity to accept these Terms and Conditions and use the Site in accordance with its purpose and current regulations.'
+            )
+          }
+        </p>
+        <blockquote>
+          {
+            t(
+              "By accessing, browsing, registering, or clicking “Accept” on the Site, the user declares to have read, understood, and expressly accepted these Terms and Conditions, as well as the Company's Privacy Policy. If you do not agree with any of the terms set forth herein, the user must refrain from using the Site; otherwise, by accessing it, the user may not ignore these terms and conditions, which are accepted in their entirety."
+            )
+          }
+        </blockquote>
+        <p>
+          {
+            t(
+              'The information published on the Site is for informational and reference purposes only, and does not constitute legal, financial, accounting, or any other type of advice, nor a personalized recommendation, nor a binding offer, unless expressly stated otherwise.'
+            )
+          }
+        </p>
+        <p>
+          {
+            t(
+              'The Company reserves the unilateral right to modify, suspend, or delete, in whole or in part, the content, functionalities, or availability of the Site, at any time and without prior notice.'
+            )
+          }
+        </p>
+      </section>
+
+      <section id="conditions">
+        <h2>{t('3. Conditions of use')}</h2>
+        <p>
+          {
+            t(
+              'The user agrees to use the Site responsibly, diligently and in accordance with current legislation, good faith, morals, and public order.'
+            )
+          }
+        </p>
+        <p>{t('In particular, the user shall refrain from:')}</p>
+        <ul>
+          <li>{t('Using the Site for illegal or unauthorized purposes.')}</li>
+          <li>
+            {
+              t(
+                'Using the Site in a way that causes or may cause damage, interruption, overload, or harm to the platform or the Company.'
+              )
+            }
+          </li>
+          <li>
+            {
+              t(
+                'Introducing, spreading, or executing computer viruses, malware, or any other system that may cause damage.'
+              )
+            }
+          </li>
+          <li>
+            {
+              t(
+                "Attempting to gain unauthorized access to the Company's systems, servers, databases, or information."
+              )
+            }
+          </li>
+        </ul>
+        <p>
+          {
+            t(
+              'The Company reserves the right to restrict, suspend, or block access to the Site to those users who fail to comply with these conditions, at the sole discretion of the Company and without the need for any proof of any act performed by the user.'
+            )
+          }
+        </p>
+      </section>
+
+      <section id="intellectual-property">
+        <h2>{t('4. Intellectual property')}</h2>
+        <p>
+          {
+            t(
+              'All contents of the Site, including texts, images, graphics, logos, trademarks, trade names, designs, software, source codes, and other elements, are the property of the Company or third parties who have authorized their use, and are protected by current intellectual property regulations.'
+            )
+          }
+        </p>
+        <p>
+          {
+            t(
+              "Any reproduction, distribution, public communication, transformation, or any other use of the Site's content without the prior and express authorization of the Company is prohibited."
+            )
+          }
+        </p>
+      </section>
+
+      <section id="responsibility">
+        <h2>{t('5. Responsibility')}</h2>
+        <p>
+          {
+            t(
+              'The Company does not guarantee that the Site will be free of errors, interruptions, or technical failures, nor that access will be continuous or uninterrupted.'
+            )
+          }
+        </p>
+        <p>
+          {
+            t(
+              'In no event shall the Company be liable for direct or indirect damages, economic losses, loss of data, lost profits, or other damages arising from the use or inability to use the Site, except in cases where the law expressly establishes mandatory liability.'
+            )
+          }
+        </p>
+        <p>
+          {
+            t(
+              'The User is solely responsible for the use of the Site, as well as for the information registered, processed, or managed through it.'
+            )
+          }
+        </p>
+        <p>
+          {
+            t(
+              'The Company shall not be liable for failures, interruptions, errors, or damages that may arise from the use of third-party services, platforms, or integrations that the user accesses through the Site.'
+            )
+          }
+        </p>
+      </section>
+
+      <section id="third-party-links">
+        <h2>{t('6. Links to third-party sites')}</h2>
+        <p>
+          {
+            t(
+              'The Site may contain links, integrations, or references to third-party platforms, services, or websites that are not operated or controlled by the Company.'
+            )
+          }
+        </p>
+        <p>
+          {
+            t(
+              "The Company assumes no responsibility for the contents, services, availability, operation, privacy policies, or practices of such third parties, and it is the user's responsibility to review and accept the applicable terms of each of them."
+            )
+          }
+        </p>
+      </section>
+
+      <section id="data-protection">
+        <h2>{t('7. Personal data protection and ARCO rights')}</h2>
+        <p>
+          {
+            t(
+              "The processing of personal data collected through the Site is carried out in accordance with the Company's Privacy Policy and with the"
+            )
+          }
+          <strong>{t('Peruvian Law No. 29733 - Personal Data Protection Law')}</strong>,
+          {t('its regulations, and other applicable rules.')}
+        </p>
+        <p>
+          {
+            t(
+              'The owner of personal data may exercise their rights of Access, Rectification, Cancellation, and Opposition (ARCO rights) at any time, in accordance with current regulations.'
+            )
+          }
+        </p>
+        <p>
+          {
+            t(
+              'The details of the processing purposes, implemented security measures, and the procedure for exercising ARCO rights are described in the Privacy Policy available on the Site. Any request related to personal data may be sent to info@zcflow.com.'
+            )
+          }
+        </p>
+      </section>
+
+      <section id="modifications">
+        <h2>{t('8. Changes to terms and conditions')}</h2>
+        <p>
+          {
+            t(
+              'The Company reserves the right to modify these Terms and Conditions at any time, as a result of regulatory, technical, operational, or commercial changes.'
+            )
+          }
+        </p>
+        <p>
+          {t('Modifications will take effect upon their publication on the Site.')}
+        </p>
+      </section>
+
+      <section id="jurisdiction">
+        <h2>{t('9. Applicable law and jurisdiction')}</h2>
+        <p>
+          {t('These Terms and Conditions are governed by the laws of the')}
+          <strong>{t('Republic of Peru')}</strong>.
+        </p>
+        <p>
+          {
+            t(
+              'The parties will attempt to resolve any controversy through direct dealing. If an agreement is not reached, any dispute will be submitted to the jurisdiction of the competent judges and courts of Lima, Peru.'
+            )
+          }
+        </p>
+      </section>
+    </section>
+  </article>
+</LegalWrapper>
