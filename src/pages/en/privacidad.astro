@@ -2,168 +2,207 @@
 import LegalWrapper from '@/components/LegalWrapper.astro'
 import { localeHelper } from '@/i18n'
 const { t } = localeHelper(Astro)
+
+const fechaHoy = new Date().toLocaleDateString('es-ES', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+})
+
+const fechaISO = new Date().toISOString()
 ---
 
 <LegalWrapper t={t}>
   <article class="legal-page">
     <header class="legal-header">
       <h1>PRIVACY POLICY</h1>
-      <p>
-        At <strong>ZCFLOW</strong>, we value our users' privacy and are committed to protecting the
-        personal data we collect through our website <a
-          href="https://www.zcflow.com"
-          target="_blank"
-          rel="noopener noreferrer">www.zcflow.com</a
-        > and the commercial interactions associated with our solution.
-      </p>
-      <p>
-        This Privacy Policy describes how we collect, use, store, and protect the personal data of
-        individuals and legal entities, as well as their representatives, collaborators, and
-        authorized users, in accordance with <strong
-          >Law No. 29733 – Personal Data Protection Law</strong
-        >, its Regulations, and other applicable laws in the Republic of Peru.
-      </p>
-      <p>
-        Everything stated in the Personal Data chapter is governed by Law No. 29733. Any omissions
-        shall be supplemented by the provisions of said law or applied directly.
+      <p class="last-updated">
+        {t('Última actualización:')}
+        <time datetime={fechaISO}>{fechaHoy}</time>
       </p>
     </header>
 
-    <hr />
+    <section class="legal-content">
+      <section>
+        <p>
+          At <strong>ZCFLOW</strong>, we value our users' privacy and are committed to protecting
+          the personal data we collect through our website <a
+            href="https://www.zcflow.com"
+            target="_blank"
+            rel="noopener noreferrer">www.zcflow.com</a
+          > and the commercial interactions associated with our solution.
+        </p>
+        <p>
+          This Privacy Policy describes how we collect, use, store, and protect the personal data of
+          individuals and legal entities, as well as their representatives, collaborators, and
+          authorized users, in accordance with <strong
+            >Law No. 29733 - Personal Data Protection Law</strong
+          >, its Regulations, and other applicable laws in the Republic of Peru.
+        </p>
+        <p>
+          Everything stated in the Personal Data chapter is governed by Law No. 29733. Any omissions
+          shall be supplemented by the provisions of said law or applied directly.
+        </p>
+      </section>
 
-    <section>
-      <h2>1. Controller of Personal Data</h2>
-      <dl>
-        <div><dt><strong>Corporate Name:</strong></dt><dd class="description-text" class="description-text">SEIDOR CONSULTING PERU S.A.C.</dd></div>
-        <div><dt><strong>Trade Name:</strong></dt><dd class="description-text">ZCFLOW</dd></div>
-        <div><dt><strong>RUC (Tax ID):</strong></dt><dd class="description-text">20517426726</dd></div>
-        <div>
-          <dt><strong>Address:</strong></dt><dd class="description-text">
-            Vittore Carpaccio 250, Of. 501, San Borja, Lima, Peru
-          </dd>
-        </div>
-        <div>
-          <dt><strong>Contact Email:</strong></dt><dd class="description-text">
-            <a href="mailto:info@zcflow.com">info@zcflow.com</a>
-          </dd>
-        </div>
-      </dl>
-      <p>Hereinafter referred to as <strong>"the Company"</strong>.</p>
-    </section>
+      <section>
+        <h2>1. Controller of Personal Data</h2>
+        <dl>
+          <div>
+            <dt class="description-text"><strong>Corporate Name:</strong></dt><dd
+              class="description-text"
+              class="description-text"
+            >
+              SEIDOR CONSULTING PERU S.A.C.
+            </dd>
+          </div>
+          <div>
+            <dt class="description-text"><strong>Trade Name:</strong></dt><dd
+              class="description-text"
+            >
+              ZCFLOW
+            </dd>
+          </div>
+          <div>
+            <dt class="description-text"><strong>RUC (Tax ID):</strong></dt><dd
+              class="description-text"
+            >
+              20517426726
+            </dd>
+          </div>
+          <div>
+            <dt class="description-text"><strong>Address:</strong></dt><dd class="description-text">
+              Vittore Carpaccio 250, Of. 501, San Borja, Lima, Peru
+            </dd>
+          </div>
+          <div>
+            <dt class="description-text"><strong>Contact Email:</strong></dt><dd
+              class="description-text"
+            >
+              <a href="mailto:info@zcflow.com">info@zcflow.com</a>
+            </dd>
+          </div>
+        </dl>
+        <p>Hereinafter referred to as <strong>"the Company"</strong>.</p>
+      </section>
 
-    <section>
-      <h2>2. Personal Data We Collect</h2>
-      <p>
-        Depending on your interaction with the website or the ZCFLOW solution, the Company may
-        collect:
-      </p>
-      <ul>
-        <li>Full name.</li>
-        <li>ID document (when applicable).</li>
-        <li>Email address and phone number.</li>
-        <li>Professional and business information (company, position, and country).</li>
-        <li>Information provided through contact forms or commercial processes.</li>
-        <li>Data necessary for contractual or pre-contractual purposes.</li>
-        <li>Technical information: IP address, browser type, operating system, and access logs.</li>
-      </ul>
-      <p class="note">
-        The Company does not request or process sensitive personal data. The user declares that the
-        information provided is true, complete, and up to date.
-      </p>
-    </section>
+      <section>
+        <h2>2. Personal Data We Collect</h2>
+        <p>
+          Depending on your interaction with the website or the ZCFLOW solution, the Company may
+          collect:
+        </p>
+        <ul>
+          <li>Full name.</li>
+          <li>ID document (when applicable).</li>
+          <li>Email address and phone number.</li>
+          <li>Professional and business information (company, position, and country).</li>
+          <li>Information provided through contact forms or commercial processes.</li>
+          <li>Data necessary for contractual or pre-contractual purposes.</li>
+          <li>
+            Technical information: IP address, browser type, operating system, and access logs.
+          </li>
+        </ul>
+        <p class="note">
+          The Company does not request or process sensitive personal data. The user declares that
+          the information provided is true, complete, and up to date.
+        </p>
+      </section>
 
-    <section>
-      <h2>3. Purposes of Processing</h2>
-      <ul>
-        <li>Responding to inquiries and contact requests.</li>
-        <li>Managing the attraction and nurturing of commercial leads.</li>
-        <li>Providing information about the ZCFLOW solution and associated services.</li>
-        <li>Managing commercial, contractual, or pre-contractual relationships.</li>
-        <li>Providing technical support and customer service.</li>
-        <li>Managing authorized access, users, and profiles.</li>
-        <li>Administering credentials and usage controls for the solution.</li>
-        <li>Sending operational or commercial communications with consent.</li>
-        <li>Analyzing website usage to improve user experience.</li>
-        <li>Complying with legal and regulatory obligations.</li>
-        <li>Developing commercial and promotional actions.</li>
-      </ul>
-    </section>
+      <section>
+        <h2>3. Purposes of Processing</h2>
+        <ul>
+          <li>Responding to inquiries and contact requests.</li>
+          <li>Managing the attraction and nurturing of commercial leads.</li>
+          <li>Providing information about the ZCFLOW solution and associated services.</li>
+          <li>Managing commercial, contractual, or pre-contractual relationships.</li>
+          <li>Providing technical support and customer service.</li>
+          <li>Managing authorized access, users, and profiles.</li>
+          <li>Administering credentials and usage controls for the solution.</li>
+          <li>Sending operational or commercial communications with consent.</li>
+          <li>Analyzing website usage to improve user experience.</li>
+          <li>Complying with legal and regulatory obligations.</li>
+          <li>Developing commercial and promotional actions.</li>
+        </ul>
+      </section>
 
-    <section>
-      <h2>4. Legal Basis for Processing</h2>
-      <ul>
-        <li>Free, prior, express, and informed consent.</li>
-        <li>Execution of a contractual or pre-contractual relationship.</li>
-        <li>Compliance with legal obligations.</li>
-        <li>
-          Legitimate interest of the Company, provided it does not affect the data subject's rights.
-        </li>
-      </ul>
-    </section>
+      <section>
+        <h2>4. Legal Basis for Processing</h2>
+        <ul>
+          <li>Free, prior, express, and informed consent.</li>
+          <li>Execution of a contractual or pre-contractual relationship.</li>
+          <li>Compliance with legal obligations.</li>
+          <li>
+            Legitimate interest of the Company, provided it does not affect the data subject's
+            rights.
+          </li>
+        </ul>
+      </section>
 
-    <section>
-      <h2>5. Data Retention</h2>
-      <p>
-        Data will be kept as long as necessary to fulfill the stated purposes, including potential
-        or legitimate interest relationships.
-      </p>
-      <p>
-        In contractual relationships, data will be kept for the duration of the contract and
-        subsequent legal periods. Thereafter, data will be deleted, anonymized, or blocked in
-        accordance with Law No. 29733.
-      </p>
-    </section>
+      <section>
+        <h2>5. Data Retention</h2>
+        <p>
+          Data will be kept as long as necessary to fulfill the stated purposes, including potential
+          or legitimate interest relationships.
+        </p>
+        <p>
+          In contractual relationships, data will be kept for the duration of the contract and
+          subsequent legal periods. Thereafter, data will be deleted, anonymized, or blocked in
+          accordance with Law No. 29733.
+        </p>
+      </section>
 
-    <section>
-      <h2>6. Information Security</h2>
-      <p>
-        We adopt reasonable technical and organizational measures to protect data from unauthorized
-        access or loss, limiting access only to authorized personnel under confidentiality
-        agreements.
-      </p>
-    </section>
+      <section>
+        <h2>6. Information Security</h2>
+        <p>
+          We adopt reasonable technical and organizational measures to protect data from
+          unauthorized access or loss, limiting access only to authorized personnel under
+          confidentiality agreements.
+        </p>
+      </section>
 
-    <section>
-      <h2>7. Data Processors and Transfers</h2>
-      <p>We may share data with:</p>
-      <ul>
-        <li>Technology providers necessary for operation.</li>
-        <li>
-          Companies within the <strong>SEIDOR group</strong> for administrative and commercial purposes.
-        </li>
-        <li>Strategic partners linked to ZCFLOW under confidentiality.</li>
-        <li>Competent authorities as required by law.</li>
-      </ul>
-      <p>We do not sell or transfer data indiscriminately to third parties.</p>
-    </section>
+      <section>
+        <h2>7. Data Processors and Transfers</h2>
+        <p>We may share data with:</p>
+        <ul>
+          <li>Technology providers necessary for operation.</li>
+          <li>
+            Companies within the <strong>SEIDOR group</strong> for administrative and commercial purposes.
+          </li>
+          <li>Strategic partners linked to ZCFLOW under confidentiality.</li>
+          <li>Competent authorities as required by law.</li>
+        </ul>
+        <p>We do not sell or transfer data indiscriminately to third parties.</p>
+      </section>
 
-    <section>
-      <h2>8. Data Subject Rights</h2>
-      <p>
-        The data subject may exercise their rights of: <strong
-          >Access, Rectification, Cancellation / Erasure, and Opposition</strong
-        >.
-      </p>
-      <p>
-        Submit your request to <a href="mailto:info@zcflow.com">info@zcflow.com</a> with your full name
-        and a clear description of the request, per Law No. 29733.
-      </p>
-    </section>
+      <section>
+        <h2>8. Data Subject Rights</h2>
+        <p>
+          The data subject may exercise their rights of: <strong
+            >Access, Rectification, Cancellation / Erasure, and Opposition</strong
+          >.
+        </p>
+        <p>
+          Submit your request to <a href="mailto:info@zcflow.com">info@zcflow.com</a> with your full name
+          and a clear description of the request, per Law No. 29733.
+        </p>
+      </section>
 
-    <section>
-      <h2>9. Cookies and Similar Technologies</h2>
-      <p>
-        We use cookies to improve browsing. You can configure your browser to reject them, though
-        this may affect site functionality.
-      </p>
-    </section>
+      <section>
+        <h2>9. Cookies and Similar Technologies</h2>
+        <p>
+          We use cookies to improve browsing. You can configure your browser to reject them, though
+          this may affect site functionality.
+        </p>
+      </section>
 
-    <section>
-      <h2>10. Modifications to the Privacy Policy</h2>
-      <p>
-        The Company reserves the right to modify this policy at any time. Changes become effective
-        upon publication on the website.
-      </p>
+      <section>
+        <h2>10. Modifications to the Privacy Policy</h2>
+        <p>
+          The Company reserves the right to modify this policy at any time. Changes become effective
+          upon publication on the website.
+        </p>
+      </section>
     </section>
   </article>
 </LegalWrapper>
