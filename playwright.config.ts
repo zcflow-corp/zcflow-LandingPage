@@ -36,9 +36,13 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+    name: 'DEBUG_CHROME_MOBILE',
+    use: { 
+      browserName: 'chromium',
+      viewport: { width: 375, height: 667 },
+      isMobile: true,
     },
+  },
 
     {
       name: 'firefox',
