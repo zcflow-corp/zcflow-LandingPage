@@ -4,6 +4,7 @@ import Header from '@/components/Header.astro'
 import Footer from '@/components/Footer.astro'
 import FormClaim from '@/islands/FormClaim'
 import AppProvider from '@/layouts/AppProvider'
+import LegalWrapper from '@/components/LegalWrapper.astro'
 
 const pathname = Astro.url.pathname
 
@@ -16,130 +17,134 @@ const dictionaries = import.meta.glob('@/i18n/*.json', { eager: true })
 const messages = dictionaries[`/src/i18n/${locale}.json`]?.default ?? {}
 
 const t = (key) => messages[key] ?? key
+
+const fechaHoy = new Date().toLocaleDateString('es-ES', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+})
+
+const fechaISO = new Date().toISOString()
 ---
 
 <BaseLayout title="libro de reclamaciones" />
 
-<BaseLayout>
-  <Header t={t} />
-  <main>
-    <section class="section-reclamo">
-      <section class="container claim-container">
-        <section class="claim-info" aria-labelledby="claim-title">
-          <div class="claim-header">
-            <h1 id="claim-title" class="gradient-blue-dark">Register Your Claim</h1>
-          </div>
+<LegalWrapper t={t}>
+  <article class="legal-page">
+    <header class="legal-header" style={{ margin: '0px' }}>
+      <h1 id="claim-title" class="gradient-blue-dark">Register Your Claim</h1>
+    </header>
 
-          <!-- Company information -->
-          <address class="claim-entity">
-            <p>
-              <strong>Company name:</strong>
-              <span>SEIDOR CONSULTING PERU S.A.C.</span>
-            </p>
-            <p>
-              <strong>Tax ID (RUC):</strong>
-              <span>20517426726</span>
-            </p>
-            <p>
-              <strong>Registered address:</strong>
-              <span> Vittore Carpaccio 250, Office 501, San Borja, Lima, Peru </span>
-            </p>
-            <p>
-              <strong>Contact email:</strong>
-              <a href="mailto:ayuda@zcflow.com">ayuda@zcflow.com</a>
-            </p>
-          </address>
-
-          <!-- Response timeframe -->
-          <section class="claim-deadline" aria-labelledby="claim-deadline-title">
-            <h2 id="claim-deadline-title" class="sr-only">Response timeframe</h2>
-            <p>
-              <strong>Response timeframe</strong><br />
-              ZCFLOW will respond to the claim or complaint within a maximum period of thirty (30) calendar
-              days, in accordance with applicable regulations.
-            </p>
-          </section>
-
-          <!-- Legal information -->
-          <section class="claim-legal" aria-labelledby="claim-legal-title">
-            <h2 id="claim-legal-title" class="sr-only">Legal information</h2>
-
-            <article>
-              <p>
-                Filing a claim or complaint does not prevent the consumer from resorting to other
-                dispute resolution mechanisms, nor does it constitute a prerequisite for filing a
-                complaint with INDECOPI.
-              </p>
-            </article>
-
-            <article>
-              <h3>Personal data protection</h3>
-              <p>
-                SEIDOR CONSULTING PERU S.A.C. (hereinafter, “SEIDOR”) informs the user that, in
-                accordance with Law No. 29733 – Personal Data Protection Law, its Regulations and
-                other supplementary provisions, the personal data provided through ZCFLOW’s
-                Complaints Book will be processed under the following conditions:
-              </p>
-
-              <h3>Purpose of processing and mandatory data</h3>
-              <p>
-                The personal data collected is necessary to receive, manage and respond to the claim
-                or complaint submitted by the user.
-              </p>
-              <p>
-                The mandatory personal data includes: first and last names, type and number of
-                identity document, home address, telephone number and email address. If this
-                information is not provided, SEIDOR will not be able to process or manage the claim
-                or complaint.
-              </p>
-
-              <h3>Recipients and data transfers</h3>
-              <p>
-                Personal data may be processed by data processors solely for the purpose of managing
-                the claim or complaint, under strict confidentiality and security obligations.
-              </p>
-
-              <h3>Database</h3>
-              <p>
-                Personal data will be stored in SEIDOR’s personal data database, duly registered or
-                in the process of registration with the National Registry of Personal Data
-                Protection.
-              </p>
-
-              <h3>Retention period</h3>
-              <p>
-                Personal data will be retained for as long as necessary to process and close the
-                claim or complaint and, subsequently, for the applicable legal period, up to ten
-                (10) years.
-              </p>
-
-              <h3>Exercise of ARCO rights</h3>
-              <p>
-                The user may exercise their rights of access, rectification, cancellation and
-                opposition (ARCO) by submitting a request to the email address
-                <a href="mailto:ayuda@zcflow.com">ayuda@zcflow.com</a>.
-              </p>
-
-              <p>
-                If the user considers that their rights have not been adequately addressed, they may
-                file a complaint with the National Authority for Personal Data Protection, under the
-                Ministry of Justice and Human Rights.
-              </p>
-            </article>
-
-            <div class="claim-sign">
-              <p>February 2026</p>
-            </div>
-          </section>
-        </section>
-
-        <div class="claim-form">
-          <AppProvider client:load>
-            <FormClaim client:load />
-          </AppProvider>
+    <section class="legal-content">
+      <dl>
+        <div>
+          <dt><strong>Company name:</strong></dt>
+          <dd class="description-text">SEIDOR CONSULTING PERU S.A.C.</dd>
         </div>
+        <div>
+          <dt><strong>Tax ID (RUC):</strong></dt>
+          <dd class="description-text">20517426726</dd>
+        </div>
+        <div>
+          <dt><strong>Registered address:</strong></dt>
+          <dd class="description-text">Vittore Carpaccio 250, Office 501, San Borja, Lima, Peru</dd>
+        </div>
+        <div>
+          <dt><strong>Contact email:</strong></dt>
+          <dd class="description-text">
+            <a href="mailto:ayuda@zcflow.com">ayuda@zcflow.com</a>
+          </dd>
+        </div>
+      </dl>
+
+      <section aria-labelledby="claim-deadline-title">
+        <h2 id="claim-deadline-title" class="sr-only">Response timeframe</h2>
+        <blockquote class="claim-deadline">
+          ZCFLOW will respond to the claim or complaint within a maximum period of thirty (30)
+          calendar days, in accordance with applicable regulations.
+        </blockquote>
+      </section>
+
+      <section>
+        <p>
+          Filing a claim or complaint does not prevent the consumer from resorting to other dispute
+          resolution mechanisms, nor does it constitute a prerequisite for filing a complaint with
+          INDECOPI.
+        </p>
+        <h2>1. Personal data protection</h2>
+        <p>
+          SEIDOR CONSULTING PERU S.A.C. (hereinafter, “SEIDOR”) informs the user that, in accordance
+          with Law No. 29733 – Personal Data Protection Law, its Regulations and other supplementary
+          provisions, the personal data provided through ZCFLOW’s Complaints Book will be processed
+          under the following conditions:
+        </p>
+      </section>
+
+      <section>
+        <h2>2. Purpose of processing and mandatory data</h2>
+        <p>
+          The personal data collected is necessary to receive, manage and respond to the claim or
+          complaint submitted by the user.
+        </p>
+        <p>
+          The mandatory personal data includes: first and last names, type and number of identity
+          document, home address, telephone number and email address. If this information is not
+          provided, SEIDOR will not be able to process or manage the claim or complaint.
+        </p>
+      </section>
+
+      <section>
+        <h2>3. Recipients and data transfers</h2>
+        <p>
+          Personal data may be processed by data processors solely for the purpose of managing the
+          claim or complaint, under strict confidentiality and security obligations.
+        </p>
+      </section>
+
+      <section>
+        <h2>4. Database</h2>
+        <p>
+          Personal data will be stored in SEIDOR’s personal data database, duly registered or in the
+          process of registration with the National Registry of Personal Data Protection.
+        </p>
+      </section>
+
+      <section>
+        <h2>5. Retention period</h2>
+        <p>
+          Personal data will be retained for as long as necessary to process and close the claim or
+          complaint and, subsequently, for the applicable legal period, up to ten (10) years.
+        </p>
+      </section>
+
+      <section>
+        <h2>6. Exercise of ARCO rights</h2>
+        <p>
+          The user may exercise their rights of access, rectification, cancellation and opposition
+          (ARCO) by submitting a request to the email address
+          <a href="mailto:ayuda@zcflow.com">ayuda@zcflow.com</a>.
+        </p>
+      </section>
+
+      <section>
+        <p>
+          If the user considers that their rights have not been adequately addressed, they may file
+          a complaint with the National Authority for Personal Data Protection, under the Ministry
+          of Justice and Human Rights.
+        </p>
       </section>
     </section>
-  </main>
-  <Footer t={t} />
-</BaseLayout>
+
+    <div class="claim-sign">
+      <p>
+        <time datetime={fechaISO}>{fechaHoy}</time>
+      </p>
+    </div>
+  </article>
+
+  <section class="claim-form">
+    <AppProvider client:load>
+      <FormClaim client:load />
+    </AppProvider>
+  </section>
+</LegalWrapper>
