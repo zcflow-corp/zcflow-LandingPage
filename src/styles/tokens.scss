@@ -37,8 +37,14 @@
   --d8: #b0b0b0;
   --d9: #00b8d9;
   --d10: #ff9f40;
+  --d11: #063bb1;
   --g-primary: linear-gradient(135deg, #0563ff 0%, #071381 100%); //nuevoo
   --g-primary-light: linear-gradient(90deg,
+      var(--c-primary),
+      var(--d9),
+      var(--c-quinary),
+      var(--c-primary));
+      --g-primary-light: linear-gradient(90deg,
       var(--c-primary),
       var(--d9),
       var(--c-quinary),
@@ -56,7 +62,7 @@
   --shadowInset: 0 30px 60px -12px rgba(50, 50, 93, 0.25), 0 18px 36px -18px rgba(0, 0, 0, 0.3);
   --shadowL: 0 50px 100px -20px rgba(50, 50, 93, 0.25), 0 30px 60px -30px rgba(0, 0, 0, 0.3);
   --container: 1200px;
-  --header-offset: 100px;
+  --header-offset: 90px;
 }
 
 /* 1. Variables globales de tema */
@@ -69,7 +75,7 @@
   --c-line: #1f2a44;
   --g-primary-light: linear-gradient(90deg,
       #7faeff,
-      #8fdfff,
+      #8899ff,
       #9aa8ff,
       #7faeff);
 
@@ -94,8 +100,8 @@
 }
 
 .section {
-  padding: 14px 0;
-  scroll-margin-top: 80px;
+  // padding: 14px 0;
+  // scroll-margin-top: 80px;
 }
 
 
