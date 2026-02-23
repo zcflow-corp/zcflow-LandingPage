@@ -641,6 +641,7 @@ html[data-theme='dark'] .card-slider {
 
     @include media(mobile) {
       flex-direction: column;
+      row-gap: 0rem;
     }
 
     .card-slider__media {
