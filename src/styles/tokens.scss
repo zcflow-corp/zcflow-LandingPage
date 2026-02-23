@@ -37,8 +37,14 @@
   --d8: #b0b0b0;
   --d9: #00b8d9;
   --d10: #ff9f40;
+  --d11: #063bb1;
   --g-primary: linear-gradient(135deg, #0563ff 0%, #071381 100%); //nuevoo
   --g-primary-light: linear-gradient(90deg,
+      var(--c-primary),
+      var(--d9),
+      var(--c-quinary),
+      var(--c-primary));
+      --g-primary-light: linear-gradient(90deg,
       var(--c-primary),
       var(--d9),
       var(--c-quinary),
@@ -69,7 +75,7 @@
   --c-line: #1f2a44;
   --g-primary-light: linear-gradient(90deg,
       #7faeff,
-      #8fdfff,
+      #8899ff,
       #9aa8ff,
       #7faeff);
 
