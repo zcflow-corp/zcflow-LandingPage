@@ -56,7 +56,7 @@
   --shadowInset: 0 30px 60px -12px rgba(50, 50, 93, 0.25), 0 18px 36px -18px rgba(0, 0, 0, 0.3);
   --shadowL: 0 50px 100px -20px rgba(50, 50, 93, 0.25), 0 30px 60px -30px rgba(0, 0, 0, 0.3);
   --container: 1200px;
-  --header-offset: 100px;
+  --header-offset: 90px;
 }
 
 /* 1. Variables globales de tema */
@@ -94,8 +94,8 @@
 }
 
 .section {
-  padding: 14px 0;
-  scroll-margin-top: 80px;
+  // padding: 14px 0;
+  // scroll-margin-top: 80px;
 }
 
 
