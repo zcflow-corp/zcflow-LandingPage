@@ -9,7 +9,7 @@ const base = import.meta.env.BASE_URL
 const { t, path, locale } = localeHelper(Astro)
 const terminosPath = path('/terminos')
 const [logoLight, win_leader, win_milestone, libro_reclamo] = await Promise.all([
-  getImageMetadata('logo_header_light.webp'),
+  getImageMetadata('logo_movil_dark.webp'),
   getImageMetadata('win_leader.webp'),
   getImageMetadata('win_milestone.webp'),
   getImageMetadata('libro-reclamo.jpg'),
@@ -42,6 +42,9 @@ const [logoLight, win_leader, win_milestone, libro_reclamo] = await Promise.all(
             <p style="font-size: 0.8rem;font-style: normal;margin:0px;">
               Jr. Vittore Carpaccio 250, San Borja 15036
             </p>
+            <p style="font-size: 0.8rem;font-style: normal;margin:0px;">
+              {t('Derechos reservados')} @Zcflow
+            </p>
           </address>
         </div>
         <meta itemprop="name" content="ZCFlow" />
@@ -57,28 +60,19 @@ const [logoLight, win_leader, win_milestone, libro_reclamo] = await Promise.all(
       <div class="footer-col">
         <h3>{t('Platform')}</h3>
         <nav aria-label="Platform" style="background:var(--c-quinary)!important;">
-          <a href={`${path('')}#soluciones`} target="_blank" rel="noopener noreferrer"
-            >{t('Empresas')}</a
-          >
-          <a href={`${path('')}#soluciones`} target="_blank" rel="noopener noreferrer"
+          <a href={'#soluciones'} rel="noopener noreferrer">{t('Empresas')}</a>
+          <!-- <a href={`${path('')}#soluciones`}  rel="noopener noreferrer"
             >{t('Socios')}</a
-          >
-          <a href={`${path('')}#soluciones`} target="_blank" rel="noopener noreferrer"
-            >{t('Soluciones')}</a
-          >
+          > -->
+          <a href={'#soluciones'} rel="noopener noreferrer">{t('Soluciones')}</a>
         </nav>
       </div>
       <div class="footer-col">
         <h3>{t('Resources')}</h3>
         <nav aria-label="resources" style="background:var(--c-quinary)!important;">
-          <a href={`${path('')}#zcflow`} target="_blank" rel="noopener noreferrer"
-            >{t('Quiénes somos')}</a
-          >
-          <a href={`${path('')}#fundamentos`} target="_blank" rel="noopener noreferrer"
-            >{t('Fundamentos')}</a
-          >
-          <a href={path('contacto')} target="_blank" rel="noopener noreferrer">{t('Contáctanos')}</a
-          >
+          <a href={'#zcflow'} rel="noopener noreferrer">{t('Quiénes somos')}</a>
+          <a href={'#fundamentos'} rel="noopener noreferrer">{t('Fundamentos')}</a>
+          <a href={path('contacto')} rel="noopener noreferrer">{t('Contáctanos')}</a>
         </nav>
       </div>
       <div style="display: flex;max-width: 50%;">
@@ -118,30 +112,13 @@ const [logoLight, win_leader, win_milestone, libro_reclamo] = await Promise.all(
             style="flex-wrap: wrap; line-height: 2; background:var(--c-quinary)!important;flex-direction: row; gap:0.8rem;justify-content: space-between;"
             aria-label="Legal"
           >
-            <a href={path('/terminos')} target="_blank" rel="noopener noreferrer"
-              >{t('Términos y Condiciones')}</a
+            <a href={path('/terminos')} rel="noopener noreferrer">{t('Términos y Condiciones')}</a>
+
+            <a href={path('/privacidad')} rel="noopener noreferrer">{t('Política de privacidad')}</a
             >
 
-            <a href={path('/privacidad')} target="_blank" rel="noopener noreferrer"
-              >{t('Política de privacidad')}</a
-            >
-            <a href="#legal" target="_blank" rel="noopener noreferrer"
-              >{t('Derechos reservados')} @Zcflow</a
-            >
-
-            <a
-              href={path('reclamo')}
-              aria-label="Libro de Reclamaciones"
-              target="_blank"
-              rel="noopener noreferrer"
-              ><Image
-                src={libro_reclamo}
-                loading="lazy"
-                decoding="async"
-                alt="Libro de Reclamaciones"
-                width={80}
-                height={80}
-              /></a
+            <a href={path('reclamo')} aria-label="Libro de Reclamaciones" rel="noopener noreferrer"
+              >Libro de reclamaciones</a
             >
           </nav>
         </div>
@@ -191,7 +168,7 @@ const [logoLight, win_leader, win_milestone, libro_reclamo] = await Promise.all(
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 4.5rem;
+      gap: 5.5rem;
       align-items: start;
     }
     .footer-col {

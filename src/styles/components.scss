@@ -63,7 +63,7 @@
     place-items: center;
     opacity: 0;
     transform: scale(0.995);
-    margin: 1rem;
+    margin: 0rem;
 
     pointer-events: none;
     transition:
@@ -641,6 +641,7 @@ html[data-theme='dark'] .card-slider {
 
     @include media(mobile) {
       flex-direction: column;
+      row-gap: 0rem;
     }
 
     .card-slider__media {
@@ -1089,7 +1090,7 @@ html[data-theme='dark'] .zcflow-who {
   color: #e5edff;
 
   @include media(mobile) {
-    padding: 1rem;
+    padding: 0rem;
     margin-top: 0rem;
     height: 100%;
 

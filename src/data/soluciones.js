@@ -20,7 +20,7 @@ export const soluciones = (t) => [
         título: t('Conecta'),
         textinfo: t('Más información'),
         icono: 'conecta',
-        titleSub: t('Más rápido'),
+        titleSub: t('Con rapidez'),
         process: 25,
         SubTitle: t('Unifique todo.'),
         resumen: t(

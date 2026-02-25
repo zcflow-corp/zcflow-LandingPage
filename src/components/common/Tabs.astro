@@ -12,7 +12,7 @@ let active = 0
       <span class="process" id="out"> </span>
     </div>
     <!-- Botones -->
-    <div role="tablist" aria-label="Qué podrás hacer" class="tabs">
+    <div role="tablist" aria-label="Qué podrás hacer" class="tabs tablist">
       {
         TabsJson.pestañas.map((t, i) => (
           <button
@@ -101,13 +101,16 @@ let active = 0
   .tabs-container {
     width: 100%;
     position: relative;
+    @include media(mobile) {
+      border-radius: 0px 0px 20px 20px;
+    }
 
     .tabs {
       display: flex;
       justify-content: flex-start;
       align-items: flex-start;
 
-      gap: 1rem;
+      // gap: 1rem;
       margin-bottom: 1rem;
       flex-wrap: wrap;
 
@@ -144,9 +147,18 @@ let active = 0
         cursor: pointer;
         flex: 1;
         padding: 0.5rem;
+        row-gap: 0.3rem;
+        @include media(mobile) {
+          transform: scale(0.85);
+          padding: 0.5rem 0rem;
+        }
 
         p {
           font-size: medium;
+          @include media(mobile) {
+            font-size: 1rem;
+          }
+
           &:focus {
             box-shadow: var(--shadow);
           }
@@ -159,9 +171,6 @@ let active = 0
         span {
           font-size: small;
           color: var(--c-text-muted);
-          @include media(mobile) {
-            font-size: 0.7rem;
-          }
         }
       }
 
@@ -172,31 +181,44 @@ let active = 0
       &-solutions {
         @include media(mobile) {
           position: sticky;
-          top: 12%;
+          overflow-y: hidden;
+          top: 12.5%;
           z-index: 10;
           width: 100%;
           left: 100%;
-          border-radius: 5px;
+
           gap: 0rem;
           align-self: self-end;
-          transform: scale(0.85);
-          box-shadow: var(--shadowX);
-          padding-top: 1rem;
 
-          .tab-title {
-            color: var(--c-white);
+          box-shadow: var(--shadowX);
+          padding-top: 0.6rem;
+        }
+
+        .activeTab {
+          span {
+            color: var(--d7);
             @include media(mobile) {
               color: var(--c-line);
             }
           }
+        }
 
-          .activeTab {
-            span {
-              color: var(--d7);
-              @include media(mobile) {
-                color: var(--c-line);
-              }
-            }
+        .tab-title {
+          color: var(--c-white);
+          @include media(mobile) {
+            color: var(--c-line);
+            font-size: 0.75rem;
+          }
+        }
+
+        .tablist {
+          @include media(mobile) {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            overflow: auto;
+            border-radius: var(--br);
           }
         }
       }

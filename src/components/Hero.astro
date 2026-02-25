@@ -13,6 +13,10 @@ const textos = [
   t('¿Cuál es el saldo de mi cuenta global en USD?'),
   t('¿Cuáles son los clientes que me pagan con retraso?'),
 ]
+// const textos = [
+//   t('¿Saldo cuenta global USD?'),
+//   t('¿Clientes con pagos retrasados?'),
+// ]
 ---
 
 <section class="hero" id="hero">
@@ -20,7 +24,15 @@ const textos = [
     <div class="hero-description">
       <div class="hero-description-title">
         <h1 class="hero-description-title-h1">
-          <span class="gradient-blue-dark">
+          <span
+            class="gradient-blue-dark"
+            style={{
+              '--bg-custom': 'linear-gradient(90deg, #0563ff, #071381, #0563ff)',
+              background: 'var(--bg-custom)',
+              '-webkit-background-clip': 'text',
+              'background-clip': 'text',
+            }}
+          >
             {t('Revolucionando')}
             <br class="only-mobile" />
             {t('la tesorería')}
