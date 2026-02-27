@@ -38,7 +38,11 @@ const fechaISO = new Date().toISOString()
       <!-- Datos de la empresa -->
 
       <dl>
-        <div><dt><strong>Razón social:</strong></dt><dd class="description-text">SEIDOR CONSULTING PERU S.A.C.</dd></div>
+        <div>
+          <dt><strong>Razón social:</strong></dt><dd class="description-text">
+            SEIDOR CONSULTING PERU S.A.C.
+          </dd>
+        </div>
         <div><dt><strong>RUC:</strong></dt><dd class="description-text">20517426726</dd></div>
         <div>
           <dt><strong>Domicilio:</strong></dt><dd class="description-text">
@@ -55,8 +59,8 @@ const fechaISO = new Date().toISOString()
       <!-- Plazo de atención -->
       <section aria-labelledby="claim-deadline-title">
         <blockquote>
-          ZCFLOW dará respuesta al reclamo o queja en un plazo máximo de treinta (30) días calendario,
-          conforme a la normativa vigente.
+          ZCFLOW dará respuesta al reclamo o queja en un plazo máximo de treinta (30) días
+          calendario, conforme a la normativa vigente.
         </blockquote>
       </section>
 
@@ -131,15 +135,37 @@ const fechaISO = new Date().toISOString()
       </section>
     </section>
 
+    <section class="claim-form">
+      <p class="description-text">
+        Para registrar un reclamo o queja, puede utilizar el
+        <a href="#" id="open-claim" class="legal-link"> formulario correspondiente. </a>
+      </p>
+    </section>
+
     <div class="claim-sign">
       <p class="">
         <time datetime={fechaISO}>{fechaHoy}</time>
       </p>
     </div>
   </article>
-   <section class="claim-form">
-      <AppProvider client:load>
-        <FormClaim client:load />
-      </AppProvider>
-    </section>
+  <div id="claim-container" class="hidden" style="margin-top: 2rem; margin-bottom: 4rem;">
+    <AppProvider client:load>
+      <FormClaim client:load />
+    </AppProvider>
+  </div>
 </LegalWrapper>
+
+<script>
+  const link = document.getElementById('open-claim')
+  const container = document.getElementById('claim-container')
+
+  link?.addEventListener('click', (e) => {
+    e.preventDefault()
+    container.style.display = 'block'
+
+    container.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    })
+  })
+</script>

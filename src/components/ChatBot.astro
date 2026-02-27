@@ -64,6 +64,16 @@ const { locale, t } = localeHelper(Astro)
       height: auto !important;
     }
 
+    @include media(desktop) {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+
+    @include media(extradesktop) {
+      height: auto;
+    }
+
     .container {
       width: 100%;
       height: auto;
