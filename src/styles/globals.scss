@@ -6,12 +6,14 @@ html {
   scroll-behavior: smooth;
   // scroll-padding-top: var(--header-offset);
 }
+
 section[id] {
   scroll-margin-top: 80px !important;
   display: block;
   position: relative;
   overflow: clip;
 }
+
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: 0.5s;
@@ -296,12 +298,15 @@ html[data-theme='light'] .fundamentos {
   background: rgba(255, 255, 255, 0.85) !important;
   backdrop-filter: blur(8px);
 }
-[data-theme='light'] .tabs{
+
+[data-theme='light'] .tabs {
   background: var(--c-white);
 }
+
 [data-theme='dark'] .tabs {
- background: var(--c-black);
+  background: var(--c-black);
 }
+
 [data-theme='dark'] header {
   background: rgb(0, 0, 0, 0.8) !important;
   backdrop-filter: blur(8px);
@@ -407,4 +412,75 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
   width: 1px;
   height: 100%;
   background: var(--g-primary-dark);
+}
+
+
+/* ============================= */
+/* SONNER THEME - ZCFLOW */
+/* ============================= */
+
+.zcflow-toaster {
+  font-family: var(--font-body);
+}
+
+.zcflow-toaster [data-sonner-toast] {
+  background: var(--c-panel);
+  color: var(--c-text);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* SUCCESS */
+.zcflow-toaster [data-sonner-toast][data-type='success'] {
+  background: var(--c-success);
+  color: var(--c-white);
+  border-color: var(--c-success);
+}
+
+/* ERROR */
+.zcflow-toaster [data-sonner-toast][data-type='error'] {
+  background: var(--c-error);
+  color: var(--c-white);
+  border-color: var(--c-error);
+}
+
+/* WARNING */
+.zcflow-toaster [data-sonner-toast][data-type='warning'] {
+  background: var(--c-warning);
+  color: var(--c-white);
+  border-color: var(--c-warning);
+}
+
+/* INFO */
+.zcflow-toaster [data-sonner-toast][data-type='info'] {
+  background: var(--c-primary);
+  color: var(--c-white);
+  border-color: var(--c-primary);
+}
+
+
+.hero-description {
+
+  .gradient-hero {
+    background:
+      linear-gradient(100deg,
+        var(--c-primary),
+        var(--d11),
+
+        var(--c-primary),
+
+        var(--c-quinary),
+        var(--c-primary-accessible-hover));
+
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    animation: gradient-move 5s ease infinite;
+    background-size: 300% 100%;
+    animation: infinityBorder 4s linear infinite;
+  }
 }

@@ -42,13 +42,14 @@ function getLocaleFromDoc() {
   return document.documentElement.lang === 'en' ? 'en' : 'es'
 }
 
+const localeR = getLocaleFromDoc()
+
 function createTranslationFunction(messages) {
   return (key) => messages[key] || key
 }
 export default function ContactForm() {
   const [step, setStep] = useState(1)
   const [prefix, setPrefix] = useState('')
-  const [openTerms, setOpenTerms] = useState(false)
 
   // ✅ i18n
   const locale = getLocaleFromDoc()
@@ -300,16 +301,19 @@ export default function ContactForm() {
                           onCheckedChange={field.onChange}
                         />
 
-                        <p className="text-sm text-text leading-snug">
-                          {t('Acepto los')}{' '}
-                          <button
-                            type="button"
-                            onClick={() => setOpenTerms(true)}
-                            className="underline text-primary hover:opacity-80 "
-                          >
-                            {t('términos y condiciones')}
-                          </button>
-                        </p>
+                        <div className="flex items-start gap-2 ">
+                          <p className="text-sm leading-snug">
+                            {t('Al continuar acepto la')}{' '}
+                            <a
+                              href={`/${localeR}/privacidad`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="underline text-primary cursor-pointer"
+                            >
+                              {t('Política de Privacidad')}
+                            </a>
+                          </p>
+                        </div>
                       </div>
                     )}
                   />
@@ -317,7 +321,6 @@ export default function ContactForm() {
               </>
             )}
 
-            <TermsModal open={openTerms} onOpenChange={setOpenTerms} />
             {/* ACTIONS */}
             <div className="flex justify-between pt-4">
               {step > 1 && (

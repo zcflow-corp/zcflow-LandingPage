@@ -24,15 +24,7 @@ const textos = [
     <div class="hero-description">
       <div class="hero-description-title">
         <h1 class="hero-description-title-h1">
-          <span
-            class="gradient-blue-dark"
-            style={{
-              '--bg-custom': 'linear-gradient(90deg, #0563ff, #071381, #0563ff)',
-              background: 'var(--bg-custom)',
-              '-webkit-background-clip': 'text',
-              'background-clip': 'text',
-            }}
-          >
+          <span class="gradient-hero" style="text-align: center;">
             {t('Revolucionando')}
             <br class="only-mobile" />
             {t('la tesorería')}
@@ -77,23 +69,26 @@ const textos = [
       animation: changeBgHero 12s forwards;
       transform: rotate(-70deg);
       background-position: 159%;
-      bottom: -52%;
+      bottom: -50%;
       right: 0%;
 
       @include media(tablet-down) {
         .hero-description {
           align-self: center;
         }
-        // transform: rotate(-78deg);
-        // background-position: 186%;
-        // bottom: -5%;
-        // right: -55%;
-        // background-size: 117%;
+
         transform: rotate(-10deg);
         background-position: 52%;
-        bottom: -59%;
-        right: -368%;
+        bottom: -45%;
+        right: -350%;
         background-size: 165%;
+      }
+
+      @include media(tablet) {
+        transform: rotate(124deg);
+        background-position: 52%;
+        bottom: -10%;
+        right: -118%;
       }
 
       @include media(desktop) {
@@ -104,10 +99,6 @@ const textos = [
       }
 
       @include media(extradesktop) {
-        // background-position: 145% 30% center;
-        // background-position: 100%;
-        // bottom: -19%;
-        // right: -14%;
         inset: 0 0% 0 0;
         position: absolute;
         transform: rotate(-60deg);
@@ -124,11 +115,6 @@ const textos = [
     .container {
       padding-top: 0rem;
       padding-bottom: 0rem;
-
-      // @include media(tablet) {
-      //   padding-bottom: 0rem;
-      //   padding-right: 0rem !important;
-      // }
     }
 
     &-inner {
@@ -227,10 +213,18 @@ const textos = [
     &-imagen {
       display: flex;
       width: 100%;
-      min-height: 50vh;
+      margin-top: 1rem;
+
+      min-height: 65vh;
+      transform: scale(0.95);
+
+      @include media(mobile) {
+        justify-items: end;
+      }
 
       @include media(tablet) {
         min-height: 90vh;
+        transform: scale(1);
       }
 
       @include media(extradesktop) {
@@ -347,6 +341,10 @@ const textos = [
         transform: rotate(-55deg);
         background-size: contain;
       }
+    }
+
+    h2 {
+      color: var(--c-white);
     }
   }
 </style>

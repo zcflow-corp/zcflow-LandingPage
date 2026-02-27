@@ -134,6 +134,12 @@ const fechaISO = new Date().toISOString()
         </p>
       </section>
     </section>
+    <section class="claim-form">
+      <p class="description-text">
+        To submit a complaint or claim, you may use the
+        <a href="#" id="open-claim" class="legal-link"> corresponding form. </a>
+      </p>
+    </section>
 
     <div class="claim-sign">
       <p>
@@ -143,8 +149,26 @@ const fechaISO = new Date().toISOString()
   </article>
 
   <section class="claim-form">
-    <AppProvider client:load>
-      <FormClaim client:load />
-    </AppProvider>
+    <div id="claim-container" class="hidden" style="margin-top: 2rem; margin-bottom: 4rem;">
+      <AppProvider client:load>
+        <FormClaim client:load />
+      </AppProvider>
+    </div>
   </section>
 </LegalWrapper>
+
+<script>
+  const link = document.getElementById('open-claim')
+  const container = document.getElementById('claim-container')
+
+  link?.addEventListener('click', (e) => {
+    e.preventDefault()
+
+    container.style.display = 'block'
+
+    container.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    })
+  })
+</script>

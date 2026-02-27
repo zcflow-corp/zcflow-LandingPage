@@ -16,6 +16,12 @@
     margin: 0rem 2rem;
   }
 
+  @include media(extradesktop) {
+
+    overflow: visible;
+
+  }
+
   &::before {
     content: '';
     position: absolute;
@@ -56,7 +62,7 @@
     // }
 
     @include media(desktop) {
-      transform: rotate(50deg);
+      transform: rotate(60deg);
       background-size: 150%;
       background-position: center;
       background-repeat: no-repeat;
@@ -82,11 +88,12 @@
 html[data-theme='dark'] .section-contact {
   &::before {
     background-image: url('/assets/herob.webp');
-    background-size: 95%;
+    background-size: 100%;
     background-position: bottom;
-    transform: rotate(20deg);
-    bottom: -30%;
-    top: 20%;
+    transform: rotate(-95deg);
+    top: -7%;
+    right: -50%;
+
   }
 }
 
@@ -239,4 +246,12 @@ html[data-theme='light'] .form-claim {
       border-radius: 10px;
     }
   }
+}
+
+.legal-link {
+  color: var(--c-primary-accessible);
+  font-weight: 400;
+  letter-spacing: 1%;
+
+  text-decoration: underline;
 }
