@@ -39,16 +39,24 @@
   --d10: #ff9f40;
   --d11: #063bb1;
   --g-primary: linear-gradient(135deg, #0563ff 0%, #071381 100%); //nuevoo
+
+
+
+
+
   --g-primary-light: linear-gradient(90deg,
       var(--c-primary),
       var(--d9),
       var(--c-quinary),
       var(--c-primary));
-      --g-primary-light: linear-gradient(90deg,
+  --g-primary-light: linear-gradient(90deg,
       var(--c-primary),
       var(--d9),
       var(--c-quinary),
       var(--c-primary));
+
+
+
   --g-primary-dark: linear-gradient(90deg, #0563ff 0%, #476aa6 47.12%, #e2e2e2 100%);
   --g-cta: linear-gradient(90deg, #00084d 20%, #1d63ed 99%);
   --g-hero: radial-gradient(60% 80% at 70% 30%, #ffff 0%, #fff 70%);
@@ -99,10 +107,7 @@
   align-items: center;
 }
 
-.section {
-  // padding: 14px 0;
-  // scroll-margin-top: 80px;
-}
+
 
 
 

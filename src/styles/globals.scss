@@ -458,3 +458,29 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
   color: var(--c-white);
   border-color: var(--c-primary);
 }
+
+
+.hero-description {
+
+  .gradient-hero {
+    background:
+      linear-gradient(100deg,
+        var(--c-primary),
+        var(--d11),
+
+        var(--c-primary),
+
+        var(--c-quinary),
+        var(--c-primary-accessible-hover));
+
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    animation: gradient-move 5s ease infinite;
+    background-size: 300% 100%;
+    animation: infinityBorder 4s linear infinite;
+  }
+}
