@@ -4,9 +4,6 @@ import LineChart from '@/islands/LineChart.jsx'
 import CounterOnView from '@/islands/CounterOnView.jsx'
 import ChartIndicator from './grafic/ChartIndicator.astro'
 
-// const { t: _t } = Astro.props
-// const t = typeof _t === 'function' ? _t : (k) => k
-
 const { locale, t } = localeHelper(Astro)
 ---
 
@@ -29,7 +26,7 @@ const { locale, t } = localeHelper(Astro)
         </div>
         <!-- Gráfico de línea con descripción -->
         <div class="section-grafico-indicador">
-          <figure style="align-self: flex-end; margin:0%">
+          <figure style="align-self: flex-end; margin:0%; min-height: 300px;">
             <LineChart
               client:visible
               aria-label={t('Gráfico de línea mostrando indicadores financieros clave')}
@@ -77,13 +74,16 @@ const { locale, t } = localeHelper(Astro)
   .section-grafico-left {
     max-width: 41%;
     align-self: center;
+    @include media(mobile) {
+      max-width: 100%;
+    }
   }
   .indicators {
     background: #141417 !important;
     border: 1px solid #3a3a3d;
     flex-direction: column;
     color: var(--c-bg);
-    padding: 2rem 3rem;
+    // padding: 2rem 3rem;
     border-radius: var(--radius);
 
     max-width: 950px;
@@ -107,7 +107,6 @@ const { locale, t } = localeHelper(Astro)
     line-height: 28px;
     margin: 0;
     height: 40px;
-    // @include gradient-text-indicadores-base(#0563ff, #90a9d5, #f6f6f9);
   }
 
   .imagen-indicador {
@@ -172,31 +171,44 @@ const { locale, t } = localeHelper(Astro)
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin-top: 3rem;
+    margin-top: 0rem;
+    min-height: 123px;
+    align-items: center;
     @include media(mobile) {
       padding: 0px 1rem;
+      min-height: 300px;
     }
-
-    // @include media(tablet) {
-    //
-    // }
   }
   .section-grafico {
     display: flex;
 
     align-items: start;
-    padding: 1rem 0;
+    // padding: 1rem 0;
     // gap: 2rem;
     justify-content: space-between;
     width: 100%;
     text-wrap: wrap;
     flex-wrap: wrap;
-    .section-grafico-indicador {
-      width: 55%;
-      height: auto;
-      @include media(mobile) {
-        width: 100%;
-      }
+    row-gap: 2rem;
+    @include media(mobile) {
+      row-gap: 0rem;
+    }
+    .imagen-indicador,
+    .counter {
+      contain: layout;
+      min-height: 80px;
+    }
+  }
+  .section-grafico-indicador {
+    width: 55%;
+    aspect-ratio: 16 / 9;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    @include media(mobile) {
+      width: 100%;
+      height: 280px;
     }
   }
 
@@ -206,9 +218,6 @@ const { locale, t } = localeHelper(Astro)
       display: flex;
       flex-wrap: wrap;
       row-gap: 1.4rem;
-    }
-    .section-grafico {
-      row-gap: 2rem;
     }
   }
 
@@ -266,21 +275,17 @@ const { locale, t } = localeHelper(Astro)
   @include media(mobile) {
     .container-counter {
       display: grid;
-      grid-template-columns: repeat(2, 1fr); /* 2 columnas iguales */
+      grid-template-columns: repeat(2, 1fr);
       gap: 2rem;
       width: 100%;
       padding: 0rem;
+      min-height: 100px;
+      contain-intrinsic-size: auto 100px;
     }
 
     .container-counter {
       transform: scale(0.9);
     }
-    // .section-grafico {
-    //   .section-grafico-indicador {
-    //     width: 100%;
-    //     margin-top: 2rem;
-    //   }
-    // }
   }
 
   html[data-theme='dark'] .indicators {
