@@ -3,8 +3,6 @@ import { getImageMetadata } from '@/utils/imageHelper'
 import { localeHelper } from '../i18n/index'
 import { Image } from 'astro:assets'
 
-// const { t: _t } = Astro.props
-// const t = typeof _t === 'function' ? _t : (k: unknown) => k
 const base = import.meta.env.BASE_URL
 const { t, path, locale } = localeHelper(Astro)
 const terminosPath = path('/terminos')
