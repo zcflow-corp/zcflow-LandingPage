@@ -3,8 +3,6 @@ import { getImageMetadata } from '@/utils/imageHelper'
 import { localeHelper } from '../i18n/index'
 import { Image } from 'astro:assets'
 
-// const { t: _t } = Astro.props
-// const t = typeof _t === 'function' ? _t : (k: unknown) => k
 const base = import.meta.env.BASE_URL
 const { t, path, locale } = localeHelper(Astro)
 const terminosPath = path('/terminos')
@@ -20,7 +18,7 @@ const [logoLight, win_leader, win_milestone, libro_reclamo] = await Promise.all(
   <div class="container" style="width: 100%; padding:0rem">
     <div class="container-footer-col">
       <div class="footer-col" itemscope itemtype="https://schema.org/Organization">
-        <a href={`${base}`} aria-label="Inicio - ZCFlow">
+        <a href={`${path('')}#hero`} aria-label="Inicio - ZCFlow">
           {
             logoLight && (
               <Image
