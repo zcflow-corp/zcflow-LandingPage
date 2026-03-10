@@ -438,7 +438,12 @@ export default function FormClaim() {
                 <p className="text-xs text-muted pt-3">
                   {t('También puedes registrar tu reclamo escribiendo a:')}
                   <br />
-                  <strong>ayuda@zcflow.com</strong>
+                 <a 
+    href="mailto:ayuda@zcflow.com" 
+    className="hover:underline font-bold text-primary"
+  >
+    ayuda@zcflow.com
+  </a>
                 </p>
               </>
             )}

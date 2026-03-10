@@ -1,8 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import LegalWrapper from '@/components/LegalWrapper.astro'
-import Header from '@/components/Header.astro'
-import Footer from '@/components/Footer.astro'
 import FormClaim from '@/islands/FormClaim'
 import AppProvider from '@/layouts/AppProvider'
 
@@ -138,7 +136,10 @@ const fechaISO = new Date().toISOString()
     <section class="claim-form">
       <p class="description-text">
         Para registrar un reclamo o queja, puede utilizar el
-        <a href="#" id="open-claim" class="legal-link"> formulario correspondiente. </a>
+        <!-- <a href="#" id="open-claim" class="legal-link"> formulario correspondiente. </a> -->
+         <button type="button" id="open-claim" class="legal-link" style="background: none; border: none; padding: 0; text-decoration: underline; cursor: pointer;">
+  formulario correspondiente.
+</button>
       </p>
     </section>
 
