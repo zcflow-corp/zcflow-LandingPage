@@ -38,10 +38,11 @@ export default function FormClaim() {
 
   const SERVICE_ID = 'service_fg8dkbj'
   const TEMPLATE_ID = 'template_aeexhcd'
-  const PUBLIC_KEY = 'OxhdmLgo61idmBNlb'
+  const PUBLIC_KEY = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY
 
-  const CLOUD_NAME = 'drbbpfygo'
-  const UPLOAD_PRESET = 'zcflow-reclamos'
+  const CLOUD_NAME = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME
+
+  const UPLOAD_PRESET = import.meta.env.PUBLIC_CLOUDINARY_UPLOAD_PRESET
 
   const MAX_FILES = 5
   const MAX_SIZE_BYTES = 10 * 1024 * 1024
@@ -110,7 +111,7 @@ export default function FormClaim() {
       setLoading(true)
 
       let uploadedLinks = []
-
+ 
       if (files.length > 0) {
         toast.loading(t('Subiendo archivos...'), { id: 'upload' })
 
