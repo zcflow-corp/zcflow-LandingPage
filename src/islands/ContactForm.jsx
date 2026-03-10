@@ -170,8 +170,9 @@ export default function ContactForm() {
             {/* STEP 1 */}
             {step === 1 && (
               <>
-                <Field label={t('Correo corporativo')} error={errors.email?.message}>
+                <Field label={t('Correo corporativo')} id="email-input" error={errors.email?.message}>
                   <Input
+                    id="email-input"
                     placeholder="nombre@empresa.com"
                     {...register('email', {
                       required: t('El correo es obligatorio'),
@@ -185,7 +186,7 @@ export default function ContactForm() {
                   />
                 </Field>
 
-                <Field label={t('País')} error={errors.country?.message}>
+                <Field label={t('País')} id="pais-input" error={errors.country?.message}>
                   <Select onValueChange={(v) => setValue('country', v, { shouldValidate: true })}>
                     <SelectTrigger>
                       <SelectValue placeholder={t('Selecciona tu país')} />
@@ -199,6 +200,7 @@ export default function ContactForm() {
                     </SelectContent>
                   </Select>
                   <input
+                    id="email-input"
                     type="hidden"
                     {...register('country', {
                       required: t('Selecciona un país'),
@@ -350,10 +352,10 @@ export default function ContactForm() {
 
 /* ================== FIELD ================== */
 
-function Field({ label, error, children }) {
+function Field({ label, error, children, id }) {
   return (
     <div className="space-y-1">
-      {label && <label className="text-sm font-medium text-text">{label}</label>}
+      {label && <label htmlFor={id} className="text-sm font-medium text-text">{label}</label>}
       {children}
       {error && <p className="text-sm text-error">{error}</p>}
     </div>

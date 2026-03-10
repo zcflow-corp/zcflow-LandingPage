@@ -17,7 +17,7 @@ const [logo_header_darks, logo_header_light] = await Promise.all([
 <header class="site-header" itemscope itemtype="https://schema.org/Organization" transition:persist>
   <div class="container">
     <a href={`${path('')}#hero`} aria-label="Inicio - ZCFlow">
-      { 
+      {
         logo_header_darks && (
           <Image
             src={logo_header_darks}
@@ -25,7 +25,7 @@ const [logo_header_darks, logo_header_light] = await Promise.all([
             class="mode-dark responsive-mode-dark"
             width={150}
             height={150}
-            loading="lazy"
+            loading="eager"
             decoding="async"
             itemprop="logo"
           />
@@ -39,7 +39,7 @@ const [logo_header_darks, logo_header_light] = await Promise.all([
             class="mode-light"
             width={150}
             height={150}
-            loading="lazy"
+            loading="eager"
             decoding="async"
             itemprop="logo"
           />
@@ -47,7 +47,7 @@ const [logo_header_darks, logo_header_light] = await Promise.all([
       }
     </a>
     <meta itemprop="name" content="ZCFlow" />
-    <meta itemprop="url" content="https://www.zcflow.com" />
+    <meta itemprop="url" content="https://dev-companies.zcflow.com/" />
 
     <!-- menú hamburguesa -->
     <div class="container-toggle">
@@ -70,11 +70,13 @@ const [logo_header_darks, logo_header_light] = await Promise.all([
       itemtype="https://schema.org/SiteNavigationElement"
     >
       <ul role="listbox" aria-labelledby="label_items" class="nav-list">
-        <li><a href={`${path('')}#zcflow`} itemprop="name">{t('Empresas')}</a></li>
+        <li itemprop="name"><a href={`${path('')}#zcflow`}>{t('Empresas')}</a></li>
         <!-- <li><a href={`${path('')}#soluciones`} itemprop="name">{t('Socios')}</a></li> -->
-        <li><a href={`${path('')}#soluciones`} itemprop="name">{t('Soluciones')}</a></li>
-        <li><a href={`${path('')}#fundamentos`} itemprop="name">{t('Fundamentos')}</a></li>
-        <li><a href="#" itemprop="name">{t('Ingresar')}</a></li>
+        <li itemprop="name"><a href={`${path('')}#soluciones`}>{t('Soluciones')}</a></li>
+        <li itemprop="name"><a href={`${path('')}#fundamentos`}>{t('Fundamentos')}</a></li>
+        <li itemprop="name">
+          <a itemprop="url" href="https://dev-companies.zcflow.com/">{t('Ingresar')}</a>
+        </li>
       </ul>
       <!--Otras Acciones -->
 
