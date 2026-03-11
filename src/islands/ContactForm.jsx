@@ -111,22 +111,25 @@ export default function ContactForm() {
   const prev = () => setStep(step - 1)
 
   /* ================== SUBMIT ================== */
-  // const SERVICE_ID = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID
-  // const TEMPLATE_ID = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID
-  // const PUBLIC_KEY = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY
 
+  const PUBLIC_KEY = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY
   const SERVICE_ID = 'service_3avdpu8'
   const TEMPLATE_ID = 'template_32m276g'
-  const PUBLIC_KEY = 'OxhdmLgo61idmBNlb'
 
   const onSubmit = async (data) => {
     try {
+      const countryName = COUNTRIES.find((c) => c.code === data.country)?.name
+      if (!countryName) {
+        toast.error(t('País no válido'))
+        return
+      }
       await emailjs.send(
         SERVICE_ID,
         TEMPLATE_ID,
         {
           ...data,
           phone: `${prefix} ${data.phone}`,
+          country: countryName,
         },
         PUBLIC_KEY
       )
@@ -170,8 +173,13 @@ export default function ContactForm() {
             {/* STEP 1 */}
             {step === 1 && (
               <>
-                <Field label={t('Correo corporativo')} error={errors.email?.message}>
+                <Field
+                  label={t('Correo corporativo')}
+                  id="email-input"
+                  error={errors.email?.message}
+                >
                   <Input
+                    id="email-input"
                     placeholder="nombre@empresa.com"
                     {...register('email', {
                       required: t('El correo es obligatorio'),
@@ -185,7 +193,7 @@ export default function ContactForm() {
                   />
                 </Field>
 
-                <Field label={t('País')} error={errors.country?.message}>
+                <Field label={t('País')} id="pais-input" error={errors.country?.message}>
                   <Select onValueChange={(v) => setValue('country', v, { shouldValidate: true })}>
                     <SelectTrigger>
                       <SelectValue placeholder={t('Selecciona tu país')} />
@@ -199,6 +207,7 @@ export default function ContactForm() {
                     </SelectContent>
                   </Select>
                   <input
+                    id="email-input"
                     type="hidden"
                     {...register('country', {
                       required: t('Selecciona un país'),
@@ -259,10 +268,12 @@ export default function ContactForm() {
                     </SelectTrigger>
                     <SelectContent className="bg-panel">
                       <SelectItem value="demo">{t('Solicitar demo')} </SelectItem>
-                      <SelectItem value="solution">{t('Solución específica')} </SelectItem>
-                      <SelectItem value="alianza">{t('Alianza Comercial')} </SelectItem>
+                      <SelectItem value="solucion_especifica">
+                        {t('Solución específica')}{' '}
+                      </SelectItem>
+                      <SelectItem value="alianza_comercial">{t('Alianza Comercial')} </SelectItem>
 
-                      <SelectItem value="partner"> {t('Otro Motivo')} </SelectItem>
+                      <SelectItem value="otro_motivo"> {t('Otro Motivo')} </SelectItem>
                     </SelectContent>
                   </Select>
                   <input
@@ -350,10 +361,14 @@ export default function ContactForm() {
 
 /* ================== FIELD ================== */
 
-function Field({ label, error, children }) {
+function Field({ label, error, children, id }) {
   return (
     <div className="space-y-1">
-      {label && <label className="text-sm font-medium text-text">{label}</label>}
+      {label && (
+        <label htmlFor={id} className="text-sm font-medium text-text">
+          {label}
+        </label>
+      )}
       {children}
       {error && <p className="text-sm text-error">{error}</p>}
     </div>

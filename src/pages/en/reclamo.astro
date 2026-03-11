@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
-import Header from '@/components/Header.astro'
-import Footer from '@/components/Footer.astro'
 import FormClaim from '@/islands/FormClaim'
 import AppProvider from '@/layouts/AppProvider'
 import LegalWrapper from '@/components/LegalWrapper.astro'
@@ -32,7 +30,7 @@ const fechaISO = new Date().toISOString()
 <LegalWrapper t={t}>
   <article class="legal-page">
     <header class="legal-header" style={{ margin: '0px' }}>
-      <h1 id="claim-title" class="gradient-blue-dark">Register Your Claim</h1>
+      <h1 id="claim-title">Register Your Claim</h1>
     </header>
 
     <section class="legal-content">
@@ -52,7 +50,9 @@ const fechaISO = new Date().toISOString()
         <div>
           <dt><strong>Contact email:</strong></dt>
           <dd class="description-text">
-            <a href="mailto:ayuda@zcflow.com">ayuda@zcflow.com</a>
+            <a href="mailto:ayuda@zcflow.com" class="hover:underline font-bold text-primary">
+              ayuda@zcflow.com
+            </a>
           </dd>
         </div>
       </dl>
@@ -137,7 +137,7 @@ const fechaISO = new Date().toISOString()
     <section class="claim-form">
       <p class="description-text">
         To submit a complaint or claim, you may use the
-        <a href="#" id="open-claim" class="legal-link"> corresponding form. </a>
+        <a href="#" id="open-claim" class="legal-link"> Corresponding form. </a>
       </p>
     </section>
 

@@ -3,8 +3,6 @@ import { getImageMetadata } from '@/utils/imageHelper'
 import { localeHelper } from '../i18n/index'
 import { Image } from 'astro:assets'
 
-// const { t: _t } = Astro.props
-// const t = typeof _t === 'function' ? _t : (k: unknown) => k
 const base = import.meta.env.BASE_URL
 const { t, path, locale } = localeHelper(Astro)
 const terminosPath = path('/terminos')
@@ -20,7 +18,7 @@ const [logoLight, win_leader, win_milestone, libro_reclamo] = await Promise.all(
   <div class="container" style="width: 100%; padding:0rem">
     <div class="container-footer-col">
       <div class="footer-col" itemscope itemtype="https://schema.org/Organization">
-        <a href={`${base}`} aria-label="Inicio - ZCFlow">
+        <a href={`${path('')}#hero`} aria-label="Inicio - ZCFlow">
           {
             logoLight && (
               <Image
@@ -48,7 +46,7 @@ const [logoLight, win_leader, win_milestone, libro_reclamo] = await Promise.all(
           </address>
         </div>
         <meta itemprop="name" content="ZCFlow" />
-        <meta itemprop="url" content="https://www.zcflow.com" />
+        <meta itemprop="url" content="https://dev-companies.zcflow.com/" />
       </div>
       <div class="slogan-text">
         <p itemprop="description" class="slogan-footer">
@@ -163,7 +161,76 @@ const [logoLight, win_leader, win_milestone, libro_reclamo] = await Promise.all(
     padding: 48px 1rem;
     font-size: 14px;
     background: var(--c-quinary) !important;
+    @include media(mobile) {
+      .footer-col {
+        width: 100%;
+      }
+      .footer-grid .footer-col {
+        align-items: center;
+      }
+      .footer-col nav {
+        align-items: center;
+      }
+      footer #contacto {
+        padding: 48px 2.5rem !important;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        gap: 0rem;
+      }
 
+      .container-footer-col {
+        width: 100%;
+        display: contents;
+
+        .footer-col:first-child {
+          order: 5;
+          padding: 0rem 1rem;
+        }
+        .slogan-text {
+          order: 4;
+          margin: 2rem 0;
+          text-align: center;
+          width: 100%;
+        }
+      }
+      .footer-grid {
+        width: 100% !important;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        order: 2;
+        .footer-col:nth-child(1) {
+          grid-column: 1;
+          order: 1;
+        }
+        .footer-col:nth-child(2) {
+          grid-column: 2;
+          order: 2;
+        }
+        div[style*='display: flex'] {
+          grid-column: 1 / span 2;
+          order: 3;
+          justify-content: center !important;
+          max-width: 100% !important;
+          margin-top: 1rem;
+          .win {
+            width: 45% !important;
+          }
+        }
+        .description-slogan {
+          grid-column: 1 / span 2;
+          order: 5;
+          width: 100% !important;
+          nav {
+            flex-direction: column !important;
+            align-items: center;
+            text-align: center;
+          }
+        }
+      }
+    }
     .footer-grid {
       display: flex;
       justify-content: space-between;
@@ -225,8 +292,9 @@ const [logoLight, win_leader, win_milestone, libro_reclamo] = await Promise.all(
     }
     @include media(mobile) {
       .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 0rem;
+        row-gap: 1rem;
         flex-direction: column;
       }
       footer #contacto {
