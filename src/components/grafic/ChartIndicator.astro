@@ -1,7 +1,14 @@
 ---
 // src/components/ChartIndicator.astro
+import { localeHelper } from '@/i18n/index'
+const { locale, t, path } = localeHelper(Astro)
 const { year = new Date().getFullYear() } = Astro.props
-const fechaHoy = new Date().toLocaleDateString('es-ES', {
+const localeMap = {
+  es: 'es-ES',
+  en: 'en-US',
+}
+
+const fechaHoy = new Date().toLocaleDateString(localeMap[locale] || locale, {
   month: 'long',
   year: 'numeric',
 })
@@ -26,8 +33,8 @@ const fechaISO = new Date().toISOString()
     height: 321.651px; */
     background: rgba(255, 255, 255, 0.15);
     height: 246px;
-    height: 246px; 
-    min-height: 246px; 
+    height: 246px;
+    min-height: 246px;
     contain: size layout;
     /* 0 0 0 2px #4d90fe,
     inset 0 0 0 2px hsla(0, 0%, 100%, 0.9);
@@ -97,13 +104,12 @@ const fechaISO = new Date().toISOString()
     display: block;
   }
 
-
-canvas {
+  canvas {
     width: 100% !important;
     height: 100% !important;
     display: block;
-    contain: strict; 
-}
+    contain: strict;
+  }
   .indicator-tip {
     position: absolute;
     pointer-events: none;
@@ -122,7 +128,7 @@ canvas {
 
 <section class="card-indicator" aria-label="Posición de caja">
   <div class="indicator-row">
-    <div class="indicator-title">Posición de caja</div>
+    <div class="indicator-title">{t('Posición de caja')}</div>
     <div class="indicator-chip"><span class="indicator-dot"></span>{fechaHoy}</div>
   </div>
 
@@ -135,7 +141,7 @@ canvas {
   </div>
 </section>
 
-<script>
+<script define:vars={{ dayLabel: t('día'), locale }}>
   const $ = (s, r = document) => r.querySelector(s)
   const canvas = $('#cv'),
     tip = $('#tip'),
@@ -166,9 +172,9 @@ canvas {
     // const rect = canvas.getBoundingClientRect()
     // W = Math.floor(rect.width)
     // H = Math.floor(rect.height)
-    const parent = canvas.parentElement;
-    W = parent.clientWidth;
-    H = parent.clientHeight;
+    const parent = canvas.parentElement
+    W = parent.clientWidth
+    H = parent.clientHeight
     canvas.width = Math.floor(W * DPR)
     canvas.height = Math.floor(H * DPR)
   }
@@ -356,7 +362,7 @@ canvas {
     const p = pts[idx]
     tip.style.left = `${p.x}px`
     tip.style.top = `${p.y}px`
-    tip.textContent = `$ ${Math.round(data[idx]).toLocaleString('es-PE')} — día ${idx + 1}`
+    tip.textContent = `$ ${Math.round(data[idx]).toLocaleString(locale)} — ${dayLabel} ${idx + 1}`
     tip.style.display = 'block'
   })
 

@@ -147,7 +147,7 @@ export default function CardZcflow({
         {/* === CONTENT === */}
         <div className="card-slider__content zcflow-description">
           <p>
-            {t('Con')} Zcflow{' '}
+            {t('En')} Zcflow{' '}
             {t(
               'integramos toda tu información financiera en una plataforma 100% data driven, potenciada por'
             )}{' '}
