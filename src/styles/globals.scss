@@ -421,6 +421,8 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
 
 .zcflow-toaster {
   font-family: var(--font-body);
+  top: 30% !important;
+  transform: translate(-50%, -30%);
 }
 
 .zcflow-toaster [data-sonner-toast] {
@@ -433,9 +435,14 @@ https://github.com/fauziralpiandi/astrogent/blob/main/src/styles/globals.css    
 
 /* SUCCESS */
 .zcflow-toaster [data-sonner-toast][data-type='success'] {
-  background: var(--c-success);
+  background: var(--c-primary);
   color: var(--c-white);
   border-color: var(--c-success);
+}
+
+/* DESCRIPTION */
+.zcflow-toaster [data-sonner-toast][data-type='success'] [data-description] {
+  color: var(--c-tertiary);
 }
 
 /* ERROR */

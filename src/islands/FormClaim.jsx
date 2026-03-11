@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import es from '@/i18n/es.json'
 import en from '@/i18n/en.json'
@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Upload, X } from 'lucide-react'
+import { Checkbox } from '@/components/ui/checkbox'
 
 function getLocaleFromDoc() {
   if (typeof document === 'undefined') return 'es'
@@ -111,7 +112,7 @@ export default function FormClaim() {
       setLoading(true)
 
       let uploadedLinks = []
- 
+
       if (files.length > 0) {
         toast.loading(t('Subiendo archivos...'), { id: 'upload' })
 
@@ -158,9 +159,18 @@ export default function FormClaim() {
       setLoading(false)
     }
   }
+  const termsAccepted = watch('terms')
+
+  const formRef = useRef(null)
+  useEffect(() => {
+    formRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    })
+  }, [step])
 
   return (
-    <section className="form-claim py-0 bg-bg-variant">
+    <section ref={formRef} className="form-claim py-0 bg-bg-variant">
       <Card className="max-w-xl mx-auto shadow-xl bg-white">
         <CardHeader className="space-y-2">
           <CardTitle className="text-h3">{t('Libro de Reclamaciones')}</CardTitle>
@@ -236,20 +246,6 @@ export default function FormClaim() {
                 <Field label={t('Dirección')}>
                   <Input {...register('address')} />
                 </Field>
-
-                <div className="flex items-start gap-2 pt-2">
-                  <p className="text-sm leading-snug">
-                    {t('Al continuar acepto la')}{' '}
-                    <a
-                      href={`/${localeR}/privacidad`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline text-primary cursor-pointer"
-                    >
-                      {t('Política de Privacidad')}
-                    </a>
-                  </p>
-                </div>
               </>
             )}
 
@@ -436,15 +432,55 @@ export default function FormClaim() {
                   </ul>
                 )}
 
+                <div className="flex items-start gap-2 pt-2">
+                  <Field error={errors.terms?.message}>
+                    <Controller
+                      name="terms"
+                      control={control}
+                      rules={{
+                        required: t('Debes aceptar la política de privacidad'),
+                      }}
+                      render={({ field }) => (
+                        <div className="flex items-start gap-2">
+                          <Checkbox
+                            className="
+                        border-muted
+                        data-[state=checked]:bg-primary
+                        data-[state=checked]:border-primary
+                        data-[state=checked]:text-white
+                      "
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+
+                          <div className="flex items-start gap-2 ">
+                            <p className="text-sm leading-snug">
+                              {t('Acepto la')}{' '}
+                              <a
+                                href={`/${localeR}/privacidad`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="underline text-primary cursor-pointer"
+                              >
+                                {t('Política de Privacidad')}
+                              </a>
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                    />
+                  </Field>
+                </div>
+
                 <p className="text-xs text-muted pt-3">
                   {t('También puedes registrar tu reclamo escribiendo a:')}
                   <br />
-                 <a 
-    href="mailto:ayuda@zcflow.com" 
-    className="hover:underline font-bold text-primary"
-  >
-    ayuda@zcflow.com
-  </a>
+                  <a
+                    href="mailto:ayuda@zcflow.com"
+                    className="hover:underline font-bold text-primary"
+                  >
+                    ayuda@zcflow.com
+                  </a>
                 </p>
               </>
             )}
@@ -475,7 +511,7 @@ export default function FormClaim() {
               )}
 
               {step === 3 && (
-                <Button type="submit" className="btn primary" disabled={loading}>
+                <Button type="submit" className="btn primary" disabled={loading || !termsAccepted}>
                   {loading ? 'Enviando...' : 'Enviar reclamo'}
                 </Button>
               )}
