@@ -90,6 +90,19 @@ p {
 html[data-theme='dark'] p {
   color: #c4c4c4;
 }
+html[data-theme='dark'] .container-toggle {
+  background: none;
+}
+html[data-theme='light'] .container-toggle { 
+    background: none;
+}
+
+html[data-theme='dark'] .menu-toggle .bar {
+background: var(--c-white);
+}
+html[data-theme='light'] .menu-toggle .bar {
+background: var(--c-black);
+}
 
 img {
   width: 100%;
@@ -175,7 +188,12 @@ html[data-theme='dark'] .fundamentos {
 html[data-theme='light'] .fundamentos {
   background: var(--c-bg-variant);
 }
-
+html[data-theme='dark'] .tab-title{
+color: var(--c-white);
+}
+html[data-theme='light'] .tab-title {
+  color: var(--c-line);
+}
 @include media(tablet-down) {
   html[data-theme='dark'] .mobile-actions {
     border-top: 1px solid #3a3a3d;
