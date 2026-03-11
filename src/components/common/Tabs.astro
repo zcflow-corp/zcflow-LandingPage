@@ -26,7 +26,10 @@ let active = 0
           >
             <p class="tab-title"> {t.título} </p>
 
-            <span>{t.titleSub}</span>
+            <span
+              class="sub-title-wrapper"
+              set:html={t.titleSub.replace('Tus', '<span class="tus-desktop">Tus</span>')}
+            />
           </button>
         ))
       }
@@ -103,6 +106,16 @@ let active = 0
     position: relative;
     @include media(mobile) {
       border-radius: 0px 0px 20px 20px;
+    }
+    .sub-title-wrapper {
+      :global(.tus-desktop) {
+        display: none;
+
+        @include media(desktop) {
+          display: inline !important;
+          margin-right: 4px;
+        }
+      }
     }
 
     .tabs {
@@ -207,9 +220,9 @@ let active = 0
         }
 
         .tab-title {
-          color: var(--c-line);
+          
           @include media(mobile) {
-            color: var(--c-line);
+            // color: var(--c-line);
             font-size: 0.75rem;
           }
         }
