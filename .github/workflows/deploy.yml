@@ -1,0 +1,87 @@
+name: Deploy Landing ZCFlow
+
+on:
+  push:
+    branches: ["develop", "uat", "main"]
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: us-east-1
+  NODE_VERSION: "20"
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Environment Config
+        id: config
+        run: |
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "IAM_ROLE=arn:aws:iam::085727029176:role/zcflow-landing-prd-gha-role" >> $GITHUB_ENV
+            echo "S3_BUCKET=zcflow-landing" >> $GITHUB_ENV
+            echo "CLOUDFRONT_ID=${{ secrets.PRD_CLOUDFRONT_ID }}" >> $GITHUB_ENV
+            echo "DEPLOY_ENV=prd" >> $GITHUB_ENV
+          elif [[ "${{ github.ref }}" == "refs/heads/uat" ]]; then
+            echo "IAM_ROLE=arn:aws:iam::085727029176:role/zcflow-landing-uat-gha-role" >> $GITHUB_ENV
+            echo "S3_BUCKET=zcflow-landing-uat" >> $GITHUB_ENV
+            echo "CLOUDFRONT_ID=${{ secrets.UAT_CLOUDFRONT_ID }}" >> $GITHUB_ENV
+            echo "DEPLOY_ENV=uat" >> $GITHUB_ENV
+          else
+            echo "IAM_ROLE=arn:aws:iam::085727029176:role/zcflow-landing-dev-gha-role" >> $GITHUB_ENV
+            echo "S3_BUCKET=zcflow-landing-dev" >> $GITHUB_ENV
+            echo "CLOUDFRONT_ID=${{ secrets.DEV_CLOUDFRONT_ID }}" >> $GITHUB_ENV
+            echo "DEPLOY_ENV=dev" >> $GITHUB_ENV
+          fi
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.IAM_ROLE }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Astro
+        env:
+          DEPLOY_ENV: ${{ env.DEPLOY_ENV }}
+          NODE_ENV: production
+        run: npm run build
+
+      - name: Sync to S3
+        run: |
+          # Sincronizar archivos estáticos con caché larga (1 año)
+          aws s3 sync dist/ s3://${{ env.S3_BUCKET }}/ \
+            --delete \
+            --cache-control "public, max-age=31536000, immutable" \
+            --exclude "*.html" \
+            --exclude "*.xml" \
+            --exclude "*.txt"
+
+          # Sincronizar HTML con caché corta (no cachear)
+          aws s3 sync dist/ s3://${{ env.S3_BUCKET }}/ \
+            --delete \
+            --cache-control "public, max-age=0, must-revalidate" \
+            --include "*.html" \
+            --include "*.xml" \
+            --include "*.txt"
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ env.CLOUDFRONT_ID }} \
+            --paths "/*" \
+            --query "Invalidation.Id" --output text

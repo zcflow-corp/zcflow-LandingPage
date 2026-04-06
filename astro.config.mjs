@@ -3,21 +3,23 @@ import { fileURLToPath } from 'node:url'
 import react from '@astrojs/react'
 import tailwind from '@astrojs/tailwind'
 
-const isProd = process.env.NODE_ENV === 'production'
+const env = process.env.DEPLOY_ENV || 'dev'
+
+const siteUrls = {
+  dev: 'https://dev-landing.zcflow.com',
+  uat: 'https://uat-landing.zcflow.com',
+  prd: 'https://zcflow.com',
+}
 
 export default defineConfig({
   output: 'static',
-  site: isProd ? 'https://zcflow-corp.github.io' : 'http://localhost:4321',
-  base: isProd ? '/zcflow-LandingPage/' : '/',
-
+  site: siteUrls[env] || 'http://localhost:4321',
+  base: '/',
   server: {
-    allowedHosts: ['porky-nonpossessively-kimberlie.ngrok-free.dev', 'localhost'],
+    allowedHosts: ['localhost'],
   },
-
   trailingSlash: 'ignore',
-
   integrations: [react(), tailwind()],
-
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en'],
@@ -26,14 +28,12 @@ export default defineConfig({
       fallbackType: 'rewrite',
     },
   },
-
   vite: {
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
     },
-
     css: {
       preprocessorOptions: {
         scss: {
