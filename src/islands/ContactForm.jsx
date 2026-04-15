@@ -1,10 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import emailjs from '@emailjs/browser'
 import { toast } from 'sonner'
-import { TermsModal } from './TermsModal'
 import es from '@/i18n/es.json'
 import en from '@/i18n/en.json'
 import { Button } from '@/components/ui/button'
@@ -94,7 +93,7 @@ export default function ContactForm() {
   }, [country])
 
   /* ================== STEPS ================== */
-
+  const termsAccepted = watch('terms')
   const next = async () => {
     const fieldsByStep = {
       1: ['email', 'country'],
@@ -135,7 +134,7 @@ export default function ContactForm() {
       )
 
       toast.success('Formulario enviado', {
-        description: t('Te contactaremos pronto'),
+        description: t('Nuestros expertos se pondrán en contacto contigo, gracias'),
       })
 
       reset()
@@ -148,8 +147,16 @@ export default function ContactForm() {
   }
   /* ================== UI ================== */
 
+  const formRefContact = useRef(null)
+  useEffect(() => {
+    formRefContact.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    })
+  }, [step])
+
   return (
-    <section className="bg-bg-variant py-40 section-contact">
+    <section ref={formRefContact} className="bg-bg-variant py-40 section-contact">
       <Card className="max-w-md mx-auto bg-panel shadow-xl rounded-base">
         <CardHeader className="space-y-3 text-h3">
           <CardTitle className="font-head text-h2 leading-tight text-text">
@@ -297,7 +304,7 @@ export default function ContactForm() {
                     name="terms"
                     control={control}
                     rules={{
-                      required: t('Debes aceptar los términos'),
+                      required: t('Debes aceptar la política de privacidad'),
                     }}
                     render={({ field }) => (
                       <div className="flex items-start gap-2">
@@ -314,7 +321,7 @@ export default function ContactForm() {
 
                         <div className="flex items-start gap-2 ">
                           <p className="text-sm leading-snug">
-                            {t('Al continuar acepto la')}{' '}
+                            {t('Acepto la')}{' '}
                             <a
                               href={`/${localeR}/privacidad`}
                               target="_blank"
@@ -347,7 +354,11 @@ export default function ContactForm() {
               )}
 
               {step === 3 && (
-                <Button type="submit" className="btn primary" disabled={isSubmitting}>
+                <Button
+                  type="submit"
+                  className="btn primary"
+                  disabled={isSubmitting || !termsAccepted}
+                >
                   {isSubmitting ? t('Enviando…') : t('Enviar')}
                 </Button>
               )}
