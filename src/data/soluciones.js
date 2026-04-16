@@ -1,4 +1,5 @@
 import conexion_banco from '@/assets/conexion_banco.webp'
+import conexion_banco_en from '@/assets/conexion_banco_en.webp'
 import conexion_datos from '@/assets/conexion_datos.webp'
 import conexion_socios from '@/assets/conexion_socios.webp'
 import gestiona_movimientos from '@/assets/gestiona_movimientos.webp'
@@ -39,6 +40,7 @@ export const soluciones = (t) => [
               'Agentes de IA descargan movimientos, saldos y operaciones del ERP de forma automática cada día.'
             ),
             image: conexion_banco,
+            imageEn: conexion_banco_en,
             alt: 'Conexión con bancos, ERPs y otras fuentes',
             Icono: 'Bank',
             status: true,
@@ -90,6 +92,7 @@ export const soluciones = (t) => [
               'La IA detecta patrones y coincidencias para automatizar conciliaciones y liberar al equipo financiero.'
             ),
             image: gestiona_movimientos,
+
             alt: 'Clasificación inteligente',
             Icono: 'movement',
             status: true,

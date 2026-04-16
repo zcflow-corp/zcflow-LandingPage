@@ -500,6 +500,9 @@
   }
 
 
+
+
+
   &--reveal {
     opacity: 0;
     transform: translate3d(28px, 0, 0); // entra desde derecha
@@ -521,6 +524,52 @@
     }
   }
 }
+
+
+
+
+/* Estado sin imagen */
+.dCard__frame.is-empty {
+  background: var(--c-bg-variant)
+}
+
+/* Placeholder con blur */
+.dCard__placeholder {
+  width: 100%;
+  height: 220px;
+  backdrop-filter: blur(40px);
+  position: relative;
+}
+
+/* Efecto tipo "glass" */
+.dCard__frame.is-empty::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(40px);
+  border: none;
+  background: var(--g-primary);
+}
+
+/* Opcional: animación suave */
+.dCard__frame.is-empty {
+  animation: pulse 2.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 0.9;
+  }
+}
+
+
+
 
 /* Dark theme */
 [data-theme='dark'] {

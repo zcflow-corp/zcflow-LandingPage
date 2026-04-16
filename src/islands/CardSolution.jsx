@@ -9,6 +9,9 @@ function getLocaleFromDoc() {
   return document.documentElement.lang === 'en' ? 'en' : 'es'
 }
 
+const localeR = getLocaleFromDoc()
+console.log('localeR', localeR)
+
 export default function CardSolution({
   slides = [],
   interval = 5000,
@@ -103,47 +106,56 @@ export default function CardSolution({
             aria-label="Listado de descripciones"
             ref={gridRef}
           >
-            {slides.map((s, i) => (
-              <article
-                className="dCard"
-                key={`${s.title}-${i}`}
-                style={{ '--delay': `${i * 90}ms` }} // ✅ cascada suave
-              >
-                <div className="dCard__top">
-                  <span className="dCard__badge">{word}</span>
-                </div>
+            {slides.map((s, i) => {
+              const imageSrc = localeR === 'en' ? s.imageEn?.src : s.image?.src
+              const hasImage = Boolean(imageSrc)
 
-                {s.status === 'beta' && (
-                  <div className="beta-card">
-                    <span className="beta-ribbon ">beta</span>
+              return (
+                <article
+                  className="dCard"
+                  key={`${s.title}-${i}`}
+                  style={{ '--delay': `${i * 90}ms` }} // ✅ cascada suave
+                >
+                  <div className="dCard__top">
+                    <span className="dCard__badge">{word}</span>
                   </div>
-                )}
 
-                <div className="dCard__body">
-                  <h3 className="dCard__title">{s.title}</h3>
-                  <p className="dCard__desc">{s.description}</p>
+                  {s.status === 'beta' && (
+                    <div className="beta-card">
+                      <span className="beta-ribbon ">beta</span>
+                    </div>
+                  )}
 
-                  <button
-                    type="button"
-                    className="dCard__button"
-                    aria-label="Ver detalle de la tarjeta"
-                  >
-                    <span className="dCard__arrow">{textinfo}</span>
-                  </button>
-                </div>
+                  <div className="dCard__body">
+                    <h3 className="dCard__title">{s.title}</h3>
+                    <p className="dCard__desc">{s.description}</p>
 
-                <div className="dCard__preview" role="img" aria-label={s.title}>
-                  <div className="dCard__frame">
-                    <img
-                      className="dCard__img"
-                      src={s.image.src}
-                      alt={s.alt || s.title}
-                      loading="lazy"
-                    />
+                    <button
+                      type="button"
+                      className="dCard__button"
+                      aria-label="Ver detalle de la tarjeta"
+                    >
+                      <span className="dCard__arrow">{textinfo}</span>
+                    </button>
                   </div>
-                </div>
-              </article>
-            ))}
+
+                  <div className="dCard__preview" role="img" aria-label={s.title}>
+                    <div className={`dCard__frame ${!hasImage ? 'is-empty' : ''}`}>
+                      {hasImage ? (
+                        <img
+                          className="dCard__img"
+                          src={imageSrc}
+                          alt={s.alt || s.title}
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="dCard__placeholder" />
+                      )}
+                    </div>
+                  </div>
+                </article>
+              )
+            })}
           </ul>
         </div>
       </div>
