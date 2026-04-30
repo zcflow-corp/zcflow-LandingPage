@@ -9,8 +9,7 @@ function getLocaleFromDoc() {
   return document.documentElement.lang === 'en' ? 'en' : 'es'
 }
 
-const localeR = getLocaleFromDoc()
-console.log('localeR', localeR)
+const locale = getLocaleFromDoc()
 
 export default function CardSolution({
   slides = [],
@@ -23,9 +22,10 @@ export default function CardSolution({
 }) {
   const [index, setIndex] = useState(startIndex)
   const [t, setT] = useState(startIndex)
+  const [localeR, setlocaleR] = useState('es')
   const timerRef = useRef(null)
 
-  const gridRef = useRef(null) // ✅ NUEVO
+  const gridRef = useRef(null)
 
   const total = slides.length
   const next = () => setIndex((prev) => (prev + 1) % total)
@@ -53,11 +53,11 @@ export default function CardSolution({
     return () => window.removeEventListener('keydown', handleKey)
   }, [])
 
-  const locale = getLocaleFromDoc()
-
   useEffect(() => {
     const messages = locale === 'en' ? en : es
     setT(messages)
+
+    setlocaleR(locale)
   }, [locale])
 
   // ✅ ANIMACIÓN SMOOTH (reveal al entrar)
@@ -107,7 +107,7 @@ export default function CardSolution({
             ref={gridRef}
           >
             {slides.map((s, i) => {
-              const imageSrc = localeR === 'en' ? s.imageEn?.src : s.image?.src
+              const imageSrc = localeR == 'es' ? s.image?.src : s.imageEn?.src
               const hasImage = Boolean(imageSrc)
 
               return (

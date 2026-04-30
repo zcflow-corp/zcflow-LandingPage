@@ -439,7 +439,7 @@
     gap: 8px;
     font: 600 13px/1 var(--font-body);
     color: var(--c-primary);
-    cursor: pointer;
+    pointer-events: none;
 
     &:hover {
       color: var(--c-primary-accessible-hover);

@@ -31,7 +31,7 @@ export const soluciones = (t) => [
       // 1) CONECTA
       {
         título: t('Conecta'),
-        textinfo: t('Más información'),
+        textinfo: t('Integración total'),
         icono: 'conecta',
         titleSub: t('Con rapidez'),
         process: 25,
@@ -87,7 +87,7 @@ export const soluciones = (t) => [
       {
         título: t('Gestiona'),
         icono: 'gestiona',
-        textinfo: t('Más información'),
+        textinfo: t('Decisiones precisas'),
         process: 50,
         titleSub: t('Con confianza'),
         SubTitle: t('Liquidez confiable.'),
@@ -152,7 +152,7 @@ export const soluciones = (t) => [
       // 3) OPTIMIZA
       {
         título: t('Optimiza'),
-        textinfo: t('Más información'),
+        textinfo: t('AI-First'),
         icono: 'optimiza',
         process: 75,
         titleSub: t('Tus decisiones'),
@@ -207,7 +207,7 @@ export const soluciones = (t) => [
       {
         título: t('Actúa'),
         icono: 'actua',
-        textinfo: t('Más información'),
+        textinfo: t('Ejecución Ágil'),
         process: 100,
         titleSub: t('Con Precisión'),
         SubTitle: t('Ejecución ágil.'),
