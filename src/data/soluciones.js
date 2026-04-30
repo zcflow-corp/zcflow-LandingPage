@@ -1,17 +1,29 @@
 import conexion_banco from '@/assets/conexion_banco.webp'
 import conexion_banco_en from '@/assets/conexion_banco_en.webp'
 import conexion_datos from '@/assets/conexion_datos.webp'
+import conexion_datos_en from '@/assets/conexion_datos_en.webp'
 import conexion_socios from '@/assets/conexion_socios.webp'
+import conexion_socios_en from '@/assets/conexion_socios_en.webp'
 import gestiona_movimientos from '@/assets/gestiona_movimientos.webp'
+import gestiona_movimientos_en from '@/assets/gestiona_movimientos_en.webp'
 import gestiona_flujo_caja from '@/assets/gestiona_flujo_caja.webp'
+import gestiona_flujo_caja_en from '@/assets/gestiona_flujo_caja_en.webp'
 import gestiona_dashboards from '@/assets/gestiona_dashboards.webp'
+import gestiona_dashboards_en from '@/assets/gestiona_dashboards_en.webp'
 import gestiona_reporting from '@/assets/gestiona_reporting.webp'
+import gestiona_reporting_en from '@/assets/gestiona_reporting_en.webp'
 import optimiza_liquidez from '@/assets/optimiza_liquidez.webp'
+import optimiza_liquidez_en from '@/assets/optimiza_liquidez_en.webp'
 import optimiza_escenarios from '@/assets/optimiza_escenarios.webp'
+import optimiza_escenarios_en from '@/assets/optimiza_escenarios_en.webp'
 import optimiza_recomendaciones from '@/assets/optimiza_recomendaciones.webp'
+import optimiza_recomendaciones_en from '@/assets/optimiza_recomendaciones_en.webp'
 import actua_aprobaciones from '@/assets/actua_aprobaciones.webp'
+import actua_aprobaciones_en from '@/assets/actua_aprobaciones_en.webp'
 import actua_ordenes from '@/assets/actua_ordenes.webp'
+import actua_ordenes_en from '@/assets/actua_ordenes_en.webp'
 import actua_documentaria from '@/assets/actua_documentaria.webp'
+import actua_documentaria_en from '@/assets/actua_documentaria_en.webp'
 
 export const soluciones = (t) => [
   {
@@ -51,6 +63,7 @@ export const soluciones = (t) => [
               'Automatiza la validación y enriquecimiento de datos con fuentes externas para decisiones confiables.'
             ),
             image: conexion_datos,
+            imageEn: conexion_datos_en,
             alt: 'Enriquecimiento y calidad de datos',
             Icono: 'data',
             status: true,
@@ -61,6 +74,8 @@ export const soluciones = (t) => [
               'Integra fintechs e inversionistas para crear soluciones financieras más competitivas.'
             ),
             image: conexion_socios,
+            imageEn: conexion_socios_en,
+
             alt: 'Conexión con socios de negocios',
             Icono: 'conexion',
             status: 'beta',
@@ -92,6 +107,7 @@ export const soluciones = (t) => [
               'La IA detecta patrones y coincidencias para automatizar conciliaciones y liberar al equipo financiero.'
             ),
             image: gestiona_movimientos,
+            imageEn: gestiona_movimientos_en,
 
             alt: 'Clasificación inteligente',
             Icono: 'movement',
@@ -103,6 +119,7 @@ export const soluciones = (t) => [
               'Consolida saldos y movimientos bancarios en un visor único, sin depender de hojas de cálculo.'
             ),
             image: gestiona_flujo_caja,
+            imageEn: gestiona_flujo_caja_en,
             alt: 'Flujo de caja real',
             Icono: 'caja',
             status: true,
@@ -113,6 +130,7 @@ export const soluciones = (t) => [
               'Visualiza métricas clave de liquidez, riesgos y operaciones desde paneles personalizables.'
             ),
             image: gestiona_dashboards,
+            imageEn: gestiona_dashboards_en,
             alt: 'Dashboards y widgets',
             Icono: 'dashboards',
             status: true,
@@ -123,6 +141,7 @@ export const soluciones = (t) => [
               'Genera informes claros y consistentes con un clic, siempre actualizados y listos para auditores.'
             ),
             image: gestiona_reporting,
+            imageEn: gestiona_reporting_en,
             alt: 'Reporting financiero',
             Icono: 'reporte',
             status: true,
@@ -154,6 +173,7 @@ export const soluciones = (t) => [
               'Genera proyecciones ajustadas a escenarios de negocio para tomar decisiones anticipadas.'
             ),
             image: optimiza_liquidez,
+            imageEn: optimiza_liquidez_en,
             alt: 'Proyecciones de liquidez',
             Icono: 'liquidez',
             status: true,
@@ -164,6 +184,7 @@ export const soluciones = (t) => [
               'Crea escenarios optimista, pesimista y realista, comparando impactos en la liquidez en tiempo real.'
             ),
             image: optimiza_escenarios,
+            imageEn: optimiza_escenarios_en,
             alt: 'Escenarios financieros',
             Icono: 'escenarios',
             status: true,
@@ -174,6 +195,7 @@ export const soluciones = (t) => [
               'La IA sugiere el mejor uso de productos financieros para optimizar costos y minimizar riesgos.'
             ),
             image: optimiza_recomendaciones,
+            imageEn: optimiza_recomendaciones_en,
             alt: 'Recomendaciones costo/riesgo',
             Icono: 'costo',
             status: true,
@@ -206,6 +228,7 @@ export const soluciones = (t) => [
               'Configura jerarquías, valida operaciones y aprueba transacciones trazables y seguras.'
             ),
             image: actua_aprobaciones,
+            imageEn: actua_aprobaciones_en,
             alt: 'Workflow y aprobaciones',
             Icono: 'aprobaciones',
             status: 'beta',
@@ -216,6 +239,7 @@ export const soluciones = (t) => [
               'Envía instrucciones financieras automáticas para préstamos, coberturas o inversiones.'
             ),
             image: actua_ordenes,
+            imageEn: actua_ordenes_en,
             alt: 'Automatización de órdenes',
             Icono: 'automatizaciones',
             status: 'beta',
@@ -226,6 +250,7 @@ export const soluciones = (t) => [
               'Centraliza documentos clave y compártelos al instante para auditorías más ágiles.'
             ),
             image: actua_documentaria,
+            imageEn: actua_documentaria_en,
             alt: 'Gestión documental y auditoría',
             Icono: 'documentaria',
             status: true,
