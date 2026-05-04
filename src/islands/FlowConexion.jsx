@@ -1,7 +1,5 @@
-// FlowConexion.jsx
 import React, { useEffect, useRef } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
-
 
 const BANK_SVG_BASE = `
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -24,14 +22,11 @@ const MOVEMENT_SVG_BASE = `
   <path fill="#292D32" d="M22 22.75H2c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h20c.41 0 .75.34.75.75s-.34.75-.75.75Z"/>
 </svg>`
 
-
-
 const ICON_SVGS_BASE = {
   bank: BANK_SVG_BASE,
   data: DATA_SVG_BASE,
   movement: MOVEMENT_SVG_BASE,
 }
-
 
 // Crea imágenes para un color dado (gris/azul)
 const createIconImages = (color) => {
